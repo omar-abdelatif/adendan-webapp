@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 Route::view('/','welcome');
 
@@ -12,6 +13,9 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::controller(HomeController::class)->group(function () {
             Route::get('dashboard', 'index')->name('home');
+        });
+        Route::controller(UserController::class)->group(function () {
+            Route::get('profile', 'index')->name('user.profile');
         });
     });
 });
