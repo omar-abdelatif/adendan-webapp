@@ -16,6 +16,7 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(UserController::class)->group(function () {
             Route::get('profile', 'index')->name('user.profile');
+            Route::post('update_profile', 'update')->name( 'user.update' );
         });
     });
 });

@@ -14,7 +14,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="email" class="col-form-label text-white">البريد الإلكتروني:</label>
-                                    <input id="email" type="email" placeholder="البريد الإلكتروني" class="form-control text-white @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" placeholder="البريد الإلكتروني" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="password" class="col-form-label text-white">كلمة السر:</label>
-                                    <input id="password" type="password" placeholder="كلمة السر" class="form-control text-white @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password" placeholder="كلمة السر" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

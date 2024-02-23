@@ -38,7 +38,7 @@
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="media profile-media">
-                        <img class="rounded-circle" width="50" src={{$user->avatar ? asset('assets/images/users/'.$user->name.'/'.$user->avatar) : 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg'}} alt={{$user->avatar}}>
+                        <img class="rounded-circle" width="50" src={{$user->avatar ? asset('assets/images/users/'.$user->avatar) : 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg'}} alt={{$user->avatar}}>
                         <div class="media-body">
                             <span>{{$user->name}}</span>
                             <p class="mb-0 font-roboto">

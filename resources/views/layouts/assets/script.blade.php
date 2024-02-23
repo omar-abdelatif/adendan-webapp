@@ -44,10 +44,4 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
-
-@if(Route::currentRouteName() == 'home')
-    <script>
-        new WOW().init();
-    </script>
-@endif
 <script src={{asset('assets/js/custom-script.js')}}></script>
