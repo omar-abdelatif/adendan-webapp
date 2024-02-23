@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Gulzar&display=swap');
+.login-card .login-main .theme-form .or:before{
+    display: none;
+}
+[dir=rtl] .remember{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.login-card .login-main .theme-form .link{
+    position: relative;
+    top: 0;
+}
+[dir=rtl] .checkbox .text-muted{
+    order: 1;
+}
+.login-main h4{
+    margin-bottom: 30px;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:first-child
+{
+    display: block !important;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper .according-menu{
+    display: none !important;
+}
+.dataTables_wrapper table.dataTable
+{
+    border: none;
+}
+.dataTables_wrapper .dataTables_paginate
+{
+    border: none;
+}
+body.dark-only .toast-success
+{
+    background-color: rgb(3, 83, 3);
+}
+.toast-message{
+    color: white;
+}
+table.dataTable.display tbody tr.odd > .sorting_1
+{
+    background-color: transparent;
+}
+table.dataTable.display tbody tr.odd
+{
+    background-color: rgb(78, 78, 78);
+}
+.dataTables_wrapper .dataTables_filter input[type=search]
+{
+    color: white;
+}
+.page-wrapper .page-body-wrapper .page-body
+{
+    padding: 0;
+}
+.logo-wrapper a h3{
+    font-family: 'Gulzar', serif;
+    color: #7366ff;
+}
+.page-wrapper .page-body-wrapper .page-title .row
+{
+    align-items: flex-start;
+}
+.fade {
+    transition: opacity 0.15s linear;
+}
+.hidden {
+    display: none !important;
+}
+.form-control
+{
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+table.dataTable input[type='checkbox']{
+    height: 15px;
+}
