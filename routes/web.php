@@ -20,7 +20,7 @@ Route::view('/','welcome');
 Auth::routes();
 Route::middleware('auth')->group(function(){
     Route::controller(HomeController::class)->group(function(){
-        Route::view('/home', 'index')->name('home');
+        Route::view('dashboard', 'index')->name('home');
         // Route::get('/home', 'index')->name('home');
     });
 });
