@@ -1,7 +1,9 @@
-
- <!-- latest jquery-->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <!-- Bootstrap js-->
+<!-- latest jquery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="{{asset('assets/js/datatable/datatable-extension/dataTables.checkboxes.min.js')}}"></script>
+<!-- Bootstrap js-->
 <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
 <!-- feather icon js-->
 <script src="{{asset('assets/js/icons/feather-icon/feather.min.js')}}"></script>
@@ -10,29 +12,38 @@
 <script src="{{asset('assets/js/scrollbar/simplebar.js')}}"></script>
 <script src="{{asset('assets/js/scrollbar/custom.js')}}"></script>
 <!-- Sidebar jquery-->
-<script src="{{asset('assets/js/config.js')}}"></script>
 <!-- Plugins JS start-->
-<script src="{{ asset('assets/js/chart/apex-chart/apex-chart.js') }}"></script>
-<script src="{{ asset('assets/js/chart/apex-chart/stock-prices.js') }}"></script>
 <script id="menu" src="{{asset('assets/js/sidebar-menu.js')}}"></script>
 <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
 <script src="{{ asset('assets/js/header-slick.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @yield('script')
-
-@if(Route::current()->getName() != 'popover')
-	<script src="{{asset('assets/js/tooltip-init.js')}}"></script>
-@endif
-
+<script>
+    @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type','info') }}"
+        switch(type){
+            case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
+            case 'success':
+                toastr.success(" {{ Session::get('message') }} ");
+                break;
+            case 'warning':
+                toastr.warning(" {{ Session::get('message') }} ");
+                break;
+            case 'error':
+                toastr.error(" {{ Session::get('message') }} ");
+                break;
+        }
+    @endif
+    @if (Route::currentRouteName() == 'home')
+        new WOW().init();
+    @endif
+</script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
-{{-- <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script> --}}
-
-
-@if(Route::current()->getName() == 'home')
-	<script src="{{asset('assets/js/layout-change.js')}}"></script>
-@endif
 
 @if(Route::currentRouteName() == 'home')
     <script>
