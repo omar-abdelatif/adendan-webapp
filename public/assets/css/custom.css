@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Gulzar&display=swap');
+body.dark-only .login-dark {
+    background-color: #262932;
+    background-blend-mode: overlay;
+}
 .login-card .login-main .theme-form .or:before{
     display: none;
 }
@@ -76,3 +80,4 @@ table.dataTable.display tbody tr.odd
 table.dataTable input[type='checkbox']{
     height: 15px;
 }
+
