@@ -8,7 +8,7 @@
                     <div class="card-header bg-primary">
                         <h3 class="text-white">تسجيل دخول</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body login-main w-100">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="row">
