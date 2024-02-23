@@ -50,3 +50,4 @@
         new WOW().init();
     </script>
 @endif
+<script src={{asset('assets/js/custom-script.js')}}></script>

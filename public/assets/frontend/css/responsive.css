@@ -1,0 +1,25 @@
+@media (min-width: 768px){
+    .carousel, .carousel-control-next, .carousel-control-prev{
+        padding-top: 0 !important;
+    }
+    .carousel{
+        height: 80vh !important;
+    }
+}
+@media (min-width: 640px) {
+    .hidden{
+        display: none;
+    }
+    .flex{
+        display: flex !important;
+    }
+    .items-center{
+        align-items: center !important;
+    }
+    .justify-between{
+        justify-content: space-between !important;
+    }
+    .flex-1 {
+        flex: 1 1 0%;
+    }
+}
