@@ -3,6 +3,9 @@ body.dark-only .login-dark {
     background-color: #262932;
     background-blend-mode: overlay;
 }
+body.dark-only .login-dark .login-main {
+    background-color: #323846;
+}
 .login-card .login-main .theme-form .or:before{
     display: none;
 }
