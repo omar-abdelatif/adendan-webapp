@@ -27,7 +27,7 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="" target="_blank">
                             <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_3') }}"></use>
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                             </svg>
                             <span>الأخبار </span>
                         </a>
@@ -35,7 +35,7 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="" target="_blank">
                             <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
                             <span>المشتركين</span>
                         </a>
@@ -74,17 +74,13 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_1') }}"></use>
-                            </svg>
+                            <i class="fa-solid fa-tombstone-blank text-white me-3"></i>
                             <span>المقابر</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#Cape_5') }}"></use>
-                            </svg>
+                            <i class="fa-duotone fa-rings-wedding text-white me-3"></i>
                             <span>الأفراح</span>
                         </a>
                     </li>
@@ -115,7 +111,7 @@
                             <li class="sidebar-list">
                                 <a href="" class="sidebar-link sidebar-title">
                                     <svg class="stroke-icon">
-                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                                     </svg>
                                     <span>السن</span>
                                 </a>
@@ -123,7 +119,7 @@
                             <li class="sidebar-list">
                                 <a href="" class="sidebar-link sidebar-title">
                                     <svg class="stroke-icon">
-                                        <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_4') }}"></use>
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#fill-job-search') }}"></use>
                                     </svg>
                                     <span>الوظائف</span>
                                 </a>
@@ -132,9 +128,7 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_2') }}"></use>
-                            </svg>
+                            <i data-feather="log-in" class="text-white"></i>
                             <span>سجل تسجيل الدخول</span>
                         </a>
                     </li>
