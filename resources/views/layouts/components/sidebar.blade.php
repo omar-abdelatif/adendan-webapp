@@ -43,9 +43,9 @@
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
                             <svg class="fill-icon">
-                                <use></use>
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
-                            <span></span>
+                            <span>مجلس الإدارة</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -53,7 +53,15 @@
                             <svg class="fill-icon">
                                 <use></use>
                             </svg>
-                            <span></span>
+                            <span>لجان الجميعة</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a href="" class="sidebar-link sidebar-title">
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
+                            </svg>
+                            <span>حرفيين</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -61,7 +69,7 @@
                             <svg class="fill-icon">
                                 <use></use>
                             </svg>
-                            <span></span>
+                            <span>التبرعات</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -69,7 +77,7 @@
                             <svg class="fill-icon">
                                 <use></use>
                             </svg>
-                            <span></span>
+                            <span>المقابر</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -77,47 +85,37 @@
                             <svg class="fill-icon">
                                 <use></use>
                             </svg>
-                            <span></span>
+                            <span>الأفراح</span>
                         </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a href="#" class="sidebar-link sidebar-title">
+                            <svg class="fill-icon">
+                                <use></use>
+                            </svg>
+                            <span>التقارير</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="">الإشتراكات</a>
+                            </li>
+                            <li>
+                                <a href="">السكن</a>
+                            </li>
+                            <li>
+                                <a href="">السن</a>
+                            </li>
+                            <li>
+                                <a href="">الوظائف</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
                             <svg class="fill-icon">
                                 <use></use>
                             </svg>
-                            <span></span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
-                            </svg>
-                            <span></span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
-                            </svg>
-                            <span></span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
-                            </svg>
-                            <span></span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
-                            </svg>
-                            <span></span>
+                            <span>سجل تسجيل الدخول</span>
                         </a>
                     </li>
                 </ul>
