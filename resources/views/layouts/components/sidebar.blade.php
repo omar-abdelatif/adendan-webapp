@@ -27,7 +27,7 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="" target="_blank">
                             <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_3') }}"></use>
                             </svg>
                             <span>الأخبار </span>
                         </a>
@@ -35,14 +35,14 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="" target="_blank">
                             <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                             </svg>
-                            <span>الإشتراكات</span>
+                            <span>المشتركين</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
+                            <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
                             <span>مجلس الإدارة</span>
@@ -50,15 +50,15 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                             </svg>
                             <span>لجان الجميعة</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
+                            <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
                             <span>حرفيين</span>
@@ -66,54 +66,74 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                             </svg>
                             <span>التبرعات</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_1') }}"></use>
                             </svg>
                             <span>المقابر</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Cape_5') }}"></use>
                             </svg>
                             <span>الأفراح</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="#" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                             </svg>
                             <span>التقارير</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li>
-                                <a href="">الإشتراكات</a>
+                            <li class="sidebar-list">
+                                <a href="" class="sidebar-link sidebar-title">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>الإشتراكات</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="">السكن</a>
+                            <li class="sidebar-list">
+                                <a href="" class="sidebar-link sidebar-title">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                                    </svg>
+                                    <span>السكن</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="">السن</a>
+                            <li class="sidebar-list">
+                                <a href="" class="sidebar-link sidebar-title">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                                    </svg>
+                                    <span>السن</span>
+                                </a>
                             </li>
-                            <li>
-                                <a href="">الوظائف</a>
+                            <li class="sidebar-list">
+                                <a href="" class="sidebar-link sidebar-title">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_4') }}"></use>
+                                    </svg>
+                                    <span>الوظائف</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
-                            <svg class="fill-icon">
-                                <use></use>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/svg/icon-sprite.svg#Capa_2') }}"></use>
                             </svg>
                             <span>سجل تسجيل الدخول</span>
                         </a>
