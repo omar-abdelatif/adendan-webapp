@@ -17,7 +17,7 @@
             <div id="sidebar-menu">
                 <ul class="sidebar-links w-100" id="simple-bar">
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="{{ route('home') }}" target="_blank">
+                        <a class="sidebar-link sidebar-title" href="{{ route('home') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                             </svg>
@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="" target="_blank">
+                        <a class="sidebar-link sidebar-title" href="{{route('news.all')}}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                             </svg>
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="" target="_blank">
+                        <a class="sidebar-link sidebar-title" href="">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>

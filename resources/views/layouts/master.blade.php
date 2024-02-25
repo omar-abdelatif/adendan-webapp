@@ -11,11 +11,13 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <title>@yield('title')</title>
+    {{-- ! Vite ! --}}
+    @vite('resources/js/app.js')
     {{-- ! Google font ! --}}
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     @include('layouts.assets.css')
-    @yield('style')
+
 </head>
 
 <body
@@ -53,16 +55,19 @@
                                 @yield('breadcrumb-title')
                             </div>
                             <div class="col-6">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="{{ route('home') }}">
-                                            <svg class="stroke-icon">
-                                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    @yield('breadcrumb-items')
-                                </ol>
+                                <div class="d-flex align-items-center justify-content-end">
+                                    @yield('modals')
+                                    <ol class="ms-3 breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="{{ route('home') }}">
+                                                <svg class="stroke-icon">
+                                                    <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        @yield('breadcrumb-items')
+                                    </ol>
+                                </div>
                             </div>
                         </div>
                     </div>

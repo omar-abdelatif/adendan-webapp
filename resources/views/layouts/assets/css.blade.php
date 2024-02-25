@@ -24,5 +24,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 {{-- ! Date Picker ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/date-picker.css')}}">
-<!-- Custom css-->
+{{-- ! Include Css Files ! --}}
+@yield('style')
+{{-- ! Custom css ! --}}
 <link rel="stylesheet" href={{asset('assets/css/custom.css')}}>
