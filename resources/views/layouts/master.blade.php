@@ -11,7 +11,7 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <title>@yield('title')</title>
-    <!-- Google font-->
+    {{-- ! Google font ! --}}
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     @include('layouts.assets.css')
@@ -33,21 +33,18 @@
             </filter>
         </svg>
     </div>
-    <!-- tap on top starts-->
+    {{-- ! Tap On Top Starts ! --}}
     <div class="tap-top">
         <i data-feather="chevrons-up"></i>
     </div>
-    <!-- tap on tap ends-->
-    <!-- page-wrapper Start-->
+    {{-- ! Page Wrapper Start ! --}}
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
-        <!-- Page Header Start-->
+        {{-- ! Page Header Start ! --}}
         @include('layouts.components.header')
-        <!-- Page Header Ends  -->
-        <!-- Page Body Start-->
+        {{-- ! Page Body Start ! --}}
         <div class="page-body-wrapper">
-            <!-- Page Sidebar Start-->
+            {{-- ! Page Sidebar Start ! --}}
             @include('layouts.components.sidebar')
-            <!-- Page Sidebar Ends-->
             <div class="page-body">
                 <div class="container-fluid">
                     <div class="page-title">
@@ -70,15 +67,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid starts-->
+                {{-- ! Container-Fluid Starts ! --}}
                 @yield('content')
-                <!-- Container-fluid Ends-->
             </div>
-            <!-- footer start-->
+            {{-- ! Footer Start ! --}}
             @include('layouts.components.footer')
         </div>
     </div>
-    <!-- latest jquery-->
+    {{-- ! Latest Jquery ! --}}
     @include('layouts.assets.script')
 </body>
 
