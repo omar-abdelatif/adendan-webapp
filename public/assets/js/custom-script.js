@@ -76,41 +76,7 @@ $(document).ready(function () {
         dateFormat: "yyyy-mm-dd",
     });
 });
-//! Multi Datatables in Same  Page
-// const tables = [
-//     "table",
-//     "table1",
-//     "table2",
-//     "table3",
-//     "table4",
-//     "table5",
-//     "table6",
-//     "table8",
-//     "table9",
-//     "table10",
-//     "table11",
-//     "table12",
-//     "table13",
-//     "table14",
-//     "table15",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-//     "table16",
-// ];
-
+//! Multi Datatables in Same Page
 for (let i = 0; i < 500; i++) {
     let table = document.querySelector("#table" + i);
     new DataTable(table, {
@@ -142,17 +108,17 @@ errors.forEach((error) => {
         error.style.display = "none";
     }, 5000);
 });
-//!
+//! craftSelect
 let SelectedOption = document.getElementById("craftSelect");
 if (SelectedOption) {
     SelectedOption.addEventListener("change", function () {
-        var selectedOption = this.options[this.selectedIndex].value;
-        var otherCraftInput = document.getElementsByName("other_craft")[0];
+        let selectedOption = this.options[this.selectedIndex].value;
+        let otherCraftInput = document.getElementsByName("other_craft")[0];
         otherCraftInput.value = "";
         otherCraftInput.disabled = selectedOption !== "أخرى";
     });
 }
-//!
+//! categorySelect
 const categorySelect = document.getElementById("categorySelect");
 const inputsDiv = document.getElementById("inputs");
 const img = document.getElementById("img");
@@ -192,7 +158,41 @@ function handleChange() {
         inputLabel.innerText = "مبلغ المتأخرات";
     }
 }
-//!
+//! updateCraft
+// function handleUpdateCraft() {
+//     let selectElement = document.getElementById('updateCraft');
+//     let other_craft = document.getElementById("updaing_craft");
+//     let selectedCraft = document.getElementById("selected_craft");
+//     console.log(other_craft.value)
+//     if (selectElement.value === "أخرى") {
+//         other_craft.classList.remove("hidden");
+//     } else {
+//         other_craft.classList.add("hidden");
+//     }
+// }
+
+// let selectElement = document.getElementById('updateCraft');
+// selectElement.addEventListener("change", handleUpdateCraft);
+
+let selectElements = document.querySelectorAll("[data-worker-id]");
+selectElements.forEach(selectElement => {
+    let otherCraftInput = document.querySelector(`input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+    function handleUpdateCraft() {
+        let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+        if (selectedOption === "أخرى") {
+            otherCraftInput.disabled = false;
+        } else {
+            otherCraftInput.value = "";
+            otherCraftInput.disabled = true;
+            otherCraftInput.removeAttribute('value')
+        }
+    }
+    selectElement.addEventListener("change", handleUpdateCraft);
+})
+
+
+
+
 //!
 //!
 //!

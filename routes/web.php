@@ -43,17 +43,22 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(SubscribersController::class)->group(function(){});
         Route::controller(TombsController::class)->group(function(){});
-        Route::controller(WorkerController::class)->group(function(){});
+        Route::controller(WorkerController::class)->group(function () {
+            Route::get('workers/all', 'index')->name('workers.all');
+            Route::post('store_workers', 'storeWorker')->name('worker.store');
+            Route::get('delete_worker/{id}', 'delete')->name('worker.delete');
+            Route::post('update_worker', 'update')->name('worker.update');
+        });
         Route::controller(WeddingController::class)->group(function(){});
         Route::controller(SubscriptionsController::class)->group(function(){});
         Route::controller(DelayController::class)->group(function(){});
         Route::controller(BoardMembersController::class)->group(function(){});
         Route::controller(ReportController::class)->group(function(){});
         Route::controller(AssociationCommittesController::class)->group(function () {
-            Route::get('all', 'index')->name('association.all');
-            Route::post('store_association', 'store')->name('association.store');
-            Route::get('delete_association/{id}', 'remove')->name('association.delete');
-            Route::post('update_association', 'update')->name('association.update');
+            Route::get('associations/all', 'index')->name('association.all');
+            Route::post('associations/store_association', 'store')->name('association.store');
+            Route::get('associations/delete_association/{id}', 'remove')->name('association.delete');
+            Route::post('associations/update_association', 'update')->name('association.update');
         });
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});

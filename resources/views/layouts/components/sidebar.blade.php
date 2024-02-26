@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('workers.all')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
