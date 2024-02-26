@@ -159,21 +159,6 @@ function handleChange() {
     }
 }
 //! updateCraft
-// function handleUpdateCraft() {
-//     let selectElement = document.getElementById('updateCraft');
-//     let other_craft = document.getElementById("updaing_craft");
-//     let selectedCraft = document.getElementById("selected_craft");
-//     console.log(other_craft.value)
-//     if (selectElement.value === "أخرى") {
-//         other_craft.classList.remove("hidden");
-//     } else {
-//         other_craft.classList.add("hidden");
-//     }
-// }
-
-// let selectElement = document.getElementById('updateCraft');
-// selectElement.addEventListener("change", handleUpdateCraft);
-
 let selectElements = document.querySelectorAll("[data-worker-id]");
 selectElements.forEach(selectElement => {
     let otherCraftInput = document.querySelector(`input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
@@ -187,11 +172,10 @@ selectElements.forEach(selectElement => {
             otherCraftInput.removeAttribute('value')
         }
     }
-    selectElement.addEventListener("change", handleUpdateCraft);
+    selectElement.addEventListener("change", function () {
+        handleUpdateCraft();
+    });
 })
-
-
-
 
 //!
 //!
