@@ -170,7 +170,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- ! Updating Midal ! --}}
+                                    {{-- ! Updating Modal ! --}}
                                     <div class="modal fade" id="editing_{{$new->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

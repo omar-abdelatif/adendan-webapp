@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('association.all')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                             </svg>

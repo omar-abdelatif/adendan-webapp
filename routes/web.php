@@ -49,7 +49,12 @@ Route::prefix('admin')->group(function () {
         Route::controller(DelayController::class)->group(function(){});
         Route::controller(BoardMembersController::class)->group(function(){});
         Route::controller(ReportController::class)->group(function(){});
-        Route::controller(AssociationCommittesController::class)->group(function(){});
+        Route::controller(AssociationCommittesController::class)->group(function () {
+            Route::get('all', 'index')->name('association.all');
+            Route::post('store_association', 'store')->name('association.store');
+            Route::get('delete_association/{id}', 'remove')->name('association.delete');
+            Route::post('update_association', 'update')->name('association.update');
+        });
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});
     });
