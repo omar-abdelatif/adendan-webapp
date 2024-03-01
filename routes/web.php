@@ -42,7 +42,12 @@ Route::prefix('admin')->group(function () {
             Route::post('store_video/{id}', 'storeVideo')->name('video.store');
         });
         Route::controller(SubscribersController::class)->group(function(){});
-        Route::controller(TombsController::class)->group(function(){});
+        Route::controller(TombsController::class)->group(function () {
+            Route::get('all_tombs', 'index')->name('tomb.all');
+            Route::post('store_tombs', 'storeTomb')->name('tomb.store');
+            Route::get('delete_tombs/{id}', 'deleteTomb')->name('tomb.delete');
+            Route::post('update_tombs', 'updateTomb')->name('tomb.update');
+        });
         Route::controller(WorkerController::class)->group(function () {
             Route::get('workers/all', 'index')->name('workers.all');
             Route::post('store_workers', 'storeWorker')->name('worker.store');
@@ -52,7 +57,12 @@ Route::prefix('admin')->group(function () {
         Route::controller(WeddingController::class)->group(function(){});
         Route::controller(SubscriptionsController::class)->group(function(){});
         Route::controller(DelayController::class)->group(function(){});
-        Route::controller(BoardMembersController::class)->group(function(){});
+        Route::controller(BoardMembersController::class)->group(function () {
+            Route::get('board_members', 'index')->name('board.index');
+            Route::post('store_member', 'storeMember')->name('board.store');
+            Route::get('delete_member/{id}', 'deleteMember')->name('board.delete');
+            Route::post('update_board', 'updateMember')->name('board.update');
+        });
         Route::controller(ReportController::class)->group(function(){});
         Route::controller(AssociationCommittesController::class)->group(function () {
             Route::get('associations/all', 'index')->name('association.all');

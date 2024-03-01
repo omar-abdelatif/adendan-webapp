@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('board.index')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
@@ -73,7 +73,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
                             <i class="fa-solid fa-tombstone-blank text-white me-3"></i>
                             <span>المقابر</span>
                         </a>
