@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="{{route('board.index')}}" class="sidebar-link sidebar-title">
+                        <a href="{{route('board.all')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>

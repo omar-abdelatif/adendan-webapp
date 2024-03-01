@@ -24,7 +24,7 @@ class BoardMembersRequest extends FormRequest
         return [
             'name' => 'required|string',
             'position' => 'required|string',
-            'img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
+            'img' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
             'phone_number' => 'required'
         ];
     }

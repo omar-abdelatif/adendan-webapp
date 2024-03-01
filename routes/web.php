@@ -58,7 +58,7 @@ Route::prefix('admin')->group(function () {
         Route::controller(SubscriptionsController::class)->group(function(){});
         Route::controller(DelayController::class)->group(function(){});
         Route::controller(BoardMembersController::class)->group(function () {
-            Route::get('board_members', 'index')->name('board.index');
+            Route::get('board_members', 'index')->name('board.all');
             Route::post('store_member', 'storeMember')->name('board.store');
             Route::get('delete_member/{id}', 'deleteMember')->name('board.delete');
             Route::post('update_board', 'updateMember')->name('board.update');
