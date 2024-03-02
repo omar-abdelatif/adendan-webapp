@@ -160,23 +160,25 @@ function handleChange() {
 }
 //! updateCraft
 let selectElements = document.querySelectorAll("[data-worker-id]");
-selectElements.forEach(selectElement => {
-    let otherCraftInput = document.querySelector(`input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+selectElements.forEach((selectElement) => {
+    let otherCraftInput = document.querySelector(
+        `input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`
+    );
     function handleUpdateCraft() {
-        let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+        let selectedOption =
+            selectElement.options[selectElement.selectedIndex].value;
         if (selectedOption === "أخرى") {
             otherCraftInput.disabled = false;
         } else {
             otherCraftInput.value = "";
             otherCraftInput.disabled = true;
-            otherCraftInput.removeAttribute('value')
+            otherCraftInput.removeAttribute("value");
         }
     }
     selectElement.addEventListener("change", function () {
         handleUpdateCraft();
     });
-})
-
+});
 //!
 //!
 //!

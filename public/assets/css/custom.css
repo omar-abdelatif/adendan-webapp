@@ -83,4 +83,6 @@ body.dark-only .login-dark {
 body.dark-only .login-dark .login-main {
     background-color: #323846;
 }
-
+body.dark-only .page-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a.active span{
+    color: #7366ff !important;
+}

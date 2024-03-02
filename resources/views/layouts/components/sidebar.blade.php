@@ -92,32 +92,32 @@
                             <span>التقارير</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li class="sidebar-list">
-                                <a href="" class="sidebar-link sidebar-title">
+                            <li>
+                                <a href="{{route('reports.subscriptions')}}">
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                     </svg>
                                     <span>الإشتراكات</span>
                                 </a>
                             </li>
-                            <li class="sidebar-list">
-                                <a href="" class="sidebar-link sidebar-title">
+                            <li>
+                                <a href="{{route('reports.location')}}">
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                                     </svg>
                                     <span>السكن</span>
                                 </a>
                             </li>
-                            <li class="sidebar-list">
-                                <a href="" class="sidebar-link sidebar-title">
+                            <li>
+                                <a href="{{route('reports.age')}}">
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                                     </svg>
                                     <span>السن</span>
                                 </a>
                             </li>
-                            <li class="sidebar-list">
-                                <a href="" class="sidebar-link sidebar-title">
+                            <li>
+                                <a href="{{route('reports.jobs')}}">
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#fill-job-search') }}"></use>
                                     </svg>

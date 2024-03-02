@@ -1,27 +1,24 @@
 <?php
 
-use App\Http\Controllers\AdsController;
-use App\Http\Controllers\AssociationCommittesController;
-use App\Http\Controllers\BoardMembersController;
-use App\Http\Controllers\DelayController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdsController;
 use App\Http\Controllers\MsgController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SubscribersController;
-use App\Http\Controllers\SubscriptionsController;
-use App\Http\Controllers\TombsController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\TombsController;
+use App\Http\Controllers\DelayController;
 use App\Http\Controllers\WorkerController;
-
-Route::view('/','welcome');
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\BoardMembersController;
+use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
 Route::prefix('admin')->group(function () {
-    Route::view('login', 'auth.login');
     Route::middleware('auth')->group(function () {
         Route::controller(HomeController::class)->group(function () {
             Route::get('dashboard', 'index')->name('home');
@@ -41,7 +38,6 @@ Route::prefix('admin')->group(function () {
             Route::post('update_video', 'updateVideo')->name('video.update');
             Route::post('store_video/{id}', 'storeVideo')->name('video.store');
         });
-        Route::controller(SubscribersController::class)->group(function(){});
         Route::controller(TombsController::class)->group(function () {
             Route::get('all_tombs', 'index')->name('tomb.all');
             Route::post('store_tombs', 'storeTomb')->name('tomb.store');
@@ -54,22 +50,28 @@ Route::prefix('admin')->group(function () {
             Route::get('delete_worker/{id}', 'delete')->name('worker.delete');
             Route::post('update_worker', 'update')->name('worker.update');
         });
-        Route::controller(WeddingController::class)->group(function(){});
-        Route::controller(SubscriptionsController::class)->group(function(){});
-        Route::controller(DelayController::class)->group(function(){});
         Route::controller(BoardMembersController::class)->group(function () {
             Route::get('board_members', 'index')->name('board.all');
             Route::post('store_member', 'storeMember')->name('board.store');
             Route::get('delete_member/{id}', 'deleteMember')->name('board.delete');
             Route::post('update_board', 'updateMember')->name('board.update');
         });
-        Route::controller(ReportController::class)->group(function(){});
         Route::controller(AssociationCommittesController::class)->group(function () {
             Route::get('associations/all', 'index')->name('association.all');
             Route::post('associations/store_association', 'store')->name('association.store');
             Route::get('associations/delete_association/{id}', 'remove')->name('association.delete');
             Route::post('associations/update_association', 'update')->name('association.update');
         });
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('all_reports', 'index')->name('reports.subscriptions');
+            Route::get('jobs_reports', 'jobs')->name('reports.jobs');
+            Route::get('age_reports', 'ages')->name('reports.age');
+            Route::get('location_reports', 'locations')->name('reports.location');
+        });
+        Route::controller(WeddingController::class)->group(function(){});
+        Route::controller(SubscribersController::class)->group(function(){});
+        Route::controller(SubscriptionsController::class)->group(function(){});
+        Route::controller(DelayController::class)->group(function(){});
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});
     });
