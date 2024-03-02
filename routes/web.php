@@ -19,6 +19,7 @@ use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
 Route::prefix('admin')->group(function () {
+    Route::view('login', 'auth.login');
     Route::middleware('auth')->group(function () {
         Route::controller(HomeController::class)->group(function () {
             Route::get('dashboard', 'index')->name('home');
