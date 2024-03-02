@@ -79,7 +79,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
                             <i class="fa-duotone fa-rings-wedding text-white me-3"></i>
                             <span>الأفراح</span>
                         </a>

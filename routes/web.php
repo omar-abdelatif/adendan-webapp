@@ -12,6 +12,8 @@ use App\Http\Controllers\DelayController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\DonatorsController;
+use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\SubscriptionsController;
@@ -26,7 +28,7 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(UserController::class)->group(function () {
             Route::get('profile', 'index')->name('user.profile');
-            Route::post('update_profile', 'update')->name( 'user.update' );
+            Route::post('dashboard/update_profile', 'update')->name('user.update');
         });
         Route::controller(NewsController::class)->group(function () {
             Route::get('news/all', 'index')->name('news.all');
@@ -40,22 +42,22 @@ Route::prefix('admin')->group(function () {
             Route::post('store_video/{id}', 'storeVideo')->name('video.store');
         });
         Route::controller(TombsController::class)->group(function () {
-            Route::get('all_tombs', 'index')->name('tomb.all');
-            Route::post('store_tombs', 'storeTomb')->name('tomb.store');
-            Route::get('delete_tombs/{id}', 'deleteTomb')->name('tomb.delete');
-            Route::post('update_tombs', 'updateTomb')->name('tomb.update');
+            Route::get('tombs/all', 'index')->name('tomb.all');
+            Route::post('tombs/store', 'storeTomb')->name('tomb.store');
+            Route::get('tombs/delete/{id}', 'deleteTomb')->name('tomb.delete');
+            Route::post('tombs/update', 'updateTomb')->name('tomb.update');
         });
         Route::controller(WorkerController::class)->group(function () {
             Route::get('workers/all', 'index')->name('workers.all');
-            Route::post('store_workers', 'storeWorker')->name('worker.store');
-            Route::get('delete_worker/{id}', 'delete')->name('worker.delete');
-            Route::post('update_worker', 'update')->name('worker.update');
+            Route::post('workers/store', 'storeWorker')->name('worker.store');
+            Route::get('worker/delete/{id}', 'delete')->name('worker.delete');
+            Route::post('worker/update', 'update')->name('worker.update');
         });
         Route::controller(BoardMembersController::class)->group(function () {
-            Route::get('board_members', 'index')->name('board.all');
-            Route::post('store_member', 'storeMember')->name('board.store');
-            Route::get('delete_member/{id}', 'deleteMember')->name('board.delete');
-            Route::post('update_board', 'updateMember')->name('board.update');
+            Route::get('board/all', 'index')->name('board.all');
+            Route::post('board/store', 'storeMember')->name('board.store');
+            Route::get('board/delete/{id}', 'deleteMember')->name('board.delete');
+            Route::post('board/update', 'updateMember')->name('board.update');
         });
         Route::controller(AssociationCommittesController::class)->group(function () {
             Route::get('associations/all', 'index')->name('association.all');
@@ -64,15 +66,22 @@ Route::prefix('admin')->group(function () {
             Route::post('associations/update_association', 'update')->name('association.update');
         });
         Route::controller(ReportController::class)->group(function () {
-            Route::get('all_reports', 'index')->name('reports.subscriptions');
-            Route::get('jobs_reports', 'jobs')->name('reports.jobs');
-            Route::get('age_reports', 'ages')->name('reports.age');
-            Route::get('location_reports', 'locations')->name('reports.location');
+            Route::get('reports/all', 'index')->name('reports.subscriptions');
+            Route::get('reports/jobs', 'jobs')->name('reports.jobs');
+            Route::get('reports/age', 'ages')->name('reports.age');
+            Route::get('reports/location', 'locations')->name('reports.location');
         });
-        Route::controller(WeddingController::class)->group(function(){});
+        Route::controller(WeddingController::class)->group(function () {
+            Route::get('weddings/all', 'index')->name('weddings.all');
+            Route::post('wedding/store', 'weddingStore')->name('weddings.store');
+            Route::get('wedding/delete/{id}', 'weddingRemove')->name('wedding.delete');
+            Route::post('wedding/update', 'weddingUpdate')->name('weddings.update');
+        });
         Route::controller(SubscribersController::class)->group(function(){});
         Route::controller(SubscriptionsController::class)->group(function(){});
         Route::controller(DelayController::class)->group(function(){});
+        Route::controller(DonatorsController::class)->group(function(){});
+        Route::controller(DonationsController::class)->group(function(){});
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});
     });
