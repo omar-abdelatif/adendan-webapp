@@ -30,7 +30,13 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-lg-12 text-center mt-4">
+                                <div class="col-lg-12 text-center">
+                                    <div class="form-group my-2">
+                                        <div class="checkbox p-0">
+                                            <input id="checkbox1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <label class="text-muted" for="checkbox1">تذكرني</label>
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-primary w-50 py-2 rounded-pill">
                                         تسجيل دخول
                                     </button>
