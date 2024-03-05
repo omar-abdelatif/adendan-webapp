@@ -15,7 +15,7 @@ class SubscribersController extends Controller
     public function index()
     {
         $members = Subscribers::with('delays')->get();
-        return view('pages.Subscriptions.subscribers', compact('members'));
+        return view('pages.subscriptions.subscribers', compact('members'));
     }
     public function storeSubs(SubscriberRequest $request)
     {
