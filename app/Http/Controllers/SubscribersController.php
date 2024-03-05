@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\Models\Delay;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\SubscriberRequest;
+use App\Imports\SubscribersImport;
 
 class SubscribersController extends Controller
 {
@@ -176,5 +178,22 @@ class SubscribersController extends Controller
             }
         }
         return redirect()->route('subscriber.all')->withErrors($validatedData);
+    }
+    public function bulkUpload(Request $request)
+    {
+        $validated = $request->validate([
+            'import' => 'required|mimes:xlsx,xls',
+        ]);
+        if ($validated) {
+            $import = Excel::import(new SubscribersImport, $request['import'], null, \Maatwebsite\Excel\Excel::XLSX);
+            if ($import) {
+                $notificationSuccess = [
+                    'message' => "تم الاستيراد بنجاح",
+                    'alert-type' => 'success'
+                ];
+                return redirect()->route('subscriber.all')->with($notificationSuccess);
+            }
+        }
+        return redirect()->route('subscriber.all')->withErrors($validated);
     }
 }

@@ -27,7 +27,7 @@
                 <div class="modal-body">
                     <form action="{{route('subscriber.bulk')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control" name="excel" accept=".xlsx, .xls">
+                        <input type="file" class="form-control" name="import" accept=".xlsx, .xls">
                         <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
                     </form>
                 </div>
