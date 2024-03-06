@@ -20,6 +20,20 @@ use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
+
+//! FrontEnd Routes
+Route::view('/', 'welcome');
+
+
+
+
+
+
+
+
+
+
+
 Route::prefix('admin')->group(function () {
     Route::view('login', 'auth.login');
     Route::middleware('auth')->group(function () {
