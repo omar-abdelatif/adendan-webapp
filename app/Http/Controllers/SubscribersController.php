@@ -15,7 +15,7 @@ class SubscribersController extends Controller
     public function index()
     {
         $members = Subscribers::with('delays')->get();
-        return view('pages.subscriptions.subscribers', compact('members'));
+        return view('pages.subscribers.subscribers', compact('members'));
     }
     public function storeSubs(SubscriberRequest $request)
     {
@@ -111,7 +111,7 @@ class SubscribersController extends Controller
     {
         $subscriber = Subscribers::find($id);
         if ($subscriber) {
-            return view('pages.Subscriptions.update_subscriber', compact('subscriber'));
+            return view('pages.subscribers.update_subscriber', compact('subscriber'));
         }
     }
     public function update(SubscriberRequest $request)

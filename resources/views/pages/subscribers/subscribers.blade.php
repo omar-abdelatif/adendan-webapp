@@ -255,7 +255,7 @@
                     <div class="card-body">
                         <?php $i =1 ?>
                         <div class="table-responsible">
-                            <table id="table" class="table display align-middle text-center table-hover" data-order='[[0, "asc"]]' data-page-length='10'>
+                            <table id="table" class="table display align-middle text-center table-hover" data-order='[[1, "asc"]]' data-page-length='10'>
                                 <thead>
                                     <tr>
                                         <th class="text-white text-center"></th>
@@ -281,7 +281,7 @@
                                                     <span class="badge rounded-pill badge-danger">الإشتراك غير مفعل</span>
                                                 @endif
                                             </td>
-                                            @if ($member->delays)
+                                            @if ($member->delays === 0)
                                                 <td class="text-white text-center">
                                                     <span class="text-white bg-secondary rounded-pill px-4">{{$member->delays->amount}}</span>
                                                     ج.م
@@ -306,14 +306,10 @@
                                                         <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
                                                             <i class="icofont icofont-ui-edit"></i>
                                                         </a>
-                                                        {{-- ! Add Subscription ! --}}
-                                                        <button type="button" class="btn btn-info text-dark px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
-                                                            <i class="icofont icofont-plus"></i>
-                                                        </button>
                                                         {{-- ! History ! --}}
-                                                        {{-- <a class="btn btn-success px-2 py-1" role="button" href={{route('subscription.history',$member->id)}}>
+                                                        <a class="btn btn-success px-2 py-1" role="button" href={{route('subscription.history',$member->id)}}>
                                                             <i class="icofont icofont-eye"></i>
-                                                        </a> --}}
+                                                        </a>
                                                         {{-- ! Add Delay ! --}}
                                                         <button type="button" class="btn btn-secondary text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
                                                             <i class="icofont icofont-plus"></i>
@@ -337,6 +333,38 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- ! Add Delay ! --}}
+                                                <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مديونية للعضو {{$member->name}}</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action={{route('delays.store')}} method="post">
+                                                                    @csrf
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-white">رقم العضوية</label>
+                                                                                <input type="number" class="form-control text-white" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-white">مبلغ المديونية</label>
+                                                                                <input type="number" class="form-control text-white" name="amount" placeholder="إجمالي مبلغ المديونية">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                        </div>
                                                                     </div>
                                                                 </form>
                                                             </div>

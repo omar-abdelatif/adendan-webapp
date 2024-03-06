@@ -85,8 +85,15 @@ Route::prefix('admin')->group(function () {
             Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriber.details');
             Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriber.bulk');
         });
-        Route::controller(SubscriptionsController::class)->group(function(){});
-        Route::controller(DelayController::class)->group(function(){});
+        Route::controller(SubscriptionsController::class)->group(function () {
+            Route::get('subscription/history/{id}', 'index')->name('subscription.history');
+            Route::post('subscription/store', 'storeSubscription')->name('subscription.store');
+            Route::get('subscription/delete/{id}', 'destroyingSubscription')->name('subscription.destroy');
+            Route::post('subscription/updating', 'updatingSubscription')->name('subscription.update');
+        });
+        Route::controller(DelayController::class)->group(function () {
+            Route::post('delays/store', 'storeDelays')->name('delays.store');
+        });
         Route::controller(DonatorsController::class)->group(function(){});
         Route::controller(DonationsController::class)->group(function(){});
         Route::controller(AdsController::class)->group(function(){});
