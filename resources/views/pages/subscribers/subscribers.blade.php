@@ -255,43 +255,53 @@
                     <div class="card-body">
                         <?php $i =1 ?>
                         <div class="table-responsible">
-                            <table id="table" class="table display align-middle text-center table-hover" data-order='[[1, "asc"]]' data-page-length='10'>
+                            <table id="table" class="table table-hover align-middle text-center table-hover" data-order='[[1, "asc"]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-white text-center"></th>
-                                        <th class="text-white text-start">#</th>
-                                        <th class="text-white text-center">رقم العضوية</th>
-                                        <th class="text-white text-center">الإسم</th>
-                                        <th class="text-white text-center">حالة الإشتراك</th>
-                                        <th class="text-white text-center">متأخرات</th>
-                                        <th class="text-white text-center">Action</th>
+                                        <th class="text-muted text-center"></th>
+                                        <th class="text-muted text-center">#</th>
+                                        <th class="text-muted text-center">رقم العضوية</th>
+                                        <th class="text-muted text-center">الإسم</th>
+                                        <th class="text-muted text-center">حالة الإشتراك</th>
+                                        <th class="text-muted text-center">متأخرات</th>
+                                        <th class="text-muted text-center">مدة المتأخرات بالسنوات</th>
+                                        <th class="text-muted text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($members as $member)
                                         <tr>
                                             <td class="text-center"></td>
-                                            <td class="text-white text-center">{{$i++}}</td>
-                                            <td class="text-white text-center">{{$member->member_id}}</td>
-                                            <td class="text-white text-center">{{$member->name}}</td>
-                                            <td class="text-white text-center">
+                                            <td class="text-muted text-center">{{$i++}}</td>
+                                            <td class="text-muted text-center">{{$member->member_id}}</td>
+                                            <td class="text-muted text-center">{{$member->name}}</td>
+                                            <td class="text-muted text-center">
                                                 @if($member->status == 1)
-                                                    <span class="badge rounded-pill badge-success">الإشتراك مفعل</span>
-                                                @else
-                                                    <span class="badge rounded-pill badge-danger">الإشتراك غير مفعل</span>
+                                                    <span class="badge rounded-pill badge-success text-muted">الإشتراك مفعل</span>
+                                                @elseif($member->status == 0)
+                                                    <span class="badge rounded-pill badge-danger text-muted">الإشتراك غير مفعل</span>
+                                                @elseif ($member->status == 2)
+                                                    <span class="badge rounded-pill badge-dark text-muted">المشترك متوفي</span>
                                                 @endif
                                             </td>
-                                            @if ($member->delays === 0)
-                                                <td class="text-white text-center">
-                                                    <span class="text-white bg-secondary rounded-pill px-4">{{$member->delays->amount}}</span>
+                                            @if ($member->delays)
+                                                <td class="text-muted text-center">
+                                                    <span class="text-muted bg-secondary rounded-pill px-4">{{$member->delays->amount}}</span>
                                                     ج.م
                                                 </td>
                                             @else
-                                                <td class="text-white text-center">
-                                                    <span class="text-white bg-success rounded-pill px-3">0</span>
+                                                <td class="text-muted text-center">
+                                                    <span class="text-muted bg-success rounded-pill px-3">0</span>
                                                     ج.م
                                                 </td>
                                             @endif
+                                            <td class="text-center text-muted">
+                                                @if ($member->delays)
+                                                    {{$member->delays->delay_period}}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -299,9 +309,9 @@
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                         {{-- ! Delete Member ! --}}
-                                                        <button type="button" class="btn btn-danger px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#deleting_{{$member->id}}">
+                                                        {{-- <button type="button" class="btn btn-danger px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#deleting_{{$member->id}}">
                                                             <i class="icofont icofont-trash"></i>
-                                                        </button>
+                                                        </button> --}}
                                                         {{-- ! Edit Member ! --}}
                                                         <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
                                                             <i class="icofont icofont-ui-edit"></i>
@@ -311,13 +321,19 @@
                                                             <i class="icofont icofont-eye"></i>
                                                         </a>
                                                         {{-- ! Add Delay ! --}}
-                                                        <button type="button" class="btn btn-secondary text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
-                                                            <i class="icofont icofont-plus"></i>
-                                                        </button>
+                                                        @if ($member->status == 2)
+                                                            <button type="button" class="btn btn-secondary text-white d-none px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
+                                                                <i class="icofont icofont-plus"></i>
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="btn btn-secondary text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
+                                                                <i class="icofont icofont-plus"></i>
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 {{-- ! Delete Member ! --}}
-                                                <div class="modal fade" id="deleting_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                {{-- <div class="modal fade" id="deleting_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -338,13 +354,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 {{-- ! Add Delay ! --}}
                                                 <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مديونية للعضو {{$member->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة مديونية للعضو {{$member->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -353,17 +369,21 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-white">رقم العضوية</label>
-                                                                                <input type="number" class="form-control text-white" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
+                                                                                <label for="title" class="text-muted">رقم العضوية</label>
+                                                                                <input type="number" class="form-control text-muted" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-white">مبلغ المديونية</label>
-                                                                                <input type="number" class="form-control text-white" name="amount" placeholder="إجمالي مبلغ المديونية">
+                                                                                <label for="title" class="text-muted">مبلغ المديونية</label>
+                                                                                <input type="number" class="form-control text-muted" name="amount" placeholder="إجمالي مبلغ المديونية">
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="delay_period" class="text-muted">مدة المدينوية</label>
+                                                                                <input type="number" class="form-control text-muted" name="delay_period" placeholder="مدة المدينوية">
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                            <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
+                                                                            <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>

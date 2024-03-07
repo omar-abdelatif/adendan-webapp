@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="" class="sidebar-link sidebar-title">
+                        <a href="{{route('donators.all')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                             </svg>
@@ -126,12 +126,12 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-list">
+                    {{-- <li class="sidebar-list">
                         <a href="" class="sidebar-link sidebar-title">
                             <i data-feather="log-in" class="text-white"></i>
                             <span>سجل تسجيل الدخول</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </nav>

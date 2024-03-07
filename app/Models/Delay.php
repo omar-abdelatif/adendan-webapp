@@ -12,6 +12,7 @@ class Delay extends Model
     protected $fillable = [
         'member_id',
         'amount',
+        'delay_period',
         'subscribers_id'
     ];
     public function  subscriber() {

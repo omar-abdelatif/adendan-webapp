@@ -21,19 +21,6 @@ use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
 
-//! FrontEnd Routes
-Route::view('/', 'welcome');
-
-
-
-
-
-
-
-
-
-
-
 Route::prefix('admin')->group(function () {
     Route::view('login', 'auth.login');
     Route::middleware('auth')->group(function () {
@@ -108,7 +95,9 @@ Route::prefix('admin')->group(function () {
         Route::controller(DelayController::class)->group(function () {
             Route::post('delays/store', 'storeDelays')->name('delays.store');
         });
-        Route::controller(DonatorsController::class)->group(function(){});
+        Route::controller(DonatorsController::class)->group(function () {
+            Route::get('donators/all', 'index')->name('donators.all');
+        });
         Route::controller(DonationsController::class)->group(function(){});
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});

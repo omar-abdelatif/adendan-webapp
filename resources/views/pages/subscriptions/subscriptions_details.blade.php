@@ -102,7 +102,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="subs-title mb-5">
-                    <h2 class="text-center text-decoration-underline">كل الإشتراكات للعضو {{$subscriber->name}}</h2>
+                    <h2 class="text-center text-decoration-underline">كل الإشتراكات و المديونيات السابقة للعضو {{$subscriber->name}}</h2>
                 </div>
                 <div class="card">
                     <div class="card-body">
