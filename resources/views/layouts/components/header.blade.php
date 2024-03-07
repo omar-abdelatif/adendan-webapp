@@ -30,6 +30,9 @@
         <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
             <ul class="nav-menus">
                 <li>
+                    <a href="{{route('site.index')}}" class="btn btn-outline-success" target="_blank">زيارة الموقع</a>
+                </li>
+                <li>
                     <div class="mode">
                         <svg>
                             <use href="{{ asset('assets/svg/icon-sprite.svg#moon') }}"></use>
