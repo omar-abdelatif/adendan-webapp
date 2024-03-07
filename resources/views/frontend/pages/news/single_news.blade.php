@@ -5,6 +5,11 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">{{$news->title}}</li>
 @endsection
+@section('meta')
+    <meta property="og:title" content="{{$news->title}}">
+    <meta property="og:description" content="{{$news->description}}">
+    <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
+@endsection
 @section('site')
     <section class="news-details my-5">
         <div class="container-fluid">

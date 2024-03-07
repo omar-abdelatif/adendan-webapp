@@ -65,6 +65,9 @@
                                                     <div class="cell mb-3 fw-bold fs-5 ">
                                                         مبلغ المديونية
                                                     </div>
+                                                    <div class="cell mb-3 fw-bold fs-5 ">
+                                                        مدة المديونية
+                                                    </div>
                                                 </div>
                                                 <div class="row bg-light py-3 text-center">
                                                     <div class="cell mb-3 fw-bold fs-5" data-title="Full Name">
@@ -83,6 +86,13 @@
                                                     <div class="cell mb-3 fw-bold fs-5" data-title="Location">
                                                         @if ($member->delays)
                                                             <p class="mb-0">{{$member->delays->amount}} ج.م</p>
+                                                        @else
+                                                            <p class="mb-0">لا توجد مديونية</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Location">
+                                                        @if ($member->delays)
+                                                            <p class="mb-0">{{$member->delays->delay_period}} سنوات</p>
                                                         @else
                                                             <p class="mb-0">لا توجد مديونية</p>
                                                         @endif

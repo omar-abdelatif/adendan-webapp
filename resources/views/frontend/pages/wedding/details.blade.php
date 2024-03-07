@@ -8,6 +8,11 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">تفاصيل الفرح</li>
 @endsection
+@section('meta')
+    <meta property="og:title" content="{{$page->title}}">
+    <meta property="og:description" content="{{$page->details}}">
+    <meta property="og:image" content="{{ asset('assets/images/weddings/'.$page->img) }}">
+@endsection
 @section('site')
     <section class="weddings-details my-5">
         <div class="container">

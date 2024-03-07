@@ -11,9 +11,7 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <meta property="og:url" content="https://adendan.website/">
-    <meta property="og:title" content="جمعية أدندان الخيرية">
-    <meta property="og:description" content="جمعية أدندان الخيرية">
-    <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
+    @yield('meta')
     @vite('resources/js/app.js')
     <title>جمعية أدندان الخيرية</title>
     @include('frontend.layouts.assets.css')

@@ -35,10 +35,21 @@ class NewsController extends Controller
             'sportnewscount'
         ]));
     }
+    function extractVideoCode($url)
+    {
+        $youTubePos = strpos($url, 'youtu.be/');
+        if ($youTubePos !== false) {
+            $videoCode = substr($url, $youTubePos + strlen('youtu.be/'));
+            return $videoCode;
+        }
+        return null;
+    }
     public function newsDetails($id)
     {
         $news = News::find($id);
         if ($news) {
+            // $routeName = request()->route()->getName();
+            // dd($routeName);
             $thumbsImgs = NewsThumbnail::where('news_id', $id)->get();
             $countThumbsImgs = $thumbsImgs->count();
             $thumbVideos = NewsVideos::where('news_id', $id)->get();
@@ -50,6 +61,11 @@ class NewsController extends Controller
                 $videoCode = $this->extractVideoCode($videoUrl);
                 $videoLinks[] = $videoCode;
             }
+            // if($routeName == ''){
+
+            // } elseif ($routeName == ''){
+
+            // }
             return view('frontend.pages.news.single_news', compact(
                 'news',
                 'thumbsImgs',
@@ -59,15 +75,6 @@ class NewsController extends Controller
                 'socialShare'
             ));
         }
-    }
-    function extractVideoCode($url)
-    {
-        $youTubePos = strpos($url, 'youtu.be/');
-        if ($youTubePos !== false) {
-            $videoCode = substr($url, $youTubePos + strlen('youtu.be/'));
-            return $videoCode;
-        }
-        return null;
     }
     public function socialWidget()
     {
