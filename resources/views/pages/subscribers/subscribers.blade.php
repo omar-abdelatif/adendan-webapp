@@ -308,10 +308,10 @@
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
-                                                        {{-- ! Delete Member ! --}}
-                                                        {{-- <button type="button" class="btn btn-danger px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#deleting_{{$member->id}}">
-                                                            <i class="icofont icofont-trash"></i>
-                                                        </button> --}}
+                                                        {{-- ! Donation ! --}}
+                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#donating_{{$member->id}}">
+                                                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                                                        </button>
                                                         {{-- ! Edit Member ! --}}
                                                         <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
                                                             <i class="icofont icofont-ui-edit"></i>
@@ -330,31 +330,74 @@
                                                                 <i class="icofont icofont-plus"></i>
                                                             </button>
                                                         @endif
+                                                        {{-- ! Donation History ! --}}
+                                                        <a href="{{route('donations.showAll', $member->id)}}" class="btn btn-primary px-2 py-1">
+                                                            <i class="fa-solid fa-book-heart"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
-                                                {{-- ! Delete Member ! --}}
-                                                {{-- <div class="modal fade" id="deleting_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
+                                                {{-- ! Donations ! --}}
+                                                <div class="modal fade" id="donating_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">حذف العضو {{$member->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تبرع من العضو {{$member->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('subscribe.destroy', $member->id)}} method="get">
+                                                                <form action={{route('donations.store')}} method="post">
                                                                     @csrf
-                                                                    <div class="form-title text-center">
-                                                                        <h1 class="text-white">هل أنت متأكد الحذف</h1>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for="member_id" class="text-muted text-right">رقم العضوية</label>
+                                                                                <input type="number" name="member_id" id="member_id" class="form-control" value="{{$member->member_id}}" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for="invoice_no" class="text-muted">رقم الإيصال</label>
+                                                                                <input type="number" class="form-control" placeholder="رقم الإيصال" id="invoice_no" name="invoice_no">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for="amount" class="text-muted">المبلغ</label>
+                                                                                <input type="number" class="form-control" placeholder="المبلغ" id="amount" name="amount">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for="donation_duration" class="text-muted">مدة التبرع</label>
+                                                                                <input type="text" class="form-control" placeholder="المده" id="donation_duration" name="donation_duration">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for=donation_type class="text-muted">نوع التبرع</label>
+                                                                                <select name=donation_type class="form-select" id=donation_type>
+                                                                                    <option value="مادي" selected>مادي</option>
+                                                                                    <option value="أخرى" id="other_donation">أخرى</option>
+                                                                                </select>
+                                                                                <input type="text" class="form-control d-none mt-3" placeholder="نوع التبرع الأخر" id="otherDonation" name="other_donation" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="form-group">
+                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
+                                                                                <input type="text" class="form-control" placeholder="جهة التبرع" name="donation_destination">
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                        <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                    <div class="modal-footer mt-3">
+                                                                        <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                                 {{-- ! Add Delay ! --}}
                                                 <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">

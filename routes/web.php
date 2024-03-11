@@ -98,7 +98,11 @@ Route::prefix('admin')->group(function () {
         Route::controller(DonatorsController::class)->group(function () {
             Route::get('donators/all', 'index')->name('donators.all');
         });
-        Route::controller(DonationsController::class)->group(function(){});
+        Route::controller(DonationsController::class)->group(function () {
+            Route::get('donations/showAll/{id}', 'index')->name("donations.showAll");
+            Route::post('donations/store', 'storeDonations')->name('donations.store');
+            Route::get('donation/remove/{id}', 'removeDonation')->name('donation.remove');
+        });
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});
     });

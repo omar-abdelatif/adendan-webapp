@@ -12,4 +12,5 @@ class DonatorsController extends Controller
         $allDonators = Donators::all();
         return view('pages.donations.donators', compact('allDonators'));
     }
+    public function storeDonator(){}
 }

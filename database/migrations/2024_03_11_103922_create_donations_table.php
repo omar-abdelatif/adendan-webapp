@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('member_id');
+            $table->bigInteger('invoice_no')->nullable()->unique();
+            $table->bigInteger('amount');
+            $table->string('donation_duration');
+            $table->string('donation_type');
+            $table->string('other_donation')->nullable();
+            $table->integer('subscribers_id')->index()->references('id')->on('subscribers')->onDelete('cascade');
             $table->timestamps();
         });
     }

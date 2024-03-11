@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('subscription_cost');
             $table->integer('invoice_no');
             $table->date('pay_date');
-            $table->integer('subscribers_id')->index()->references('id')->on('subscribers')->onDelte('cascade');
+            $table->integer('subscribers_id')->index()->references('id')->on('subscribers')->onDelete('cascade');
             $table->year('period');
             $table->string('delays')->nullable();
             $table->timestamps();

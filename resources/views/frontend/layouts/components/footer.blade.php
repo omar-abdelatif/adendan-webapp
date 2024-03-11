@@ -15,13 +15,6 @@
                                     <p class="mb-0 text-center fw-bold fs-5 text-white">00405010000670</p>
                                 </div>
                             </div>
-                            <div class="vc d-flex align-items-center justify-content-evenly rounded p-3 mb-3" style="background-color: #ee1d23">
-                                <img src="{{asset('assets/frontend/images/icons/vodafone_cash.jpeg')}}" width="80" class="img-fluid rounded-circle" alt="vc logo">
-                                <div class="texts-details">
-                                    <h4 class="text-center text-white mb-3">فودافون كاش</h4>
-                                    <p class="mb-0 text-center fw-bold fs-5 text-white" dir="ltr">+20123456789</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,8 +25,8 @@
                         </div>
                         <div class="footer-item-body">
                             <div class="contact-item mb-3 text-center d-flex align-items-center">
-                                <i class="fa-solid fa-mobile-screen-button fs-5 bg-primary p-3 rounded-pill text-white"></i>
-                                <p class="mb-0 text-secondary fs-5 me-3 fw-bold" dir="ltr">+20123456789</p>
+                                <i class="fa-solid fa-tty fs-5 bg-primary p-3 rounded-pill text-white"></i>
+                                <p class="mb-0 text-secondary fs-5 me-3 fw-bold" dir="ltr">023902313</p>
                             </div>
                             <div class="contact-item mb-3 text-center d-flex align-items-center">
                                 <i class="fa-solid fa-location-dot fs-5 bg-primary p-3 rounded-pill text-white"></i>

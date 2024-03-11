@@ -1,10 +1,10 @@
 @extends('layouts.master')
 @section('title', 'كل التبرعات')
 @section('breadcrumb-title')
-    <h3>كل التبرعات</h3>
+    <h3>كل المتبرعين</h3>
 @endsection
 @section('breadcrumb-items')
-    <li class="breadcrumb-item active">كل التبرعات</li>
+    <li class="breadcrumb-item active">كل المتبرعين</li>
 @endsection
 @section('modals')
 

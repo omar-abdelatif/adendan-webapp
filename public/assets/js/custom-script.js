@@ -179,7 +179,21 @@ selectElements.forEach((selectElement) => {
         handleUpdateCraft();
     });
 });
-//!
+//! Insert Donation
+let otherDonation = document.getElementById("donation_type");
+if (otherDonation) {
+    otherDonation.addEventListener("change", function () {
+        let donationValue = this.options[this.selectedIndex].value;
+        let donationName = document.getElementById("otherDonation");
+        if (donationValue == "أخرى") {
+            donationName.classList.remove("d-none");
+            donationName.removeAttribute('disabled')
+        } else {
+            donationName.value = "";
+            donationName.classList.add("d-none");
+        }
+    })
+}
 //!
 //!
 //!
