@@ -18,6 +18,7 @@ use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\AssociationCommittesController;
+use App\Http\Controllers\OuterDonationsController;
 
 Auth::routes();
 
@@ -97,11 +98,21 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(DonatorsController::class)->group(function () {
             Route::get('donators/all', 'index')->name('donators.all');
+            Route::post('donators/store', 'storeDonator')->name('donators.store');
+            Route::get('donators/remove/{id}', 'removeDonator')->name('donators.remove');
+            Route::post('donators/update', 'donatorUpdate')->name('donators.update');
         });
         Route::controller(DonationsController::class)->group(function () {
             Route::get('donations/showAll/{id}', 'index')->name("donations.showAll");
             Route::post('donations/store', 'storeDonations')->name('donations.store');
-            Route::get('donation/remove/{id}', 'removeDonation')->name('donation.remove');
+            Route::get('donations/remove/{id}', 'removeDonation')->name('donation.remove');
+            Route::post('donations/update', 'updateDonation')->name('donations.update');
+        });
+        Route::controller(OuterDonationsController::class)->group(function () {
+            Route::get('outer_donations/history/{id}', 'index')->name('outer_donations.history');
+            Route::post('outer_donations/history/store', 'storeOuterDonations')->name('outer_donations.store');
+            Route::get('outer_donations/history/delete/{id}', 'removeOuterDonations')->name('outer_donations.delete');
+            Route::post('outer_donations/history/update', 'updateOuterDonations')->name('outer_donations.update');
         });
         Route::controller(AdsController::class)->group(function(){});
         Route::controller(MsgController::class)->group(function(){});

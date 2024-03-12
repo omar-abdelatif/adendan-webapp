@@ -11,9 +11,12 @@ class Donators extends Model
     protected $table = 'donators';
     protected $fillable = [
         'name',
-        'mobile_no',
-        '',
-        '',
-        '',
+        'mobile_number',
+        'donator_type',
+        'duration'
     ];
+    public function outerdonations()
+    {
+        return $this->hasMany(OuterDonations::class);
+    }
 }

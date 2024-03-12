@@ -61,4 +61,24 @@ class DonationsController extends Controller
             return redirect()->route('subscriber.all')->with($notificationErrors);
         }
     }
+    public function updateDonation(RequestDonations $request)
+    {
+        $id = $request->id;
+        $donations = Donations::find($id);
+        if ($donations) {
+            $update = $donations->update($request->all());
+            if ($update) {
+                $notificationSuccess = [
+                    'message' => 'تم تحديث الإشتراك',
+                    'alert-type' => 'success'
+                ];
+                return redirect()->back()->with($notificationSuccess);
+            }
+        }
+        $notificationError = [
+            'message' => 'حدث خطأ... برجاء المحاولة مره اخرى',
+            'alert-type' => 'error'
+        ];
+        return redirect()->back()->with($notificationError);
+    }
 }

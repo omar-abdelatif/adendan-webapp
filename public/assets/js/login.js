@@ -1,23 +1,25 @@
 (function ($) {
-    "use strict";
+    ("use strict");
     /*----------------------------------------
-     passward show hide
-     ----------------------------------------*/
-    $('.show-hide').show();
-    $('.show-hide span').addClass('show');
+    passward show hide
+    ----------------------------------------*/
+    $(".show-hide").show();
+    $(".show-hide span").addClass("show");
 
-    $('.show-hide span').click(function () {
-        if ($(this).hasClass('show')) {
-            $('input[name="login[password]"]').attr('type', 'text');
-            $(this).removeClass('show');
+    $(".show-hide span").click(function () {
+        if ($(this).hasClass("show")) {
+            $('input[name="login"]').attr("type", "text");
+            $(this).removeClass("show");
         } else {
-            $('input[name="login[password]"]').attr('type', 'password');
-            $(this).addClass('show');
+            $('input[name="login"]').attr("type", "password");
+            $(this).addClass("show");
         }
     });
-    $('form button[type="submit"]').on('click', function () {
-        $('.show-hide span').text('Show').addClass('show');
-        $('.show-hide').parent().find('input[name="login[password]"]').attr('type', 'password');
+    $('form button[type="submit"]').on("click", function () {
+        $(".show-hide span").text("Show").addClass("show");
+        $(".show-hide")
+            .parent()
+            .find('input[name="login"]')
+            .attr("type", "password");
     });
-
 })(jQuery);

@@ -78,7 +78,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="" method="post">
+                                                                <form action="{{route('outer_donations.update')}}" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value={{$donation->id}}>
                                                                     <div class="row">
@@ -127,7 +127,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('donation.remove', $donation->id)}} method="get">
+                                                                <form action={{route('outer_donations.delete', $donation->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>

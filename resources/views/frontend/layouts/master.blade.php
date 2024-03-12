@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#2d6c81" />
-    <meta name="description" content="">
-    <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان">
+    <meta name="description" content="جمعية أدندان الخيرية">
+    <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
     <meta name="author" content="جمعية أدندان الخيرية">
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
