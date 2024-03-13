@@ -23,6 +23,8 @@ class OuterDonationsController extends Controller
         $donators = Donators::where('id', $request['id'])->first();
         if ($validated) {
             $store = OuterDonations::create([
+                'name' => $request['name'],
+                'donator_type' => $request['donator_type'],
                 'invoice_id' => $request['invoice_id'],
                 'amount' => $request['amount'],
                 'duration' => $request['duration'],

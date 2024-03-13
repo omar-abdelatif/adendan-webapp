@@ -11,11 +11,11 @@ class Donations extends Model
     protected $table = 'donations';
     protected $fillable = [
         'member_id',
-        'amount',
         'invoice_no',
-        'donation_duration',
         'donation_type',
+        'donation_duration',
         'other_donation',
+        'amount',
         'donation_destination',
         'subscribers_id',
     ];

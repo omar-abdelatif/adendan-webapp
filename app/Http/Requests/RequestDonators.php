@@ -24,7 +24,7 @@ class RequestDonators extends FormRequest
         return [
             'name' => 'required',
             'mobile_number' => 'required',
-            'duration' => 'required',
+            'duration' => 'nullable',
             'donator_type' => 'required'
         ];
     }

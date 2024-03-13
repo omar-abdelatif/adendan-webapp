@@ -10,6 +10,27 @@
     <script src="{{asset('assets/js/form-wizard/form-wizard.js')}}"></script>
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
+    <script>
+        let selectedElements = document.querySelectorAll("[data-donation-id]")
+        selectedElements.forEach((selectElement) => {
+            let otherCraftInput = document.querySelector(`input[name="other_donation"][data-donation-id="${selectElement.dataset.donationId}"]`);
+            function handleDonation() {
+                let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+                if (selectedOption === "أخرى") {
+                    otherCraftInput.disabled = false;
+                    otherCraftInput.classList.remove('d-none')
+                } else {
+                    otherCraftInput.value = "";
+                    otherCraftInput.disabled = true;
+                    otherCraftInput.removeAttribute("value");
+                    otherCraftInput.classList.add('d-none')
+                }
+            }
+            selectElement.addEventListener("change", function () {
+                handleDonation();
+            });
+        })
+    </script>
 @endsection
 @section('modals')
     {{-- ! Insert Bulk Subscribers ! --}}
@@ -374,12 +395,12 @@
                                                                         </div>
                                                                         <div class="col-lg-6">
                                                                             <div class="form-group">
-                                                                                <label for=donation_type class="text-muted">نوع التبرع</label>
-                                                                                <select name=donation_type class="form-select" id=donation_type>
+                                                                                <label for="donation_type" class="text-muted">نوع التبرع</label>
+                                                                                <select name="donation_type" class="form-select" id="donation_type" data-donation-id="{{$member->id}}">
                                                                                     <option value="مادي" selected>مادي</option>
                                                                                     <option value="أخرى" id="other_donation">أخرى</option>
                                                                                 </select>
-                                                                                <input type="text" class="form-control d-none mt-3" placeholder="نوع التبرع الأخر" id="otherDonation" name="other_donation" disabled>
+                                                                                <input type="text" class="form-control mt-3 d-none" placeholder="نوع التبرع الأخر" data-donation-id="{{$member->id}}" id="otherDonation" name="other_donation" disabled>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-6">

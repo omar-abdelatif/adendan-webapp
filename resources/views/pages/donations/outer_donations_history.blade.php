@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'كل التبرعات')
 @section('breadcrumb-title')
-    <h3>كل التبرعات الخاصة بالمتبرع </h3>
+    <h3>كل التبرعات الخاصة بالمتبرع {{$donators->name}}</h3>
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item">
@@ -23,10 +23,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center"></th>
+                                        <th class="text-center">إسم المتبرع</th>
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">المبلغ</th>
-                                        <th class="text-center">المدة الزمنية</th>
-                                        <th class="text-center">جهة التبرع</th>
+                                        <th class="text-center">نوع التبرع</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -34,9 +34,9 @@
                                     @foreach ($outerdonations as $donations)
                                         <tr>
                                             <td class="text-center"></td>
+                                            <td class="text-center">{{$donators->name}}</td>
                                             <td class="text-center">{{$donations->invoice_id}}</td>
                                             <td class="text-center">{{$donations->amount}}</td>
-                                            <td class="text-center">{{$donations->duration}}</td>
                                             <td class="text-center">{{$donations->donation_destination}}</td>
                                             <td class="text-center">
                                                 {{-- ! Delete ! --}}
@@ -91,12 +91,8 @@
                                                                                 <input type="text" name="amount" class="form-control" value="{{$donations->amount}}" placeholder="المبلغ" id="amount">
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="duration" class="text-muted">المده</label>
-                                                                                <input type="text" name="duration" class="form-control" value="{{$donations->duration}}" placeholder="المده" id="duration">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
-                                                                                <input type="text" name="donation_destination" class="form-control" value="{{$donations->donation_destination}}" placeholder="جهة التبرع" id="donation_destination">
+                                                                                <label for="donation_destination" class="text-muted">نوع التبرع</label>
+                                                                                <input type="text" name="donation_destination" class="form-control" value="{{$donations->donation_destination}}" placeholder="نوع التبرع" id="donation_destination">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>

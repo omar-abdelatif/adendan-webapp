@@ -32,13 +32,6 @@
                 <li>
                     <a href="{{route('site.index')}}" class="btn btn-outline-success" target="_blank">زيارة الموقع</a>
                 </li>
-                <li>
-                    <div class="mode">
-                        <svg>
-                            <use href="{{ asset('assets/svg/icon-sprite.svg#moon') }}"></use>
-                        </svg>
-                    </div>
-                </li>
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="media profile-media">
                         <img class="rounded-circle" width="50" src={{$user->avatar ? asset('assets/images/users/'.$user->avatar) : 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg'}} alt={{$user->avatar}}>

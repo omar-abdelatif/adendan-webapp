@@ -72,6 +72,8 @@ Route::prefix('admin')->group(function () {
             Route::get('reports/jobs', 'jobs')->name('reports.jobs');
             Route::get('reports/age', 'ages')->name('reports.age');
             Route::get('reports/location', 'locations')->name('reports.location');
+            Route::get('reports/donations', 'outerdonations')->name('reports.donations');
+            Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');

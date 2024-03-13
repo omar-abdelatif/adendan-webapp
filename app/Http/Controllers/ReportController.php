@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donations;
+use App\Models\Donators;
+use App\Models\OuterDonations;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
 
@@ -82,5 +85,16 @@ class ReportController extends Controller
             }
         }
         return  [$locationKey, $locations, $message ?? null];
+    }
+    //! Donations
+    public function outerdonations()
+    {
+        $donators = OuterDonations::all();
+        return view('pages.reports.donations', compact('donators'));
+    }
+    public function innerDonations()
+    {
+        $donations = Donations::all();
+        return view('pages.reports.inner_donations', compact('donations'));
     }
 }

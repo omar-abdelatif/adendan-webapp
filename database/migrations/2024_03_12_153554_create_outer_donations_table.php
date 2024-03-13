@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('invoice_id');
             $table->bigInteger('amount');
-            $table->string('duration');
             $table->string('donation_destination');
             $table->integer('donators_id')->index()->references('id')->on('donators')->onDelete('cascade');
             $table->timestamps();

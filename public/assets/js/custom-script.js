@@ -142,43 +142,29 @@ if (categorySelect) {
         }
     });
 }
-//!
-function handleChange() {
-    let selectElement = document.getElementById("subscriptionType");
-    let inputField = document.getElementById("inputField");
-    let inputLabel = document.getElementById("inputLabel");
-
-    if (selectElement.value === "subscription") {
-        inputField.setAttribute("name", "subscription");
-        inputField.setAttribute("placeholder", "أدخل مبلغ الإشتراك");
-        inputLabel.innerText = "مبلغ الإشتراك";
-    } else if (selectElement.value === "delay") {
-        inputField.setAttribute("name", "delay");
-        inputField.setAttribute("placeholder", "أدخل مبلغ المتأخرات");
-        inputLabel.innerText = "مبلغ المتأخرات";
-    }
-}
-//! updateCraft
+//! updateCraft Worker Page
 let selectElements = document.querySelectorAll("[data-worker-id]");
-selectElements.forEach((selectElement) => {
-    let otherCraftInput = document.querySelector(
-        `input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`
-    );
-    function handleUpdateCraft() {
-        let selectedOption =
-            selectElement.options[selectElement.selectedIndex].value;
-        if (selectedOption === "أخرى") {
-            otherCraftInput.disabled = false;
-        } else {
-            otherCraftInput.value = "";
-            otherCraftInput.disabled = true;
-            otherCraftInput.removeAttribute("value");
+if (selectElements) {
+    selectElements.forEach((selectElement) => {
+        let otherCraftInput = document.querySelector(
+            `input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`
+        );
+        function handleUpdateCraft() {
+            let selectedOption =
+                selectElement.options[selectElement.selectedIndex].value;
+            if (selectedOption === "أخرى") {
+                otherCraftInput.disabled = false;
+            } else {
+                otherCraftInput.value = "";
+                otherCraftInput.disabled = true;
+                otherCraftInput.removeAttribute("value");
+            }
         }
-    }
-    selectElement.addEventListener("change", function () {
-        handleUpdateCraft();
+        selectElement.addEventListener("change", function () {
+            handleUpdateCraft();
+        });
     });
-});
+}
 //! Insert Donation
 let otherDonation = document.getElementById("donation_type");
 if (otherDonation) {
@@ -187,14 +173,27 @@ if (otherDonation) {
         let donationName = document.getElementById("otherDonation");
         if (donationValue == "أخرى") {
             donationName.classList.remove("d-none");
-            donationName.removeAttribute('disabled')
+            donationName.removeAttribute("disabled");
         } else {
             donationName.value = "";
             donationName.classList.add("d-none");
         }
-    })
+    });
 }
-//!
+//! Donators Period
+let donationSelect = document.getElementById("donator_type");
+if (donationSelect) {
+    donationSelect.addEventListener("change", function () {
+        let donationValue = this.options[this.selectedIndex].value;
+        let donationName = document.getElementById("duration");
+        if (donationValue == "منتظم") {
+            donationName.classList.remove("d-none");
+        } else {
+            donationName.value = "";
+            donationName.classList.add("d-none");
+        }
+    });
+}
 //!
 //!
 //!

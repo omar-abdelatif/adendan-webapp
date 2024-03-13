@@ -128,7 +128,7 @@
                                                                                     <option value="أخرى" {{$worker->craft === 'أخرى' ? 'selected' : ''}} class="option-control">أخرى</option>
                                                                                 </select>
                                                                                 @if ($worker->craft === 'أخرى')
-                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-white"  placeholder="المهنة الأخرى" value="{{$worker->other_craft}}" data-worker-id="{{$worker->id}}">
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-white" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" value="{{$worker->other_craft}}">
                                                                                 @else
                                                                                     <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-white" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" disabled>
                                                                                 @endif

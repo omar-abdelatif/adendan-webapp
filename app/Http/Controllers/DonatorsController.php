@@ -36,7 +36,13 @@ class DonatorsController extends Controller
     {
         $donator = Donators::find($id);
         if ($donator) {
+            $outerDonations = $donator->outerdonations;
             $remove = $donator->delete();
+            if ($outerDonations) {
+                foreach ($outerDonations as $item) {
+                    $item->delete();
+                }
+            }
             if ($remove) {
                 $notificationSuccess = [
                     'message' => "تم الحذف بنجاح!",
@@ -58,6 +64,7 @@ class DonatorsController extends Controller
         if ($donator) {
             $update = $donator->update($request->all());
             if ($update) {
+                $donator->outerDonations()->update(['name' => $request->name]);
                 $notificationSuccess = [
                     'message' => "تم التحديث بنجاح!",
                     'alert-type' => "success"

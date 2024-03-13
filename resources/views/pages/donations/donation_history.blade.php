@@ -8,6 +8,11 @@
         <a href="{{route('subscriber.all')}}">كل المشتركين</a>
     </li>
 @endsection
+@section('script')
+    <script>
+
+    </script>
+@endsection
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
@@ -51,8 +56,8 @@
                                                     <span class="fw-bold">-</span>
                                                 @endif
                                             </td>
-                                            <td>{{$donation->donation_duration}}</td>
                                             <td>{{$donation->donation_destination}}</td>
+                                            <td>{{$donation->donation_duration}}</td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,26 +83,26 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{route('outer_donations.update')}}" method="post">
+                                                                <form action="{{route('donations.update')}}" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value={{$donation->id}}>
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
                                                                                 <label for="title" class="text-white">رقم العضوية</label>
-                                                                                <input type="text" class="form-control text-muted" name="member_id" value="{{$donation->member_id}}" readonly>
+                                                                                <input type="number" class="form-control text-muted" name="member_id" value="{{$donation->member_id}}" readonly>
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="title" class="text-white">رقم الإيصال</label>
-                                                                                <input type="text" class="form-control text-muted" name="invoice_no" value="{{$donation->invoice_no}}">
+                                                                                <input type="number" class="form-control text-muted" name="invoice_no" value="{{$donation->invoice_no}}">
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="title" class="text-muted">المبلغ</label>
-                                                                                <input type="text" class="form-control text-muted" name="position" value="{{$donation->amount}}">
+                                                                                <input type="number" class="form-control text-muted" name="amount" value="{{$donation->amount}}">
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for=donation_type class="text-muted">نوع التبرع</label>
-                                                                                <select name=donation_type class="form-select" id=donation_type>
+                                                                                <label for="donation_type" class="text-muted">نوع التبرع</label>
+                                                                                <select name="donation_type" class="form-select" id="donation_type">
                                                                                     <option value="مادي" {{$donation->donation_type == '' ? 'selected' : 'مادي'}}>مادي</option>
                                                                                     <option value="أخرى" id="other_donation" {{$donation->donation_type == 'أخرى' ? 'selected' : ''}}>أخرى</option>
                                                                                 </select>
@@ -106,6 +111,14 @@
                                                                                 @else
                                                                                     <input type="text" class="form-control d-none" placeholder="نوع التبرع الأخر" name="other_donation">
                                                                                 @endif
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
+                                                                                <input type="text" class="form-control" placeholder="جهة التبرع" value="{{$donation->donation_destination}}" name="donation_destination">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="donation_duration" class="text-muted">مدة التبرع</label>
+                                                                                <input type="text" class="form-control" placeholder="المده" id="donation_duration" value="{{$donation->donation_duration}}" name="donation_duration">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -127,7 +140,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('outer_donations.delete', $donation->id)}} method="get">
+                                                                <form action={{route('donation.remove', $donation->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>

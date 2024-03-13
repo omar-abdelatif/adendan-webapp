@@ -23,12 +23,12 @@ class RequestDonations extends FormRequest
     {
         return [
             'member_id'            => ['required', 'integer'],
-            'amount'               => ['required', 'numeric'],
             'invoice_no'           => ['nullable', 'integer'],
-            'donation_duration'    => ['required'],
+            'amount'               => ['required', 'numeric'],
             'donation_type'        => ['required'],
             'other_donation'       => ['nullable'],
-            'donation_destination' => ['required']
+            'donation_destination' => ['required'],
+            'donation_duration'    => ['required'],
         ];
     }
 }

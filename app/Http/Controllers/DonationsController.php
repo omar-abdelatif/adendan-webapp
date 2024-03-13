@@ -63,6 +63,7 @@ class DonationsController extends Controller
     }
     public function updateDonation(RequestDonations $request)
     {
+        // dd($request->all());
         $id = $request->id;
         $donations = Donations::find($id);
         if ($donations) {

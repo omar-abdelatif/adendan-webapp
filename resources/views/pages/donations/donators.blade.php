@@ -15,7 +15,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة متبرع جديد</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة متبرع جديد</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -30,15 +30,13 @@
                             <input type="number" class="form-control" name="mobile_number" placeholder="رقم المحمول" id="mobile_number">
                         </div>
                         <div class="form-group">
-                            <label for="duration" class="text-muted">مدة التبرع</label>
-                            <input type="text" class="form-control" name="duration" placeholder="مدة التبرع" id="duration">
-                        </div>
-                        <div class="form-group">
                             <label for="donator_type" class="text-muted">نوع المتبرع</label>
                             <select name="donator_type" class="form-select" id="donator_type">
+                                <option selected>أختر نوع المتبرع</option>
                                 <option value="منتظم">منتظم</option>
                                 <option value="موسمي">موسمي</option>
                             </select>
+                            <input type="text" class="form-control mt-3 d-none" name="duration" placeholder="مدة التبرع" id="duration">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -64,31 +62,37 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table" class="table display align-middle text-center" data-order='[[1,"asc"]]' data-page-length=10>
+                            <table id="table" class="table display align-middle text-muted text-center" data-order='[[1,"asc"]]' data-page-length=10>
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-white"></th>
-                                        <th class="text-center text-white">#</th>
-                                        <th class="text-center text-white">إسم المتبرع</th>
-                                        <th class="text-center text-white">رقم المحمول</th>
-                                        <th class="text-center text-white">مدة التبرع</th>
-                                        <th class="text-center text-white">نوع المتبرع</th>
-                                        <th class="text-center text-white">تاريخ التسجيل</th>
-                                        <th class="text-center text-white">Actions</th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">إسم المتبرع</th>
+                                        <th class="text-center">رقم المحمول</th>
+                                        <th class="text-center">مدة التبرع</th>
+                                        <th class="text-center">نوع المتبرع</th>
+                                        <th class="text-center">تاريخ التسجيل</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i=1 ?>
                                     @foreach ($allDonators as $donator)
                                         <tr>
-                                            <td class="text-center text-white"></td>
-                                            <td class="text-center text-white">{{$i++}}</td>
-                                            <td class="text-center text-white">{{$donator->name}}</td>
-                                            <td class="text-center text-white">{{$donator->mobile_number}}</td>
-                                            <td class="text-center text-white">{{$donator->duration}}</td>
-                                            <td class="text-center text-white">{{$donator->donator_type}}</td>
-                                            <td class="text-center text-white">{{$donator->created_at->format('Y-m-d')}}</td>
-                                            <td class="text-center text-white">
+                                            <td class="text-center"></td>
+                                            <td class="text-center">{{$i++}}</td>
+                                            <td class="text-center">{{$donator->name}}</td>
+                                            <td class="text-center">{{$donator->mobile_number}}</td>
+                                            <td class="text-center">
+                                                @if ($donator->donator_type == 'منتظم')
+                                                    {{$donator->duration}}
+                                                @else
+                                                    <span class="fw-bold">-</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{$donator->donator_type}}</td>
+                                            <td class="text-center">{{$donator->created_at->format('Y-m-d')}}</td>
+                                            <td class="text-center">
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -99,11 +103,11 @@
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
                                                         </button>
                                                         {{-- ! Update ! --}}
-                                                        <button type="button" class="btn btn-warning text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#update_donator_{{$donator->id}}">
+                                                        <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#update_donator_{{$donator->id}}">
                                                             <i class="fa-solid fa-pen"></i>
                                                         </button>
                                                         {{-- ! Delete ! --}}
-                                                        <button type="button" class="btn btn-danger text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#delete_donator_{{$donator->id}}">
+                                                        <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" data-bs-target="#delete_donator_{{$donator->id}}">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </button>
                                                         {{-- ! Donation History ! --}}
@@ -117,14 +121,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">حذف التبرع {{$donator->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">حذف التبرع {{$donator->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form action={{route('donators.remove', $donator->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
-                                                                        <h1 class="text-white">هل أنت متأكد من الحذف</h1>
+                                                                        <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -140,7 +144,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تحديث المتبرع {{$donator->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تحديث المتبرع {{$donator->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -184,7 +188,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة تبرع جديد {{$donator->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة تبرع جديد {{$donator->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -194,6 +198,14 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
+                                                                                <label for="donator_name" class="text-muted">إسم المتبرع</label>
+                                                                                <input type="text" name="name" class="form-control" value="{{$donator->name}}" placeholder="إسم المتبرع" id="donator_name" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="donator_type" class="text-muted">نوع المتبرع</label>
+                                                                                <input type="text" name="donator_type" class="form-control" value="{{$donator->donator_type}}" placeholder="نوع المتبرع" id="donator_type" readonly>
+                                                                            </div>
+                                                                            <div class="form-group">
                                                                                 <label for="invoice_no" class="text-muted">رقم الإيصال</label>
                                                                                 <input type="number" name="invoice_id" class="form-control" placeholder="رقم الإيصال" id="invoice_no">
                                                                             </div>
@@ -202,12 +214,8 @@
                                                                                 <input type="number" name="amount" class="form-control" placeholder="المبلغ" id="amount">
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="duration" class="text-muted">المده</label>
-                                                                                <input type="text" name="duration" class="form-control" placeholder="المده" id="duration">
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
-                                                                                <input type="text" name="donation_destination" class="form-control" placeholder="جهة التبرع" id="donation_destination">
+                                                                                <label for="donation_destination" class="text-muted">نوع التبرع</label>
+                                                                                <input type="text" name="donation_destination" class="form-control" placeholder="نوع التبرع" id="donation_destination">
                                                                             </div>
                                                                         </div>
                                                                     </div>

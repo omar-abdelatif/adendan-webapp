@@ -10,9 +10,11 @@ class OuterDonations extends Model
     use HasFactory;
     protected $table = 'outer_donations';
     protected $fillable = [
+        'name',
+        'donator_type',
+        'donation_type',
         'invoice_id',
         'amount',
-        'duration',
         'donation_destination',
         'donators_id'
     ];

@@ -29,7 +29,13 @@
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                             </svg>
-                            <span>الأخبار </span>
+                            <span>الأخبار</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="">
+                            <i class="fa-solid fa-file-invoice fs-5 me-3 text-muted"></i>
+                            <span>نثريات</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -74,13 +80,13 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-solid fa-tombstone-blank text-white me-3"></i>
+                            <i class="fa-solid fa-tombstone-blank text-muted fs-5 me-3"></i>
                             <span>المقابر</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-duotone fa-rings-wedding text-white me-3"></i>
+                            <i class="fa-duotone fa-rings-wedding text-muted fs-5 me-3"></i>
                             <span>الأفراح</span>
                         </a>
                     </li>
@@ -122,6 +128,22 @@
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#fill-job-search') }}"></use>
                                     </svg>
                                     <span>الوظائف</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('reports.donations')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>التبرعات الخارجية</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('reports.innerDonations')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>التبرعات الداخلية</span>
                                 </a>
                             </li>
                         </ul>

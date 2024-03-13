@@ -22,9 +22,9 @@ class OuterDonationsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice_id' => ['required', 'integer'],
+            'name' => ['required'],
             'amount' => ['required', 'integer'],
-            'duration' => ['required'],
+            'invoice_id' => ['required', 'integer'],
             'donation_destination' => ['required']
         ];
     }
