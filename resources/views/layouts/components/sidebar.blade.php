@@ -33,17 +33,23 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="">
-                            <i class="fa-solid fa-file-invoice fs-5 me-3 text-muted"></i>
-                            <span>نثريات</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="{{route('subscriber.all')}}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                             </svg>
                             <span>المشتركين</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a href="{{route('costyears.all')}}" class="sidebar-link sidebar-title">
+                            <i class="fa-duotone fa-rings-wedding text-muted fs-5 me-3"></i>
+                            <span>التكلفة السنوية</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="{{route('miscellaneous.all')}}">
+                            <i class="fa-solid fa-file-invoice fs-5 me-3 text-muted"></i>
+                            <span>النثريات</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -90,6 +96,7 @@
                             <span>الأفراح</span>
                         </a>
                     </li>
+
                     <li class="sidebar-list">
                         <a href="#" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
@@ -144,6 +151,22 @@
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                     </svg>
                                     <span>التبرعات الداخلية</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('reports.indebtedness')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>المديونية</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('reports.safe')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>الخزنة</span>
                                 </a>
                             </li>
                         </ul>

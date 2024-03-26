@@ -13,7 +13,6 @@ class Subscriptions extends Model
         'member_id',
         'subscription_cost',
         'invoice_no',
-        'pay_date',
         'period',
         'delays',
         'payment_type',

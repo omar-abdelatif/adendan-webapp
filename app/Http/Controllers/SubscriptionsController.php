@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscriptionRequest;
+use App\Models\CostYears;
 use App\Models\Delay;
+use App\Models\Olddelays;
 use App\Models\Subscribers;
 use App\Models\Subscriptions;
 use Illuminate\Http\Request;
@@ -15,7 +17,9 @@ class SubscriptionsController extends Controller
         $subscriber = Subscribers::find($subscriberId);
         if ($subscriber) {
             $subscriptions = $subscriber->subscriptions;
-            return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions'));
+            $delays = $subscriber->delays;
+            $donations = $subscriber->donations;
+            return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions', 'delays', 'donations'));
         }
     }
     public function storeSubscription(SubscriptionRequest $request)
@@ -23,14 +27,13 @@ class SubscriptionsController extends Controller
         $validated = $request->validated();
         if ($validated) {
             $subscriber = Subscribers::where('member_id', $validated['member_id'])->first();
-            $delays = Delay::where('member_id', $validated['member_id'])->first();
+            $oldDelays = Delay::where('member_id', $validated['member_id'])->first();
             if ($subscriber) {
                 $store = Subscriptions::create([
                     'member_id' => $request['member_id'],
                     'subscription_cost' => $request['subscription_cost'],
                     'invoice_no' => $request['invoice_no'],
-                    'pay_date' => $request['pay_date'],
-                    'period' => $request['period'],
+                    'period' => $oldDelays->year,
                     'delays' => $request['delays'],
                     'payment_type' => $request['payment_type'],
                     'delays_period' => $request['delays_period'],
@@ -38,7 +41,7 @@ class SubscriptionsController extends Controller
                 ]);
                 if ($store) {
                     $subscriber->update(['status' => 1]);
-                    $delays->delete();
+                    $oldDelays->delete();
                     $notificationSuccess = [
                         "message" => "تم الإضافة بنجاح",
                         "alert-type" => "success"

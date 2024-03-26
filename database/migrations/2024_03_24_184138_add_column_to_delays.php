@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ads', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('delays', function (Blueprint $table) {
+            $table->string('payment_type')->after('yearly_cost')->nullable();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ads');
+        Schema::table('delays', function (Blueprint $table) {
+            $table->dropColumn('payment_type');
+        });
     }
 };

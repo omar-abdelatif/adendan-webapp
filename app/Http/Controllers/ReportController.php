@@ -97,4 +97,15 @@ class ReportController extends Controller
         $donations = Donations::all();
         return view('pages.reports.inner_donations', compact('donations'));
     }
+    //! Indebtedness ( المديونية )
+    public function indebtedness()
+    {
+        $debts = Subscribers::where('status', 0)->get();
+        return view('pages.reports.indebtedness', compact('debts'));
+    }
+    //! Safe
+    public function safe()
+    {
+        return view('pages.reports.safe');
+    }
 }

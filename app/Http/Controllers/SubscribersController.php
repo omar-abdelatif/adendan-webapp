@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\SubscriberRequest;
 use App\Imports\SubscribersImport;
+use App\Models\CostYears;
 
 class SubscribersController extends Controller
 {
     public function index()
     {
+        $years = CostYears::all();
         $members = Subscribers::with('delays')->get();
-        return view('pages.subscribers.subscribers', compact('members'));
+        return view('pages.subscribers.subscribers', compact('members', 'years'));
     }
     public function storeSubs(SubscriberRequest $request)
     {

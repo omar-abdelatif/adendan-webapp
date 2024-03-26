@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delay extends Model
+class Olddelays extends Model
 {
     use HasFactory;
-    protected $table = 'delays';
+    protected $table = 'olddelays';
     protected $fillable = [
+        'delay_period',
         'member_id',
         'amount',
-        'delay_period',
-        'year',
-        'yearly_cost',
-        'payment_type',
-        'subscribers_id'
     ];
-    public function  subscriber() {
+    public function subscribers()
+    {
         return $this->belongsTo(Subscribers::class);
     }
 }

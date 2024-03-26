@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestDonators;
 use App\Models\Donators;
+use App\Models\Subscribers;
 use Illuminate\Http\Request;
 
 class DonatorsController extends Controller
 {
     public function index()
     {
+        $subscribers = Subscribers::all();
         $allDonators = Donators::all();
-        return view('pages.donations.donators', compact('allDonators'));
+        return view('pages.donations.donators', compact('allDonators', 'subscribers'));
     }
     public function storeDonator(RequestDonators $request)
     {

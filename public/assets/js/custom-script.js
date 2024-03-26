@@ -75,6 +75,7 @@ $(document).ready(function () {
     $(".datepicker-here").datepicker({
         dateFormat: "yyyy-mm-dd",
     });
+    //! Get Cost By Years
 });
 //! Multi Datatables in Same Page
 for (let i = 0; i < 500; i++) {
@@ -194,9 +195,82 @@ if (donationSelect) {
         }
     });
 }
-//!
-//!
-//!
+//! miscellaneous
+let category = document.getElementById("category");
+if (category) {
+    category.addEventListener("change", function () {
+        let selectedOption = this.options[this.selectedIndex].value;
+        let otherCategory = document.getElementById("other_category");
+        if (selectedOption === "أخرى") {
+            otherCategory.classList.remove("d-none");
+        } else {
+            otherCategory.value = "";
+            otherCategory.classList.add("d-none");
+        }
+    });
+}
+//! Update miscellaneous
+let selectMiscs = document.querySelectorAll("[data-misc-id]");
+if (selectMiscs) {
+    selectMiscs.forEach((misc) => {
+        let otherCategory = document.querySelector(
+            `input[name="other_category"][data-misc-id="${misc.dataset.miscId}"]`
+        );
+        function handleUpdateCraft() {
+            let selectedOption = misc.options[misc.selectedIndex].value;
+            if (selectedOption === "أخرى") {
+                otherCategory.disabled = false;
+            } else {
+                otherCategory.value = "";
+                otherCategory.disabled = true;
+                otherCategory.removeAttribute("value");
+            }
+        }
+        misc.addEventListener("change", function () {
+            handleUpdateCraft();
+        });
+    });
+}
+//! تسديد إشتراك أو متأخرات
+let paymentTypes = document.querySelectorAll("[data-payment-id]");
+if (paymentTypes) {
+    paymentTypes.forEach((payment) => {
+        let subscriptionCost = document.querySelector(
+            `input[name="subscription_cost"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let subscriptionPeriod = document.querySelector(
+            `input[name="period"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let delayAmount = document.querySelector(
+            `input[name="delays"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let delayPeriod = document.querySelector(
+            `input[name="delays_period"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        function handleDelay() {
+            let selectedPayment = payment.options[payment.selectedIndex].value;
+            if (selectedPayment === "إشتراك") {
+                subscriptionCost.classList.remove("d-none");
+                subscriptionPeriod.classList.remove("d-none");
+                delayAmount.classList.add("d-none");
+                delayPeriod.classList.add("d-none");
+            } else if (selectedPayment === "متأخرات") {
+                subscriptionCost.classList.add("d-none");
+                subscriptionPeriod.classList.add("d-none");
+                delayAmount.classList.remove("d-none");
+                delayPeriod.classList.remove("d-none");
+            } else {
+                subscriptionCost.classList.add("d-none");
+                subscriptionPeriod.classList.add("d-none");
+                delayAmount.classList.add("d-none");
+                delayPeriod.classList.add("d-none");
+            }
+        }
+        payment.addEventListener("change", function () {
+            handleDelay();
+        });
+    });
+}
 //!
 //!
 //!

@@ -10,7 +10,7 @@
     <meta name="author" content="جمعية أدندان الخيرية">
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-    <meta property="og:url" content="https://adendan.website/">
+    <meta property="og:url" content="https://adendan.com/">
     @yield('meta')
     @vite('resources/js/app.js')
     <title>جمعية أدندان الخيرية</title>

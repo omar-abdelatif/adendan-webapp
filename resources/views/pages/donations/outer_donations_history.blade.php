@@ -10,6 +10,13 @@
     <li class="breadcrumb-item active">التبرعات السابقة</li>
 @endsection
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger text-center w-50 mx-auto rounded" id="error">
+                <p class="mb-0">{{$error}}</p>
+            </div>
+        @endforeach
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -22,7 +29,6 @@
                             <table id="table" class="table display table-hover text-muted" data-order='[[1,"asc"]]' data-page-length=10>
                                 <thead>
                                     <tr>
-                                        <th class="text-center"></th>
                                         <th class="text-center">إسم المتبرع</th>
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">المبلغ</th>
@@ -33,7 +39,6 @@
                                 <tbody>
                                     @foreach ($outerdonations as $donations)
                                         <tr>
-                                            <td class="text-center"></td>
                                             <td class="text-center">{{$donators->name}}</td>
                                             <td class="text-center">{{$donations->invoice_id}}</td>
                                             <td class="text-center">{{$donations->amount}}</td>

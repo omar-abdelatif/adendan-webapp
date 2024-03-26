@@ -49,6 +49,13 @@
     </div>
 @endsection
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger text-center w-50 mx-auto rounded" id="error">
+                <p class="mb-0">{{$error}}</p>
+            </div>
+        @endforeach
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">

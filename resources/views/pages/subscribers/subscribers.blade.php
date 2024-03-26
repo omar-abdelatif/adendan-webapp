@@ -33,13 +33,36 @@
     </script>
 @endsection
 @section('modals')
+    <div class="btn-group" role="group">
+        <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
+            {{-- ! Insert Bulk Subscribers ! --}}
+            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_upload">
+                <i class="icofont icofont-plus fw-bold"></i>
+                <span>إضافة مشتركين بالجملة</span>
+            </button>
+            {{-- ! Insert Single Subscriber ! --}}
+            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subscriber">
+                <i class="icofont icofont-plus fw-bold"></i>
+                <span>إضافة مشترك جديد</span>
+            </button>
+            {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
+            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
+                <i class="icofont icofont-plus fw-bold"></i>
+                <span>إضافة مديونية على كل الأعضاء</span>
+            </button>
+            {{-- ! Insert Bulk Delay ! --}}
+            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                <i class="icofont icofont-plus fw-bold"></i>
+                <span>إضافة متأخرات بالجملة</span>
+            </button>
+        </div>
+    </div>
     {{-- ! Insert Bulk Subscribers ! --}}
-    <button type="button" class="btn btn-success text-dark px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_upload">
-        <i class="icofont icofont-eye"></i>
-        <span class="ms-3">إضافة بالجملة</span>
-    </button>
     <div class="modal fade" id="bulk_upload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة بالجملة</h1>
@@ -56,12 +79,8 @@
         </div>
     </div>
     {{-- ! Insert Single Subscriber ! --}}
-    <button type="button" class="btn btn-success text-dark px-2 py-1 ms-3" data-bs-toggle="modal" data-bs-target="#add_subscriber">
-        <i class="icofont icofont-eye"></i>
-        <span class="ms-3">إضافة مشترك جديد</span>
-    </button>
     <div class="modal fade" id="add_subscriber" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مشترك جديد</h1>
@@ -260,6 +279,65 @@
             </div>
         </div>
     </div>
+    {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
+    <div class="modal fade" id="bulk_delay_subscribers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مديونية بالجملة</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('delays.costbyyear')}}" method="post">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="groups">
+                                        <div class="form-group mb-3">
+                                            <label for="cost-year" class="text-muted">السنة</label>
+                                            <select name="year" id="cost-year" class="form-select">
+                                                <option selected>-- إختار السنة --</option>
+                                                @foreach ($years as $year)
+                                                    <option value="{{$year->year}}">{{$year->year}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="cost" class="text-muted">المبلغ</label>
+                                            <input type="number" name="yearly_cost" id="cost" class="form-control" placeholder="المبلغ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- ! Insert Bulk Delay ! --}}
+    <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة متأخرات بالجملة</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('bulk_subscriber_delay')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <input type="file" class="form-control" name="import-delay" accept=".xlsx, .xls">
+                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('content')
     @if ($errors->any())
@@ -276,23 +354,19 @@
                     <div class="card-body">
                         <?php $i =1 ?>
                         <div class="table-responsible">
-                            <table id="table" class="table table-hover align-middle text-center table-hover" data-order='[[1, "asc"]]' data-page-length='10'>
+                            <table id="table" class="table table-hover align-middle text-center table-hover" data-order='[[0, "asc"]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-muted text-center"></th>
                                         <th class="text-muted text-center">#</th>
                                         <th class="text-muted text-center">رقم العضوية</th>
                                         <th class="text-muted text-center">الإسم</th>
                                         <th class="text-muted text-center">حالة الإشتراك</th>
-                                        <th class="text-muted text-center">متأخرات</th>
-                                        <th class="text-muted text-center">مدة المتأخرات بالسنوات</th>
                                         <th class="text-muted text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($members as $member)
                                         <tr>
-                                            <td class="text-center"></td>
                                             <td class="text-muted text-center">{{$i++}}</td>
                                             <td class="text-muted text-center">{{$member->member_id}}</td>
                                             <td class="text-muted text-center">{{$member->name}}</td>
@@ -305,122 +379,38 @@
                                                     <span class="badge rounded-pill badge-dark text-muted">المشترك متوفي</span>
                                                 @endif
                                             </td>
-                                            @if ($member->delays)
-                                                <td class="text-muted text-center">
-                                                    <span class="text-muted bg-secondary rounded-pill px-4">{{$member->delays->amount}}</span>
-                                                    ج.م
-                                                </td>
-                                            @else
-                                                <td class="text-muted text-center">
-                                                    <span class="text-muted bg-success rounded-pill px-3">0</span>
-                                                    ج.م
-                                                </td>
-                                            @endif
-                                            <td class="text-center text-muted">
-                                                @if ($member->delays)
-                                                    {{$member->delays->delay_period}}
-                                                @else
-                                                    -
-                                                @endif
-                                            </td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
-                                                        {{-- ! Donation ! --}}
-                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#donating_{{$member->id}}">
-                                                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                                                        </button>
+                                                        {{-- ! History ! --}}
+                                                        <a class="btn btn-primary px-2 py-1" role="button" href={{route('subscription.history',$member->id)}}>
+                                                            <i class="icofont icofont-eye"></i>
+                                                        </a>
                                                         {{-- ! Edit Member ! --}}
                                                         <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
                                                             <i class="icofont icofont-ui-edit"></i>
                                                         </a>
-                                                        {{-- ! History ! --}}
-                                                        <a class="btn btn-success px-2 py-1" role="button" href={{route('subscription.history',$member->id)}}>
-                                                            <i class="icofont icofont-eye"></i>
-                                                        </a>
                                                         {{-- ! Add Delay ! --}}
-                                                        @if ($member->status == 2)
-                                                            <button type="button" class="btn btn-secondary text-white d-none px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
+                                                        {{-- @if ($member->status == 2)
+                                                            <button type="button" class="btn btn-secondary d-none px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
                                                                 <i class="icofont icofont-plus"></i>
                                                             </button>
                                                         @else
-                                                            <button type="button" class="btn btn-secondary text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
+                                                            <button type="button" class="btn btn-secondary px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
                                                                 <i class="icofont icofont-plus"></i>
                                                             </button>
-                                                        @endif
-                                                        {{-- ! Donation History ! --}}
-                                                        <a href="{{route('donations.showAll', $member->id)}}" class="btn btn-primary px-2 py-1">
-                                                            <i class="fa-solid fa-book-heart"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                {{-- ! Donations ! --}}
-                                                <div class="modal fade" id="donating_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تبرع من العضو {{$member->name}}</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action={{route('donations.store')}} method="post">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="member_id" class="text-muted text-right">رقم العضوية</label>
-                                                                                <input type="number" name="member_id" id="member_id" class="form-control" value="{{$member->member_id}}" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="invoice_no" class="text-muted">رقم الإيصال</label>
-                                                                                <input type="number" class="form-control" placeholder="رقم الإيصال" id="invoice_no" name="invoice_no">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="amount" class="text-muted">المبلغ</label>
-                                                                                <input type="number" class="form-control" placeholder="المبلغ" id="amount" name="amount">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="donation_duration" class="text-muted">مدة التبرع</label>
-                                                                                <input type="text" class="form-control" placeholder="المده" id="donation_duration" name="donation_duration">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="donation_type" class="text-muted">نوع التبرع</label>
-                                                                                <select name="donation_type" class="form-select" id="donation_type" data-donation-id="{{$member->id}}">
-                                                                                    <option value="مادي" selected>مادي</option>
-                                                                                    <option value="أخرى" id="other_donation">أخرى</option>
-                                                                                </select>
-                                                                                <input type="text" class="form-control mt-3 d-none" placeholder="نوع التبرع الأخر" data-donation-id="{{$member->id}}" id="otherDonation" name="other_donation" disabled>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group">
-                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
-                                                                                <input type="text" class="form-control" placeholder="جهة التبرع" name="donation_destination">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer mt-3">
-                                                                        <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
-                                                                        <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                        @endif --}}
+                                                        {{-- ! Add Subscription ! --}}
+                                                        <button type="button" class="btn btn-success fw-bold px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
+                                                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 {{-- ! Add Delay ! --}}
-                                                <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                {{-- <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -448,6 +438,50 @@
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
                                                                             <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                                {{-- ! Add Subscription ! --}}
+                                                <div class="modal fade" id="add_subs_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد إشتراك أو مديونية للعضو {{$member->name}}</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action={{route('subscription.store')}} method="post">
+                                                                    @csrf
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-muted">رقم العضوية</label>
+                                                                                <input type="number" class="form-control text-muted" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-muted">رقم الإيصال</label>
+                                                                                <input type="number" class="form-control text-muted" name="invoice_no" placeholder="رقم الإيضال">
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="payment_type" class="text-muted">نوع المدفوعات</label>
+                                                                                <select name="payment_type" class="form-select text-muted" id="payment_type" data-payment-id="{{$member->id}}">
+                                                                                    <option selected>إختر نوع المدفوعات</option>
+                                                                                    <option value="إشتراك">إشتراك</option>
+                                                                                    <option value="متأخرات">متأخرات</option>
+                                                                                </select>
+                                                                                <input type="number" class="form-control text-muted d-none mt-3" id="subscriptionCost" name="subscription_cost" data-payment-id="{{$member->id}}" placeholder="أدخل مبلغ الإشتراك">
+                                                                                <input type="text" class="form-control text-muted d-none mt-3" id="subscriptionPeriod" name="period" data-payment-id="{{$member->id}}" placeholder="مدة الإشتراك" min="2000" max="3000">
+                                                                                <input type="number" class="form-control text-muted d-none mt-3" id="delayAmount" name="delays_period" data-payment-id="{{$member->id}}" placeholder="أدخل مبلغ المديونية">
+                                                                                <input type="number" class="form-control text-muted mt-3 d-none" id="delayPeriod" name="delays" data-payment-id="{{$member->id}}" id="delayPeriod" placeholder="مدة المديونية">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>

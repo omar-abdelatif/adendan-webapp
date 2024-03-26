@@ -5,13 +5,8 @@
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
-        <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        <a href="{{route('donators.all')}}">كل المتبرعين</a>
     </li>
-@endsection
-@section('script')
-    <script>
-
-    </script>
 @endsection
 @section('content')
     @if ($errors->any())
@@ -30,7 +25,6 @@
                             <table class="table display table-hover align-middle text-center text-muted" id="table" data-order='[[0, "asc"]]' data-page-length=10>
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th class="text-center">رقم العضوية</th>
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">المبلغ</th>
@@ -44,7 +38,6 @@
                                 <tbody>
                                     @foreach ($donations as $donation)
                                         <tr>
-                                            <td></td>
                                             <td>{{$donation->member_id}}</td>
                                             <td>{{$donation->invoice_no}}</td>
                                             <td>{{$donation->amount}}</td>

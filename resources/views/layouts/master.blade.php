@@ -24,7 +24,7 @@
     @include('layouts.assets.css')
 </head>
 
-<body class="rtl">
+<body class="dark-only rtl">
     <div class="loader-wrapper">
         <div class="loader-index">
             <span></span>

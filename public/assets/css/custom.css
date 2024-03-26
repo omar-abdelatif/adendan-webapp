@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gulzar&display=swap');
+.text-right{
+    text-align: right !important;
+}
 .login-card .login-main .theme-form .or:before{
     display: none;
 }
@@ -195,4 +198,13 @@ body.dark-only .page-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-mai
 }
 html[dir=rtl] .checkbox_animated, html[dir=rtl] .radio_animated{
     margin: 0;
+}
+.dropdown-menu{
+    min-width: max-content;
+}
+.nav-link {
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
 }

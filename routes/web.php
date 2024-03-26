@@ -18,6 +18,8 @@ use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\AssociationCommittesController;
+use App\Http\Controllers\CostYearsController;
+use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\OuterDonationsController;
 
 Auth::routes();
@@ -74,6 +76,8 @@ Route::prefix('admin')->group(function () {
             Route::get('reports/location', 'locations')->name('reports.location');
             Route::get('reports/donations', 'outerdonations')->name('reports.donations');
             Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
+            Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
+            Route::get('reports/safe', 'safe')->name('reports.safe');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');
@@ -97,6 +101,8 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(DelayController::class)->group(function () {
             Route::post('delays/store', 'storeDelays')->name('delays.store');
+            Route::post('delays/CostByYear', 'CostByYear')->name('delays.costbyyear');
+            Route::post('delays/subscriber_delays', 'subscriberDelay')->name('bulk_subscriber_delay');
         });
         Route::controller(DonatorsController::class)->group(function () {
             Route::get('donators/all', 'index')->name('donators.all');
@@ -116,7 +122,17 @@ Route::prefix('admin')->group(function () {
             Route::get('outer_donations/history/delete/{id}', 'removeOuterDonations')->name('outer_donations.delete');
             Route::post('outer_donations/history/update', 'updateOuterDonations')->name('outer_donations.update');
         });
-        Route::controller(AdsController::class)->group(function(){});
-        Route::controller(MsgController::class)->group(function(){});
+        Route::controller(CostYearsController::class)->group(function () {
+            Route::get('costyears/all', 'index')->name('costyears.all');
+            Route::post('costyears/store', 'storeYears')->name('costyears.store');
+            Route::get('costyears/delete/{id}', 'removeYear')->name('costyears.remove');
+            Route::post('costyears/update', 'updateYear')->name('costyears.update');
+        });
+        Route::controller(MiscellaneousController::class)->group(function () {
+            Route::get('miscellaneous/all', 'index')->name('miscellaneous.all');
+            Route::post('miscellaneous/store', 'storeMiscellaneous')->name('miscellaneous.store');
+            Route::get('miscellaneous/delete/{id}', 'deleteMiscellaneous')->name('miscellaneous.delete');
+            Route::post('miscellaneous/update', 'updateMiscellaneous')->name('miscellaneous.update');
+        });
     });
 });

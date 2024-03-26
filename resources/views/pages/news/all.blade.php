@@ -68,14 +68,14 @@
     </div>
 @endsection
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger text-center w-50 mt-4 mx-auto rounded" id="error">
+                <p class="mb-0">{{$error}}</p>
+            </div>
+        @endforeach
+    @endif
     <div class="container-fluid">
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger text-center w-50 mt-4 mx-auto rounded" id="error">
-                    <p class="mb-0">{{$error}}</p>
-                </div>
-            @endforeach
-        @endif
         <div class="card">
             <div class="card-body">
                 <table id="table" class="table display align-middle text-center table-hover" data-order='[[ 0, "asc" ]]' data-page-length='10'>
