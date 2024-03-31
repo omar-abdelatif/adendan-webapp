@@ -12,6 +12,8 @@ class Tombs extends Model
     protected $fillable = [
         'title',
         'region',
+        'tomb_guard_name',
+        'tomb_guard_number',
         'location'
     ];
 }

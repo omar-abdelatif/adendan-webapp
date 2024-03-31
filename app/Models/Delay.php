@@ -11,8 +11,8 @@ class Delay extends Model
     protected $table = 'delays';
     protected $fillable = [
         'member_id',
-        'amount',
-        'delay_period',
+        'paied',
+        'remaing',
         'year',
         'yearly_cost',
         'payment_type',

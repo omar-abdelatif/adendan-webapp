@@ -141,12 +141,6 @@
                                                                                                 </div>
                                                                                                 <div class="col-lg-6">
                                                                                                     <div class="form-group">
-                                                                                                        <label for="donation_duration" class="text-muted">مدة التبرع</label>
-                                                                                                        <input type="text" class="form-control" placeholder="المده" id="donation_duration" name="donation_duration">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group">
                                                                                                         <label for="donation_type" class="text-muted">نوع التبرع</label>
                                                                                                         <select name="donation_type" class="form-select" id="donation_type" data-donation-id="{{$subscriber->id}}">
                                                                                                             <option value="مادي" selected>مادي</option>

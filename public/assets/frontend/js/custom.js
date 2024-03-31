@@ -9,3 +9,14 @@ window.addEventListener("scroll", () => {
         document.querySelector(".navbar").classList.remove("fixed");
     }
 });
+//! Audio Play
+$(document).ready(function () {
+    var audio = document.getElementById("audio-player");
+    console.log(audio)
+    var hasAudioPlayed = sessionStorage.getItem("audioPlayed");
+
+    if (!hasAudioPlayed) {
+        audio.play();
+        sessionStorage.setItem("audioPlayed", true);
+    }
+});

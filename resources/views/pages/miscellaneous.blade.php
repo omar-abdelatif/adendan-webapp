@@ -90,7 +90,18 @@
                                             <td>{{$misc->amount}}</td>
                                             <td>
                                                 @if ($misc->invoice_img)
-                                                    <img src="{{asset('assets/images/miscellaneous/'.$misc->invoice_img)}}" width="60" class="rounded" alt="">
+                                                    <button type="button" class="btn btn-transparent" data-bs-target="#proof_{{$misc->id}}" data-bs-toggle="modal">
+                                                        <img src="{{asset('assets/images/miscellaneous/'.$misc->invoice_img)}}" width="60" class="rounded" alt="">
+                                                    </button>
+                                                    <div class="modal fade" id="proof_{{$misc->id}}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body p-0">
+                                                                    <img src="{{asset('assets/images/miscellaneous/'.$misc->invoice_img)}}" width="60" class="rounded w-100" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @else
                                                     <span class="fw-bold">-</span>
                                                 @endif

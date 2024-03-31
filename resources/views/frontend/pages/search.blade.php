@@ -127,16 +127,16 @@
                                                     <div class="col-lg-4 div col-md-6">
                                                         <div class="tomb-item p-3 rounded bg-secondary mb-3 mt-3">
                                                             <div class="tomb-item-title">
-                                                                <h4 class="text-center text-white">مقبره {{$tomb->title}}</h4>
+                                                                <h4 class="text-center text-white">{{$tomb->title}}</h4>
                                                             </div>
                                                                 <div class="guard-tomb-data mb-3 mt-3 text-center text-white">
                                                                     <p class="fw-bold">
                                                                         إسم التربي:
-                                                                        <span class="ms-1">000000</span>
+                                                                        <span class="ms-1">{{$tomb->tomb_guard_name}}</span>
                                                                     </p>
                                                                     <p class="mb-0 fw-bold">
                                                                         رقم المحمول:
-                                                                        <span class="ms-1">000000</span>
+                                                                        <span class="ms-1">{{$tomb->tomb_guard_number}}</span>
                                                                     </p>
                                                                 </div>
                                                             <div class="tomb-item-body mt-3 w-100 text-center">

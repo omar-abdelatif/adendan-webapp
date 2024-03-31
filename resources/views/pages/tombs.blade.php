@@ -36,6 +36,14 @@
                                         <option value="زينهم" class="option-control">زينهم</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="tomb_guard_name" class="text-white">إسم التربي</label>
+                                    <input type="text" id="tomb_guard_name" class="form-control text-white" name="tomb_guard_name" placeholder="إسم التربي">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tomb_guard_number" class="text-white">رقم المحمول</label>
+                                    <input type="number" id="tomb_guard_number" class="form-control text-white" name="tomb_guard_number" placeholder="رقم المحمول">
+                                </div>
                                 <div class="form-group mt-3">
                                     <label class="text-white">الموقع</label>
                                     <input type="text" name="location" placeholder="موقع المقبره" class="form-control text-white">
@@ -55,7 +63,7 @@
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger text-center w-50 mx-auto rounded">
+            <div class="alert alert-danger text-center w-50 mx-auto rounded" id="error">
                 <p class="mb-0">{{$error}}</p>
             </div>
         @endforeach
@@ -73,6 +81,8 @@
                                         <td class="text-center text-white">#</td>
                                         <td class="text-center text-white">إسم المقبره</td>
                                         <td class="text-center text-white">المنطقة</td>
+                                        <td class="text-center text-white">إسم التربي</td>
+                                        <td class="text-center text-white">رقم المحمول</td>
                                         <td class="text-center text-white">الموقع</td>
                                         <td class="text-center text-white">Action</td>
                                     </tr>
@@ -83,6 +93,8 @@
                                             <td class="text-white">{{$i++}}</td>
                                             <td class="text-white">{{$tomb->title}}</td>
                                             <td class="text-white">{{$tomb->region}}</td>
+                                            <td class="text-white">{{$tomb->tomb_guard_name}}</td>
+                                            <td class="text-white">{{$tomb->tomb_guard_number}}</td>
                                             <td class="text-white">{{$tomb->location}}</td>
                                             <td>
                                                 {{-- ! Update ! --}}
@@ -117,6 +129,14 @@
                                                                                     <option value="الغفير" class="option-control" {{$tomb->region === 'الغفير' ? 'selected' : ''}}>الغفير</option>
                                                                                     <option value="زينهم" class="option-control" {{$tomb->region === 'زينهم' ? 'selected' : ''}}>زينهم</option>
                                                                                 </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="tomb_guard_name" class="text-white">إسم التربي</label>
+                                                                                <input type="text" id="tomb_guard_name" class="form-control text-white" value="{{$tomb->tomb_guard_name}}" name="tomb_guard_name" placeholder="إسم التربي">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="tomb_guard_number" class="text-white">رقم المحمول</label>
+                                                                                <input type="number" id="tomb_guard_number" class="form-control text-white" value="{{$tomb->tomb_guard_number}}" name="tomb_guard_number" placeholder="رقم المحمول">
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label class="text-white">الموقع</label>

@@ -43,7 +43,7 @@
                     <li class="sidebar-list">
                         <a href="{{route('costyears.all')}}" class="sidebar-link sidebar-title">
                             <i class="fa-duotone fa-rings-wedding text-muted fs-5 me-3"></i>
-                            <span>التكلفة السنوية</span>
+                            <span>الإشتراك السنوي</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -65,7 +65,7 @@
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                             </svg>
-                            <span>لجان الجميعة</span>
+                            <span>لجان الجمعية</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -96,7 +96,6 @@
                             <span>الأفراح</span>
                         </a>
                     </li>
-
                     <li class="sidebar-list">
                         <a href="#" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
@@ -167,6 +166,14 @@
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                     </svg>
                                     <span>الخزنة</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('bankTransactios')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>البنك</span>
                                 </a>
                             </li>
                         </ul>

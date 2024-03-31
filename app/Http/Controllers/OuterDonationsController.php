@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OuterDonationsRequest;
 use App\Models\Donators;
-use App\Models\OuterDonations;
+use App\Models\TotalSafe;
+use App\Models\SafeReports;
 use Illuminate\Http\Request;
+use App\Models\OuterDonations;
+use App\Http\Requests\OuterDonationsRequest;
 
 class OuterDonationsController extends Controller
 {
@@ -21,6 +23,7 @@ class OuterDonationsController extends Controller
     {
         $validated = $request->validated();
         $donators = Donators::where('id', $request['id'])->first();
+        $totalSafe = TotalSafe::where('id', 1)->first();
         if ($validated) {
             $store = OuterDonations::create([
                 'name' => $request['name'],
@@ -32,6 +35,15 @@ class OuterDonationsController extends Controller
                 'donators_id' => $donators->id,
             ]);
             if ($store) {
+                SafeReports::create([
+                    'member_id' => '-',
+                    'transaction_type' => 'تبرعات',
+                    'amount' => $request['amount'],
+                ]);
+                $sumAmount = $totalSafe->amount + $request['amount'];
+                $totalSafe->update([
+                    'amount' => $sumAmount,
+                ]);
                 $notificationSuccess = [
                     'message' => 'تم الإضافة بنجاح',
                     'alert-type' => 'success'

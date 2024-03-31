@@ -19,13 +19,7 @@
     <body>
         <div id="fb-root"></div>
         <div class="wrapper layout-1">
-            @if (Route::current()->getName() == 'site.index')
-                <div class="audio-play">
-                    <audio autoplay>
-                        <source src="{{asset('assets/melody/profet_mohamed.mp3')}}" type="audio/mp3">
-                    </audio>
-                </div>
-            @endif
+            
             @include('frontend.layouts.components.header')
             <main>
                 @if (Route::currentRouteName() !== 'site.index')

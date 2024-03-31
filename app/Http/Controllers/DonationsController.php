@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestDonations;
 use App\Models\Donations;
+use App\Models\SafeReports;
 use App\Models\Subscribers;
+use App\Models\TotalSafe;
 use Illuminate\Http\Request;
 
 class DonationsController extends Controller
@@ -21,18 +23,27 @@ class DonationsController extends Controller
     {
         $validated = $request->validated();
         $subscribers = Subscribers::where('member_id', $request['member_id'])->first();
+        $totalSafe = TotalSafe::where('id', 1)->first();
         if ($subscribers) {
             $store = Donations::create([
                 'member_id' => $request['member_id'],
                 'amount' => $request['amount'],
                 'invoice_no' => $request['invoice_no'],
-                'donation_duration' => $request['donation_duration'],
                 'donation_type' => $request['donation_type'],
                 'other_donation' => $request['other_donation'],
                 'donation_destination' => $request['donation_destination'],
                 'subscribers_id' => $subscribers->id,
             ]);
             if ($store) {
+                SafeReports::create([
+                    'member_id' => $subscribers->member_id,
+                    'transaction_type' => 'تبرعات',
+                    'amount' => $request['amount'],
+                ]);
+                $sumAmount = $totalSafe->amount + $request['amount'];
+                $totalSafe->update([
+                    'amount' => $sumAmount,
+                ]);
                 $notificationSuccess = [
                     'message' => "تم الإضافة بنجاح",
                     'alert-type' => 'success'
@@ -63,7 +74,6 @@ class DonationsController extends Controller
     }
     public function updateDonation(RequestDonations $request)
     {
-        // dd($request->all());
         $id = $request->id;
         $donations = Donations::find($id);
         if ($donations) {

@@ -6,6 +6,12 @@
     <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
 @endsection
 @section('site')
+    {{-- ! BackGroud Audio ! --}}
+    <div class="audio-play">
+        <audio autoplay id="audio-player">
+            <source src="{{ asset('assets/melody/profet_mohamed.mp3') }}" type="audio/mp3">
+        </audio>
+    </div>
     {{-- ! News Bar Section ! --}}
     <section class="new-bar">
         <div class="bn-breaking-news mb-3 border-0 bg-primary" id="newsTicker2">

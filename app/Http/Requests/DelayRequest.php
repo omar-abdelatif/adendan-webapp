@@ -23,8 +23,8 @@ class DelayRequest extends FormRequest
     {
         return [
             'member_id' => 'required|integer',
-            'amount' => 'required|integer',
-            'delay_period' => 'required|integer',
+            'paied' => 'required|integer',
+            'year' => 'required|integer',
         ];
     }
 }

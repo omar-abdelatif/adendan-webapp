@@ -10,9 +10,9 @@ class Olddelays extends Model
     use HasFactory;
     protected $table = 'olddelays';
     protected $fillable = [
-        'delay_period',
-        'member_id',
         'amount',
+        'member_id',
+        'delay_period',
     ];
     public function subscribers()
     {

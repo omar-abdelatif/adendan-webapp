@@ -31,7 +31,6 @@
                                         <th class="text-center">نوع التبرع</th>
                                         <th class="text-center">أخرى</th>
                                         <th class="text-center">جهة التبرع</th>
-                                        <th class="text-center">مدة التبرع</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -50,7 +49,6 @@
                                                 @endif
                                             </td>
                                             <td>{{$donation->donation_destination}}</td>
-                                            <td>{{$donation->donation_duration}}</td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

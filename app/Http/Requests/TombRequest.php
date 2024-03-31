@@ -24,6 +24,8 @@ class TombRequest extends FormRequest
         return [
             'title' => 'required',
             'region' => 'required',
+            'tomb_guard_name' => 'nullable',
+            'tomb_guard_number' => 'nullable',
             'location' => 'required'
         ];
     }

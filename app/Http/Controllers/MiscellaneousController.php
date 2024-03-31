@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MiscellaneousRequest;
-use App\Models\Miscellaneous;
+use App\Models\TotalSafe;
+use App\Models\SafeReports;
 use Illuminate\Http\Request;
+use App\Models\Miscellaneous;
+use App\Http\Requests\MiscellaneousRequest;
 
 class MiscellaneousController extends Controller
 {
@@ -16,6 +18,7 @@ class MiscellaneousController extends Controller
     public function storeMiscellaneous(MiscellaneousRequest $request)
     {
         $validated = $request->validated();
+        $totalSafe = TotalSafe::where('id', 1)->first();
         if ($request->hasFile('invoice_img')) {
             $imageFile = $request->file('invoice_img');
             $imagename = time() . '.' . $imageFile->getClientOriginalExtension();
@@ -35,6 +38,15 @@ class MiscellaneousController extends Controller
             ]);
         }
         if ($store) {
+            SafeReports::create([
+                'member_id' => '-',
+                'transaction_type' => 'نثريات' . " " . ($validated['category']) . " " . ($validated['other_category']),
+                'amount' => $request['amount'],
+            ]);
+            $sumAmount = $totalSafe->amount - $request['amount'];
+            $totalSafe->update([
+                'amount' => $sumAmount,
+            ]);
             $notificationSuccess = [
                 'message' => 'تم الإضافة بنجاح',
                 'alert-type' => 'success'
@@ -99,4 +111,5 @@ class MiscellaneousController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ ما');
     }
+
 }

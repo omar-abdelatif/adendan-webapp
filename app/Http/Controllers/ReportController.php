@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use App\Models\Donations;
 use App\Models\Donators;
 use App\Models\OuterDonations;
+use App\Models\SafeReports;
 use App\Models\Subscribers;
+use App\Models\TotalBank;
+use App\Models\TotalSafe;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -106,6 +110,28 @@ class ReportController extends Controller
     //! Safe
     public function safe()
     {
-        return view('pages.reports.safe');
+        $safes = SafeReports::get();
+        $totalSafe = TotalSafe::get();
+        $donationsReports = SafeReports::where('transaction_type', 'تبرعات')->get();
+        $sumDonations = $donationsReports->sum('amount');
+        $subscriptionsReports = SafeReports::where('transaction_type', 'إشتراكات')->get();
+        $sumSubscriptions = $subscriptionsReports->sum('amount');
+        $safeAmounts = [];
+        foreach ($totalSafe as $safe) {
+            $safeAmounts[] = $safe->amount;
+        }
+        return view('pages.reports.safe', compact('safeAmounts', 'safes', 'sumDonations', 'sumSubscriptions'));
+    }
+    //! Bank
+    public function bankTransactions()
+    {
+        $transactions = Bank::get();
+        $totalBank = TotalBank::get();
+        $bankAmount = [];
+        foreach ($totalBank as $bank) {
+            $bankAmount[] =  $bank->amount;
+        }
+        $amount = $transactions->sum('amount');
+        return view('pages.reports.bank', compact('transactions', 'amount', 'bankAmount'));
     }
 }

@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('delays', function (Blueprint $table) {
-            //
+            $table->dropColumn('year');
+            $table->dropColumn('yearly_cost');
         });
     }
 };

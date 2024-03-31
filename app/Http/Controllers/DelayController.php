@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Delay;
-use App\Models\CostYears;
+use App\Models\Olddelays;
+use App\Models\TotalSafe;
+use App\Models\SafeReports;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use App\Models\Subscriptions;
 use App\Http\Requests\DelayRequest;
-use App\Imports\ImportSubscribersDelays;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportSubscribersDelays;
 
 class DelayController extends Controller
 {
-    public function storeDelays(DelayRequest $request)
+    public function storeDelays(DelayRequest $request) //! Store Total Delay For Single Subscriber ( Debrecated )
     {
         $validated = $request->validated();
         $subscriber = Subscribers::where('member_id', $request['member_id'])->first();
@@ -35,7 +38,7 @@ class DelayController extends Controller
         }
         return redirect()->route('subscriber.all')->withErrors($validated);
     }
-    public function costByYear(Request $request)
+    public function uploadDelays(Request $request) //! Add Subscriptions Delay For All Subscribers
     {
         $subscribers = Subscribers::all();
         foreach ($subscribers as $subscriber) {
@@ -55,7 +58,7 @@ class DelayController extends Controller
             return redirect()->back()->with($notificationSuccess);
         }
     }
-    public function subscriberDelay(Request $request)
+    public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {
         $validated = $request->validate([
             'import-delay' => 'required|mimes:xlsx,xls',
@@ -71,5 +74,248 @@ class DelayController extends Controller
             }
         }
         return redirect()->route('subscriber.all')->withErrors($validated);
+    }
+    public function paySubscription(Request $request) //! Pay Single Subscription Delay For Single Subscriber
+    {
+        $id = $request->id;
+        $validated = $request->validate([
+            'paied' => 'required',
+            'invoice_no' => 'required'
+        ]);
+        $delay = Delay::where('year', $request->year)->where('id', $id)->first();
+        $subscribers = Subscribers::where('member_id', $request->member_id)->first();
+        $totalSafe = TotalSafe::where('id', 1)->first();
+        if ($validated) {
+            $cost = $delay->yearly_cost;
+            $paied = $request->paied;
+            $baky = $delay->remaing;
+            if ($paied == $cost) {
+                $delay->delete();
+                $pay = Subscriptions::create([
+                    'member_id' => $request->member_id,
+                    'subscription_cost' => $request->paied,
+                    'period' => $request->year,
+                    'invoice_no' => $request->invoice_no,
+                    'payment_type' => 'إشتراك كلي',
+                    'subscribers_id' => $subscribers->id
+                ]);
+                if ($pay) {
+                    SafeReports::create([
+                        'member_id' => $subscribers->member_id,
+                        'transaction_type' => 'إشتراكات',
+                        'amount' => $request['paied'],
+                    ]);
+                    $sumAmount = $totalSafe->amount + $request['paied'];
+                    $totalSafe->update([
+                        'amount' => $sumAmount,
+                    ]);
+                    $subscribers->update(['status' => 1]);
+                    $notificationSuccess = [
+                        'message' => 'تم دفع كل المبلغ',
+                        'alert-type' => 'success'
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else {
+                $payed = $delay->paied;
+                $remain = $delay->remaing;
+                if ($payed == null && $remain == null) {
+                    $remainingAmount = $cost - $paied;
+                    $update = $delay->update([
+                        'paied' => $paied,
+                        'remaing' => $remainingAmount,
+                    ]);
+                    if ($update) {
+                        $subscribers->update(['status' => 3]);
+                        Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'subscription_cost' => $request->paied,
+                            'period' => $request->year,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'إشتراك جزئي',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'إشتراكات',
+                            'amount' => $request['paied'],
+                        ]);
+                        $sumAmount = $totalSafe->amount + $request['paied'];
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                } else {
+                    if ($payed == $remain) {
+                        $delay->delete();
+                        $pay = Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'subscription_cost' => $request->paied,
+                            'period' => $request->year,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'إشتراك كلي',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($pay) {
+                            $subscribers->update(['status' => 1]);
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'إشتراكات',
+                                'amount' => $request['paied'],
+                            ]);
+                            $sumAmount = $totalSafe->amount + $request['paied'];
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع كل المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    } else {
+                        $delay->update([
+                            'paied' => $paied,
+                            'remaing' => $baky - $paied,
+                        ]);
+                        $pay = Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'subscription_cost' => $request->paied,
+                            'period' => $request->year,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'إشتراك جزئي',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($remain === 0) {
+                            $delay->delete();
+                        }
+                        if ($pay) {
+                            $subscribers->update(['status' => 1]);
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'إشتراكات',
+                                'amount' => $request['paied'],
+                            ]);
+                            $sumAmount = $totalSafe->amount + $request['paied'];
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع كل المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    }
+                }
+            }
+        }
+        return back()->withErrors($validated);
+    }
+    public function payOldDelay(Request $request) //! Pay Single Old Delay For Single Subscriber
+    {
+        $validated = $request->validate([
+            'invoice_no' => 'required',
+            'olddelay' => 'required',
+        ]);
+        $oldDelay = Olddelays::where('member_id', $request->member_id)->first();
+        $subscribers = Subscribers::where('member_id', $request->member_id)->first();
+        $subscriptions = Subscriptions::where('member_id', $request->member_id)->first();
+        $totalSafe = TotalSafe::where('id', 1)->first();
+        if ($validated) {
+            $amount = $oldDelay->amount;
+            $requestAmount = $request->olddelay;
+            if ($amount == $requestAmount) {
+                $oldDelay->delete();
+                $store = Subscriptions::create([
+                    'member_id' => $request->member_id,
+                    'invoice_no' => $request->invoice_no,
+                    'delays' => $requestAmount,
+                    'payment_type' => 'متأخرات كلية',
+                    'subscribers_id' => $subscribers->id
+                ]);
+                if ($store) {
+                    SafeReports::create([
+                        'member_id' => $subscribers->member_id,
+                        'transaction_type' => 'متأخرات',
+                        'amount' => $request['olddelay'],
+                    ]);
+                    $sumAmount = $totalSafe->amount + $request['olddelay'];
+                    $totalSafe->update([
+                        'amount' => $sumAmount,
+                    ]);
+                    $notificationSuccess = [
+                        'message' => 'تم دفع كل المبلغ',
+                        'alert-type' => 'success'
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else {
+                $oldDelayAmount = $oldDelay->amount;
+                $requestPay = $request->olddelay;
+                $delays = $subscriptions->delays;
+                $remainingDelays = $oldDelayAmount - $requestPay;
+                if ($delays == null) {
+                    $update = $oldDelay->update(['amount' => $remainingDelays]);
+                    if ($update) {
+                        Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'delays' => $request->olddelay,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'متأخرات جزئي',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'متأخرات',
+                            'amount' => $request['olddelay'],
+                        ]);
+                        $sumAmount = $totalSafe->amount + $request['olddelay'];
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                } else {
+                    $oldDelay->update(['amount' => $remainingDelays]);
+                    $pay = Subscriptions::create([
+                        'member_id' => $request->member_id,
+                        'delays' => $request->olddelay,
+                        'invoice_no' => $request->invoice_no,
+                        'payment_type' => 'متأخرات جزئي',
+                        'subscribers_id' => $subscribers->id
+                    ]);
+                    if ($remainingDelays === 0) {
+                        $oldDelay->delete();
+                    }
+                    if ($pay) {
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'متأخرات',
+                            'amount' => $request['olddelay'],
+                        ]);
+                        $sumAmount = $totalSafe->amount + $request['olddelay'];
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                }
+            }
+        }
+        return back()->withErrors($validated);
     }
 }

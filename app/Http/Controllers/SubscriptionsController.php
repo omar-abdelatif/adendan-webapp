@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubscriptionRequest;
-use App\Models\CostYears;
+use App\Http\Requests\DelayRequest;
 use App\Models\Delay;
 use App\Models\Olddelays;
 use App\Models\Subscribers;
-use App\Models\Subscriptions;
 use Illuminate\Http\Request;
+use App\Models\Subscriptions;
+use App\Http\Requests\SubscriptionRequest;
 
 class SubscriptionsController extends Controller
 {
@@ -16,10 +16,11 @@ class SubscriptionsController extends Controller
     {
         $subscriber = Subscribers::find($subscriberId);
         if ($subscriber) {
+            $memberId = $subscriber->member_id;
             $subscriptions = $subscriber->subscriptions;
             $delays = $subscriber->delays;
-            $donations = $subscriber->donations;
-            return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions', 'delays', 'donations'));
+            $oldelays = Olddelays::where('member_id', $memberId)->get();
+            return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions', 'delays', 'oldelays'));
         }
     }
     public function storeSubscription(SubscriptionRequest $request)
@@ -91,4 +92,5 @@ class SubscriptionsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
+
 }

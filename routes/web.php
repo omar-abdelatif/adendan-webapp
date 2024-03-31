@@ -21,6 +21,7 @@ use App\Http\Controllers\AssociationCommittesController;
 use App\Http\Controllers\CostYearsController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\OuterDonationsController;
+use App\Http\Controllers\WithdrawController;
 
 Auth::routes();
 
@@ -78,6 +79,7 @@ Route::prefix('admin')->group(function () {
             Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
             Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
             Route::get('reports/safe', 'safe')->name('reports.safe');
+            Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');
@@ -101,8 +103,10 @@ Route::prefix('admin')->group(function () {
         });
         Route::controller(DelayController::class)->group(function () {
             Route::post('delays/store', 'storeDelays')->name('delays.store');
-            Route::post('delays/CostByYear', 'CostByYear')->name('delays.costbyyear');
+            Route::post('delays/upload_delays', 'uploadDelays')->name('delays.costbyyear');
             Route::post('delays/subscriber_delays', 'subscriberDelay')->name('bulk_subscriber_delay');
+            Route::post('delays/pay', 'paySubscription')->name('subscription.pay');
+            Route::post('delays/old_delays', 'payOldDelay')->name('oldDelays.pay');
         });
         Route::controller(DonatorsController::class)->group(function () {
             Route::get('donators/all', 'index')->name('donators.all');
@@ -133,6 +137,10 @@ Route::prefix('admin')->group(function () {
             Route::post('miscellaneous/store', 'storeMiscellaneous')->name('miscellaneous.store');
             Route::get('miscellaneous/delete/{id}', 'deleteMiscellaneous')->name('miscellaneous.delete');
             Route::post('miscellaneous/update', 'updateMiscellaneous')->name('miscellaneous.update');
+        });
+        Route::controller(WithdrawController::class)->group(function () {
+            Route::post('withdraw', 'withdraw')->name('withdraw');
+            Route::post('withdraw/bank', 'bankWithdraw')->name('bank.withdraw');
         });
     });
 });

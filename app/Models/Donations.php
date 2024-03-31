@@ -13,7 +13,6 @@ class Donations extends Model
         'member_id',
         'invoice_no',
         'donation_type',
-        'donation_duration',
         'other_donation',
         'amount',
         'donation_destination',

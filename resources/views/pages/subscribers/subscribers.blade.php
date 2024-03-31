@@ -82,8 +82,11 @@
     <div class="modal fade" id="add_subscriber" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header align-content-center">
                     <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مشترك جديد</h1>
+                    <div class="yearly-cost pe-5">
+                        <span class="fw-bold rounded-pill badge badge-warning text-dark fs-6">تكلفة الإشتراك = {{$cost}} لعام {{$year}}</span>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body basic-wizard important-validation">
@@ -136,64 +139,69 @@
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label class="form-label text-white" for="email-basic-wizard">
+                                            <label class="form-label text-muted" for="email-basic-wizard">
                                                 الأسم الكامل
                                             </label>
-                                            <input class="form-control text-white" id="email-basic-wizard" type="text" name="name" placeholder="مثلا: محمد أحمد محمود">
+                                            <input class="form-control text-muted @error('name') is-invalid @enderror" id="email-basic-wizard" type="text" name="name" placeholder="مثلا: محمد أحمد محمود">
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label text-white" for="email-basic-wizard">
+                                            <label class="form-label text-muted" for="email-basic-wizard">
                                                 اللقب و إسم الشهرة
                                             </label>
-                                            <input class="form-control text-white" id="email-basic-wizard" type="text" name="nickname" placeholder="مثلا: محمد أحمد محمود">
+                                            <input class="form-control text-muted" id="email-basic-wizard" type="text" name="nickname" placeholder="مثلا: محمد أحمد محمود">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-white" for="confirmpasswordwizard">
+                                            <label class="col-lg-6 form-label text-muted" for="confirmpasswordwizard">
                                                 تاريخ الميلاد
                                             </label>
-                                            <input class="datepicker-here form-control text-white digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl">
+                                            <input class="datepicker-here form-control text-muted digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="col-6-6 form-label text-white" for="passwordwizard">
+                                            <label class="col-6-6 form-label text-muted" for="passwordwizard">
                                                 العنوان
                                             </label>
-                                            <input class="form-control text-white" name="address" id="passwordwizard" type="text" placeholder="عنوان المشترك">
+                                            <input class="form-control text-muted" name="address" id="passwordwizard" type="text" placeholder="عنوان المشترك">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-white" for="confirmpasswordwizard">
+                                            <label class="col-lg-6 form-label text-muted" for="confirmpasswordwizard">
                                                 رقم المحمول
                                             </label>
-                                            <input class="form-control text-white" id="confirmpasswordwizard" name="mobile_no" type="number" placeholder="رقم المحمول">
+                                            <input class="form-control text-muted" id="confirmpasswordwizard" name="mobile_no" type="number" placeholder="رقم المحمول">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-white" for="personalImg">
+                                            <label class="col-lg-6 form-label text-muted" for="personalImg">
                                                 الصورة الشخصية
                                             </label>
-                                            <input class="form-control text-white" name="img" id="personalImg" type="file" accept="image/*">
+                                            <input class="form-control text-muted" name="img" id="personalImg" type="file" accept="image/*">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-white" for="personalImg">
+                                            <label class="col-lg-6 form-label text-muted" for="personalImg">
                                                 صورة البطاقة الشخصية
                                             </label>
-                                            <input class="form-control text-white" name="id_img" id="personalImg" type="file" accept="image/*">
+                                            <input class="form-control text-muted" name="id_img" id="personalImg" type="file" accept="image/*">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label text-white" for="firstnamewizard">
+                                            <label class="form-label text-muted" for="firstnamewizard">
                                                 الرقم القومي
                                             </label>
-                                            <input class="form-control text-white" id="firstnamewizard" name="ssn" type="number" placeholder="أدخل الرقم القومي">
+                                            <input class="form-control text-muted" id="firstnamewizard" name="ssn" type="number" placeholder="أدخل الرقم القومي">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label text-white" for="firstnamewizard">
+                                            <label class="form-label text-muted" for="firstnamewizard">
                                                 الحالة الإجتماعية
                                             </label>
-                                            <input class="form-control text-white" id="firstnamewizard" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
+                                            <input class="form-control text-muted" id="firstnamewizard" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label text-white" for="firstnamewizard">
+                                            <label class="form-label text-muted" for="firstnamewizard">
                                                 ت المنزل
                                             </label>
-                                            <input class="form-control text-white" id="firstnamewizard" name="home_tel" type="number" placeholder="ت المنزل">
+                                            <input class="form-control text-muted" id="firstnamewizard" name="home_tel" type="number" placeholder="ت المنزل">
                                         </div>
                                     </div>
                                 </div>
@@ -256,6 +264,10 @@
                                         <div class="col-lg-6">
                                             <label for="validationMemberId" class="form-label text-white">رقم العضوية</label>
                                             <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId">
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
+                                            <input type="number" name="invoice_no" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
                                         </div>
                                     </div>
                                 </div>
@@ -371,12 +383,14 @@
                                             <td class="text-muted text-center">{{$member->member_id}}</td>
                                             <td class="text-muted text-center">{{$member->name}}</td>
                                             <td class="text-muted text-center">
-                                                @if($member->status == 1)
-                                                    <span class="badge rounded-pill badge-success text-muted">الإشتراك مفعل</span>
-                                                @elseif($member->status == 0)
-                                                    <span class="badge rounded-pill badge-danger text-muted">الإشتراك غير مفعل</span>
+                                                @if($member->status == 0)
+                                                    <span class="badge rounded-pill badge-danger text-white">الإشتراك غير مفعل</span>
+                                                @elseif($member->status == 1)
+                                                    <span class="badge rounded-pill badge-success text-dark">الإشتراك مفعل</span>
                                                 @elseif ($member->status == 2)
-                                                    <span class="badge rounded-pill badge-dark text-muted">المشترك متوفي</span>
+                                                    <span class="badge rounded-pill badge-dark text-white">المشترك متوفي</span>
+                                                @elseif ($member->status == 3)
+                                                    <span class="badge rounded-pill badge-warning text-dark">الإشتراك معلق</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -393,60 +407,14 @@
                                                         <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
                                                             <i class="icofont icofont-ui-edit"></i>
                                                         </a>
-                                                        {{-- ! Add Delay ! --}}
-                                                        {{-- @if ($member->status == 2)
-                                                            <button type="button" class="btn btn-secondary d-none px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
-                                                                <i class="icofont icofont-plus"></i>
-                                                            </button>
-                                                        @else
-                                                            <button type="button" class="btn btn-secondary px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_delay_{{$member->id}}">
-                                                                <i class="icofont icofont-plus"></i>
-                                                            </button>
-                                                        @endif --}}
                                                         {{-- ! Add Subscription ! --}}
-                                                        <button type="button" class="btn btn-success fw-bold px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
+                                                        {{-- <button type="button" class="btn btn-success fw-bold px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
-                                                        </button>
+                                                        </button> --}}
                                                     </div>
                                                 </div>
-                                                {{-- ! Add Delay ! --}}
-                                                {{-- <div class="modal fade" id="add_delay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة مديونية للعضو {{$member->name}}</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action={{route('delays.store')}} method="post">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">رقم العضوية</label>
-                                                                                <input type="number" class="form-control text-muted" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
-                                                                            </div>
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">مبلغ المديونية</label>
-                                                                                <input type="number" class="form-control text-muted" name="amount" placeholder="إجمالي مبلغ المديونية">
-                                                                            </div>
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="delay_period" class="text-muted">مدة المدينوية</label>
-                                                                                <input type="number" class="form-control text-muted" name="delay_period" placeholder="مدة المدينوية">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
-                                                                            <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                                 {{-- ! Add Subscription ! --}}
-                                                <div class="modal fade" id="add_subs_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                {{-- <div class="modal fade" id="add_subs_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -488,7 +456,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </td>
                                         </tr>
                                     @endforeach

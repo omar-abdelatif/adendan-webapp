@@ -4,24 +4,35 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Delay;
+use App\Models\CostYears;
+use App\Models\TotalSafe;
+use App\Models\SafeReports;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use App\Models\Subscriptions;
+use App\Imports\SubscribersImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\SubscriberRequest;
-use App\Imports\SubscribersImport;
-use App\Models\CostYears;
 
 class SubscribersController extends Controller
 {
     public function index()
     {
         $years = CostYears::all();
+        $halfDelay = $this->insertHalfDelay();
+        $value = $this->getSubscriptionValue();
+        $cost = $value[0];
+        $year = $value[1];
         $members = Subscribers::with('delays')->get();
-        return view('pages.subscribers.subscribers', compact('members', 'years'));
+        return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year'));
     }
     public function storeSubs(SubscriberRequest $request)
     {
         $validatedData = $request->validated();
+        $halfDelay = $this->insertHalfDelay();
+        $value = $this->getSubscriptionValue();
+        $cost = $value[0];
+        $year = $value[1];
         if ($request->hasFile('id_img') || $request->hasFile('img')) {
             //! ID Image
             $filename = $request->file('id_img');
@@ -52,6 +63,7 @@ class SubscribersController extends Controller
                 'qualification_date' => $request['qualification_date'],
                 'img' => $pImg,
                 'id_img' => $idImg,
+                'status' => 1
             ]);
         } else {
             $store = Subscribers::create([
@@ -71,9 +83,20 @@ class SubscribersController extends Controller
                 'membership_type' => $request['membership_type'],
                 'educational_qualification' => $request['educational_qualification'],
                 'qualification_date' => $request['qualification_date'],
+                'status' => 1
             ]);
         }
         if ($store) {
+            $subscriberId = $store->id;
+            Subscriptions::create([
+                'member_id' => $request->member_id,
+                'subscription_cost' => $cost + 10,
+                'invoice_no' => $request->invoice_no,
+                'period' => $year,
+                'payment_type' => 'إشتراك',
+                'subscribers_id' => $subscriberId
+            ]);
+            $this->safeInsert($request);
             $notificationSuccess = [
                 "message" => "تم الإضافة بنجاح",
                 "alert-type" => "success",
@@ -197,5 +220,46 @@ class SubscribersController extends Controller
             }
         }
         return redirect()->route('subscriber.all')->withErrors($validated);
+    }
+    public function insertHalfDelay()
+    {
+        $currentDate = Carbon::now();
+        $currentDate->day(1);
+        $currentDate->subMonth();
+        $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
+        $differenceInMonths = $currentDate->diffInMonths($june30);
+        return $differenceInMonths;
+    }
+    function getSubscriptionValue()
+    {
+        $currentDate = Carbon::now();
+        $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
+        $yearlyCost = CostYears::where('year', $currentDate->year)->first();
+        if ($currentDate->gt($june30)) {
+            $costYearly = $yearlyCost->cost;
+            return [$costYearly, $currentDate->year];
+        } else {
+            $previousYear = $currentDate->copy()->subYear();
+            $yearlyCost = CostYears::where('year', $previousYear->year)->first();
+            $costYearly = $yearlyCost->cost;
+            return [$costYearly, $previousYear->year];
+        }
+    }
+    function safeInsert(Request $request)
+    {
+        $value = $this->getSubscriptionValue();
+        $cost = $value[0];
+        $totalSafe = TotalSafe::where('id', 1)->first();
+        $sumAmount = $totalSafe->amount + $cost;
+        $totalSafe->update([
+            'amount' => $sumAmount,
+        ]);
+        $return =  SafeReports::create([
+            'member_id' => $request->member_id,
+            'transaction_type' => 'إشتراكات',
+            'amount' => $cost,
+            'proof_img' => '-',
+        ]);
+        return $return;
     }
 }
