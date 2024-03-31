@@ -2,9 +2,6 @@
 @section('site_styles')
     <link rel="stylesheet" href={{asset('assets/frontend/css/cards.css')}}>
 @endsection
-@section('meta')
-    <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
-@endsection
 @section('site')
     {{-- ! BackGroud Audio ! --}}
     <div class="audio-play">
