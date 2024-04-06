@@ -17,7 +17,7 @@
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
     </head>
-    <body>
+    <body onload="playAudio()">
         <div id="fb-root"></div>
         <div class="wrapper layout-1">
             @include('frontend.layouts.components.header')

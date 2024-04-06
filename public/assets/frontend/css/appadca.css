@@ -7722,7 +7722,7 @@ header .dropdown-menu.show {
 	z-index: 1000;
 }
 header .navbar-light .navbar-nav .nav-link {
-	color: #214570 !important;
+	color: #214570;
 	font-family: AdelleSansARA-Semibold;
 	font-size: 1.2rem;
 	padding: 0.7rem 1rem;

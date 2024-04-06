@@ -9,14 +9,18 @@ window.addEventListener("scroll", () => {
         document.querySelector(".navbar").classList.remove("fixed");
     }
 });
-//! Audio Play
+function playAudio() {
+    const audio = document.getElementById("audio-player");
+    window.onload = function () {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    };
+}
 $(document).ready(function () {
-    var audio = document.getElementById("audio-player");
-    console.log(audio)
-    var hasAudioPlayed = sessionStorage.getItem("audioPlayed");
-
-    if (!hasAudioPlayed) {
-        audio.play();
-        sessionStorage.setItem("audioPlayed", true);
-    }
+    $("#newsTicker2").breakingNews({
+        direction: "rtl",
+    });
 });

@@ -8,6 +8,8 @@ use App\Models\Wedding;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Olddelays;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class SearchController extends Controller
 {
@@ -49,11 +51,13 @@ class SearchController extends Controller
             if ($member) {
                 $subscription = $member->subscriptions;
                 $delays = $member->delays;
+                $oldDelays = Olddelays::where('member_id', $member->member_id)->first();
                 return redirect()->route('site.search')->with([
                     'member' => $member,
                     'searched' => true,
                     'subscription' => $subscription,
                     'delays' => $delays,
+                    'oldDelays' => $oldDelays
                 ]);
             }
         }

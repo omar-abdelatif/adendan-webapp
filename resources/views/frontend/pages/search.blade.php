@@ -38,7 +38,7 @@
                                 <div class="search-form">
                                     <form action="{{route('site.result')}}" method="post" class="my-5 w-50 mx-auto">
                                         @csrf
-                                        <input type="search" name="ssn" id="ssn" class="form-control border border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
+                                        <input type="number" name="ssn" id="ssn" class="form-control border border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
                                         <button type="submit" class="btn btn-secondary rounded-pill w-100 mt-3 fw-bold fs-5">بحث</button>
                                     </form>
                                 </div>
@@ -50,53 +50,43 @@
                                 @endphp
                                 @if ($searched)
                                     @if ($member)
-                                        <div class="overflow-hidden rounded-5 w-75 mx-auto">
-                                            <div class="table d-flex mb-0">
-                                                <div class="row header bg-secondary text-white text-center py-3 w-50">
-                                                    <div class="cell mb-3 fw-bold fs-5 ">
-                                                        الإسم
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5 ">
-                                                        رقم العضوية
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5 ">
-                                                        حالة الإشتراك
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5 ">
-                                                        مبلغ المديونية
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5 ">
-                                                        مدة المديونية
-                                                    </div>
+                                        <div class="card border-0 w-75 mx-auto">
+                                            <div class="card-header p-3 d-flex subscriber_details align-items-center justify-content-evenly bg-secondary">
+                                                <p class="text-white mb-2 fs-5">الإسم: {{$member->name}}</p>
+                                                <p class="text-white mb-2 fs-5">رقم العضوية: {{$member->member_id}}</p>
+                                                <p class="text-white mb-2 fs-5">
+                                                    حالة الإشتراك:
+                                                    @if ($member->status === 1)
+                                                        <span class="text-white bg-primary rounded-pill px-3 py-1">الإشتراك مفعل</span>
+                                                    @elseif ($member->status === 0)
+                                                        <span class="text-white bg-danger rounded-pill px-3 py-1">الإشتراك غير مفعل</span>
+                                                    @elseif($member->status === 2)
+                                                        <span class="text-white bg-dark rounded-pill px-3 py-1">المشترك متوفي</span>
+                                                    @else
+                                                        <span class="text-dark bg-warning rounded-pill px-3 py-1">الإشتراك معلق</span>
+                                                    @endif
+                                                </p>
+                                            </div>
+                                            <div class="card-body bg-light">
+                                                <div class="card-title my-3">
+                                                    <h3 class="text-center fw-bold">المديونيات و المتأخرات</h3>
                                                 </div>
-                                                <div class="row bg-light py-3 text-center">
-                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Full Name">
-                                                        {{$member->name}}
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Age">
-                                                        {{$member->member_id}}
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Job Title">
-                                                        @if ($member->status === 1)
-                                                            <span class="text-white bg-primary rounded-pill px-3 py-1">الإشتراك مفعل</span>
-                                                        @else
-                                                            <span class="text-white bg-danger rounded-pill px-3 py-1">الإشتراك غير مفعل</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Location">
-                                                        @if ($member->delays)
-                                                            <p class="mb-0">{{$member->delays->amount}} ج.م</p>
-                                                        @else
-                                                            <p class="mb-0">لا توجد مديونية</p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="cell mb-3 fw-bold fs-5" data-title="Location">
-                                                        @if ($member->delays)
-                                                            <p class="mb-0">{{$member->delays->delay_period}} سنوات</p>
-                                                        @else
-                                                            <p class="mb-0">لا توجد مديونية</p>
-                                                        @endif
-                                                    </div>
+                                                <div class="card-content d-flex">
+                                                    @if ($member->delays !== null)
+                                                        @foreach ($member->delays as $delay)
+                                                            <div class="delay-item rounded-2 p-2 ms-3 mb-2 border border-2 border-primary w-100">
+                                                                <p class="mb-0 text-center">السنة: {{$delay->year}}</p>
+                                                                <p class="mb-0 text-center">الإشتراك السنوية: {{$delay->yearly_cost}} ج.م</p>
+                                                                @if ($delay->paied == null || $delay->remaing == null)
+                                                                    <p class="mb-0 text-center">المبلغ المدفوع: لا يوجد</p>
+                                                                    <p class="mb-0 text-center">المبلغ المتبقي: لا يوجد</p>
+                                                                @else
+                                                                    <p class="mb-0 text-center">المبلغ المدفوع: {{$delay->paied}} ج.م</p>
+                                                                    <p class="mb-0 text-center">المبلغ المتبقي: {{$delay->remaing}} ج.م</p>
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

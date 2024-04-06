@@ -5,9 +5,7 @@
 @section('site')
     {{-- ! BackGroud Audio ! --}}
     <div class="audio-play">
-        <audio autoplay id="audio-player">
-            <source src="{{ asset('assets/melody/profet_mohamed.mp3') }}" type="audio/mp3">
-        </audio>
+        <audio autoplay id="audio-player" src="{{ asset('assets/melody/profet_mohamed.mp3') }}"></audio>
     </div>
     {{-- ! News Bar Section ! --}}
     <section class="new-bar">
@@ -15,7 +13,7 @@
             <div class="bn-label px-4 py-1">
                 <h4 class="mb-0">الأخبار</h4>
             </div>
-            <div class="bn-news">
+            <div class="bn-news bg-primary">
                 <ul class="navbar-nav">
                     @foreach ($latest as $item)
                         <li>

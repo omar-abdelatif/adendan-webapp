@@ -1,25 +1,113 @@
-@media (min-width: 768px){
-    .carousel, .carousel-control-next, .carousel-control-prev{
-        padding-top: 0 !important;
-    }
-    .carousel{
-        height: 80vh !important;
+@media (max-width: 1400px){}
+@media (max-width: 1200px){}
+@media (max-width: 1024px){}
+@media (max-width: 992px){
+    /* ! Navbar ! */
+    #menu{
+        display: block !important;
     }
 }
-@media (min-width: 640px) {
-    .hidden{
-        display: none;
+@media (max-width: 768px){}
+@media (max-width: 576px) {}
+@media (max-width: 480px) {}
+@media (max-width: 414px) {
+    /* ! Navbar ! */
+    .nav h1{
+        font-size: 2.7rem !important;
     }
-    .flex{
-        display: flex !important;
+    .slogan small{
+        font-size: .750em;
     }
-    .items-center{
-        align-items: center !important;
+    .offcanvas.offcanvas-end{
+        width: 270px;
     }
-    .justify-between{
-        justify-content: space-between !important;
+    .offcanvas-backdrop.show{
+        width: 100% !important;
     }
-    .flex-1 {
-        flex: 1 1 0%;
+    .offcanvas .nav-item {
+        margin-bottom: 15px;
+    }
+    .offcanvas-end .offcanvas-body ul .nav-item.dropdown .dropdown-menu > div {
+        flex-direction: column !important;
+    }
+    .offcanvas-end .offcanvas-body ul .nav-item.dropdown .dropdown-menu > div .dropdown-item {
+        font-weight: bold;
+    }
+    .offcanvas-end .offcanvas-body ul .nav-item.dropdown .dropdown-menu > div li {
+        margin-bottom: 10px;
+    }
+    .offcanvas-end .offcanvas-body ul .nav-item.dropdown .dropdown-menu > div li:last-child {
+        margin-bottom: 0px;
+    }
+    /* ! Hero Section ! */
+    .hero-background{
+        background-size: contain;
+        height: 300px !important;
+    }
+    /* ! News Section ! */
+    .news-section .section-title .my-5{
+        margin-top: 0 !important;
+    }
+    /* ! Single News ! */
+    .news-details.my-5{
+        margin-top: 0 !important;
+    }
+    /* !  Workers  */
+    .workers .services-title .w-25{
+        width: 75% !important;
+    }
+    /* ! Search With SSN ! */
+    .inquiries .search-form form.w-50{
+        width: 100% !important;
+    }
+    .inquiries .tab-content .tab-pane#tomb .card .w-25{
+        width: 50% !important;
+    }
+    .inquiries .tab-content .tab-pane#tomb .card .ms-5{
+        margin-right: 0px !important;
+    }
+    .inquiries .tab-content .tab-pane#wedding .card .w-25{
+        width: 75% !important;
+    }
+    .inquiries .tab-content .tab-pane#subscription-tab .card.w-75{
+        width: 100% !important;
+    }
+    .inquiries .tab-content .tab-pane#subscription-tab .card .card-body .card-content{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .inquiries .tab-content .tab-pane#subscription-tab .card .card-body .card-content .delay-item.ms-3{
+        margin-right: 0 !important;
+    }
+    .inquiries .subscriber_details{
+        flex-direction: column !important;
+    }
+    .inquiries .card-content{
+        flex-direction: column !important;
+    }
+    /* ! Association Commiites ! */
+    .association_details .section-title.w-50{
+        width: 100% !important;
+    }
+    /* ! About ! */
+    .about-us .tabs-body .nav-tabs.flex-column{
+        flex-direction: row !important;
+        justify-content: center;
+    }
+    .about-us .tabs .nav-tabs{
+        overflow-x: scroll !important;
+        width: 100%;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    /* ! Footer ! */
+    .contact-item:nth-child(3) p.fs-5 {
+        font-size: 1rem !important;
+    }
+}
+@media (min-width: 414px) {
+    /* ! NavBar ! */
+    header .navbar-nav .nav-item.dropdown .dropdown-menu .dropdown-item{
+        color: #fff;
     }
 }
