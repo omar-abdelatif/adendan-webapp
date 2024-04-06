@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         @vite('resources/js/app.js')
         <title>جمعية أدندان الخيرية</title>
-        @include('frontend.layouts.assets.css')
         <meta name="theme-color" content="#2d6c81" />
         <meta name="author" content="جمعية أدندان الخيرية">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,6 +15,7 @@
         <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
+        @include('frontend.layouts.assets.css')
     </head>
     <body onload="playAudio()">
         <div id="fb-root"></div>
