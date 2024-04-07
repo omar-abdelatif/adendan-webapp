@@ -15,20 +15,8 @@
                             <h3>تواصل معنا</h3>
                         </div>
                         <div class="row justify-content-center align-items-center">
-                            <div class="col-lg-3">
-                                <div class="contact-item rounded bg-smoke-white p-2 text-center">
-                                    <div class="icon bg-primary p-3 rounded-circle text-white mt-3 mb-3 w-25 mx-auto">
-                                        <i class="fa-solid fa-mobile-screen-button fs-1"></i>
-                                    </div>
-                                    <div class="contact-texts mt-3 text-center fs-5">
-                                        <p class="mb-0 text-primary">
-                                            <b>0123456789</b>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="contact-item rounded bg-smoke-white p-2 text-center">
+                            <div class="col-lg-4">
+                                <div class="contact-item rounded bg-smoke-white p-2 text-center mb-2">
                                     <div class="icon bg-primary p-3 rounded-circle text-white mt-3 mb-3 w-25 mx-auto">
                                         <i class="fa-solid fa-at fs-1"></i>
                                     </div>
@@ -39,8 +27,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="contact-item rounded bg-smoke-white p-2 text-center">
+                            <div class="col-lg-4">
+                                <div class="contact-item rounded bg-smoke-white p-2 text-center mb-2">
                                     <div class="icon bg-primary p-3 rounded-circle text-white mt-3 mb-3 w-25 mx-auto">
                                         <i class="fa-solid fa-location-dot fs-1"></i>
                                     </div>
@@ -51,7 +39,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="contact-item rounded bg-smoke-white p-2 text-center">
                                     <div class="icon bg-primary p-3 rounded-circle text-white mt-3 mb-3 w-25 mx-auto">
                                         <i class="fa-solid fa-tty fs-1"></i>

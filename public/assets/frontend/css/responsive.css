@@ -9,7 +9,9 @@
 }
 @media (max-width: 768px){}
 @media (max-width: 576px) {}
-@media (max-width: 480px) {}
+@media (max-width: 480px){
+
+}
 @media (max-width: 414px) {
     /* ! Navbar ! */
     .nav h1{
@@ -100,7 +102,21 @@
         overflow-y: hidden;
         white-space: nowrap;
     }
+    /* ! Contact Page ! */
+    .contact .contact-details .contact-title.w-25{
+        width: 75% !important;
+    }
     /* ! Footer ! */
+    .footer-item{
+        margin-bottom: 30px;
+    }
+    .footer-item .footer-item-body.mx-5{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .footer-item-body .contact-item.text-center{
+        text-align: right !important;
+    }
     .contact-item:nth-child(3) p.fs-5 {
         font-size: 1rem !important;
     }
@@ -110,4 +126,96 @@
     header .navbar-nav .nav-item.dropdown .dropdown-menu .dropdown-item{
         color: #fff;
     }
+}
+@media (max-width: 375px) {
+    /* ! Navbar ! */
+    .nav h1{
+        font-size: 2.5rem !important;
+    }
+    /* ! News Section ! */
+    .news-section .tab-content .tab-pane .card.mt-5{
+        margin-top: 0 !important;
+    }
+    /* ! Contact Page ! */
+    .contact-title.my-5{
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .map iframe{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    /* ! Search ! */
+    .inquiries .tabs .nav .nav-item .nav-link.fs-4{
+        font-size: 1rem !important;
+    }
+    .inquiries .tabs .nav .nav-item .nav-link.px-5{
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+    .wedding-cards .card .card-body{
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .wedding-cards .card .card-body table{
+        margin-bottom: 0 !important;
+    }
+    .wedding-cards .card .card-body table.mt-3{
+        margin-top: 0 !important;
+    }
+    /* ! Association ! */
+    .association_details .section-title.my-5{
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .about-details .details-title{
+        margin-top: 2rem;
+        text-decoration: underline;
+    }
+    .details-title.mb-4{
+        margin-bottom: 0.8rem !important;
+    }
+    .about-details p.fs-5{
+        font-size: .8rem !important;
+        margin-bottom: 0;
+    }
+    .details-title.mt-5{
+        margin-top: 1.5rem !important;
+    }
+    .association_details .about-img{
+        display: none;
+    }
+    .association_details .about-details ul{
+        margin-bottom: 0;
+    }
+    /* ! Workers ! */
+    .workers .services .card .card-body .card-image img{
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .workers .services .card .card-body .text-details.p-3{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .workers .services .card.mt-5{
+        margin-top: 0 !important;
+    }
+}
+@media (max-width: 480px){
+    /* ! Navbar ! */
+    .nav h1{
+        font-size: 2rem !important;
+    }
+    /* ! About ! */
+    /* ! Contact ! */
+    .map iframe{
+        width: 100%  !important;
+        height: 100%  !important;
+    }
+    /* ! Association ! */
+    /* ! Association ! */
+    /* ! Association ! */
+    /* ! Footer ! */
 }

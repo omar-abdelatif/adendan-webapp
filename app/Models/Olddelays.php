@@ -12,7 +12,6 @@ class Olddelays extends Model
     protected $fillable = [
         'amount',
         'member_id',
-        'delay_period',
     ];
     public function subscribers()
     {

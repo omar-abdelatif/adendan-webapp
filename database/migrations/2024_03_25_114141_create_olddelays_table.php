@@ -15,7 +15,6 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->bigInteger('amount');
-            $table->bigInteger('delay_period');
             $table->integer('member_id')->index()->references('member_id')->on('subscribers')->onDelete('cascade');
             $table->timestamps();
         });

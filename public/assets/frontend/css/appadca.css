@@ -8515,13 +8515,6 @@ abbr[title] {
 		color: #fff;
 	}
 }
-main {
-	background-image: url(../images/header-img.svg);
-	background-position: 0 0;
-	background-repeat: no-repeat;
-	background-size: 800px;
-	flex: 1 1 auto;
-}
 @media (min-width: 768px) {
 	main {
 		background-size: contain;
@@ -8749,6 +8742,7 @@ main {
 [type='submit'],
 button {
 	-webkit-appearance: auto;
+    appearance: auto;
 }
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
@@ -8757,6 +8751,7 @@ input::-webkit-outer-spin-button {
 }
 input[type='number'] {
 	-moz-appearance: textfield;
+    appearance: textfield;
 }
 [dir='rtl'] select {
 	direction: rtl;
@@ -9027,6 +9022,7 @@ h6 {
 }
 .verification-inputs input[type='number'] {
 	-moz-appearance: textfield;
+    appearance: textfield;
 }
 .card-gray {
 	background-color: #f7f7f7;
@@ -9756,11 +9752,6 @@ button.collapsed .custom_question_icon {
 	inset-inline-start: -54px;
 	position: absolute;
 	width: 250px;
-}
-.electracity-card-header-img {
-	inset-block-start: -150px;
-	inset-inline-start: -130px;
-	position: absolute;
 }
 .electracity-card-bg {
 	background: #214570 !important;
@@ -12331,14 +12322,6 @@ img {
 	height: 1px;
 	width: 100%;
 }
-.padding-header {
-	background: transparent url(../images/header-img.svg) left top 130px
-		no-repeat;
-	height: 100%;
-	min-height: calc(100vh - 70px);
-	padding-block-start: 130px;
-	width: 100%;
-}
 .pwa {
 	filter: opacity(0) !important;
 	height: 0 !important;
@@ -13688,13 +13671,6 @@ div[class*='card-donors-'] img {
 	.gifts .title.label {
 		font-size: 18px;
 	}
-	.padding-header {
-		background: transparent url(../images/header-img.svg) left top 55px
-			no-repeat;
-		background-size: 700px;
-		min-height: calc(100vh - 91px);
-		padding-block-start: 50px;
-	}
 	#showFilter {
 		width: 100%;
 	}
@@ -13947,6 +13923,7 @@ header.opaque .nav-item.selected-menu-item-wrapper .nav-link:before {
 .apple-pay-button {
 	-apple-pay-button-type: donate;
 	-webkit-appearance: -apple-pay-button;
+    appearance: -apple-pay-button;
 	display: inline-block;
 	width: 100%;
 }

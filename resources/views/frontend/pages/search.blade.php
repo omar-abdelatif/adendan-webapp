@@ -47,6 +47,9 @@
                                     $searched = session('searched');
                                     $emptyMessage = session('empty_message');
                                     $validSsn = session('valid_message');
+                                    $oldDelays = session('oldDelays');
+                                    $noOldDelays = session('noOldDelays');
+                                    $noDelays = session('noDelays');
                                 @endphp
                                 @if ($searched)
                                     @if ($member)
@@ -68,25 +71,47 @@
                                                 </p>
                                             </div>
                                             <div class="card-body bg-light">
-                                                <div class="card-title my-3">
-                                                    <h3 class="text-center fw-bold">المديونيات و المتأخرات</h3>
-                                                </div>
-                                                <div class="card-content d-flex">
-                                                    @if ($member->delays !== null)
-                                                        @foreach ($member->delays as $delay)
-                                                            <div class="delay-item rounded-2 p-2 ms-3 mb-2 border border-2 border-primary w-100">
-                                                                <p class="mb-0 text-center">السنة: {{$delay->year}}</p>
-                                                                <p class="mb-0 text-center">الإشتراك السنوية: {{$delay->yearly_cost}} ج.م</p>
-                                                                @if ($delay->paied == null || $delay->remaing == null)
-                                                                    <p class="mb-0 text-center">المبلغ المدفوع: لا يوجد</p>
-                                                                    <p class="mb-0 text-center">المبلغ المتبقي: لا يوجد</p>
-                                                                @else
-                                                                    <p class="mb-0 text-center">المبلغ المدفوع: {{$delay->paied}} ج.م</p>
-                                                                    <p class="mb-0 text-center">المبلغ المتبقي: {{$delay->remaing}} ج.م</p>
-                                                                @endif
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
+                                                <div class="card-content">
+                                                    <div class="delays justify-content-center">
+                                                        <div class="card-title my-3">
+                                                            <h3 class="text-center fw-bold text-decoration-underline">المديونيات</h3>
+                                                        </div>
+                                                        <div class="delays-content d-flex justify-content-center">
+                                                            @if (count($member->delays) >= 1)
+                                                                @foreach ($member->delays as $delay)
+                                                                    <div class="delay-item rounded-2 p-2 ms-3 mb-2 border border-2 border-primary w-100">
+                                                                        <p class="mb-0 text-center">السنة: {{$delay->year}}</p>
+                                                                        <p class="mb-0 text-center">الإشتراك السنوية: {{$delay->yearly_cost}} ج.م</p>
+                                                                        @if ($delay->paied == null || $delay->remaing == null)
+                                                                            <p class="mb-0 text-center">المبلغ المدفوع: لا يوجد</p>
+                                                                            <p class="mb-0 text-center">المبلغ المتبقي: لا يوجد</p>
+                                                                        @else
+                                                                            <p class="mb-0 text-center">المبلغ المدفوع: {{$delay->paied}} ج.م</p>
+                                                                            <p class="mb-0 text-center">المبلغ المتبقي: {{$delay->remaing}} ج.م</p>
+                                                                        @endif
+                                                                    </div>
+                                                                @endforeach
+                                                            @else
+                                                                <p class="mb-0 text-center empty-msg fw-bold fs-1">{{$noDelays}}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="old-delays mt-3">
+                                                        <div class="card-title my-3">
+                                                            <h3 class="text-center text-decoration-underline">المتأخرات</h3>
+                                                        </div>
+                                                        <div class="old-content">
+                                                            @if (count($oldDelays) >= 1)
+                                                                @foreach ($oldDelays as $delay)
+                                                                    <div class="old-item rounded-2 p-2 border border-2 border-primary w-50 mx-auto">
+                                                                        <p class="mb-0 text-center fw-bold">المبلغ الإجمالي: {{$delay->amount}} ج.م</p>
+                                                                    </div>
+                                                                @endforeach
+                                                            @else
+                                                                <p class="mb-0 text-center fs-1 fw-bold empty-msg">{{$noOldDelays}}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -130,7 +130,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 d-flex">
                         <div class="about-img text-center">
                             <img src="{{asset('assets/frontend/images/associations/sports/undraw_fitness_stats_sht6.svg')}}" width="400" alt="about-img">
                         </div>

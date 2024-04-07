@@ -49,15 +49,17 @@ class SearchController extends Controller
             return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح');
         } else {
             if ($member) {
-                $subscription = $member->subscriptions;
+                $noDelays = 'لا توجد مديونية';
+                $noOldDelays = 'لا توجد متأخرات';
                 $delays = $member->delays;
-                $oldDelays = Olddelays::where('member_id', $member->member_id)->first();
+                $oldDelays = Olddelays::where('member_id', $member->member_id)->get();
                 return redirect()->route('site.search')->with([
                     'member' => $member,
                     'searched' => true,
-                    'subscription' => $subscription,
                     'delays' => $delays,
-                    'oldDelays' => $oldDelays
+                    'oldDelays' => $oldDelays,
+                    'noDelays' => $noDelays,
+                    'noOldDelays' => $noOldDelays,
                 ]);
             }
         }
