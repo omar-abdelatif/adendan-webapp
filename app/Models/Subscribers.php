@@ -44,4 +44,8 @@ class Subscribers extends Model
     {
         return $this->hasMany(Olddelays::class);
     }
+    public function donationDelays()
+    {
+        return $this->hasMany(DonationDelay::class);
+    }
 }

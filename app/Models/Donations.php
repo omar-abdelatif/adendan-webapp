@@ -16,6 +16,7 @@ class Donations extends Model
         'other_donation',
         'amount',
         'donation_destination',
+        'donation_category',
         'subscribers_id',
     ];
     public function subscribers()

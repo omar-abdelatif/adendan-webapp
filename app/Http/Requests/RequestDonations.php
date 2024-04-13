@@ -22,12 +22,12 @@ class RequestDonations extends FormRequest
     public function rules(): array
     {
         return [
+            'amount'               => ['required', 'numeric'],
             'member_id'            => ['required', 'integer'],
             'invoice_no'           => ['nullable', 'integer'],
-            'amount'               => ['required', 'numeric'],
             'donation_type'        => ['required'],
             'other_donation'       => ['nullable'],
-            'donation_destination' => ['required'],
+            'donation_category'    => ['required'],
         ];
     }
 }

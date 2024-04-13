@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestDonations;
 use App\Models\Donations;
+use App\Models\TotalSafe;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
-use App\Models\TotalSafe;
 use Illuminate\Http\Request;
+use App\Models\DonationDelay;
+use App\Http\Requests\RequestDonations;
+use App\Models\Olddelays;
 
 class DonationsController extends Controller
 {
@@ -16,7 +18,9 @@ class DonationsController extends Controller
         $subscriber = Subscribers::find($id);
         if ($subscriber) {
             $donations = $subscriber->donations;
-            return view('pages.donations.donation_history', compact('subscriber', 'donations'));
+            $delayDonation = DonationDelay::where('member_id', $subscriber->member_id)->get();
+            $oldDelayDonations = Olddelays::where('member_id', $subscriber->member_id)->where('old_delay_type', 'تبرعات')->get();
+            return view('pages.donations.donation_history', compact('subscriber', 'donations', 'delayDonation', 'oldDelayDonations'));
         }
     }
     public function storeDonations(RequestDonations $request)
@@ -31,7 +35,7 @@ class DonationsController extends Controller
                 'invoice_no' => $request['invoice_no'],
                 'donation_type' => $request['donation_type'],
                 'other_donation' => $request['other_donation'],
-                'donation_destination' => $request['donation_destination'],
+                'donation_category' => $request['donation_category'],
                 'subscribers_id' => $subscribers->id,
             ]);
             if ($store) {
@@ -91,5 +95,31 @@ class DonationsController extends Controller
             'alert-type' => 'error'
         ];
         return redirect()->back()->with($notificationError);
+    }
+    public function donationsOnSubscribers(Request $request)
+    {
+        $validated = $request->validate([
+            'donation_type' => 'required',
+            'delay_amount' => 'required'
+        ]);
+        if ($validated) {
+            $subscribers = Subscribers::all();
+            foreach ($subscribers as $subscriber) {
+                $delays = DonationDelay::create([
+                    'member_id' => $subscriber->member_id,
+                    'donation_type' => $request->donation_type,
+                    'payment_type' => 'مادي',
+                    'delay_amount' => $request->delay_amount,
+                ]);
+            }
+            if ($delays) {
+                $notificationSuccess = [
+                    "message" => "تم أضافة مديونية التبرعات للمشتركين بنجاح",
+                    "alert-type" => "success",
+                ];
+                return redirect()->back()->with($notificationSuccess);
+            }
+        }
+        return redirect()->back()->withErrors($validated);
     }
 }

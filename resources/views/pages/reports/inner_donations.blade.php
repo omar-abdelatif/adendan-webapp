@@ -27,7 +27,7 @@
             let totalAmount = 0;
             table.rows().every(function () {
                 let row = this.data();
-                let amount = parseFloat(row[7].replace(",", ""));
+                let amount = parseFloat(row[6].replace(",", ""));
                 if (!isNaN(amount)) {
                     totalAmount += amount;
                 }
@@ -38,6 +38,148 @@
 @endsection
 @section('content')
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="light-card balance-card widget-hover w-50 mx-auto justify-content-center rounded-pill bg-primary mb-4">
+                    <i class="fas fa-dollar-sign" style="font-size:30px;"></i>
+                    تـقرير التبرعات
+                </h3>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/external-condo-city-scape-xnimrodx-lineal-color-xnimrodx.png" alt="external-condo-city-scape-xnimrodx-lineal-color-xnimrodx"/>
+                            </div>
+                            <h5 class="mb-0">صيانة مقر</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">50,000 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1 ">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="65" height="65" src="https://img.icons8.com/external-hidoc-kerismaker/65/external-Headstone-funeral-hidoc-kerismaker.png" alt="external-Headstone-funeral-hidoc-kerismaker" />
+                            </div>
+                            <h5 class="mb-0">المقابر</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">10,000 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="70" height="70" src="https://img.icons8.com/external-konkapp-outline-color-konkapp/70/external-van-transportation-konkapp-outline-color-konkapp.png" alt="external-van-transportation-konkapp-outline-color-konkapp"/>
+                            </div>
+                            <h5 class="mb-0">ص.سيارة</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">5,000 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/external-bzzricon-flat-bzzricon-studio/64/external-zakat-ramadan-bzzricon-flat-bzzricon-flat-bzzricon-studio.png" alt="external-zakat-ramadan-bzzricon-flat-bzzricon-flat-bzzricon-studio"/>
+                            </div>
+                            <h5 class="mb-0">زكاة مال</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">10,000 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/stickers/64/food-donor.png" alt="food-donor"/>
+                            </div>
+                            <h5 class="mb-0">زكاة فطر</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">7,500 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/dusk/64/donate.png" alt="donate"/>
+                            </div>
+                            <h5 class="mb-0">تبرع تنمية</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">2,500 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="70" height="70" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/70/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
+                            </div>
+                            <h5 class="mb-0">تبرع إنتساب</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">1,500 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-kids-modelling-agency-flaticons-lineal-color-flat-icons-3.png" alt="external-kids-modelling-agency-flaticons-lineal-color-flat-icons-3"/>                            </div>
+                            <h5 class="mb-0">كفالة يتيم</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">60,000 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="70" height="70" src="https://img.icons8.com/bubbles/70/question-mark.png" alt="question-mark"/>
+                            </div>
+                            <h5 class="mb-0">أخرى</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">55,500 ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-absolute">
@@ -55,7 +197,6 @@
                                         <th class="text-center">نوع التبرع</th>
                                         <th class="text-center">تبرعات أخرى</th>
                                         <th class="text-center">جهة التبرع</th>
-                                        <th class="text-center">مدة التبرع</th>
                                         <th class="text-center">المبلغ</th>
                                     </tr>
                                 </thead>
@@ -74,8 +215,13 @@
                                                     <span class="fw-bold">-</span>
                                                 @endif
                                             </td>
-                                            <td class="text-center">{{$donation->donation_destination}}</td>
-                                            <td class="text-center">{{$donation->donation_duration}}</td>
+                                            <td class="text-center">
+                                                @if ($donation->donation_type == 'مادي')
+                                                    {{$donation->donation_category}}
+                                                @else
+                                                    <span class="fw-bold">-</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">{{$donation->amount}}</td>
                                         </tr>
                                     @endforeach
@@ -85,7 +231,7 @@
                                         <td class="text-center">
                                             <b>الإجمالي</b>
                                         </td>
-                                        <td id="totalAmount" class="text-left" colspan="7"></td>
+                                        <td id="totalAmount" class="text-left" colspan="6"></td>
                                     </tr>
                                 </tfoot>
                             </table>

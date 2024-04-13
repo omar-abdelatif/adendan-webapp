@@ -8,6 +8,7 @@ use App\Models\Wedding;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DonationDelay;
 use App\Models\Olddelays;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
@@ -52,7 +53,9 @@ class SearchController extends Controller
                 $noDelays = 'لا توجد مديونية';
                 $noOldDelays = 'لا توجد متأخرات';
                 $delays = $member->delays;
-                $oldDelays = Olddelays::where('member_id', $member->member_id)->get();
+                $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
+                $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();
+                $donationDelays = DonationDelay::where('member_id', $member->member_id)->get();
                 return redirect()->route('site.search')->with([
                     'member' => $member,
                     'searched' => true,
@@ -60,6 +63,8 @@ class SearchController extends Controller
                     'oldDelays' => $oldDelays,
                     'noDelays' => $noDelays,
                     'noOldDelays' => $noOldDelays,
+                    'donationOlddelays' => $donationOlddelays,
+                    'donationDelays' => $donationDelays
                 ]);
             }
         }

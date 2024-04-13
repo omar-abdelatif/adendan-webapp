@@ -20,6 +20,7 @@ class ImportSubscribersDelays implements ToCollection, WithHeadingRow, WithBatch
             Olddelays::create([
                 'amount' => $row['amount'],
                 'member_id' => $row['member_id'],
+                'old_delay_type' => $row['old_delay_type']
             ]);
         }
     }

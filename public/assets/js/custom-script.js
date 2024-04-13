@@ -167,21 +167,42 @@ if (selectElements) {
     });
 }
 //! Insert Donation
-let otherDonation = document.getElementById("donation_type");
-if (otherDonation) {
-    otherDonation.addEventListener("change", function () {
-        let donationValue = this.options[this.selectedIndex].value;
-        let donationName = document.getElementById("otherDonation");
-        if (donationValue == "أخرى") {
-            donationName.classList.remove("d-none");
-            donationName.removeAttribute("disabled");
-        } else {
-            donationName.value = "";
-            donationName.classList.add("d-none");
+let allDonations = document.querySelectorAll("[data-donation-id]");
+if (allDonations) {
+    allDonations.forEach((donation) => {
+        let otherDonation = document.querySelector(
+            `input[name="other_donation"][data-donation-id="${donation.dataset.donationId}"]`
+        );
+        let categoryType = document.querySelector(
+            `select[name="donation_category"][data-donation-id="${donation.dataset.donationId}"]`
+        );
+        let Amount = document.querySelector(
+            `input[name="amount"][data-donation-id="${donation.dataset.donationId}"]`
+        );
+        function donationUpdate() {
+            let donationValue = donation.options[donation.selectedIndex].value;
+            if (donationValue == "أخرى") {
+                Amount.classList.remove("d-none");
+                Amount.disabled = false;
+                categoryType.classList.add("d-none");
+                categoryType.disabled = true;
+                otherDonation.classList.remove("d-none");
+                otherDonation.disabled = false;
+            } else if (donationValue == "مادي") {
+                Amount.classList.remove("d-none");
+                Amount.disabled = false;
+                categoryType.classList.remove("d-none");
+                categoryType.disabled = false;
+                otherDonation.classList.add("d-none");
+                otherDonation.disabled = true;
+            }
         }
+        donation.addEventListener("change", function () {
+            donationUpdate();
+        });
     });
 }
-//! Donators Period
+//! Outer Donators Period
 let donationSelect = document.getElementById("donator_type");
 if (donationSelect) {
     donationSelect.addEventListener("change", function () {
@@ -231,7 +252,7 @@ if (selectMiscs) {
         });
     });
 }
-//! تسديد إشتراك أو متأخرات
+//! Pay Subscription or Old Delays
 let paymentTypes = document.querySelectorAll("[data-payment-id]");
 if (paymentTypes) {
     paymentTypes.forEach((payment) => {
