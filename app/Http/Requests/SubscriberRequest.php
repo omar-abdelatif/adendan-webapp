@@ -22,24 +22,24 @@ class SubscriberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'img' => 'image|max:2048|mimes:png,webp,jpg,jpeg',
-            'job' => 'required|string',
+            'img' => 'nullable|image|max:2048|mimes:png,webp,jpg,jpeg',
+            'job' => 'nullable|string',
             'ssn' => 'required|max:14',
             'name' => 'required|string',
-            'id_img' => 'image|max:2048|mimes:png,webp,jpg,jpeg',
-            'job_tel' => 'required',
-            'address' => 'required|string',
-            'home_tel' => 'required',
-            'nickname' => 'required|string',
+            'id_img' => 'nullable|image|max:2048|mimes:png,webp,jpg,jpeg',
+            'job_tel' => 'nullable',
+            'address' => 'nullable|string',
+            'home_tel' => 'nullable',
+            'nickname' => 'nullable|string',
             'member_id' => 'required|string',
-            'birthdate' => 'required|date',
+            'birthdate' => 'nullable|date',
             'mobile_no' => 'required',
-            'job_address' => 'required|string',
-            'martial_status' => 'required|string',
-            'membership_type' => 'required|string',
-            'job_destination' => 'required',
-            'qualification_date' => 'required|date',
-            'educational_qualification' => 'required|string',
+            'job_address' => 'nullable|string',
+            'martial_status' => 'nullable|string',
+            'membership_type' => 'nullable|string',
+            'job_destination' => 'nullable',
+            'qualification_date' => 'nullable|date',
+            'educational_qualification' => 'nullable|string',
         ];
     }
 }

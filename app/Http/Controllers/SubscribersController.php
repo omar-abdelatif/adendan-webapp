@@ -18,13 +18,15 @@ class SubscribersController extends Controller
 {
     public function index()
     {
+        $newMemberId = Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1;
         $years = CostYears::all();
         $halfDelay = $this->insertHalfDelay();
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];
+        $currentSubCost = $cost / 12 * $halfDelay;
         $members = Subscribers::with('delays')->get();
-        return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year'));
+        return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId'));
     }
     public function storeSubs(SubscriberRequest $request)
     {
@@ -227,8 +229,14 @@ class SubscribersController extends Controller
         $currentDate->day(1);
         $currentDate->subMonth();
         $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
-        $differenceInMonths = $currentDate->diffInMonths($june30);
-        return $differenceInMonths;
+        if ($currentDate > $june30) {
+            $newJune30 = Carbon::create($currentDate->year + 1, 6, 30, 0, 0, 0);
+            $differenceInMonths = $currentDate->diffInMonths($newJune30);
+            return $differenceInMonths;
+        } else {
+            $differenceInMonths = $currentDate->diffInMonths($june30);
+            return $differenceInMonths;
+        }
     }
     function getSubscriptionValue()
     {

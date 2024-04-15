@@ -331,8 +331,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">رقم العضوية</th>
-                                                            {{-- <th class="text-center">الفترة الزمنية</th> --}}
-                                                            <th class="text-center">المبلغ الإجمالي</th>
+                                                            <th class="text-muted text-center">المبلغ الكلي</th>
+                                                            <th class="text-muted text-center">المبلغ الإجمالي المدفوع</th>
+                                                            <th class="text-center">المبلغ الإجمالي المطلوب</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
@@ -340,8 +341,18 @@
                                                         @foreach ($oldelays as $delay)
                                                                 <tr>
                                                                     <td>{{$delay->member_id}}</td>
-                                                                    {{-- <td>{{$delay->delay_period}}</td> --}}
                                                                     <td>{{$delay->amount}}</td>
+                                                                    @if ($delay->delay_amount == null && $delay->delay_remaining == null)
+                                                                        <td>
+                                                                            <span class="fw-bold">-</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="fw-bold">-</span>
+                                                                        </td>
+                                                                    @else
+                                                                        <td>{{$delay->delay_amount}}</td>
+                                                                        <td>{{$delay->delay_remaining}}</td>
+                                                                    @endif
                                                                     <td>
                                                                         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
                                                                             <i class="fa-solid fa-money-bill"></i>

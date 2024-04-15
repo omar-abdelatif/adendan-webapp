@@ -107,7 +107,6 @@ Route::prefix('admin')->group(function () {
             Route::post('delays/subscriber_delays', 'subscriberDelay')->name('bulk_subscriber_delay');
             Route::post('delays/pay', 'paySubscription')->name('subscription.pay');
             Route::post('delays/old_delays', 'payOldDelay')->name('oldDelays.pay');
-            // Route::get('', '')->name('');
         });
         Route::controller(DonatorsController::class)->group(function () {
             Route::get('donators/all', 'index')->name('donators.all');
@@ -121,6 +120,8 @@ Route::prefix('admin')->group(function () {
             Route::get('donations/remove/{id}', 'removeDonation')->name('donation.remove');
             Route::post('donations/update', 'updateDonation')->name('donations.update');
             Route::post('donations/delays/upload_bulk', 'donationsOnSubscribers')->name('delays.uploadDonations');
+            Route::post('donation/pay_old_donation', 'payOldDonation')->name('pay.oldDonation');
+            Route::post('donations/pay_delay_donation', 'payDelayDonation')->name('pay.delayDonation');
         });
         Route::controller(OuterDonationsController::class)->group(function () {
             Route::get('outer_donations/history/{id}', 'index')->name('outer_donations.history');

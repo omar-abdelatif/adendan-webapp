@@ -55,7 +55,7 @@
                             <h5 class="mb-0">صيانة مقر</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">50,000 ج.م</h5>
+                            <h5 class="mb-1">{{$donationHeadquartersSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                             <h5 class="mb-0">المقابر</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">10,000 ج.م</h5>
+                            <h5 class="mb-1">{{$donationTombsSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             <h5 class="mb-0">ص.سيارة</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">5,000 ج.م</h5>
+                            <h5 class="mb-1">{{$donationDeathCarSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                             <h5 class="mb-0">زكاة مال</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">10,000 ج.م</h5>
+                            <h5 class="mb-1">{{$donationMoneyZakatSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                             <h5 class="mb-0">زكاة فطر</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">7,500 ج.م</h5>
+                            <h5 class="mb-1">{{$donationFoodZakatSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                             <h5 class="mb-0">تبرع تنمية</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">2,500 ج.م</h5>
+                            <h5 class="mb-1">{{$donationDevSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -140,12 +140,12 @@
                     <div class="card-body align-items-center">
                         <div class="widget-content">
                             <div class="bg-round">
-                                <img width="70" height="70" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/70/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
+                                <img width="64" height="64" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/64/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
                             </div>
                             <h5 class="mb-0">تبرع إنتساب</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">1,500 ج.م</h5>
+                            <h5 class="mb-1">{{$donationAffiliateSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                             <h5 class="mb-0">كفالة يتيم</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">60,000 ج.م</h5>
+                            <h5 class="mb-1">{{$donationOrphanSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                             <h5 class="mb-0">أخرى</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">55,500 ج.م</h5>
+                            <h5 class="mb-1">{{$donationOtherSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>

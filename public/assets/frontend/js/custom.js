@@ -9,16 +9,10 @@ window.addEventListener("scroll", () => {
         document.querySelector(".navbar").classList.remove("fixed");
     }
 });
-function playAudio() {
-    const audio = document.getElementById("audio-player");
-    window.onload = function () {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    };
-}
+window.onload = function (event) {
+    event.preventDefault;
+    document.getElementById("audio-player").play();
+};
 $(document).ready(function () {
     $("#newsTicker2").breakingNews({
         direction: "rtl",

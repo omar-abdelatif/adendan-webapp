@@ -11,7 +11,7 @@ class MasterController extends Controller
     public function index()
     {
         $latest = News::latest()->take(10)->get();
-        $news = News::latest()->get();
+        $news = News::get();
         $generalnews = $news->where('category', 'أخبار عامة')->take(8);
         $generalnewscount = $news->where('category', 'أخبار عامة')->count();
         $culturenews = $news->where('category', 'أخبار ثقافية')->take(8);
@@ -36,5 +36,4 @@ class MasterController extends Controller
             'sportnewscount',
         ]));
     }
-    
 }

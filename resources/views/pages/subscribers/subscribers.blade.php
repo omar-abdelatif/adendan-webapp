@@ -83,9 +83,12 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header align-content-center">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مشترك جديد</h1>
-                    <div class="yearly-cost pe-5">
-                        <span class="fw-bold rounded-pill badge badge-warning text-dark fs-6">تكلفة الإشتراك = {{$cost}} لعام {{$year}}</span>
+                    <h1 class="modal-title fs-5 text-white mb-0" id="exampleModalLabel">إضافة مشترك جديد</h1>
+                    <div class="yearly-cost px-2">
+                        <span class="fw-bold rounded-pill badge badge-warning text-dark fs-6">تكلفة الإشتراك = {{$cost}} ج.م لعام {{$year}}</span>
+                    </div>
+                    <div class="current-sub-cost px-2">
+                        <span class="fs-6 fw-bold badge badge-success rounded-pill"> الإشتراك الحالي للعضو الجديد: {{$currentSubCost + 10}} ج.م</span>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -256,14 +259,14 @@
                                         <div class="col-lg-6">
                                             <label for="validationMembership" class="form-label text-white">نوع العضوية</label>
                                             <select name="membership_type" class="form-select text-white" id="validationMembership">
-                                                <option selected>إختار نوع العضوية</option>
+                                                <option selected disabled>إختار نوع العضوية</option>
                                                 <option value="عامل">عامل</option>
                                                 <option value="إنتساب">إنتساب</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="validationMemberId" class="form-label text-white">رقم العضوية</label>
-                                            <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId">
+                                            <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
                                         </div>
                                         <div class="col-lg-12">
                                             <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>

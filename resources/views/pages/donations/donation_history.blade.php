@@ -65,7 +65,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="table-responsive">
-                                                    <table class="table display table-hover align-middle text-center text-muted" id="table" data-order='[[0, "asc"]]' data-page-length=10>
+                                                    <table class="table display table-hover align-middle text-center text-muted" id="table" data-order='[[5, "dec"]]' data-page-length=10>
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-center">رقم الإيصال</th>
@@ -73,6 +73,7 @@
                                                                 <th class="text-center">نوع التبرع</th>
                                                                 <th class="text-center">أخرى</th>
                                                                 <th class="text-center">جهة التبرع</th>
+                                                                <th class="text-center">تاريخ المعاملة</th>
                                                                 <th class="text-center">Actions</th>
                                                             </tr>
                                                         </thead>
@@ -96,6 +97,7 @@
                                                                             <span class="fw-bold">-</span>
                                                                         @endif
                                                                     </td>
+                                                                    <td>{{$donation->created_at->format('Y-m-d')}}</td>
                                                                     <td>
                                                                         <div class="btn-group" role="group">
                                                                             <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -247,16 +249,17 @@
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تسديد مديونية تبرع للعضو {{$subscriber->name}}</h1>
+                                                                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تسديد مديونية تبرع للعضو {{$subscriber->name}} and {{$delay->id}}</h1>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <form action="" method="post">
+                                                                                    <form action="{{route('pay.delayDonation')}}" method="post">
                                                                                         @csrf
                                                                                         <div class="row">
+                                                                                            <input type="hidden" name="id" value="{{$delay->id}}"/>
                                                                                             <div class="col-lg-12">
                                                                                                 <div class="form-group">
-                                                                                                    <label for="member_id" class="text-muted">ؤقم العضوية</label>
+                                                                                                    <label for="member_id" class="text-muted">رقم العضوية</label>
                                                                                                     <input type="text" class="form-control text-muted" name="member_id" value="{{$delay->member_id}}" placeholder="نوع التبرع" id="member_id" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mt-3">
@@ -329,7 +332,7 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <form action="" method="post">
+                                                                                    <form action="{{route('pay.oldDonation')}}" method="post">
                                                                                         @csrf
                                                                                         <div class="row">
                                                                                             <div class="col-lg-12">

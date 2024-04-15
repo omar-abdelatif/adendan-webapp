@@ -99,7 +99,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="delay_name" class="text-muted">سبب المديونية</label>
-                                    <input type="text" class="form-control text-muted" name="donation_type" placeholder="سبب المديونية" id="delay_name">
+                                    <input type="text" class="form-control text-muted" name="donation_category" placeholder="سبب المديونية" id="delay_name">
                                 </div>
                                 <div class="form-group">
                                     <label for="delay_amount" class="text-muted">مبلغ المديونية</label>

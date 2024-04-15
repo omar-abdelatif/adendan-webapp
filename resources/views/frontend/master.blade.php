@@ -4,10 +4,8 @@
 @endsection
 @section('site')
     {{-- ! BackGroud Audio ! --}}
-    <div class="audio-play">
-        <audio autoplay id="audio-player" src="{{ asset('assets/melody/profet_mohamed.mp3') }}"></audio>
-    </div>
-    {{-- ! News Bar Section ! --}}
+    <audio autoplay id="audio-player" src="{{ asset('assets/melody/profet_mohamed.mp3') }}"></audio>
+;    {{-- ! News Bar Section ! --}}
     <section class="new-bar">
         <div class="bn-breaking-news mb-3 border-0 bg-primary" id="newsTicker2">
             <div class="bn-label px-4 py-1">

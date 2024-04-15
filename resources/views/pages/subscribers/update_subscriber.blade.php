@@ -157,7 +157,7 @@
                                         <div class="col-lg-6 mt-3">
                                             <label for="validationMembership" class="form-label fw-bold text-white">نوع العضوية</label>
                                             <select name="membership_type" class="form-select text-white" id="validationMembership">
-                                                <option selected>إختار نوع العضوية</option>
+                                                <option selected disabled>إختار نوع العضوية</option>
                                                 <option value="عامل" {{$subscriber->membership_type === 'عامل' ? 'selected' : ''}}>عامل</option>
                                                 <option value="إنتساب" {{$subscriber->membership_type === 'إنتساب' ? 'selected' : ''}}>إنتساب</option>
                                             </select>

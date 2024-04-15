@@ -48,8 +48,6 @@ class NewsController extends Controller
     {
         $news = News::find($id);
         if ($news) {
-            // $routeName = request()->route()->getName();
-            // dd($routeName);
             $thumbsImgs = NewsThumbnail::where('news_id', $id)->get();
             $countThumbsImgs = $thumbsImgs->count();
             $thumbVideos = NewsVideos::where('news_id', $id)->get();
@@ -61,11 +59,6 @@ class NewsController extends Controller
                 $videoCode = $this->extractVideoCode($videoUrl);
                 $videoLinks[] = $videoCode;
             }
-            // if($routeName == ''){
-
-            // } elseif ($routeName == ''){
-
-            // }
             return view('frontend.pages.news.single_news', compact(
                 'news',
                 'thumbsImgs',

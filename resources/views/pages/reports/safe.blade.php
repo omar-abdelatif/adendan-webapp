@@ -153,10 +153,10 @@
                                         <tr>
                                             <td class="text-center">{{$safe->member_id}}</td>
                                             <td class="text-center">{{$safe->created_at->format('Y-m-d')}}</td>
-                                            <td class="text-center">{{$safe->created_at->format('H:i')}}</td>
+                                            <td class="text-center" dir="ltr">{{$safe->created_at->format('h:i a')}}</td>
                                             <td class="text-center">{{$safe->transaction_type}}</td>
                                             <td class="text-center">
-                                                @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/إيداع')
+                                                @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/إيداع' || $safe->transaction_type === 'متأخرات التبرعات' || $safe->transaction_type === 'تبرع كلي' || $safe->transaction_type === 'تبرع جزئي')
                                                     <h3 class="badge rounded-pill badge-success" style="font-size: 13px;">إيداع</h3>
                                                 @else
                                                     <h3 class="badge rounded-pill badge-danger" style="font-size: 13px;">سـحب</h3>

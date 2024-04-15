@@ -208,3 +208,6 @@ html[dir=rtl] .checkbox_animated, html[dir=rtl] .radio_animated{
 .modal.fade .modal-dialog {
     transition: transform 0.3s ease-out;
 }
+.light table.dataTable.display tbody tr.odd td {
+    color: #fff;
+}

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donations;
+use App\Models\Olddelays;
 use App\Models\TotalSafe;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
 use App\Models\DonationDelay;
 use App\Http\Requests\RequestDonations;
-use App\Models\Olddelays;
 
 class DonationsController extends Controller
 {
@@ -107,8 +107,9 @@ class DonationsController extends Controller
             foreach ($subscribers as $subscriber) {
                 $delays = DonationDelay::create([
                     'member_id' => $subscriber->member_id,
-                    'donation_type' => $request->donation_type,
-                    'payment_type' => 'مادي',
+                    'donation_type' => 'أخرى',
+                    'donation_category' => $request->category,
+                    'payment_type' => 'تبرعات',
                     'delay_amount' => $request->delay_amount,
                 ]);
             }
@@ -121,5 +122,310 @@ class DonationsController extends Controller
             }
         }
         return redirect()->back()->withErrors($validated);
+    }
+    public function payOldDonation(Request $request)
+    {
+        $memberId = $request->member_id;
+        $validated = $request->validate([
+            'member_id' => 'required',
+            'invoice_no' => 'required',
+            'amount' => 'required'
+        ]);
+        if ($validated) {
+            $oldDelay = Olddelays::where('member_id', $memberId)->where('old_delay_type', 'تبرعات')->first();
+            $donationDelay = DonationDelay::where('member_id', $request->member_id)->first();
+            $subscribers = Subscribers::where('member_id', $request->member_id)->first();
+            $totalSafe = TotalSafe::where('id', 1)->first();
+            $amount = $oldDelay->amount;
+            $requestAmount = $request->amount;
+            if ($amount == $requestAmount) {
+                $oldDelay->delete();
+                $store = Donations::create([
+                    'member_id' => $memberId,
+                    'invoice_no' => $request->invoice_no,
+                    'amount' => $requestAmount,
+                    'donation_type' => 'مادي',
+                    'donation_category' => 'متأخرات التبرعات',
+                    'subscribers_id' => $subscribers->id
+                ]);
+                if ($store) {
+                    SafeReports::create([
+                        'member_id' => $subscribers->member_id,
+                        'transaction_type' => 'متأخرات التبرعات',
+                        'amount' => $requestAmount,
+                    ]);
+                    $sumAmount = $totalSafe->amount + $requestAmount;
+                    $totalSafe->update([
+                        'amount' => $sumAmount,
+                    ]);
+                    $notificationSuccess = [
+                        'message' => 'تم دفع كل المبلغ',
+                        'alert-type' => 'success'
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else {
+                $oldDelayAmount = $oldDelay->amount;
+                $requestAmount = $request->amount;
+                $remainingDelays = $oldDelayAmount - $requestAmount;
+                $amountPaied = $oldDelay->delay_amount;
+                $amountRemain = $oldDelay->delay_remaining;
+                if ($amountPaied == null && $amountRemain == null) {
+                    $update = $oldDelay->update([
+                        'delay_amount' => $requestAmount,
+                        'delay_remaining' => $remainingDelays
+                    ]);
+                    if ($update) {
+                        Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'amount' => $requestAmount,
+                            'donation_type' => 'مادي',
+                            'donation_category' => 'متأخرات التبرعات',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'متأخرات التبرعات',
+                            'amount' => $request['amount'],
+                        ]);
+                        $sumAmount = $totalSafe->amount + $requestAmount;
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                } else {
+                    $oldDelay->update([
+                        'amount' => $remainingDelays
+                    ]);
+                    $pay = Donations::create([
+                        'member_id' => $memberId,
+                        'invoice_no' => $request->invoice_no,
+                        'amount' => $requestAmount,
+                        'donation_type' => 'مادي',
+                        'donation_category' => 'متأخرات التبرعات',
+                        'subscribers_id' => $subscribers->id
+                    ]);
+                    if ($remainingDelays === 0) {
+                        $oldDelay->delete();
+                    }
+                    if ($pay) {
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'متأخرات التبرعات',
+                            'amount' => $requestAmount,
+                        ]);
+                        $sumAmount = $totalSafe->amount + $requestAmount;
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                }
+            }
+        }
+    }
+    public function payDelayDonation(Request $request)
+    {
+        $memberId = $request->member_id;
+        $validated = $request->validate([
+            'amount' => 'required',
+            'invoice_no' => 'required'
+        ]);
+        $subscribers = Subscribers::where('member_id', $memberId)->first();
+        $donationDelay = DonationDelay::where('member_id', $memberId)->where('id', $request->id)->first();
+        $totalSafe = TotalSafe::where('id', 1)->first();
+        if ($validated) {
+            $totalAmount = $donationDelay->delay_amount;
+            $amountPaied = $request->amount;
+            if ($amountPaied == $totalAmount) {
+                $donationDelay->delete();
+                $pay = Donations::create([
+                    'member_id' => $memberId,
+                    'invoice_no' => $request->invoice_no,
+                    'donation_type' => $request->donation_type,
+                    'other_donation' => null,
+                    'donation_category' => $request->donation_category,
+                    'amount' => $amountPaied,
+                    'subscribers_id' => $subscribers->id
+                ]);
+                if ($pay) {
+                    SafeReports::create([
+                        'member_id' => $memberId,
+                        'transaction_type' => 'تبرع كلي',
+                        'amount' => $amountPaied,
+                    ]);
+                    $sumAmount = $totalSafe->amount + $amountPaied;
+                    $totalSafe->update([
+                        'amount' => $sumAmount,
+                    ]);
+                    $notificationSuccess = [
+                        'message' => 'تم دفع كل المبلغ',
+                        'alert-type' => 'success'
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else if ($amountPaied > $totalAmount) {
+                $donationDelay->delete();
+                $pay = Donations::create([
+                    'member_id' => $memberId,
+                    'invoice_no' => $request->invoice_no,
+                    'donation_type' => $request->donation_type,
+                    'other_donation' => null,
+                    'donation_category' => $request->donation_category,
+                    'amount' => $totalAmount,
+                    'subscribers_id' => $subscribers->id
+                ]);
+                if ($pay) {
+                    SafeReports::create([
+                        'member_id' => $memberId,
+                        'transaction_type' => 'تبرع كلي',
+                        'amount' => $totalAmount,
+                    ]);
+                    $sumAmount = $totalSafe->amount + $totalAmount;
+                    $totalSafe->update([
+                        'amount' => $sumAmount,
+                    ]);
+                    $notificationSuccess = [
+                        'message' => 'تم دفع كل المبلغ',
+                        'alert-type' => 'success'
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else {
+                $paiedMoney = $donationDelay->amount_paied;
+                $remainingAmount = $donationDelay->amount_remaining;
+                if ($remainingAmount == null && $paiedMoney == null) {
+                    $newRemain = $totalAmount - $amountPaied;
+                    $update = $donationDelay->update([
+                        'amount_paied' => $amountPaied,
+                        'amount_remaining' => $newRemain
+                    ]);
+                    if ($update) {
+                        Donations::create([
+                            'member_id' => $request->member_id,
+                            'invoice_no' => $request->invoice_no,
+                            'amount' => $amountPaied,
+                            'donation_type' => $request->donation_type,
+                            'other_donation' => null,
+                            'donation_category' => $request->donation_category,
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        SafeReports::create([
+                            'member_id' => $subscribers->member_id,
+                            'transaction_type' => 'تبرع جزئي',
+                            'amount' => $amountPaied,
+                        ]);
+                        $sumAmount = $totalSafe->amount + $amountPaied;
+                        $totalSafe->update([
+                            'amount' => $sumAmount,
+                        ]);
+                        $notificationSuccess = [
+                            'message' => 'تم دفع جزء من المبلغ',
+                            'alert-type' => 'success'
+                        ];
+                        return back()->with($notificationSuccess);
+                    }
+                } else {
+                    if ($amountPaied == $remainingAmount) {
+                        $donationDelay->delete();
+                        $pay = Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'donation_type' => $request->donation_type,
+                            'other_donation' => null,
+                            'donation_category' => $request->donation_category,
+                            'amount' => $amountPaied,
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'تبرع كلي',
+                                'amount' => $amountPaied,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $amountPaied;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع كل المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    } else if ($amountPaied > $remainingAmount) {
+                        $donationDelay->delete();
+                        $pay = Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'donation_type' => $request->donation_type,
+                            'other_donation' => null,
+                            'donation_category' => $request->donation_category,
+                            'amount' => $remainingAmount,
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'تبرع كلي',
+                                'amount' => $remainingAmount,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $remainingAmount;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع كل المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    } else {
+                        $donationDelay->update([
+                            'amount_paied' => $amountPaied + $totalAmount,
+                            'amount_remaining' => $remainingAmount - $amountPaied
+                        ]);
+                        $pay = Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'donation_type' => $request->donation_type,
+                            'other_donation' => null,
+                            'donation_category' => $request->donation_category,
+                            'amount' => $amountPaied,
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($remainingAmount === 0) {
+                            $donationDelay->delete();
+                        }
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'تبرع كلي',
+                                'amount' => $amountPaied,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $amountPaied;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع كل المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

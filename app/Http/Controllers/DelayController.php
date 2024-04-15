@@ -89,7 +89,7 @@ class DelayController extends Controller
             $cost = $delay->yearly_cost;
             $paied = $request->paied;
             $baky = $delay->remaing;
-            if ($paied == $cost) {
+            if ($paied >= $cost) {
                 $delay->delete();
                 $pay = Subscriptions::create([
                     'member_id' => $request->member_id,
@@ -105,7 +105,7 @@ class DelayController extends Controller
                         'transaction_type' => 'إشتراكات',
                         'amount' => $request['paied'],
                     ]);
-                    $sumAmount = $totalSafe->amount + $request['paied'];
+                    $sumAmount = $totalSafe->amount + $request->paied;
                     $totalSafe->update([
                         'amount' => $sumAmount,
                     ]);
@@ -151,11 +151,11 @@ class DelayController extends Controller
                         return back()->with($notificationSuccess);
                     }
                 } else {
-                    if ($payed == $remain) {
+                    if ($paied >= $remain) {
                         $delay->delete();
                         $pay = Subscriptions::create([
                             'member_id' => $request->member_id,
-                            'subscription_cost' => $request->paied,
+                            'subscription_cost' => $remain,
                             'period' => $request->year,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'إشتراك كلي',
@@ -166,9 +166,9 @@ class DelayController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'إشتراكات',
-                                'amount' => $request['paied'],
+                                'amount' => $request->paied,
                             ]);
-                            $sumAmount = $totalSafe->amount + $request['paied'];
+                            $sumAmount = $totalSafe->amount + $request->paied;
                             $totalSafe->update([
                                 'amount' => $sumAmount,
                             ]);
@@ -180,7 +180,7 @@ class DelayController extends Controller
                         }
                     } else {
                         $delay->update([
-                            'paied' => $paied,
+                            'paied' => $paied + $delay->paied,
                             'remaing' => $baky - $paied,
                         ]);
                         $pay = Subscriptions::create([
@@ -223,14 +223,13 @@ class DelayController extends Controller
             'invoice_no' => 'required',
             'olddelay' => 'required',
         ]);
-        $oldDelay = Olddelays::where('member_id', $request->member_id)->first();
+        $oldDelay = Olddelays::where('member_id', $request->member_id)->where('id', $request->id)->first();
         $subscribers = Subscribers::where('member_id', $request->member_id)->first();
-        $subscriptions = Subscriptions::where('member_id', $request->member_id)->first();
         $totalSafe = TotalSafe::where('id', 1)->first();
         if ($validated) {
             $amount = $oldDelay->amount;
             $requestAmount = $request->olddelay;
-            if ($amount == $requestAmount) {
+            if ($requestAmount >= $amount) {
                 $oldDelay->delete();
                 $store = Subscriptions::create([
                     'member_id' => $request->member_id,
@@ -256,12 +255,14 @@ class DelayController extends Controller
                     return back()->with($notificationSuccess);
                 }
             } else {
-                $oldDelayAmount = $oldDelay->amount;
-                $requestPay = $request->olddelay;
-                $delays = $subscriptions->delays;
-                $remainingDelays = $oldDelayAmount - $requestPay;
-                if ($delays == null) {
-                    $update = $oldDelay->update(['amount' => $remainingDelays]);
+                $oldDelayRemaining = $oldDelay->delay_remaining;
+                $oldDelayAmount = $oldDelay->delay_amount;
+                $remainingDelays = $amount - $requestAmount;
+                if ($oldDelayAmount == null && $oldDelayRemaining == null) {
+                    $update = $oldDelay->update([
+                        'delay_amount' => $requestAmount,
+                        'delay_remaining' => $remainingDelays,
+                    ]);
                     if ($update) {
                         Subscriptions::create([
                             'member_id' => $request->member_id,
@@ -273,9 +274,9 @@ class DelayController extends Controller
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'متأخرات',
-                            'amount' => $request['olddelay'],
+                            'amount' => $request->olddelay,
                         ]);
-                        $sumAmount = $totalSafe->amount + $request['olddelay'];
+                        $sumAmount = $totalSafe->amount + $request->olddelay;
                         $totalSafe->update([
                             'amount' => $sumAmount,
                         ]);
@@ -286,32 +287,63 @@ class DelayController extends Controller
                         return back()->with($notificationSuccess);
                     }
                 } else {
-                    $oldDelay->update(['amount' => $remainingDelays]);
-                    $pay = Subscriptions::create([
-                        'member_id' => $request->member_id,
-                        'delays' => $request->olddelay,
-                        'invoice_no' => $request->invoice_no,
-                        'payment_type' => 'متأخرات جزئي',
-                        'subscribers_id' => $subscribers->id
-                    ]);
-                    if ($remainingDelays === 0) {
+                    if ($requestAmount >= $oldDelayRemaining) {
                         $oldDelay->delete();
-                    }
-                    if ($pay) {
-                        SafeReports::create([
-                            'member_id' => $subscribers->member_id,
-                            'transaction_type' => 'متأخرات',
-                            'amount' => $request['olddelay'],
+                        $pay = Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'delays' => $oldDelayRemaining,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'متأخرات كلي',
+                            'subscribers_id' => $subscribers->id
                         ]);
-                        $sumAmount = $totalSafe->amount + $request['olddelay'];
-                        $totalSafe->update([
-                            'amount' => $sumAmount,
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'متأخرات',
+                                'amount' => $request->olddelay,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $request->olddelay;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع جزء من المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    } else {
+                        $remain = $oldDelay->delay_remaining;
+                        $oldDelay->update([
+                            'delay_amount' => $requestAmount +  $oldDelayAmount,
+                            'delay_remaining' => $oldDelayRemaining - $requestAmount,
                         ]);
-                        $notificationSuccess = [
-                            'message' => 'تم دفع جزء من المبلغ',
-                            'alert-type' => 'success'
-                        ];
-                        return back()->with($notificationSuccess);
+                        $pay = Subscriptions::create([
+                            'member_id' => $request->member_id,
+                            'delays' => $request->olddelay,
+                            'invoice_no' => $request->invoice_no,
+                            'payment_type' => 'متأخرات جزئي',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($remain === 0) {
+                            $oldDelay->delete();
+                        }
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'متأخرات',
+                                'amount' => $request['olddelay'],
+                            ]);
+                            $sumAmount = $totalSafe->amount + $request->olddelay;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع جزء من المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
                     }
                 }
             }

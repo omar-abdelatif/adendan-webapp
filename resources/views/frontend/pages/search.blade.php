@@ -158,7 +158,7 @@
                                                                             </h4>
                                                                             <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
                                                                                 @foreach ($oldDelays as $delay)
-                                                                                    <div class="col-lg-4 p-1 py-2">
+                                                                                    <div class="col-lg-12 p-1 py-2">
                                                                                         <div class="text-center">
                                                                                             <h4 role="presentation">
                                                                                                 <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
@@ -166,7 +166,7 @@
                                                                                             </h4>
                                                                                         </div>
                                                                                     </div>
-                                                                                    @if ($delay->paied == null || $delay->remaing == null)
+                                                                                    {{-- @if ($delay->paied == null || $delay->remaing == null)
                                                                                         <div class="col-lg-4 p-1 py-2">
                                                                                             <div class="text-center">
                                                                                                 <h4 role="presentation">
@@ -200,7 +200,7 @@
                                                                                                 </h3>
                                                                                             </div>
                                                                                         </div>
-                                                                                    @endif
+                                                                                    @endif --}}
                                                                                 @endforeach
                                                                             </div>
                                                                         </div>
