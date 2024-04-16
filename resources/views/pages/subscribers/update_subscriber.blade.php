@@ -169,19 +169,19 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="card card-absolute mt-5">
+                            <div class="card card-absolute mt-5">
                                 <div class="card-header bg-primary rounded-pill">
                                     <h5 class="txt-light">البيانات الصحية</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 col-md-4">
-                                            <input type="checkbox" class="checkbox_animated" name="status" id="deathOrNot" {{ $subscriber->status ? 'checked' : '' }}>
+                                            <input type="checkbox" class="checkbox_animated" name="status" id="deathOrNot" {{ $subscriber->status === 2 ? 'checked' : '' }}>
                                             <label for="deathOrNot" class="text-center mb-0">هل الشخص متوفي ؟</label>
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="form-footer">
                                 <button type="submit" class="btn btn-primary w-100 fw-bold mb-4">تأكيد</button>
                             </div>

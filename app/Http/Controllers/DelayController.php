@@ -40,23 +40,35 @@ class DelayController extends Controller
     }
     public function uploadDelays(Request $request) //! Add Subscriptions Delay For All Subscribers
     {
-        $subscribers = Subscribers::all();
-        foreach ($subscribers as $subscriber) {
-            $delays = Delay::create([
-                'member_id' => $subscriber->member_id,
-                'year' => $request->year,
-                'yearly_cost' => $request->yearly_cost,
-                'payment_type' => 'إشتراك',
-                'subscribers_id' => $subscriber->id
-            ]);
+        $validated = $request->validate([
+            'year' => 'required|unique:delays,year',
+            'yearly_cost' => 'required'
+        ]);
+        if ($validated) {
+            $subscribers = Subscribers::all();
+            $delays = Delay::get();
+            if ($request->year === $delays->year) {
+                return back()->withErrors($validated);
+            } else {
+                foreach ($subscribers as $subscriber) {
+                    $delays = Delay::create([
+                        'member_id' => $subscriber->member_id,
+                        'year' => $request->year,
+                        'yearly_cost' => $request->yearly_cost,
+                        'payment_type' => 'إشتراك',
+                        'subscribers_id' => $subscriber->id
+                    ]);
+                }
+                if ($delays) {
+                    $notificationSuccess = [
+                        "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
+                        "alert-type" => "success",
+                    ];
+                    return redirect()->back()->with($notificationSuccess);
+                }
+            }
         }
-        if ($delays) {
-            $notificationSuccess = [
-                "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
-                "alert-type" => "success",
-            ];
-            return redirect()->back()->with($notificationSuccess);
-        }
+        return back()->withErrors($validated);
     }
     public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {

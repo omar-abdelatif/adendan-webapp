@@ -31,7 +31,6 @@ class SubscribersController extends Controller
     public function storeSubs(SubscriberRequest $request)
     {
         $validatedData = $request->validated();
-        $halfDelay = $this->insertHalfDelay();
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];
@@ -196,6 +195,11 @@ class SubscribersController extends Controller
                 'educational_qualification' => $request['educational_qualification'],
                 'qualification_date' => $request['qualification_date'],
             ]);
+            if ($request->status) {
+                $member->update(['status' => 2]);
+            } else {
+                $member->update(['status' => 0]);
+            }
             if ($update) {
                 $notificationSuccess = [
                     'message' => "تم التعديل بنجاح",
