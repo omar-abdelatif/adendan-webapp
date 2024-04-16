@@ -164,16 +164,16 @@
                                                     <table id="table0" class="table align-middle display text-muted text-center table-hover" data-page-length="10">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">إسم العضو</th>
                                                                 <th class="text-center">رقم العضوية</th>
+                                                                <th class="text-center">إسم العضو</th>
                                                                 <th class="text-center">Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($subscribers as $subscriber)
                                                                 <tr>
-                                                                    <td>{{$subscriber->name}}</td>
                                                                     <td>{{$subscriber->member_id}}</td>
+                                                                    <td>{{$subscriber->name}}</td>
                                                                     <td>
                                                                         {{-- ! Donation ! --}}
                                                                         <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#donating_{{$subscriber->id}}">

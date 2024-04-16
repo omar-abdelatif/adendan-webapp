@@ -128,22 +128,23 @@ class DonationsController extends Controller
         $memberId = $request->member_id;
         $validated = $request->validate([
             'member_id' => 'required',
-            'invoice_no' => 'required',
+            'invoice_no' => 'required|unique:donations,invoice_no',
             'amount' => 'required'
         ]);
         if ($validated) {
             $oldDelay = Olddelays::where('member_id', $memberId)->where('old_delay_type', 'تبرعات')->first();
-            $donationDelay = DonationDelay::where('member_id', $request->member_id)->first();
             $subscribers = Subscribers::where('member_id', $request->member_id)->first();
             $totalSafe = TotalSafe::where('id', 1)->first();
             $amount = $oldDelay->amount;
             $requestAmount = $request->amount;
-            if ($amount == $requestAmount) {
+            $amountPaied = $oldDelay->delay_amount;
+            $remainingAmount = $oldDelay->delay_remaining;
+            if ($requestAmount >= $amount) {
                 $oldDelay->delete();
                 $store = Donations::create([
                     'member_id' => $memberId,
                     'invoice_no' => $request->invoice_no,
-                    'amount' => $requestAmount,
+                    'amount' => $amount,
                     'donation_type' => 'مادي',
                     'donation_category' => 'متأخرات التبرعات',
                     'subscribers_id' => $subscribers->id
@@ -165,12 +166,8 @@ class DonationsController extends Controller
                     return back()->with($notificationSuccess);
                 }
             } else {
-                $oldDelayAmount = $oldDelay->amount;
-                $requestAmount = $request->amount;
-                $remainingDelays = $oldDelayAmount - $requestAmount;
-                $amountPaied = $oldDelay->delay_amount;
-                $amountRemain = $oldDelay->delay_remaining;
-                if ($amountPaied == null && $amountRemain == null) {
+                $remainingDelays = $amount - $requestAmount;
+                if ($amountPaied == null && $remainingAmount == null) {
                     $update = $oldDelay->update([
                         'delay_amount' => $requestAmount,
                         'delay_remaining' => $remainingDelays
@@ -187,37 +184,6 @@ class DonationsController extends Controller
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'متأخرات التبرعات',
-                            'amount' => $request['amount'],
-                        ]);
-                        $sumAmount = $totalSafe->amount + $requestAmount;
-                        $totalSafe->update([
-                            'amount' => $sumAmount,
-                        ]);
-                        $notificationSuccess = [
-                            'message' => 'تم دفع جزء من المبلغ',
-                            'alert-type' => 'success'
-                        ];
-                        return back()->with($notificationSuccess);
-                    }
-                } else {
-                    $oldDelay->update([
-                        'amount' => $remainingDelays
-                    ]);
-                    $pay = Donations::create([
-                        'member_id' => $memberId,
-                        'invoice_no' => $request->invoice_no,
-                        'amount' => $requestAmount,
-                        'donation_type' => 'مادي',
-                        'donation_category' => 'متأخرات التبرعات',
-                        'subscribers_id' => $subscribers->id
-                    ]);
-                    if ($remainingDelays === 0) {
-                        $oldDelay->delete();
-                    }
-                    if ($pay) {
-                        SafeReports::create([
-                            'member_id' => $subscribers->member_id,
-                            'transaction_type' => 'متأخرات التبرعات',
                             'amount' => $requestAmount,
                         ]);
                         $sumAmount = $totalSafe->amount + $requestAmount;
@@ -230,16 +196,77 @@ class DonationsController extends Controller
                         ];
                         return back()->with($notificationSuccess);
                     }
+                } else {
+                    if ($requestAmount >= $remainingAmount) {
+                        $oldDelay->delete();
+                        $pay = Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'amount' => $remainingAmount,
+                            'donation_type' => 'مادي',
+                            'donation_category' => 'متأخرات التبرعات',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'متأخرات التبرعات',
+                                'amount' => $requestAmount,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $requestAmount;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع جزء من المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    } else {
+                        $oldDelay->update([
+                            'delay_amount' => $requestAmount +  $amountPaied,
+                            'delay_remaining' => $remainingAmount - $requestAmount,
+                        ]);
+                        $pay = Donations::create([
+                            'member_id' => $memberId,
+                            'invoice_no' => $request->invoice_no,
+                            'amount' => $requestAmount,
+                            'donation_type' => 'مادي',
+                            'donation_category' => 'متأخرات التبرعات',
+                            'subscribers_id' => $subscribers->id
+                        ]);
+                        if ($remainingAmount === 0) {
+                            $oldDelay->delete();
+                        }
+                        if ($pay) {
+                            SafeReports::create([
+                                'member_id' => $subscribers->member_id,
+                                'transaction_type' => 'متأخرات التبرعات',
+                                'amount' => $requestAmount,
+                            ]);
+                            $sumAmount = $totalSafe->amount + $requestAmount;
+                            $totalSafe->update([
+                                'amount' => $sumAmount,
+                            ]);
+                            $notificationSuccess = [
+                                'message' => 'تم دفع جزء من المبلغ',
+                                'alert-type' => 'success'
+                            ];
+                            return back()->with($notificationSuccess);
+                        }
+                    }
                 }
             }
         }
+        return back()->withErrors($validated);
     }
     public function payDelayDonation(Request $request)
     {
         $memberId = $request->member_id;
         $validated = $request->validate([
             'amount' => 'required',
-            'invoice_no' => 'required'
+            'invoice_no' => 'required|unique:donations,invoice_no'
         ]);
         $subscribers = Subscribers::where('member_id', $memberId)->first();
         $donationDelay = DonationDelay::where('member_id', $memberId)->where('id', $request->id)->first();
@@ -427,5 +454,6 @@ class DonationsController extends Controller
                 }
             }
         }
+        return back()->withErrors($validated);
     }
 }

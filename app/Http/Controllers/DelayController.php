@@ -80,7 +80,7 @@ class DelayController extends Controller
         $id = $request->id;
         $validated = $request->validate([
             'paied' => 'required',
-            'invoice_no' => 'required'
+            'invoice_no' => 'required|unique:subscriptions,invoice_no'
         ]);
         $delay = Delay::where('year', $request->year)->where('id', $id)->first();
         $subscribers = Subscribers::where('member_id', $request->member_id)->first();
@@ -220,7 +220,7 @@ class DelayController extends Controller
     public function payOldDelay(Request $request) //! Pay Single Old Delay For Single Subscriber
     {
         $validated = $request->validate([
-            'invoice_no' => 'required',
+            'invoice_no' => 'required|unique:subscriptions,invoice_no',
             'olddelay' => 'required',
         ]);
         $oldDelay = Olddelays::where('member_id', $request->member_id)->where('id', $request->id)->first();
@@ -266,7 +266,7 @@ class DelayController extends Controller
                     if ($update) {
                         Subscriptions::create([
                             'member_id' => $request->member_id,
-                            'delays' => $request->olddelay,
+                            'delays' => $requestAmount,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'متأخرات جزئي',
                             'subscribers_id' => $subscribers->id
@@ -274,9 +274,9 @@ class DelayController extends Controller
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'متأخرات',
-                            'amount' => $request->olddelay,
+                            'amount' => $requestAmount,
                         ]);
-                        $sumAmount = $totalSafe->amount + $request->olddelay;
+                        $sumAmount = $totalSafe->amount + $requestAmount;
                         $totalSafe->update([
                             'amount' => $sumAmount,
                         ]);
@@ -300,9 +300,9 @@ class DelayController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات',
-                                'amount' => $request->olddelay,
+                                'amount' => $requestAmount,
                             ]);
-                            $sumAmount = $totalSafe->amount + $request->olddelay;
+                            $sumAmount = $totalSafe->amount + $requestAmount;
                             $totalSafe->update([
                                 'amount' => $sumAmount,
                             ]);
@@ -313,28 +313,27 @@ class DelayController extends Controller
                             return back()->with($notificationSuccess);
                         }
                     } else {
-                        $remain = $oldDelay->delay_remaining;
                         $oldDelay->update([
                             'delay_amount' => $requestAmount +  $oldDelayAmount,
                             'delay_remaining' => $oldDelayRemaining - $requestAmount,
                         ]);
                         $pay = Subscriptions::create([
                             'member_id' => $request->member_id,
-                            'delays' => $request->olddelay,
+                            'delays' => $requestAmount,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'متأخرات جزئي',
                             'subscribers_id' => $subscribers->id
                         ]);
-                        if ($remain === 0) {
+                        if ($oldDelayRemaining === 0) {
                             $oldDelay->delete();
                         }
                         if ($pay) {
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات',
-                                'amount' => $request['olddelay'],
+                                'amount' => $requestAmount,
                             ]);
-                            $sumAmount = $totalSafe->amount + $request->olddelay;
+                            $sumAmount = $totalSafe->amount + $requestAmount;
                             $totalSafe->update([
                                 'amount' => $sumAmount,
                             ]);

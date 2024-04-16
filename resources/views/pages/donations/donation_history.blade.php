@@ -311,6 +311,8 @@
                                                         <tr>
                                                             <th class="text-center">#</th>
                                                             <th class="text-center">المبلغ الإجمالي</th>
+                                                            <th class="text-center">المبلغ المطلوب الإجمالي</th>
+                                                            <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
@@ -320,6 +322,8 @@
                                                             <tr>
                                                                 <td class="text-center">{{$i++}}</td>
                                                                 <td class="text-center">{{$delay->amount}}</td>
+                                                                <td class="text-center">{{$delay->delay_amount}}</td>
+                                                                <td class="text-center">{{$delay->delay_remaining}}</td>
                                                                 <td class="text-center">
                                                                     <button class="btn bg-secondary" type="button" data-bs-target="#donationPayment_{{$delay->id}}" data-bs-toggle="modal">
                                                                         <i class="fa-solid fa-dollar-sign"></i>
