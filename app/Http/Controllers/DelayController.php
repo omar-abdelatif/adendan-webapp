@@ -38,38 +38,33 @@ class DelayController extends Controller
         }
         return redirect()->route('subscriber.all')->withErrors($validated);
     }
-    public function uploadDelays(Request $request) //! Add Subscriptions Delay For All Subscribers
+    public function uploadDelays(Request $request)
     {
-        $validated = $request->validate([
-            'year' => 'required|unique:delays,year',
+        $request->validate([
+            'year' => 'required',
             'yearly_cost' => 'required'
         ]);
-        if ($validated) {
-            $subscribers = Subscribers::all();
-            $delays = Delay::get();
-            if ($request->year === $delays->year) {
-                return back()->withErrors($validated);
-            } else {
-                foreach ($subscribers as $subscriber) {
-                    $delays = Delay::create([
-                        'member_id' => $subscriber->member_id,
-                        'year' => $request->year,
-                        'yearly_cost' => $request->yearly_cost,
-                        'payment_type' => 'إشتراك',
-                        'subscribers_id' => $subscriber->id
-                    ]);
-                }
-                if ($delays) {
-                    $notificationSuccess = [
-                        "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
-                        "alert-type" => "success",
-                    ];
-                    return redirect()->back()->with($notificationSuccess);
-                }
-            }
+        $subscribers = Subscribers::all();
+        $existingDelay = Delay::where('year', $request->year)->first();
+        if ($existingDelay) {
+            return back()->withErrors('هذه السنة تم إصدار اشتراكاتها بالفعل');
         }
-        return back()->withErrors($validated);
+        foreach ($subscribers as $subscriber) {
+            Delay::create([
+                'member_id' => $subscriber->member_id,
+                'year' => $request->year,
+                'yearly_cost' => $request->yearly_cost,
+                'payment_type' => 'إشتراك',
+                'subscribers_id' => $subscriber->id
+            ]);
+        }
+        $notificationSuccess = [
+            "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
+            "alert-type" => "success",
+        ];
+        return redirect()->back()->with($notificationSuccess);
     }
+
     public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {
         $validated = $request->validate([
@@ -105,7 +100,7 @@ class DelayController extends Controller
                 $delay->delete();
                 $pay = Subscriptions::create([
                     'member_id' => $request->member_id,
-                    'subscription_cost' => $request->paied,
+                    'subscription_cost' => $cost,
                     'period' => $request->year,
                     'invoice_no' => $request->invoice_no,
                     'payment_type' => 'إشتراك كلي',
@@ -115,9 +110,9 @@ class DelayController extends Controller
                     SafeReports::create([
                         'member_id' => $subscribers->member_id,
                         'transaction_type' => 'إشتراكات',
-                        'amount' => $request['paied'],
+                        'amount' => $paied,
                     ]);
-                    $sumAmount = $totalSafe->amount + $request->paied;
+                    $sumAmount = $totalSafe->amount + $paied;
                     $totalSafe->update([
                         'amount' => $sumAmount,
                     ]);
@@ -178,9 +173,9 @@ class DelayController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'إشتراكات',
-                                'amount' => $request->paied,
+                                'amount' => $paied,
                             ]);
-                            $sumAmount = $totalSafe->amount + $request->paied;
+                            $sumAmount = $totalSafe->amount + $paied;
                             $totalSafe->update([
                                 'amount' => $sumAmount,
                             ]);
@@ -197,7 +192,7 @@ class DelayController extends Controller
                         ]);
                         $pay = Subscriptions::create([
                             'member_id' => $request->member_id,
-                            'subscription_cost' => $request->paied,
+                            'subscription_cost' => $paied,
                             'period' => $request->year,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'إشتراك جزئي',
@@ -246,7 +241,7 @@ class DelayController extends Controller
                 $store = Subscriptions::create([
                     'member_id' => $request->member_id,
                     'invoice_no' => $request->invoice_no,
-                    'delays' => $requestAmount,
+                    'delays' => $amount,
                     'payment_type' => 'متأخرات كلية',
                     'subscribers_id' => $subscribers->id
                 ]);
@@ -254,9 +249,9 @@ class DelayController extends Controller
                     SafeReports::create([
                         'member_id' => $subscribers->member_id,
                         'transaction_type' => 'متأخرات',
-                        'amount' => $request['olddelay'],
+                        'amount' => $amount,
                     ]);
-                    $sumAmount = $totalSafe->amount + $request['olddelay'];
+                    $sumAmount = $totalSafe->amount + $amount;
                     $totalSafe->update([
                         'amount' => $sumAmount,
                     ]);

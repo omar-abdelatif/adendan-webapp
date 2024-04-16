@@ -98,8 +98,7 @@ class DonationsController extends Controller
     }
     public function donationsOnSubscribers(Request $request)
     {
-        $validated = $request->validate([
-            'donation_type' => 'required',
+        $validated = $request->validate(['donation_category' => 'required',
             'delay_amount' => 'required'
         ]);
         if ($validated) {
@@ -419,7 +418,7 @@ class DonationsController extends Controller
                         }
                     } else {
                         $donationDelay->update([
-                            'amount_paied' => $amountPaied + $totalAmount,
+                            'amount_paied' => $amountPaied + $paiedMoney,
                             'amount_remaining' => $remainingAmount - $amountPaied
                         ]);
                         $pay = Donations::create([

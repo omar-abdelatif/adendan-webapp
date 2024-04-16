@@ -267,10 +267,10 @@
                                                                 <td class="text-center">{{$delay->paied}}</td>
                                                                 <td class="text-center">{{$delay->remaing}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
+                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#payment_history_{{$delay->id}}">
                                                                         <i class="fa-solid fa-money-bill"></i>
                                                                     </button>
-                                                                    <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal fade" id="payment_history_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">

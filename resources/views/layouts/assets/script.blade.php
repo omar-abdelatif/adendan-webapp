@@ -11,9 +11,9 @@
 <!-- Sidebar jquery-->
 <!-- Plugins JS start-->
 <script id="menu" src="{{asset('assets/js/sidebar-menu.js')}}"></script>
-<script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
-<script src="{{ asset('assets/js/header-slick.js') }}"></script>
+<script src="{{ asset('assets/js/header-slick.js') }}"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @yield('script')
 <script>

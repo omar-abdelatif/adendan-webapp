@@ -17,27 +17,45 @@
                             <table id="table" class="table align-middle table-hover text-center text-muted" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-center">الإسم</th>
                                         <th class="text-center">رقم العضوية</th>
+                                        <th class="text-center">الإسم</th>
                                         <th class="text-center">مبلغ المديونية</th>
+                                        <th class="text-center">باقي المبلغ المطلوب</th>
                                         <th class="text-center">حالة الإشتراك</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($debts as $debt)
                                         <tr>
-                                            <td>{{$debt->name}}</td>
                                             <td>{{$debt->member_id}}</td>
+                                            <td>{{$debt->name}}</td>
                                             @if ($debt->delays)
-                                                <td class="text-muted text-center">
-                                                    <span class="text-muted bg-secondary rounded-pill px-4">{{$debt->delays->amount}}</span>
-                                                    ج.م
-                                                </td>
+                                                @foreach ($debt->delays as $delay)
+                                                    <td class="text-muted text-center">
+                                                        <span class="text-muted bg-secondary rounded-pill px-4">{{$delay->yearly_cost}}</span>
+                                                        ج.م
+                                                    </td>
+                                                @endforeach
                                             @else
                                                 <td class="text-muted text-center">
                                                     <span class="text-muted bg-success rounded-pill px-3">0</span>
                                                     ج.م
                                                 </td>
+                                            @endif
+                                            @if ($debt->delays)
+                                                @foreach ($debt->delays as $delay)
+                                                    @if($delay->remain != null)
+                                                        <td class="text-center">
+                                                            <span class="text-white bg-secondary rounded-pill px-4">{{$delay->remaing}}</span>
+                                                            ج.م
+                                                        </td>
+                                                    @else
+                                                        <td class="text-muted text-center">
+                                                            <span class="text-white bg-success rounded-pill px-3">0</span>
+                                                            ج.م
+                                                        </td>
+                                                    @endif
+                                                @endforeach
                                             @endif
                                             <td>
                                                 @if ($debt->status === 0)
