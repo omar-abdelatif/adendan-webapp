@@ -75,254 +75,263 @@
                                             </div>
                                             <div class="card-body bg-light">
                                                 <div class="card-content">
-                                                    div.row.align-items-center.justify-content-evenly
-                                                    <div class="delays justify-content-center">
-                                                        <div class="delays-content d-flex justify-content-center flex-column align-items-center">
-                                                            @if (count($member->delays) >= 1)
-                                                                @foreach ($delays as $delay)
-                                                                    <div class="col-lg-6 mt-4 border border-1 border-dark ms-1 rounded-3">
-                                                                        <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                            <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>                                                                                مديونية الإشتراك السنوي
-                                                                            </h4>
-                                                                            <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                <div class="col-lg-3 p-1 py-2">
-                                                                                    <div class="text-center">
-                                                                                        <h4 role="presentation">
-                                                                                            <span class="h6 text-green fw-light d-block">المبلغ السنوي</span>
-                                                                                            {{$delay->yearly_cost}}
-                                                                                            ج.م
-                                                                                        </h4>
+                                                    <div class="row align-items-center justify-content-evenly">
+                                                        <div class="col-lg-6">
+                                                            <div class="delays justify-content-center">
+                                                                <div class="delays-content d-flex justify-content-center flex-column align-items-center">
+                                                                    @if (count($member->delays) >= 1)
+                                                                        @foreach ($delays as $delay)
+                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>                                                                                مديونية الإشتراك السنوي
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        <div class="col-lg-3 p-1 py-2">
+                                                                                            <div class="text-center">
+                                                                                                <h4 role="presentation">
+                                                                                                    <span class="h6 text-green fw-light d-block">المبلغ السنوي</span>
+                                                                                                    {{$delay->yearly_cost}}
+                                                                                                    ج.م
+                                                                                                </h4>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-lg-3 p-1 py-2">
+                                                                                            <div class="text-center">
+                                                                                                <h4 role="presentation">
+                                                                                                    <span class="h6 text-green fw-light d-block">السنة</span>
+                                                                                                    {{$delay->year}}
+                                                                                                </h4>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        @if ($delay->paied == null || $delay->remaing == null)
+                                                                                            <div class="col-lg-3 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                        لا يوجد
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-3 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h3 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        لا يوجد
+                                                                                                    </h3>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @else
+                                                                                            <div class="col-lg-3 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                        {{$delay->paied}} ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-3 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h3 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        {{$delay->remaing}} ج.م
+                                                                                                    </h3>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endif
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-lg-3 p-1 py-2">
-                                                                                    <div class="text-center">
-                                                                                        <h4 role="presentation">
-                                                                                            <span class="h6 text-green fw-light d-block">السنة</span>
-                                                                                            {{$delay->year}}
-                                                                                        </h4>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    @else
+                                                                        <p class="mb-0 text-center empty-msg fw-bold fs-1">{{$noDelays}}</p>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="old-delays">
+                                                                <div class="old-content">
+                                                                    <div class="row justify-content-center g-0">
+                                                                        @if (count($oldDelays) >= 1)
+                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
+                                                                                        متأخرات الإشتراكات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        @foreach ($oldDelays as $delay)
+                                                                                            <div class="col-lg-12 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
+                                                                                                        {{$delay->amount}} ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            {{-- @if ($delay->paied == null || $delay->remaing == null)
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h4 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                            لا يوجد
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h3 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            لا يوجد
+                                                                                                        </h3>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @else
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h4 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                            {{$delay->delay_amount}} ج.م
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h3 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            {{$delay->delay_remaining}} ج.م
+                                                                                                        </h3>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif --}}
+                                                                                        @endforeach
                                                                                     </div>
                                                                                 </div>
-                                                                                @if ($delay->paied == null || $delay->remaing == null)
-                                                                                    <div class="col-lg-3 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                لا يوجد
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h3 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                لا يوجد
-                                                                                            </h3>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @else
-                                                                                    <div class="col-lg-3 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                {{$delay->paied}} ج.م
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-3 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h3 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                {{$delay->remaing}} ج.م
-                                                                                            </h3>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endif
                                                                             </div>
-                                                                        </div>
+                                                                        @else
+                                                                            <p class="mb-0 text-center fs-1 fw-bold empty-msg">{{$noOldDelays}}</p>
+                                                                        @endif
                                                                     </div>
-                                                                @endforeach
-                                                            @else
-                                                                <p class="mb-0 text-center empty-msg fw-bold fs-1">{{$noDelays}}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="old-delays mt-3">
-                                                        <div class="old-content">
-                                                            <div class="row justify-content-center g-0">
-                                                                @if (count($oldDelays) >= 1)
-                                                                    <div class="col-lg-6 mt-4 border border-1 border-dark ms-1 rounded-3">
-                                                                        <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                            <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                <img width="65" height="65" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/65/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
-                                                                                متأخرات الإشتراكات
-                                                                            </h4>
-                                                                            <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                @foreach ($oldDelays as $delay)
-                                                                                    <div class="col-lg-12 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
-                                                                                                {{$delay->amount}} ج.م
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    {{-- @if ($delay->paied == null || $delay->remaing == null)
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h4 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                    لا يوجد
-                                                                                                </h4>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h3 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                    لا يوجد
-                                                                                                </h3>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @else
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h4 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                    {{$delay->delay_amount}} ج.م
-                                                                                                </h4>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h3 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                    {{$delay->delay_remaining}} ج.م
-                                                                                                </h3>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @endif --}}
-                                                                                @endforeach
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @else
-                                                                    <p class="mb-0 text-center fs-1 fw-bold empty-msg">{{$noOldDelays}}</p>
-                                                                @endif
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="old-donations mt-3">
-                                                        <div class="old-donation-content">
-                                                            <div class="row justify-content-center g-0">
-                                                                @if (count($donationOlddelays) > 0)
-                                                                    <div class="col-lg-6 mt-4 border border-1 border-dark rounded-3">
-                                                                        <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                            <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
-                                                                                متأخرات التبرعات
-                                                                            </h4>
-                                                                            <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                @foreach ($donationOlddelays as $delay)
-                                                                                    <div class="col-lg-4 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
-                                                                                                {{$delay->amount}} ج.م
-                                                                                            </h4>
-                                                                                        </div>
+                                                        <div class="col-lg-6 mt-3">
+                                                            <div class="old-donations">
+                                                                <div class="old-donation-content">
+                                                                    <div class="row justify-content-center g-0">
+                                                                        @if (count($donationOlddelays) > 0)
+                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
+                                                                                        متأخرات التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        @foreach ($donationOlddelays as $delay)
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
+                                                                                                        {{$delay->amount}} ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            @if ($delay->delay_amount == null && $delay->delay_remaining == null)
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h4 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                            لا يوجد
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h3 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            لا يوجد
+                                                                                                        </h3>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @else
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h4 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                            {{$delay->delay_amount}} ج.م
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-lg-4 p-1 py-2">
+                                                                                                    <div class="text-center">
+                                                                                                        <h3 role="presentation">
+                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            {{$delay->delay_remaining}} ج.م
+                                                                                                        </h3>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
+                                                                                        @endforeach
                                                                                     </div>
-                                                                                    @if ($delay->delay_amount == null && $delay->delay_remaining == null)
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h4 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                    لا يوجد
-                                                                                                </h4>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h3 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                    لا يوجد
-                                                                                                </h3>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @else
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h4 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                    {{$delay->delay_amount}} ج.م
-                                                                                                </h4>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col-lg-4 p-1 py-2">
-                                                                                            <div class="text-center">
-                                                                                                <h3 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                    {{$delay->delay_remaining}} ج.م
-                                                                                                </h3>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    @endif
-                                                                                @endforeach
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @else
+                                                                            <h1 class="text-center mb-0">لا توجد متأخرات تبرعات</h1>
+                                                                        @endif
                                                                     </div>
-                                                                @else
-                                                                    <h1 class="text-center mb-0">لا توجد متأخرات تبرعات</h1>
-                                                                @endif
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="delay-donaion mt-3">
-                                                        <div class="delay-donaiton-content">
-                                                            <div class="row justify-content-center g-0">
-                                                                @if (count($donationDelays) > 0)
-                                                                    <div class="col-lg-6 mt-4 border border-1 border-dark rounded-3">
-                                                                        <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                            <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                                                مديونية التبرعات
-                                                                            </h4>
-                                                                            <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                @foreach ($donationDelays as $delay)
-                                                                                    <div class="col-lg-4 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المبلغ الكلي</span>
-                                                                                                {{$delay->delay_amount}}
-                                                                                                ج.م
-                                                                                            </h4>
-                                                                                        </div>
+                                                        <div class="col-lg-6 mt-3">
+                                                            <div class="delay-donaion">
+                                                                <div class="delay-donaiton-content">
+                                                                    <div class="row justify-content-center g-0">
+                                                                        @if (count($donationDelays) > 0)
+                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
+                                                                                        مديونية التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        @foreach ($donationDelays as $delay)
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ الكلي</span>
+                                                                                                        {{$delay->delay_amount}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                        {{$delay->amount_paied}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        {{$delay->amount_remaining}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endforeach
                                                                                     </div>
-                                                                                    <div class="col-lg-4 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                {{$delay->amount_paied}}
-                                                                                                ج.م
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4 p-1 py-2">
-                                                                                        <div class="text-center">
-                                                                                            <h4 role="presentation">
-                                                                                                <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                {{$delay->amount_remaining}}
-                                                                                                ج.م
-                                                                                            </h4>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endforeach
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @else
+                                                                            <h1 class="text-center mb-0">لا توجد مديونية تبرعات</h1>
+                                                                        @endif
                                                                     </div>
-                                                                @else
-                                                                    <h1 class="text-center mb-0">لا توجد مديونية تبرعات</h1>
-                                                                @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -346,7 +355,7 @@
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 @foreach ($tombsByRegion as $region => $tombs)
-                                    <div class="card position-relative border border-secondary border-2 mt-5 p-4 w-100">
+                                    <div class="card position-relative border border-secondary border-2 p-4 w-100">
                                         <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
                                             <h3 class="mb-0 font-weight-bold text-center text-white">مقابر {{$region}}</h3>
                                         </div>
@@ -354,7 +363,7 @@
                                             <div class="row justify-content-center align-items-center">
                                                 @foreach ($tombs as $tomb)
                                                     <div class="col-lg-4 div col-md-6">
-                                                        <div class="tomb-item p-3 rounded bg-secondary mb-3 mt-3">
+                                                        <div class="tomb-item p-3 rounded bg-secondary mb-3">
                                                             <div class="tomb-item-title">
                                                                 <h4 class="text-center text-white">{{$tomb->title}}</h4>
                                                             </div>
