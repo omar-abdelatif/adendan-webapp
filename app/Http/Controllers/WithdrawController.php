@@ -12,13 +12,25 @@ class WithdrawController extends Controller
 {
     public function withdraw(Request $request)
     {
+        $totalSafe = TotalSafe::findOrFail(1);
+        $totalBank = TotalBank::findOrFail(1);
         $validated = $request->validate([
-            'amount' => 'required|integer',
+            'amount' => 'required|integer|min:1',
             'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
+        ], [
+            'amount.min' => 'المبلغ المطلوب للسحب غير متاح، الرجاء كتابة مبلغ متاح',
+            'amount.required' => 'يجب إدخال المبلغ',
+            'proof_img.required' => 'يجب ارفاق صورة الإثبات',
+            'proof_img.image' => 'يجب ان يكون الملف من نوع صورة',
+            'proof_img.mimes' => 'يجب ان يكون الملف من نوع :values',
+            'proof_img.max' => 'يجب ان لا يتعدى حجم الصورة عن :max',
         ]);
-        $totalSafe = TotalSafe::where('id', 1)->first();
-        $totalBank = TotalBank::where('id', 1)->first();
         if ($validated) {
+            if ($validated['amount'] > $totalSafe->amount) {
+                return back()->withErrors([
+                    'amount' => 'المبلغ الذي أدخلته غير متوفر. الرجاء إدخال مبلغ أقل والمحاولة مرة أخرى.',
+                ]);
+            }
             if ($request->hasFile('proof_img')) {
                 $imagefile = $request->file('proof_img');
                 $imagename = time() . '.' . $imagefile->getClientOriginalExtension();
@@ -27,38 +39,53 @@ class WithdrawController extends Controller
                 $store = SafeReports::create([
                     'member_id' => '-',
                     'proof_img' => $imagename,
-                    'amount' =>  $validated['amount'],
+                    'amount' => $validated['amount'],
                     'transaction_type' => 'بنك/سحب',
                 ]);
-            }
-            if ($store) {
-                $newAmount = $totalSafe->amount - $validated['amount'];
-                $totalSafe->update(['amount' => $newAmount]);
-                $newBank = $totalBank->amount + $validated['amount'];
-                $totalBank->update(['amount' => $newBank]);
-                Bank::create([
-                    'amount' =>  $newBank,
-                    'transaction_type' => 'إيداع',
-                    'proof_img' => $imagename,
-                ]);
-                $notificationSuccess = [
-                    'message' => 'تم السحب',
-                    "alert-type" => "success",
-                ];
-                return back()->with($notificationSuccess);
+                if ($store) {
+                    $newAmount = $totalSafe->amount - $validated['amount'];
+                    $totalSafe->update(['amount' => $newAmount]);
+                    $newBank = $totalBank->amount + $validated['amount'];
+                    $totalBank->update(['amount' => $newBank]);
+                    Bank::create([
+                        'amount' => $newBank,
+                        'transaction_type' => 'سحب',
+                        'proof_img' => $imagename,
+                    ]);
+                    $notificationSuccess = [
+                        'message' => 'تم السحب',
+                        'alert-type' => 'success',
+                    ];
+                    return back()->with($notificationSuccess);
+                }
+            } else {
+                return back()->withErrors(['proof_img' => 'الرجاء اختيار صورة.']);
             }
         }
         return back()->withErrors($validated);
     }
+
     public function bankWithdraw(Request $request)
     {
-        $totalSafe = TotalSafe::where('id', 1)->first();
-        $totalBank = TotalBank::where('id', 1)->first();
+        $totalSafe = TotalSafe::findOrFail(1);
+        $totalBank = TotalBank::findOrFail(1);
         $validated = $request->validate([
-            'amount' => 'required',
-            'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
+            'amount' => 'required|integer|min:1',
+            'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
+        ], [
+            'amount.min' => 'المبلغ المطلوب للسحب غير متاح، الرجاء كتابة مبلغ متاح',
+            'amount.required' => 'يجب إدخال المبلغ',
+            'proof_img.required' => 'يجب ارفاق صورة الإثبات',
+            'proof_img.image' => 'يجب ان يكون الملف من نوع صورة',
+            'proof_img.mimes' => 'يجب ان يكون الملف من نوع :values',
+            'proof_img.max' => 'يجب ان لا يتعدى حجم الصورة عن :max',
         ]);
         if ($validated) {
+            if ($validated['amount'] > $totalBank->amount) {
+                return back()->withErrors([
+                    'amount' => 'المبلغ الذي أدخلته غير متوفر. الرجاء إدخال مبلغ أقل والمحاولة مرة أخرى.',
+                ]);
+            }
             if ($request->hasFile('proof_img')) {
                 $imagefile = $request->file('proof_img');
                 $extention = time() . "." . $imagefile->extension();
@@ -88,5 +115,6 @@ class WithdrawController extends Controller
                 }
             }
         }
+        return back()->withErrors($validated);
     }
 }

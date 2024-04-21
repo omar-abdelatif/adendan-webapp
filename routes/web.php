@@ -80,6 +80,7 @@ Route::prefix('admin')->group(function () {
             Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
             Route::get('reports/safe', 'safe')->name('reports.safe');
             Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
+            Route::get('reports/associates', 'associates')->name('reports.associates');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');

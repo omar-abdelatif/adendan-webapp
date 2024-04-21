@@ -62,7 +62,7 @@
                             </div>
                             <div class="font-Info">
                                 @foreach ($bankAmount as $safe)
-                                    <h5 class="mb-1">{{$safe}} ج.م</h5>
+                                    <h5 class="mb-1">{{number_format($safe)}} ج.م</h5>
                                 @endforeach
                             </div>
                         </div>

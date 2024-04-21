@@ -18,15 +18,16 @@ class SubscribersController extends Controller
 {
     public function index()
     {
-        $newMemberId = Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1;
         $years = CostYears::all();
         $halfDelay = $this->insertHalfDelay();
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];
         $currentSubCost = $cost / 12 * $halfDelay;
+        $subs = Subscribers::all();
         $members = Subscribers::with('delays')->get();
-        return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId'));
+        $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : 1;
+        return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
     }
     public function storeSubs(SubscriberRequest $request)
     {

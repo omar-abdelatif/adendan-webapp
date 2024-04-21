@@ -175,4 +175,10 @@ class ReportController extends Controller
         $amount = $transactions->sum('amount');
         return view('pages.reports.bank', compact('transactions', 'amount', 'bankAmount'));
     }
+    //! Associates
+    public function associates()
+    {
+        $associates = Subscribers::where('membership_type', 'إنتساب')->get();
+        return view('pages.reports.associates', compact('associates'));
+    }
 }

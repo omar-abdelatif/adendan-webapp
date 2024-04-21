@@ -66,7 +66,7 @@
                             <h5>إجمالي التبـرعات</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumDonations}} ج.م</h5>
+                            <h5 class="mb-1">{{ number_format($sumDonations) }} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             <h5>إجمالي الإشـتـراكات</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumSubscriptions}} ج.م</h5>
+                            <h5 class="mb-1">{{number_format($sumSubscriptions)}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="font-Info">
                             @foreach ($safeAmounts as $safe)
-                                <h5 class="mb-1">{{$safe}} ج.م</h5>
+                                <h5 class="mb-1">{{number_format($safe)}} ج.م</h5>
                             @endforeach
                         </div>
                     </div>

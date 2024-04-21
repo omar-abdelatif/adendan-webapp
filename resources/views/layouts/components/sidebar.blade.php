@@ -161,11 +161,11 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('reports.indebtedness')}}">
+                                <a href="{{route('reports.associates')}}">
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                     </svg>
-                                    <span>متأخرات الإشتراكات</span>
+                                    <span>المنتسبين</span>
                                 </a>
                             </li>
                             <li>

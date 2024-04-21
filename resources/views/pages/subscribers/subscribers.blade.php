@@ -266,7 +266,11 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="validationMemberId" class="form-label text-white">رقم العضوية</label>
-                                            <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                            @if (!is_null($newMemberId))
+                                                <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                            @else
+                                                <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                            @endif
                                         </div>
                                         <div class="col-lg-12">
                                             <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
