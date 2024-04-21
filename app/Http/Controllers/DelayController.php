@@ -15,36 +15,13 @@ use App\Imports\ImportSubscribersDelays;
 
 class DelayController extends Controller
 {
-    public function storeDelays(DelayRequest $request) //! Store Total Delay For Single Subscriber ( Debrecated )
-    {
-        $validated = $request->validated();
-        $subscriber = Subscribers::where('member_id', $request['member_id'])->first();
-        if ($validated) {
-            $store = Delay::create([
-                'member_id' => $request['member_id'],
-                'amount' => $request['amount'],
-                'delay_period' => $request['delay_period'],
-                'payment_type' => 'متأخرات',
-                'subscribers_id' => $subscriber->id,
-            ]);
-            if ($store) {
-                $subscriber->update(['status' => 0]);
-                $notificationSuccess = [
-                    "message" => "نم إضافة المديونية على المشترك بنجاح",
-                    "alert-type" => "success",
-                ];
-                return redirect()->route('subscriber.all')->with($notificationSuccess);
-            }
-        }
-        return redirect()->route('subscriber.all')->withErrors($validated);
-    }
-    public function uploadDelays(Request $request)
+    public function uploadDelays(Request $request) //! Upload Yearly Delays on Subscribers
     {
         $request->validate([
             'year' => 'required',
             'yearly_cost' => 'required'
         ]);
-        $subscribers = Subscribers::all();
+        $subscribers = Subscribers::where('status', '=', 0)->get();
         $existingDelay = Delay::where('year', $request->year)->first();
         if ($existingDelay) {
             return back()->withErrors('هذه السنة تم إصدار اشتراكاتها بالفعل');
@@ -64,7 +41,6 @@ class DelayController extends Controller
         ];
         return redirect()->back()->with($notificationSuccess);
     }
-
     public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {
         $validated = $request->validate([

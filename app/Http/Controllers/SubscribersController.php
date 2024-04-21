@@ -26,7 +26,7 @@ class SubscribersController extends Controller
         $currentSubCost = $cost / 12 * $halfDelay;
         $subs = Subscribers::all();
         $members = Subscribers::with('delays')->get();
-        $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : 1;
+        $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
     }
     public function storeSubs(SubscriberRequest $request)

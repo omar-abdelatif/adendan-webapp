@@ -103,7 +103,6 @@ Route::prefix('admin')->group(function () {
             Route::post('subscription/updating', 'updatingSubscription')->name('subscription.update');
         });
         Route::controller(DelayController::class)->group(function () {
-            Route::post('delays/store', 'storeDelays')->name('delays.store');
             Route::post('delays/upload_delays', 'uploadDelays')->name('delays.costbyyear');
             Route::post('delays/subscriber_delays', 'subscriberDelay')->name('bulk_subscriber_delay');
             Route::post('delays/pay', 'paySubscription')->name('subscription.pay');
