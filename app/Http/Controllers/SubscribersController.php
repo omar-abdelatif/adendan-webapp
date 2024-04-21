@@ -30,7 +30,15 @@ class SubscribersController extends Controller
     }
     public function storeSubs(SubscriberRequest $request)
     {
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+            'ssn' => 'required|digits:14',
+            'mobile_no' => 'required|digits:11',
+        ], [
+            'ssn.required' => 'حقل الرقم القومي مطلوب.',
+            'ssn.digits' => 'يجب ألا يزيد الرقم القومي عن :digits رقم.',
+            'mobile_no.required' => 'حقل رقم الهاتف مطلوب.',
+            'mobile_no.digits' => 'يجب ألا يزيد رقم الهاتف عن :digits رقم.',
+        ]);
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];

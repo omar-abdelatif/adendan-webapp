@@ -157,7 +157,15 @@
                                     <svg class="stroke-icon">
                                         <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                     </svg>
-                                    <span>المديونية</span>
+                                    <span>مديونية الإشتراكات</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('reports.indebtedness')}}">
+                                    <svg class="stroke-icon">
+                                        <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                    </svg>
+                                    <span>متأخرات الإشتراكات</span>
                                 </a>
                             </li>
                             <li>

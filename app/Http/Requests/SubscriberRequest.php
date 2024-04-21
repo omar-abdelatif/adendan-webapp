@@ -24,7 +24,6 @@ class SubscriberRequest extends FormRequest
         return [
             'img' => 'nullable|image|max:2048|mimes:png,webp,jpg,jpeg',
             'job' => 'nullable|string',
-            'ssn' => 'required|max:14',
             'name' => 'required|string',
             'id_img' => 'nullable|image|max:2048|mimes:png,webp,jpg,jpeg',
             'job_tel' => 'nullable',
@@ -33,7 +32,6 @@ class SubscriberRequest extends FormRequest
             'nickname' => 'nullable|string',
             'member_id' => 'required|string',
             'birthdate' => 'nullable|date',
-            'mobile_no' => 'required',
             'job_address' => 'nullable|string',
             'martial_status' => 'nullable|string',
             'membership_type' => 'nullable|string',

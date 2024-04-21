@@ -270,7 +270,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
-                                            <input type="number" name="invoice_no" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
+                                            <input type="number" name="invoice_no" maxlength="4" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
                                         </div>
                                     </div>
                                 </div>
