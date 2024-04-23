@@ -42,13 +42,13 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="{{route('costyears.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-duotone fa-rings-wedding text-muted fs-5 me-3"></i>
+                            <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
                             <span>الإشتراك السنوي</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="{{route('miscellaneous.all')}}">
-                            <i class="fa-solid fa-file-invoice fs-5 me-3 text-muted"></i>
+                            <i class="fa-solid fa-file-invoice fs-5 text-muted"></i>
                             <span>النثريات</span>
                         </a>
                     </li>
@@ -86,13 +86,13 @@
                     </li>
                     <li class="sidebar-list">
                         <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-solid fa-tombstone-blank text-muted fs-5 me-3"></i>
+                            <i class="fa-solid fa-tombstone-blank text-muted fs-5"></i>
                             <span>المقابر</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-duotone fa-rings-wedding text-muted fs-5 me-3"></i>
+                            <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
                             <span>الأفراح</span>
                         </a>
                     </li>

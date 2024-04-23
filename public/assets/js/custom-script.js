@@ -292,8 +292,34 @@ if (paymentTypes) {
         });
     });
 }
-//! Play Audio
-//!
+//! Validation Subscriber SSN
+const ssn = document.getElementById('ssn')
+const ssnMsg = document.getElementById("ssnMsg");
+ssn.addEventListener('keypress', function () {
+    const regSSN = /(?=.{14,})/;
+    if (regSSN.test(ssn.value)) {
+        ssn.classList.add("good");
+        ssnMsg.classList.add("d-none");
+    } else {
+        ssn.classList.remove("good");
+        ssn.classList.add("error");
+        ssnMsg.classList.remove("d-none");
+    }
+})
+//! Validation Subscriber Mobile
+const mobile = document.getElementById("mobile_no");
+const mobileMsg = document.getElementById("mobileMsg");
+mobile.addEventListener("keypress", function () {
+    const regMOB = /(?=.{11,})/;
+    if (regMOB.test(mobile.value)) {
+        mobile.classList.add("good");
+        mobileMsg.classList.add("d-none");
+    } else {
+        mobile.classList.remove("good");
+        mobile.classList.add("error");
+        mobileMsg.classList.remove("d-none");
+    }
+});
 //!
 //!
 //!

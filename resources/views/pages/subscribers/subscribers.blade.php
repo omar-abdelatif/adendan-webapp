@@ -145,12 +145,7 @@
                                             <label class="form-label text-muted" for="email-basic-wizard">
                                                 الأسم الكامل
                                             </label>
-                                            <input class="form-control text-muted @error('name') is-invalid @enderror" id="email-basic-wizard" type="text" name="name" placeholder="مثلا: محمد أحمد محمود">
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <input class="form-control text-muted" id="email-basic-wizard" type="text" name="name" placeholder="مثلا: محمد أحمد محمود">
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label text-muted" for="email-basic-wizard">
@@ -174,7 +169,8 @@
                                             <label class="col-lg-6 form-label text-muted" for="confirmpasswordwizard">
                                                 رقم المحمول
                                             </label>
-                                            <input class="form-control text-muted" id="confirmpasswordwizard" name="mobile_no" type="number" placeholder="رقم المحمول">
+                                            <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول">
+                                            <p id="mobileMsg" class="d-none">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="col-lg-6 form-label text-muted" for="personalImg">
@@ -189,10 +185,11 @@
                                             <input class="form-control text-muted" name="id_img" id="personalImg" type="file" accept="image/*">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="firstnamewizard">
+                                            <label class="form-label text-muted" for="ssn">
                                                 الرقم القومي
                                             </label>
-                                            <input class="form-control text-muted" id="firstnamewizard" name="ssn" type="number" placeholder="أدخل الرقم القومي">
+                                            <input type="text" id="ssn" name="ssn" maxlength="14" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل الرقم القومي">
+                                            <p id="ssnMsg" class="d-none">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label text-muted" for="firstnamewizard">

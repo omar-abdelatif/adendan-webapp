@@ -211,3 +211,17 @@ html[dir=rtl] .checkbox_animated, html[dir=rtl] .radio_animated{
 .light table.dataTable.display tbody tr.odd td {
     color: #fff;
 }
+.error {
+	border: 3px solid rgb(194, 23, 23) !important;
+    margin: 0;
+}
+#ssnMsg, #mobileMsg{
+    font-size: 16px;
+    color: rgb(223, 56, 56);
+}
+.good {
+	border: 3px solid rgb(23, 194, 23) !important;
+}
+html[dir=rtl] .page-wrapper.compact-wrapper .page-body-wrapper .sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a i{
+    margin-left: 15px;
+}
