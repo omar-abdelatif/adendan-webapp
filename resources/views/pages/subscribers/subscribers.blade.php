@@ -135,158 +135,162 @@
                             <div class="step-bar-right"></div>
                         </div>
                     </div>
-                    <form action="{{route('subscribe.store')}}" method="post" id="storeSubscriber" enctype="multipart/form-data">
-                        @csrf
-                        <div id="msform">
-                            <article class="stepper-one row g-3 needs-validation custom-input" style="display: flex;">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="email-basic-wizard">
-                                                الأسم الكامل
-                                            </label>
-                                            <input class="form-control text-muted" id="email-basic-wizard" type="text" name="name" placeholder="مثلا: محمد أحمد محمود">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="email-basic-wizard">
-                                                اللقب و إسم الشهرة
-                                            </label>
-                                            <input class="form-control text-muted" id="email-basic-wizard" type="text" name="nickname" placeholder="مثلا: محمد أحمد محمود">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-muted" for="confirmpasswordwizard">
-                                                تاريخ الميلاد
-                                            </label>
-                                            <input class="datepicker-here form-control text-muted digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-6-6 form-label text-muted" for="passwordwizard">
-                                                العنوان
-                                            </label>
-                                            <input class="form-control text-muted" name="address" id="passwordwizard" type="text" placeholder="عنوان المشترك">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-muted" for="confirmpasswordwizard">
-                                                رقم المحمول
-                                            </label>
-                                            <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول">
-                                            <p id="mobileMsg" class="d-none">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-muted" for="personalImg">
-                                                الصورة الشخصية
-                                            </label>
-                                            <input class="form-control text-muted" name="img" id="personalImg" type="file" accept="image/*">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="col-lg-6 form-label text-muted" for="personalImg">
-                                                صورة البطاقة الشخصية
-                                            </label>
-                                            <input class="form-control text-muted" name="id_img" id="personalImg" type="file" accept="image/*">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="ssn">
-                                                الرقم القومي
-                                            </label>
-                                            <input type="text" id="ssn" name="ssn" maxlength="14" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل الرقم القومي">
-                                            <p id="ssnMsg" class="d-none">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="firstnamewizard">
-                                                الحالة الإجتماعية
-                                            </label>
-                                            <input class="form-control text-muted" id="firstnamewizard" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-muted" for="firstnamewizard">
-                                                ت المنزل
-                                            </label>
-                                            <input class="form-control text-muted" id="firstnamewizard" name="home_tel" type="number" placeholder="ت المنزل">
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="stepper-two row g-3 needs-validation custom-input" style="display: none;">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-white" for="placeholdername1">المؤهل الدراسي</label>
-                                            <input class="form-control text-white" id="placeholdername1" name="educational_qualification" type="text" placeholder="المؤهل الدراسي">
-                                        </div>
-                                        <div class="col-xxl-4 col-lg-6">
-                                            <label class="form-label text-white" for="cardNumber01">تاريخ المؤهل</label>
-                                            <input class="datepicker-here form-control text-white digits" name="qualification_date" readonly id="cardNumber01" type="text" placeholder="تاريخ المؤهل" data-language="ar">
+                        <form action="{{route('subscribe.store')}}" method="post" id="storeSubscriber" enctype="multipart/form-data">
+                            @csrf
+                            <div id="msform">
+                                <article class="stepper-one row g-3 needs-validation custom-input" style="display: flex;">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="name">
+                                                        الأسم الكامل
+                                                    </label>
+                                                    <input class="form-control text-muted" id="name" type="text" name="name" placeholder="مثلا: محمد أحمد محمود" required>
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="email-basic-wizard">
+                                                        اللقب و إسم الشهرة
+                                                    </label>
+                                                    <input class="form-control text-muted" id="email-basic-wizard" type="text" name="nickname" placeholder="مثلا: محمد أحمد محمود">
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="confirmpasswordwizard">
+                                                        تاريخ الميلاد
+                                                    </label>
+                                                    <input class="datepicker-here form-control text-muted digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl">
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="col-6-6 form-label text-muted" for="passwordwizard">
+                                                        العنوان
+                                                    </label>
+                                                    <input class="form-control text-muted" name="address" id="passwordwizard" type="text" placeholder="عنوان المشترك">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label text-muted" for="confirmpasswordwizard">
+                                                        رقم المحمول
+                                                    </label>
+                                                    <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول">
+                                                    <p id="mobileMsg" class="d-none">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="personalImg">
+                                                        الصورة الشخصية
+                                                    </label>
+                                                    <input class="form-control text-muted" name="img" id="personalImg" type="file" accept="image/*">
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="personalImg">
+                                                        صورة البطاقة الشخصية
+                                                    </label>
+                                                    <input class="form-control text-muted" name="id_img" id="personalImg" type="file" accept="image/*">
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="ssn">
+                                                        الرقم القومي
+                                                    </label>
+                                                    <input type="text" id="ssn" name="ssn" maxlength="14" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل الرقم القومي">
+                                                    <p id="ssnMsg" class="d-none">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
+                                                </div>
+                                                <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                    <label class="form-label text-muted" for="firstnamewizard">
+                                                        الحالة الإجتماعية
+                                                    </label>
+                                                    <input class="form-control text-muted" id="firstnamewizard" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label text-muted" for="firstnamewizard">
+                                                        ت المنزل
+                                                    </label>
+                                                    <input class="form-control text-muted" id="firstnamewizard" name="home_tel" type="number" placeholder="ت المنزل">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                            <article class="stepper-three row g-3 needs-validation custom-input" style="display: none;">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-white" for="email-basic">
-                                                الوظيفة
-                                            </label>
-                                            <input class="form-control text-white" name="job" id="email-basic" type="text" placeholder="الوظيفة">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-white" for="validationCustom996">
-                                                جهة العمل
-                                            </label>
-                                            <input class="form-control text-white" name="job_destination" id="validationCustom996" type="text" placeholder="جهة العمل">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-white" for="validationCustom996">
-                                                عنوان العمل
-                                            </label>
-                                            <input class="form-control text-white" name="job_address" id="validationCustom996" type="text" placeholder="عنوان العمل">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label class="form-label text-white" for="validationCustom996">
-                                                ت العمل
-                                            </label>
-                                            <input class="form-control text-white" name="job_tel" id="validationCustom996" type="text" placeholder="ت العمل">
+                                </article>
+                                <article class="stepper-two row g-3 needs-validation custom-input" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label class="form-label text-white" for="placeholdername1">المؤهل الدراسي</label>
+                                                <input class="form-control text-white" id="placeholdername1" name="educational_qualification" type="text" placeholder="المؤهل الدراسي">
+                                            </div>
+                                            <div class="col-xxl-4 col-lg-6">
+                                                <label class="form-label text-white" for="cardNumber01">تاريخ المؤهل</label>
+                                                <input class="datepicker-here form-control text-white digits" name="qualification_date" readonly id="cardNumber01" type="text" placeholder="تاريخ المؤهل" data-language="ar">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                            <article class="stepper-four row g-3 needs-validation custom-input" style="display: none;">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label for="validationMembership" class="form-label text-white">نوع العضوية</label>
-                                            <select name="membership_type" class="form-select text-white" id="validationMembership">
-                                                <option selected disabled>إختار نوع العضوية</option>
-                                                <option value="عامل">عامل</option>
-                                                <option value="إنتساب">إنتساب</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label for="validationMemberId" class="form-label text-white">رقم العضوية</label>
-                                            @if (!is_null($newMemberId))
-                                                <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
-                                            @else
-                                                <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId" readonly>
-                                            @endif
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
-                                            <input type="number" name="invoice_no" maxlength="4" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
+                                </article>
+                                <article class="stepper-three row g-3 needs-validation custom-input" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label class="form-label text-white" for="email-basic">
+                                                    الوظيفة
+                                                </label>
+                                                <input class="form-control text-white" name="job" id="email-basic" type="text" placeholder="الوظيفة">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-label text-white" for="validationCustom996">
+                                                    جهة العمل
+                                                </label>
+                                                <input class="form-control text-white" name="job_destination" id="validationCustom996" type="text" placeholder="جهة العمل">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-label text-white" for="validationCustom996">
+                                                    عنوان العمل
+                                                </label>
+                                                <input class="form-control text-white" name="job_address" id="validationCustom996" type="text" placeholder="عنوان العمل">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="form-label text-white" for="validationCustom996">
+                                                    ت العمل
+                                                </label>
+                                                <input class="form-control text-white" name="job_tel" id="validationCustom996" type="text" placeholder="ت العمل">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                            <article class="stepper-five row justify-content-center w-100 g-3 needs-validation" style="display: none;">
-                                <div class="col-12 m-0">
-                                    <div class="successful-form text-white text-center my-4">
-                                        <img class="img-fluid" src="{{asset('assets/images/icons8-done.gif')}}" alt="successful">
-                                        <h6 class="text-center mt-2">اضغط على تأكيد لإضافة المشترك</h6>
+                                </article>
+                                <article class="stepper-four row g-3 needs-validation custom-input" style="display: none;">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label for="validationMembership" class="form-label text-white">نوع العضوية</label>
+                                                <select name="membership_type" class="form-select text-white" id="validationMembership">
+                                                    <option selected disabled>إختار نوع العضوية</option>
+                                                    <option value="عامل">عامل</option>
+                                                    <option value="إنتساب">إنتساب</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="validationMemberId" class="form-label text-white">رقم العضوية</label>
+                                                @if (!is_null($newMemberId))
+                                                    <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                                @else
+                                                    <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                                @endif
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
+                                                <input type="number" name="invoice_no" maxlength="4" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                            <div id="submitButton"></div>
-                        </div>
-                    </form>
+                                </article>
+                                <article class="stepper-five row justify-content-center w-100 g-3 needs-validation" style="display: none;">
+                                    <div class="col-12 m-0">
+                                        <div class="successful-form text-white text-center my-4">
+                                            <img class="img-fluid" src="{{asset('assets/images/icons8-done.gif')}}" alt="successful">
+                                            <h6 class="text-center mt-2">اضغط على تأكيد لإضافة المشترك</h6>
+                                        </div>
+                                    </div>
+                                </article>
+                                <div id="submitButton"></div>
+                            </div>
+                        </form>
                     <div class="wizard-footer mt-4 d-flex gap-2 justify-content-end" id="wizard-footer">
                         <button class="btn btn-outline-danger" id="backbtn" onclick="backStep()" disabled="">السابق</button>
                         <button class="btn btn-primary" id="nextbtn" onclick="nextStep()">التالي</button>
