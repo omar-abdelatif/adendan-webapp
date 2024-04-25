@@ -29,8 +29,8 @@
         $(window).on('scroll', function () {
             if ($(this).scrollTop() < 600) {
                 $(".sidebar-list").removeClass("hoverd");
-            }         
-        });   
+            }
+        });
       }
 
     /*----------------------------------------
@@ -41,10 +41,10 @@
 
     $('.show-hide span').click(function () {
         if ($(this).hasClass('show')) {
-            $('input[name="login[password]"]').attr('type', 'text');
+            $('input[name="login"]').attr('type', 'text');
             $(this).removeClass('show');
         } else {
-            $('input[name="login[password]"]').attr('type', 'password');
+            $('input[name="login"]').attr('type', 'password');
             $(this).addClass('show');
         }
     });
@@ -121,7 +121,7 @@
         }
     });
    $(".mode").on("click", function () {
-        const bodyModeDark = $("body").hasClass("dark-only") 
+        const bodyModeDark = $("body").hasClass("dark-only")
 
         if(!bodyModeDark){
             $(".mode").addClass("active")
@@ -143,7 +143,7 @@
 
     // sidebar filter
     $('.md-sidebar .md-sidebar-toggle ').on('click', function(e) {
-        $(".md-sidebar .md-sidebar-aside ").toggleClass("open");   
+        $(".md-sidebar .md-sidebar-aside ").toggleClass("open");
     });
 
 })(jQuery);

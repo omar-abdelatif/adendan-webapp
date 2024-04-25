@@ -17,7 +17,7 @@
         <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
         @include('frontend.layouts.assets.css')
     </head>
-    <body>
+    <body oncontextmenu="return false;">
         <div id="fb-root"></div>
         <div class="wrapper layout-1">
             @include('frontend.layouts.components.header')

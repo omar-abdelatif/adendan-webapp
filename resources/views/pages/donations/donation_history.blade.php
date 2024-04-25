@@ -242,10 +242,10 @@
                                                                 @endif
                                                                 <td class="text-center">{{$delay->created_at->format('Y-m-d')}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn bg-secondary" type="button" data-bs-target="#donationPayment_{{$delay->id}}" data-bs-toggle="modal">
+                                                                    <button class="btn bg-secondary" type="button" data-bs-target="#oldDdonationPayment_{{$delay->id}}" data-bs-toggle="modal">
                                                                         <i class="fa-solid fa-dollar-sign"></i>
                                                                     </button>
-                                                                    <div class="fade modal" tabindex="-1" id="donationPayment_{{$delay->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="fade modal" tabindex="-1" id="oldDdonationPayment_{{$delay->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
