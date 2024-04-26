@@ -144,7 +144,8 @@
                                                     الأسم الكامل
                                                 </label>
                                                 <input class="form-control text-muted" id="name" type="text" name="name" placeholder="أدخل الأسم باللغة العربية" pattern="[\u0600-\u06FF\s]{3,}" required>
-                                                <p id="nameMsg" class="d-none">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
+                                                <p id="nameMsg" class="d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
+                                                <p id="nameMsgRequired" class="d-none required mb-0">حقل الإسم مطلوب</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="form-label text-muted" for="email-basic-wizard">
@@ -156,7 +157,9 @@
                                                 <label class="form-label text-muted" for="confirmpasswordwizard">
                                                     تاريخ الميلاد
                                                 </label>
-                                                <input class="datepicker-here form-control text-muted digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl" required>
+                                                <input class="datepicker-here form-control text-muted digits" id="birthdate" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl" required>
+                                                <p id="birthdateMsg" class="d-none mb-0">يجب إدخال التاريخ بصيغة صحيحة</p>
+                                                <p id="birthdateMsgRequired" class="d-none required mb-0">حقل تاريخ الميلاد مطلوب</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="col-6-6 form-label text-muted" for="passwordwizard">
@@ -169,7 +172,8 @@
                                                     رقم المحمول
                                                 </label>
                                                 <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول" required>
-                                                <p id="mobileMsg" class="d-none">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                                <p id="mobileMsg" class="d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                                <p id="mobileMsgRequired" class="d-none required mb-0">حقل الرقم المحمول مطلوب</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -190,7 +194,8 @@
                                                     الرقم القومي
                                                 </label>
                                                 <input type="text" id="ssn" name="ssn" maxlength="14" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل الرقم القومي" required>
-                                                <p id="ssnMsg" class="d-none">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
+                                                <p id="ssnMsg" class="d-none mb-0">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
+                                                <p id="ssnMsgRequired" class="d-none required mb-0">حقل الرقم القومي مطلوب</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="form-label text-muted" for="firstnamewizard">
