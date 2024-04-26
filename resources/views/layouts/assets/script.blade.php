@@ -12,7 +12,6 @@
 <!-- Plugins JS start-->
 <script id="menu" src="{{asset('assets/js/sidebar-menu.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="{{asset('assets/js/form-wizard/form-wizard.js')}}"></script>
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
 @yield('script')
@@ -40,7 +39,6 @@
 </script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
 {{-- ! Validation Forms ! --}}
 <script src="{{asset('assets/js/form-validation-custom.js')}}"></script>

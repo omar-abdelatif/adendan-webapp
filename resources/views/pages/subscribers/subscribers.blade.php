@@ -7,6 +7,7 @@
     <li class="breadcrumb-item active">كل المشتركين</li>
 @endsection
 @section('script')
+    <script src="{{asset('assets/js/form-wizard/form-wizard.js')}}"></script>
     <script>
         let selectedElements = document.querySelectorAll("[data-donation-id]")
         selectedElements.forEach((selectElement) => {

@@ -12,52 +12,60 @@
 @section('modals')
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_news">إضافة خبر جديد</button>
     <div class="modal fade" id="add_news" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة خبر</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('news.store')}} method="post" enctype="multipart/form-data">
+                    <form action={{route('news.store')}} method="post" id="newsForm" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
+                            <div class="col-lg-6">
+                                <div class="form-group mb-lg-3 mb-md-2">
                                     <label for="title" class="text-white">العنوان</label>
-                                    <input type="text" class="form-control text-white" name="title" placeholder="عنوان الخبر">
+                                    <input type="text" class="form-control text-white" id="newsTitle" pattern="[\u0600-\u06FF\s]{7,}" name="title" placeholder="عنوان الخبر" required>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="newsReq">حقل العنوان مطلوب</p>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="newsMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 7 أحرف</p>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="title" class="text-white">تفاصيل الخبر</label>
-                                    <textarea name="description" class="form-control text-light text-center pt-2" placeholder="تفاصيل الخبر"></textarea>
+                                <div class="form-group mb-lg-3 mb-md-2">
+                                    <label for="details" class="text-white">تفاصيل الخبر</label>
+                                    <textarea name="description" id="details" class="form-control text-light text-center" placeholder="تفاصيل الخبر" required></textarea>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="detailsReq">حقل التفاصيل مطلوب</p>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="" class="text-white">إختر التصنيف</label>
-                                    <select class="form-select form-select-sm" name="category" id="categorySelect">
-                                        <option selected="">التصنيف</option>
+                                <div class="form-group mb-lg-3 mb-md-2">
+                                    <label for="categorySelect" class="text-white">إختر التصنيف</label>
+                                    <select class="form-select form-select-sm" name="category" id="categorySelect" required>
+                                        <option value="التصنيف" selected disabled>التصنيف</option>
                                         <option value="أخبار عامة">أخبار عامة</option>
                                         <option value="أخبار ثقافية">أخبار ثقافية</option>
                                         <option value="أفراح">أفراح</option>
                                         <option value="عزاء">عزاء</option>
                                         <option value="أخبار رياضية">أخبار رياضية</option>
                                     </select>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="categoryMsg">يرجى اختيار تصنيف من القائمة أدناه</p>
                                 </div>
-                                <div class="form-group mt-3" id="img">
-                                    <label for="" class="text-white">صورة الخبر</label>
-                                    <input type="file" name="img" class="form-control" accept="image/*">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-lg-3 mb-md-2" id="img">
+                                    <label for="img" class="text-white">صورة الخبر</label>
+                                    <input type="file" name="img" id="img" class="form-control" accept="image/*">
                                 </div>
-                                <div class="form-group mt-3" id="thumbs">
-                                    <label for="" class="text-white">صورة المصغرة</label>
-                                    <input type="file" name="thumbnail[]" class="form-control" multiple accept="image/*">
+                                <div class="form-group mb-lg-3 mb-md-2" id="thumbs">
+                                    <label for="thumb" class="text-white">صورة المصغرة</label>
+                                    <input type="file" name="thumbnail[]" class="form-control" id="thumb" multiple accept="image/*">
                                 </div>
-                                <div class="form-group mt-3" id="inputs">
-                                    <label for="" class="text-white mb-3">رابط الفيديو (إذا وجد ) </label>
+                                <div class="form-group mb-lg-3 mb-md-2" id="inputs">
+                                    <label for="link" class="text-white mb-3">رابط الفيديو (إذا وجد ) </label>
                                     <a href="javascript:void(0)" class="btn btn-success px-2 py-1 addRow ms-2">+</a>
-                                    <input type="text" name="url[]" class="form-control text-center text-white mb-4" placeholder="رابط الفيديو">
+                                    <input type="text" name="url[]" class="form-control text-center text-white mb-4" id="link" placeholder="رابط الفيديو">
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
-                                    <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                    <button type="submit" id="submit" role="button" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
                         </div>
