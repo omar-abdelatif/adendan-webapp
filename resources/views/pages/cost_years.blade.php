@@ -7,28 +7,32 @@
     <li class="breadcrumb-item active">التكلفة السنوية</li>
 @endsection
 @section('modals')
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_cat">إضافة عام جديد</button>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_cat">إضافة المبلغ السنوي</button>
     <div class="modal fade" id="add_cat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة عام جديد</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">المبلغ السنوي</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('costyears.store')}} method="post">
+                    <form action={{route('costyears.store')}} method="post" id="costYears">
                         @csrf
                         <div class="form-group">
-                            <label for="title" class="text-muted">السنة</label>
-                            <input type="number" class="form-control text-muted" name="year" placeholder="السنة">
+                            <label for="year" class="text-muted">السنة</label>
+                            <input type="number" class="form-control text-muted" id="year" name="year" placeholder="السنة" required>
+                            <p class="required d-none text-danger mb-0" id="yearReq">حقل السنة مطلوب</p>
+                            <p class="required d-none text-danger mb-0" id="yearMsg">يجب إدخال السنة بصيغة صحيحة</p>
                         </div>
                         <div class="form-group">
-                            <label for="title" class="text-muted">المبلغ</label>
-                            <input type="number" class="form-control text-muted" name="cost" placeholder="المبلغ">
+                            <label for="cost" class="text-muted">المبلغ</label>
+                            <input type="number" class="form-control text-muted" id="cost" name="cost" placeholder="المبلغ" required>
+                            <p class="required d-none text-danger mb-0" id="amountReq">حقل المبلغ مطلوب</p>
+                            <p class="required d-none text-danger mb-0" id="amountMsg">يجب ان يكون المبلغ اكبر من صفر و مكون من رقمين</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                            <button type="submit" role="button" id="submitCost" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>

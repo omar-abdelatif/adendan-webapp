@@ -300,3 +300,83 @@ if (newsform) {
         }
     });
 }
+//! Validation For Cost Years
+const costYears = document.getElementById("costYears");
+if (costYears) {
+    costYears.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (validateForm(costYears)) {
+            this.submit();
+        }
+    });
+    //! Validation For Year Cost
+    const year = document.getElementById("year");
+    const yearMsg = document.getElementById("yearMsg");
+    const yearReq = document.getElementById("yearReq");
+    year.addEventListener("keyup", function () {
+        let letters = /^\d{4}$/;
+        if (letters.test(year.value)) {
+            year.classList.add("good");
+            yearMsg.classList.add("d-none");
+        } else {
+            year.classList.remove("good");
+            year.classList.add("error");
+            yearMsg.classList.remove("d-none");
+        }
+    });
+    year.addEventListener("input", function () {
+        if (this.value.trim() === "") {
+            yearReq.classList.remove("d-none");
+            yearMsg.classList.add("d-none");
+        } else {
+            yearReq.classList.add("d-none");
+            yearMsg.classList.remove("d-none");
+        }
+    });
+    year.addEventListener("blur", function () {
+        if (this.value.trim() === "") {
+            yearReq.classList.remove("d-none");
+        } else {
+            yearReq.classList.add("d-none");
+        }
+    });
+    //! Validation For Year Cost
+    const cost = document.getElementById("cost");
+    const amountMsg = document.getElementById("amountMsg");
+    const amountReq = document.getElementById("amountReq");
+    cost.addEventListener("keyup", function () {
+        let letters = /^(?!-)(?!0+$)\d{2,10}$/;
+        if (letters.test(cost.value)) {
+            cost.classList.add("good");
+            amountMsg.classList.add("d-none");
+        } else {
+            cost.classList.remove("good");
+            cost.classList.add("error");
+            amountMsg.classList.remove("d-none");
+        }
+    });
+    cost.addEventListener("input", function () {
+        if (this.value.trim() === "") {
+            amountReq.classList.remove("d-none");
+            amountMsg.classList.add("d-none");
+        } else {
+            amountReq.classList.add("d-none");
+            amountMsg.classList.remove("d-none");
+        }
+    });
+    cost.addEventListener("blur", function () {
+        if (this.value.trim() === "") {
+            amountReq.classList.remove("d-none");
+        } else {
+            amountReq.classList.add("d-none");
+        }
+    });
+    //! Validation For Submit Cost
+    const submit = document.getElementById("submitCost");
+    submit.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (validateForm(costYears)) {
+            this.submit();
+        }
+    });
+}
