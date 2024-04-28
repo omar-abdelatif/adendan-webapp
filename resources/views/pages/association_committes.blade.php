@@ -12,33 +12,37 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة لجنة جديدة</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة لجنة جديدة</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('association.store')}} method="post">
+                    <form action={{route('association.store')}} method="post" id="associateForm">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="title" class="text-white">إسم اللجنة</label>
-                                    <input type="text" class="form-control text-white" name="name" placeholder="إسم اللجنة">
+                                    <label for="title" class="text-muted">إسم اللجنة</label>
+                                    <input type="text" class="form-control text-muted" name="name"  placeholder="إسم اللجنة" id="associateName" required>
+                                    <p class="required d-none text-danger mb-0" id="associateNameReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="associateNameMsg">يجب ان يكون اسم اللجنة باللغة العربية ولا يقل عن 10 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-white">عن اللجنة</label>
-                                    <textarea name="description" class="form-control text-white" placeholder="عن اللجنة" cols="30" rows="3"></textarea>
+                                    <label for="title" class="text-muted">عن اللجنة</label>
+                                    <textarea name="description" class="form-control text-muted" placeholder="عن اللجنة" cols="30" rows="3"></textarea>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-white">رئيس اللجنة</label>
-                                    <input type="text" class="form-control text-white" name="boss" placeholder="رئيس الجمعية">
+                                    <label for="title" class="text-muted">رئيس اللجنة</label>
+                                    <input type="text" class="form-control text-muted" name="boss" placeholder="رئيس الجمعية" id="associateBoss" required>
+                                    <p class="required d-none text-danger mb-0" id="bossReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="bossMsg">يجب ان يكتب الاسم باللغة العربية ولا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-white">مهام الجمعية</label>
-                                    <input type="text" class="form-control text-white" name="tasks" placeholder="مهام الجمعية">
+                                    <label for="title" class="text-muted">مهام الجمعية</label>
+                                    <input type="text" class="form-control text-muted" name="tasks" placeholder="مهام الجمعية">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                    <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                    <button type="submit" role="button" id="associateSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +93,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة لجنة جديدة</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة لجنة جديدة</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -99,20 +103,20 @@
                                                                         <input type="hidden" name="id" value={{$asso->id}} >
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <label for="title" class="text-white">إسم اللجنة</label>
-                                                                                <input type="text" class="form-control text-white" name="name" value="{{$asso->name}}" placeholder="إسم اللجنة">
+                                                                                <label for="title" class="text-muted">إسم اللجنة</label>
+                                                                                <input type="text" class="form-control text-muted" name="name" value="{{$asso->name}}" placeholder="إسم اللجنة">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-white">عن اللجنة</label>
-                                                                                <textarea name="description" class="form-control text-white" placeholder="عن اللجنة" cols="30" rows="3">{{$asso->description}}</textarea>
+                                                                                <label for="title" class="text-muted">عن اللجنة</label>
+                                                                                <textarea name="description" class="form-control text-muted" placeholder="عن اللجنة" cols="30" rows="3">{{$asso->description}}</textarea>
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-white">رئيس اللجنة</label>
-                                                                                <input type="text" class="form-control text-white" name="boss" value="{{$asso->boss}}" placeholder="رئيس الجمعية">
+                                                                                <label for="title" class="text-muted">رئيس اللجنة</label>
+                                                                                <input type="text" class="form-control text-muted" name="boss" value="{{$asso->boss}}" placeholder="رئيس الجمعية">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-white">مهام الجمعية</label>
-                                                                                <input type="text" class="form-control text-white" name="tasks" value="{{$asso->tasks}}" placeholder="مهام الجمعية">
+                                                                                <label for="title" class="text-muted">مهام الجمعية</label>
+                                                                                <input type="text" class="form-control text-muted" name="tasks" value="{{$asso->tasks}}" placeholder="مهام الجمعية">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -133,14 +137,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">جار حذف اللجنة {{$asso->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">جار حذف اللجنة {{$asso->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form action={{route('association.delete', $asso->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
-                                                                        <h3 class="text-white my-2">هل أنت متأكد من الحذف</h3>
+                                                                        <h3 class="text-muted my-2">هل أنت متأكد من الحذف</h3>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>

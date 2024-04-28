@@ -5,9 +5,7 @@ let f4 = 0;
 
 // ! Validation Function Stamp
 function validateForm(form, event) {
-    let inputs = form.querySelectorAll(
-        "input[required], select[required], textarea[required]"
-    );
+    let inputs = form.querySelectorAll("input[required], textarea[required]");
     let categorySelects = form.querySelectorAll("select[required]");
     let reqs = form.querySelectorAll("p.required");
     let isValid = true;
@@ -26,7 +24,7 @@ function validateForm(form, event) {
     });
     categorySelects.forEach(function (select) {
         let categoryErrorMsg = select.nextElementSibling;
-        if (select.value === "التصنيف") {
+        if (select.value === "التصنيف" || select.value === "المنطقة") {
             select.classList.add("error");
             select.classList.remove("good");
             categoryErrorMsg.classList.remove("d-none");
@@ -300,7 +298,7 @@ if (newsform) {
         }
     });
 }
-//! Validation For Cost Years
+//! Validation For Store Cost Years
 const costYears = document.getElementById("costYears");
 if (costYears) {
     costYears.addEventListener("submit", function (event) {
@@ -376,6 +374,168 @@ if (costYears) {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(costYears)) {
+            this.submit();
+        }
+    });
+}
+//! Validation For Store Tombs
+const tomb = document.getElementById("tombForm");
+if (tomb) {
+    tomb.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (validateForm(tomb)) {
+            this.submit();
+        }
+    });
+    //! Validation For Tomb Name
+    const tombName = document.getElementById("tombName");
+    const tombReq = document.getElementById("tombReq");
+    const tombMsg = document.getElementById("tombMsg");
+    tombName.addEventListener("keyup", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (letters.test(tombName.value.trim())) {
+            tombName.classList.remove("error");
+            tombName.classList.add("good");
+            tombMsg.classList.add("d-none");
+        } else {
+            tombName.classList.remove("good");
+            tombName.classList.add("error");
+            tombMsg.classList.remove("d-none");
+        }
+    });
+    tombName.addEventListener("input", function () {
+        if (this.value.trim() === "") {
+            tombReq.classList.remove("d-none");
+            tombMsg.classList.add("d-none");
+        } else {
+            tombReq.classList.add("d-none");
+            tombMsg.classList.remove("d-none");
+        }
+    });
+    tombName.addEventListener("blur", function () {
+        if (this.value.trim() === "") {
+            tombReq.classList.remove("d-none");
+        } else {
+            tombReq.classList.add("d-none");
+        }
+    });
+    //! Validation For Region
+    const tombRegion = document.getElementById("regionSelect");
+    const regionMsg = document.getElementById("regionMsg");
+    tombRegion.addEventListener("change", function (event) {
+        event.preventDefault();
+        if (this.options[this.selectedIndex].value === "المنطقة") {
+            tombRegion.classList.add("error");
+            regionMsg.classList.remove("d-none");
+            tombRegion.classList.remove("good");
+        } else {
+            tombRegion.classList.remove("error");
+            tombRegion.classList.add("good");
+            regionMsg.classList.add("d-none");
+        }
+    });
+    tombRegion.addEventListener("input", function () {
+        if (this.value.trim() === "") {
+            regionMsg.classList.add("d-none");
+        } else {
+            regionMsg.classList.remove("d-none");
+        }
+    });
+    //! Validation For Location
+    const tombLocation = document.getElementById("location");
+    const locationReq = document.getElementById("locationReq");
+    tombLocation.addEventListener("keyup", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (letters.test(tombLocation.value)) {
+            tombLocation.classList.add("good");
+            locationReq.classList.add("d-none");
+        } else {
+            tombLocation.classList.remove("good");
+            tombLocation.classList.add("error");
+            locationReq.classList.remove("d-none");
+        }
+    });
+    tombLocation.addEventListener("input", function () {
+        if (this.value.trim() === "") {
+            locationReq.classList.add("d-none");
+        } else {
+            locationReq.classList.remove("d-none");
+        }
+    });
+    //! Validation For Submit Form
+    const submit = document.getElementById("tombSubmit");
+    submit.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (validateForm(tomb)) {
+            this.submit();
+        }
+    });
+}
+//! Validation For Store Workers
+//! Validation For Store Associations Committes
+const associate = document.getElementById("associateForm");
+if (associate) {
+    associate.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (validateForm(associate)) {
+            this.submit();
+        }
+    });
+    //! Validation For Association Name
+    const associateName = document.getElementById("associateName");
+    const associateNameReq = document.getElementById("associateNameReq");
+    const associateNameMsg = document.getElementById("associateNameMsg");
+    associateName.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{10,}$/;
+        if (this.value.trim() === "") {
+            associateNameReq.classList.remove("d-none");
+            associateNameMsg.classList.add("d-none");
+            associateName.classList.remove("good");
+            associateName.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                associateName.classList.add("good");
+                associateName.classList.remove("error");
+                associateNameMsg.classList.add("d-none");
+                associateNameReq.classList.add("d-none");
+            } else {
+                associateName.classList.remove("good");
+                associateName.classList.add("error");
+                associateNameMsg.classList.remove("d-none");
+                associateNameReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Association Boss
+    const associateBoss = document.getElementById("associateBoss");
+    const bossMsg = document.getElementById("bossMsg");
+    const bossReq = document.getElementById("bossReq");
+    associateBoss.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            bossReq.classList.remove("d-none");
+            bossMsg.classList.add("d-none");
+            associateBoss.classList.remove("good");
+            associateBoss.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                associateBoss.classList.add("good");
+                associateBoss.classList.remove("error");
+                bossMsg.classList.add("d-none");
+                bossReq.classList.add("d-none");
+            } else {
+                associateBoss.classList.remove("good");
+                associateBoss.classList.add("error");
+                bossMsg.classList.remove("d-none");
+                bossReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Submit Form
+    const submit = document.getElementById("associateSubmit");
+    submit.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (validateForm(associate)) {
             this.submit();
         }
     });

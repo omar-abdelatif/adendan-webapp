@@ -12,22 +12,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مقبره جديد</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة مقبره جديد</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('tomb.store')}} method="post">
+                    <form action={{route('tomb.store')}} method="post" id="tombForm">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="title" class="text-white">إسم المقبره</label>
-                                    <input type="text" class="form-control text-white" name="title" placeholder="إسم المقبره">
+                                <div class="form-group mb-3">
+                                    <label for="title" class="text-muted">إسم المقبره</label>
+                                    <input type="text" class="form-control text-muted" id="tombName" pattern="[\u0600-\u06FF\s]{3,}" name="title" placeholder="إسم المقبره" required>
+                                    <p class="required d-none text-danger mb-0" id="tombReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="tombMsg">يجب أن يكون الإسم باللغة العربية ولا يقل عن 3 أحرف</p>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="title" class="text-white">المنطقة</label>
-                                    <select name="region" class="form-select text-white">
-                                        <option selected>إختر المنطقة</option>
+                                <div class="form-group mb-3">
+                                    <label for="title" class="text-muted">المنطقة</label>
+                                    <select name="region" class="form-select text-muted" id="regionSelect" required>
+                                        <option selected>المنطقة</option>
                                         <option value="أكتوبر" class="option-control">أكتوبر</option>
                                         <option value="الفيوم" class="option-control">الفيوم</option>
                                         <option value="15مايو" class="option-control">15مايو</option>
@@ -35,22 +37,24 @@
                                         <option value="الغفير" class="option-control">الغفير</option>
                                         <option value="زينهم" class="option-control">زينهم</option>
                                     </select>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="regionMsg">يرجى اختيار المنطقة من القائمة أدناه</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tomb_guard_name" class="text-white">إسم التربي</label>
-                                    <input type="text" id="tomb_guard_name" class="form-control text-white" name="tomb_guard_name" placeholder="إسم التربي">
+                                <div class="form-group mb-3">
+                                    <label for="tomb_guard_name" class="text-muted">إسم التربي</label>
+                                    <input type="text" id="tomb_guard_name" class="form-control text-muted" name="tomb_guard_name" placeholder="إسم التربي">
                                 </div>
-                                <div class="form-group">
-                                    <label for="tomb_guard_number" class="text-white">رقم المحمول</label>
-                                    <input type="number" id="tomb_guard_number" class="form-control text-white" name="tomb_guard_number" placeholder="رقم المحمول">
+                                <div class="form-group mb-3">
+                                    <label for="tomb_guard_number" class="text-muted">رقم المحمول</label>
+                                    <input type="number" id="tomb_guard_number" class="form-control text-muted" name="tomb_guard_number" placeholder="رقم المحمول">
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label class="text-white">الموقع</label>
-                                    <input type="text" name="location" placeholder="موقع المقبره" class="form-control text-white">
+                                <div class="form-group mb-3">
+                                    <label class="text-muted">الموقع</label>
+                                    <input type="text" name="location" id="location" placeholder="موقع المقبره" class="form-control text-muted" required>
+                                    <p class="d-none required text-danger" id="locationReq">حقل الموقع مطلوب</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                    <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                    <button type="submit" role="button" id="tombSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
                         </div>
@@ -78,24 +82,24 @@
                             <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <td class="text-center text-white">#</td>
-                                        <td class="text-center text-white">إسم المقبره</td>
-                                        <td class="text-center text-white">المنطقة</td>
-                                        <td class="text-center text-white">إسم التربي</td>
-                                        <td class="text-center text-white">رقم المحمول</td>
-                                        <td class="text-center text-white">الموقع</td>
-                                        <td class="text-center text-white">Action</td>
+                                        <td class="text-center text-muted">#</td>
+                                        <td class="text-center text-muted">إسم المقبره</td>
+                                        <td class="text-center text-muted">المنطقة</td>
+                                        <td class="text-center text-muted">إسم التربي</td>
+                                        <td class="text-center text-muted">رقم المحمول</td>
+                                        <td class="text-center text-muted">الموقع</td>
+                                        <td class="text-center text-muted">Action</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($tombs as $tomb)
                                         <tr>
-                                            <td class="text-white">{{$i++}}</td>
-                                            <td class="text-white">{{$tomb->title}}</td>
-                                            <td class="text-white">{{$tomb->region}}</td>
-                                            <td class="text-white">{{$tomb->tomb_guard_name}}</td>
-                                            <td class="text-white">{{$tomb->tomb_guard_number}}</td>
-                                            <td class="text-white">{{$tomb->location}}</td>
+                                            <td class="text-muted">{{$i++}}</td>
+                                            <td class="text-muted">{{$tomb->title}}</td>
+                                            <td class="text-muted">{{$tomb->region}}</td>
+                                            <td class="text-muted">{{$tomb->tomb_guard_name}}</td>
+                                            <td class="text-muted">{{$tomb->tomb_guard_number}}</td>
+                                            <td class="text-muted">{{$tomb->location}}</td>
                                             <td>
                                                 {{-- ! Update ! --}}
                                                 <button type="button" class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target="#editingborder_{{$tomb->id}}">
@@ -105,7 +109,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تحديث المقبره {{$tomb->title}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تحديث المقبره {{$tomb->title}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -115,12 +119,12 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <label for="title" class="text-white">إسم المقبره</label>
-                                                                                <input type="text" class="form-control text-white" value="{{$tomb->title}}" name="title" placeholder="إسم المقبره">
+                                                                                <label for="title" class="text-muted">إسم المقبره</label>
+                                                                                <input type="text" class="form-control text-muted" value="{{$tomb->title}}" name="title" placeholder="إسم المقبره">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-white">المنطقة</label>
-                                                                                <select name="region" class="form-select text-white">
+                                                                                <label for="title" class="text-muted">المنطقة</label>
+                                                                                <select name="region" class="form-select text-muted">
                                                                                     <option selected>إختر المنطقة</option>
                                                                                     <option value="أكتوبر" class="option-control" {{$tomb->region === 'أكتوبر' ? 'selected' : ''}}>أكتوبر</option>
                                                                                     <option value="الفيوم" class="option-control" {{$tomb->region === 'الفيوم' ? 'selected' : ''}}>الفيوم</option>
@@ -131,16 +135,16 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="tomb_guard_name" class="text-white">إسم التربي</label>
-                                                                                <input type="text" id="tomb_guard_name" class="form-control text-white" value="{{$tomb->tomb_guard_name}}" name="tomb_guard_name" placeholder="إسم التربي">
+                                                                                <label for="tomb_guard_name" class="text-muted">إسم التربي</label>
+                                                                                <input type="text" id="tomb_guard_name" class="form-control text-muted" value="{{$tomb->tomb_guard_name}}" name="tomb_guard_name" placeholder="إسم التربي">
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="tomb_guard_number" class="text-white">رقم المحمول</label>
-                                                                                <input type="number" id="tomb_guard_number" class="form-control text-white" value="{{$tomb->tomb_guard_number}}" name="tomb_guard_number" placeholder="رقم المحمول">
+                                                                                <label for="tomb_guard_number" class="text-muted">رقم المحمول</label>
+                                                                                <input type="number" id="tomb_guard_number" class="form-control text-muted" value="{{$tomb->tomb_guard_number}}" name="tomb_guard_number" placeholder="رقم المحمول">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label class="text-white">الموقع</label>
-                                                                                <input type="text" name="location" value="{{$tomb->location}}" placeholder="موقع المقبره" class="form-control text-white">
+                                                                                <label class="text-muted">الموقع</label>
+                                                                                <input type="text" name="location" value="{{$tomb->location}}" placeholder="موقع المقبره" class="form-control text-muted">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -161,14 +165,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">حذف المقبره {{$tomb->title}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">حذف المقبره {{$tomb->title}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form action={{route('tomb.delete', $tomb->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
-                                                                        <h1 class="text-white">هل أنت متأكد من الحذف</h1>
+                                                                        <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
