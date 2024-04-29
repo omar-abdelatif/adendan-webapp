@@ -4,27 +4,31 @@ let f3 = 0;
 let f4 = 0;
 
 // ! Validation Function Stamp
-function validateForm(form, event) {
+function validateForm(form) {
     let inputs = form.querySelectorAll("input[required], textarea[required]");
     let categorySelects = form.querySelectorAll("select[required]");
     let reqs = form.querySelectorAll("p.required");
     let isValid = true;
     inputs.forEach(function (input) {
-        if (!input.value.trim()) {
+        let inputError = input.nextElementSibling;
+        if (input.value.trim() === "") {
             input.classList.add("error");
             isValid = false;
-            reqs.forEach(function (req) {
-                req.classList.remove("d-none");
-            });
+            inputError.classList.remove("d-none");
+            console.log(inputError);
         } else {
             input.classList.remove("error");
             input.classList.add("good");
-            isValid = true;
+            inputError.classList.add("d-none");
         }
     });
     categorySelects.forEach(function (select) {
         let categoryErrorMsg = select.nextElementSibling;
-        if (select.value === "التصنيف" || select.value === "المنطقة") {
+        if (
+            select.value === "التصنيف" ||
+            select.value === "المنطقة" ||
+            select.value === "الحرفة"
+        ) {
             select.classList.add("error");
             select.classList.remove("good");
             categoryErrorMsg.classList.remove("d-none");
@@ -35,9 +39,6 @@ function validateForm(form, event) {
             categoryErrorMsg.classList.add("d-none");
         }
     });
-    if (!isValid) {
-        event.preventDefault();
-    }
     return isValid;
 }
 //! Store Subscriber Form
@@ -294,7 +295,7 @@ if (newsform) {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(newsform)) {
-            this.submit();
+            newsform.submit();
         }
     });
 }
@@ -374,7 +375,7 @@ if (costYears) {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(costYears)) {
-            this.submit();
+            costYears.submit();
         }
     });
 }
@@ -467,11 +468,155 @@ if (tomb) {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(tomb)) {
-            this.submit();
+            tomb.submit();
         }
     });
 }
 //! Validation For Store Workers
+const workers = document.getElementById("workers");
+if (workers) {
+    // workers.addEventListener("submit", function (event) {
+    //     event.preventDefault();
+    //     if (validateForm(workers)) {
+    //         workers.submit();
+    //     }
+    // });
+    //! Validation For Worker Name
+    const workerName = document.getElementById("worker_name");
+    const nameMsg = document.getElementById("nameMsg");
+    const nameReq = document.getElementById("nameReq");
+    workerName.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            nameReq.classList.remove("d-none");
+            nameMsg.classList.add("d-none");
+            workerName.classList.remove("good");
+            workerName.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                workerName.classList.add("good");
+                workerName.classList.remove("error");
+                nameMsg.classList.add("d-none");
+                nameReq.classList.add("d-none");
+            } else {
+                workerName.classList.remove("good");
+                workerName.classList.add("error");
+                nameMsg.classList.remove("d-none");
+                nameReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Worker Mobile
+    const workerMob = document.getElementById("worker_mob");
+    const mobReq = document.getElementById("mobReq");
+    const mobCount = document.getElementById("mobCount");
+    workerMob.addEventListener("input", function () {
+        const regMOB = /(?=.{11,})/;
+        if (this.value.trim() === "") {
+            mobReq.classList.remove("d-none");
+            mobCount.classList.add("d-none");
+            workerMob.classList.remove("good");
+            workerMob.classList.add("error");
+        } else {
+            if (regMOB.test(this.value)) {
+                workerMob.classList.add("good");
+                workerMob.classList.remove("error");
+                mobReq.classList.add("d-none");
+                mobCount.classList.add("d-none");
+            } else {
+                workerMob.classList.remove("good");
+                workerMob.classList.add("error");
+                mobReq.classList.add("d-none");
+                mobCount.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Worker Category
+    const craft = document.getElementById("craftSelect");
+    const craftReq = document.getElementById("craftReq");
+    craft.addEventListener("change", function (event) {
+        event.preventDefault();
+        if (this.options[this.selectedIndex].value === "الحرفة") {
+            craft.classList.add("error");
+            craft.classList.remove("good");
+            craftReq.classList.remove("d-none");
+        } else {
+            craft.classList.remove("error");
+            craft.classList.add("good");
+            craftReq.classList.add("d-none");
+        }
+        if (this.options[this.selectedIndex].value === "أخرى") {
+            otherCraft.disabled = false;
+            if (otherCraft.value.trim() === "") {
+                otherReq.classList.remove("d-none");
+                otherCraft.classList.remove("good");
+                otherCraft.classList.add("error");
+            }
+        } else {
+            otherCraft.disabled = true;
+            otherCraft.classList.remove("good");
+            otherCraft.classList.remove("error");
+            otherReq.classList.add("d-none");
+        }
+    });
+    //! Validation For Worker Other Category
+    const otherCraft = document.getElementById("otherCategory");
+    const otherReq = document.getElementById("otherReq");
+    otherCraft.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            otherReq.classList.remove("d-none");
+            otherMsg.classList.remove("d-none");
+            otherCraft.classList.remove("good");
+            otherCraft.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                otherCraft.classList.add("good");
+                otherCraft.classList.remove("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.add("d-none");
+            } else {
+                otherCraft.classList.remove("good");
+                otherCraft.classList.add("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Worker Location
+    const worker_loc = document.getElementById("worker_location");
+    const locReq = document.getElementById("locReq");
+    const locMsg = document.getElementById("locMsg");
+    worker_loc.addEventListener("input", function () {
+        const regLOC = /^[\u0600-\u06FF\s]{5,}$/;
+        if (this.value.trim() === "") {
+            locReq.classList.remove("d-none");
+            locMsg.classList.add("d-none");
+            worker_loc.classList.remove("good");
+            worker_loc.classList.add("error");
+        } else {
+            if (regLOC.test(this.value)) {
+                worker_loc.classList.add("good");
+                worker_loc.classList.remove("error");
+                locMsg.classList.add("d-none");
+                locReq.classList.add("d-none");
+            } else {
+                worker_loc.classList.remove("good");
+                worker_loc.classList.add("error");
+                locMsg.classList.remove("d-none");
+                locReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Submit Form
+    const submit = document.getElementById("workerSubmit");
+    submit.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (validateForm(workers)) {
+            workers.submit();
+        }
+    });
+}
 //! Validation For Store Associations Committes
 const associate = document.getElementById("associateForm");
 if (associate) {
@@ -536,7 +681,9 @@ if (associate) {
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(associate)) {
-            this.submit();
+            associate.submit();
         }
     });
 }
+//! Validation For Store Miscellaneous
+//! Validation For Store Board Members

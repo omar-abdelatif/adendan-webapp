@@ -16,37 +16,46 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('worker.store')}} method="post">
+                    <form action={{route('worker.store')}} method="post" id="workers">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="title" class="text-white">إسم الشخص</label>
-                                    <input type="text" class="form-control text-white" name="name" placeholder="إسم الشخص">
+                                    <input type="text" id="worker_name" class="form-control text-muted" minlength="3" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" name="name" placeholder="إسم الشخص" required>
+                                    <p class="required d-none text-danger mb-0" id="nameReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="nameMsg">يجب ان يكون الاسم باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="title" class="text-white">رقم الموبايل</label>
-                                    <input type="number" class="form-control text-white" name="phone_number" placeholder="رقم الموبايل">
+                                    <input type="text" id="worker_mob" class="form-control text-muted" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="phone_number" placeholder="رقم الموبايل" required>
+                                    <p class="required d-none text-danger mb-0" id="mobReq">هذا الحقل  مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="mobCount">يجب ان يكون رقم الموبايل لا يقل عن 11 رقم</p>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="title" class="text-white">الحرفة</label>
-                                    <select name="craft" class="form-select text-white" id="craftSelect">
-                                        <option selected>إختر الحرفة</option>
+                                    <select name="craft" class="form-select text-white" id="craftSelect" required>
+                                        <option selected>الحرفة</option>
                                         <option value="نجار" class="option-control">نجار</option>
                                         <option value="نقاش" class="option-control">نقاش</option>
                                         <option value="سباك" class="option-control">سباك</option>
                                         <option value="كهربائي" class="option-control">كهربائي</option>
                                         <option value="أخرى" class="option-control">أخرى</option>
                                     </select>
-                                    <input type="text" name="other_craft" class="form-control mt-3 text-white" placeholder="إسم الحرفة الأخرى أن وجد" disabled>
+                                    <p class="required d-none mb-0 text-danger" id="craftReq">يجب اختيار حرفة من القائمة</p>
+                                    <input type="text" id="otherCategory" name="other_craft" class="form-control mt-3 text-white" placeholder="إسم الحرفة الأخرى أن وجد" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" disabled>
+                                    <p class="d-none mb-0 text-danger" id="otherReq">هذا الحقل مطلوب</p>
+                                    <p class="d-none mb-0 text-danger" id="otherMsg">يجب ان يكون اسم الحرفة باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="text-white">المنطقة</label>
-                                    <input type="text" name="location" placeholder="منطقة السكن" class="form-control text-white">
+                                    <input type="text" id="worker_location" name="location" minlength="5" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="منطقة السكن" class="form-control text-white" required>
+                                    <p class="required d-none text-danger mb-0" id="locReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0" id="locMsg">يجب ان يكون العنوان باللغة العربية</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                    <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                    <button type="submit" role="button" id="workerSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
                         </div>
