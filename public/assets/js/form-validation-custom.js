@@ -47,40 +47,40 @@ function validateForm(form) {
             imgError.classList.remove("d-none");
             isValid = false;
         } else {
-            checkImageSize(img, imgError);
             img.classList.remove("error");
             img.classList.add("good");
             imgError.classList.add("d-none");
         }
-    })
+    });
     return isValid;
 }
-function validateImage(img, imgReq, imgExt, imgSize) {
+function validateImage(img, imgReq, imgExt, invoice_img, imgSizeMsg) {
     const allowedExtensions = [
         "image/jpeg",
         "image/jpg",
         "image/png",
         "image/webp",
     ];
-    const sizeLimit = 2097152;
+    imgReq.classList.add("d-none");
+    imgExt.classList.add("d-none");
+    imgSizeMsg.classList.add("d-none");
     if (!img) {
         imgReq.classList.remove("d-none");
+        invoice_img.classList.add("error");
         return false;
-    } else {
-        imgReq.classList.add("d-none");
-        let isValidExt = allowedExtensions.includes(img.type);
-        if (!isValidExt) {
-            imgExt.classList.remove("d-none");
-            return false;
-        } else {
-            imgExt.classList.add("d-none");
-        }
-        if (img.size > sizeLimit) {
-            imgSize.classList.remove("d-none");
-            return false;
-        } else {
-            imgSize.classList.add("d-none");
-        }
+    }
+    if (!allowedExtensions.includes(img.type)) {
+        invoice_img.classList.add("error");
+        invoice_img.classList.remove("good");
+        imgExt.classList.remove("d-none");
+        return false;
+    }
+    const sizeLimit = Math.round(img.size / 1024); // 2MB
+    if (img.size > sizeLimit) {
+        invoice_img.classList.add("error");
+        invoice_img.classList.remove("good");
+        imgSizeMsg.classList.remove("d-none");
+        return false;
     }
     return true;
 }
@@ -804,14 +804,24 @@ if (miscForm) {
     const imgReq = document.getElementById("imgReq");
     const imgSize = document.getElementById("imgSize");
     const imgExt = document.getElementById("imgExt");
+    const allowedExtensions = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+    ];
+    const sizeLimit = 2097152;
+
     invoice_img.addEventListener("change", function () {
-        const img = this.files[0];
-        if (validateImage(img, imgReq, imgExt, imgSize)) {
-            this.classList.remove("error");
-            this.classList.add("good");
+        const img = invoice_img.files[0];
+        if (img) {
+            validateImage(img, imgReq, imgExt, invoice_img, imgSize);
+            invoice_img.classList.remove("error");
+            invoice_img.classList.add("good");
         } else {
-            this.classList.add("error");
-            this.classList.remove("good");
+            invoice_img.classList.remove("good");
+            invoice_img.classList.add("error");
+            imgReq.classList.remove("d-none");
         }
     });
     //! Validation Submit Form
@@ -819,21 +829,13 @@ if (miscForm) {
     if (miscSubmit) {
         miscSubmit.addEventListener("click", function (event) {
             event.preventDefault();
-            const miscSubmit = document.getElementById("miscSubmit");
-            miscSubmit.addEventListener("click", function (event) {
-                event.preventDefault();
-                const img = document.getElementById("invoice_img").files[0];
-                const isImageValid = validateImage(
-                    img,
-                    imgReq,
-                    imgExt,
-                    imgSize
-                );
-                if (validateForm(miscForm) && isImageValid) {
-                    miscForm.submit();
-                }
-            });
+            if (validateForm(miscForm)) {
+                miscForm.submit();
+            }
         });
     }
 }
 //! Validation For Store Board Members
+const storeBoard = document.getElementById("");
+if (storeBoard) {
+}
