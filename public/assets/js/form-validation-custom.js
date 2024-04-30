@@ -5,22 +5,23 @@ let f4 = 0;
 
 // ! Validation Function Stamp
 function validateForm(form) {
-    let inputs = form.querySelectorAll("input[required], textarea[required]");
-    let categorySelects = form.querySelectorAll("select[required]");
-    let reqs = form.querySelectorAll("p.required");
     let isValid = true;
+    let inputs = form.querySelectorAll(
+        "input[type='number'][required],input[type='text'][required], textarea[required]"
+    );
     inputs.forEach(function (input) {
         let inputError = input.nextElementSibling;
         if (input.value.trim() === "") {
             input.classList.add("error");
-            isValid = false;
             inputError.classList.remove("d-none");
+            isValid = false;
         } else {
             input.classList.remove("error");
             input.classList.add("good");
             inputError.classList.add("d-none");
         }
     });
+    const categorySelects = form.querySelectorAll("select[required]");
     categorySelects.forEach(function (select) {
         let categoryErrorMsg = select.nextElementSibling;
         if (
@@ -38,7 +39,50 @@ function validateForm(form) {
             categoryErrorMsg.classList.add("d-none");
         }
     });
+    const inputImg = form.querySelectorAll('input[type="file"][required]');
+    inputImg.forEach((img) => {
+        let imgError = img.nextElementSibling;
+        if (!img.files.length) {
+            img.classList.add("error");
+            imgError.classList.remove("d-none");
+            isValid = false;
+        } else {
+            checkImageSize(img, imgError);
+            img.classList.remove("error");
+            img.classList.add("good");
+            imgError.classList.add("d-none");
+        }
+    })
     return isValid;
+}
+function validateImage(img, imgReq, imgExt, imgSize) {
+    const allowedExtensions = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+    ];
+    const sizeLimit = 2097152;
+    if (!img) {
+        imgReq.classList.remove("d-none");
+        return false;
+    } else {
+        imgReq.classList.add("d-none");
+        let isValidExt = allowedExtensions.includes(img.type);
+        if (!isValidExt) {
+            imgExt.classList.remove("d-none");
+            return false;
+        } else {
+            imgExt.classList.add("d-none");
+        }
+        if (img.size > sizeLimit) {
+            imgSize.classList.remove("d-none");
+            return false;
+        } else {
+            imgSize.classList.add("d-none");
+        }
+    }
+    return true;
 }
 //! Store Subscriber Form
 const storeSub = document.getElementById("storeSubscriber");
@@ -218,12 +262,6 @@ if (storeSub) {
 //! Validation Store News
 const newsform = document.getElementById("newsForm");
 if (newsform) {
-    newsform.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (validateForm(newsform)) {
-            this.submit();
-        }
-    });
     //! Validation For Input News Title
     const newsMsg = document.getElementById("newsMsg");
     const title = document.getElementById("newsTitle");
@@ -529,8 +567,7 @@ if (workers) {
     //! Validation For Worker Category
     const craft = document.getElementById("craftSelect");
     const craftReq = document.getElementById("craftReq");
-    craft.addEventListener("change", function (event) {
-        event.preventDefault();
+    craft.addEventListener("change", function () {
         if (this.options[this.selectedIndex].value === "الحرفة") {
             craft.classList.add("error");
             craft.classList.remove("good");
@@ -681,4 +718,122 @@ if (associate) {
     });
 }
 //! Validation For Store Miscellaneous
+const miscForm = document.getElementById("miscForm");
+if (miscForm) {
+    //! Validation Select Category And Other Category
+    const categorySelect = document.getElementById("category");
+    const catReq = document.getElementById("catReq");
+    const otherCat = document.getElementById("other_category");
+    const otherReq = document.getElementById("otherReq");
+    const otherMsg = document.getElementById("otherMsg");
+    categorySelect.addEventListener("change", function () {
+        if (this.options[this.selectedIndex].value === "التصنيف") {
+            categorySelect.classList.add("error");
+            categorySelect.classList.remove("good");
+            catReq.classList.remove("d-none");
+        } else {
+            categorySelect.classList.remove("error");
+            categorySelect.classList.add("good");
+            catReq.classList.add("d-none");
+        }
+        if (this.options[this.selectedIndex].value === "أخرى") {
+            otherCat.classList.remove("d-none");
+            otherCat.disabled = false;
+            otherCat.setAttribute("required", true);
+            if (otherCat.value.trim() === "") {
+                otherReq.classList.remove("d-none");
+                otherCat.classList.remove("good");
+                otherCat.classList.add("error");
+            }
+        } else {
+            otherCat.disabled = true;
+            otherCat.classList.remove("good");
+            otherCat.classList.remove("error");
+            otherCat.removeAttribute("required");
+            otherReq.classList.add("d-none");
+        }
+    });
+    otherCat.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            otherReq.classList.remove("d-none");
+            otherMsg.classList.remove("d-none");
+            otherCat.classList.remove("good");
+            otherCat.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                otherCat.classList.add("good");
+                otherCat.classList.remove("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.add("d-none");
+            } else {
+                otherCat.classList.remove("good");
+                otherCat.classList.add("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation Submit Form
+    const amount = document.getElementById("amount");
+    const amountReq = document.getElementById("amountReq");
+    const amountMsg = document.getElementById("amountMsg");
+    amount.addEventListener("input", function () {
+        const regAmount = /^.{2,}$/;
+        if (this.value.trim() === "") {
+            amountReq.classList.remove("d-none");
+            amountMsg.classList.add("d-none");
+            amount.classList.remove("good");
+            amount.classList.add("error");
+        } else {
+            if (regAmount.test(this.value)) {
+                amount.classList.add("good");
+                amount.classList.remove("error");
+                amountReq.classList.add("d-none");
+                amountMsg.classList.add("d-none");
+            } else {
+                amount.classList.remove("good");
+                amount.classList.add("error");
+                amountReq.classList.add("d-none");
+                amountMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation Image Upload
+    const invoice_img = document.getElementById("invoice_img");
+    const imgReq = document.getElementById("imgReq");
+    const imgSize = document.getElementById("imgSize");
+    const imgExt = document.getElementById("imgExt");
+    invoice_img.addEventListener("change", function () {
+        const img = this.files[0];
+        if (validateImage(img, imgReq, imgExt, imgSize)) {
+            this.classList.remove("error");
+            this.classList.add("good");
+        } else {
+            this.classList.add("error");
+            this.classList.remove("good");
+        }
+    });
+    //! Validation Submit Form
+    const miscSubmit = document.getElementById("miscSubmit");
+    if (miscSubmit) {
+        miscSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            const miscSubmit = document.getElementById("miscSubmit");
+            miscSubmit.addEventListener("click", function (event) {
+                event.preventDefault();
+                const img = document.getElementById("invoice_img").files[0];
+                const isImageValid = validateImage(
+                    img,
+                    imgReq,
+                    imgExt,
+                    imgSize
+                );
+                if (validateForm(miscForm) && isImageValid) {
+                    miscForm.submit();
+                }
+            });
+        });
+    }
+}
 //! Validation For Store Board Members

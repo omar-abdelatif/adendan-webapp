@@ -16,12 +16,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('miscellaneous.store')}} method="post" enctype="multipart/form-data">
+                    <form action={{route('miscellaneous.store')}} method="post" enctype="multipart/form-data" id="miscForm">
                         @csrf
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="category" class="text-muted">التصنيف</label>
-                            <select name="category" class="form-select text-muted" id="category">
-                                <option selected>إختر التصنيف</option>
+                            <select name="category" class="form-select text-muted" id="category" required>
+                                <option selected>التصنيف</option>
                                 <option value="كهرباء">كهرباء</option>
                                 <option value="مياه">مياه</option>
                                 <option value="غاز">غاز</option>
@@ -29,19 +29,27 @@
                                 <option value="انترنت ارضي">انترنت ارضي</option>
                                 <option value="أخرى">أخرى</option>
                             </select>
-                            <input type="text" name="other_category" placeholder="تصنيف أخر" id="other_category" class="form-control text-muted d-none mt-3">
+                            <p class="required d-none fw-bold text-danger mb-0" id="catReq">يجب الاختيار من القائمة اعلاه</p>
+                            <input type="text" name="other_category" placeholder="تصنيف أخر" minlength="3" id="other_category" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-muted d-none mt-3">
+                            <p class="required d-none fw-bold text-danger mb-0" id="otherReq">هذا الحقل مطلوب</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="otherMsg">يجب ان يكون باللغة العربية ولا يقل عن 3 احرف</p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="amount" class="text-muted">المبلغ</label>
-                            <input type="number" class="form-control text-muted" id="amount" name="amount" placeholder="المبلغ">
+                            <input type="text" class="form-control text-muted" minlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="amount" name="amount" placeholder="المبلغ" required>
+                            <p class="required d-none fw-bold text-danger mb-0" id="amountReq">هذا الحقل مطلوب</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="amountMsg">يجب ان يكون المبلغ لا يقل عن 2 رقم</p>
                         </div>
                         <div class="form-group">
                             <label for="invoice_img" class="text-muted">صورة الايصال</label>
-                            <input type="file" id="invoice_img" class="form-control text-muted" name="invoice_img" accept="image/*">
+                            <input type="file" id="invoice_img" class="form-control text-muted" name="invoice_img" accept="image/*" required>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgReq">هذا الحقل مطلوب</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                            <button type="submit" role="button" id="miscSubmit" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>

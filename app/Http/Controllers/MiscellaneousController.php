@@ -28,7 +28,7 @@ class MiscellaneousController extends Controller
                 'category' => $validated['category'],
                 'amount' => $validated['amount'],
                 'invoice_img' => $imagename,
-                'other_category' => $validated['other_category'],
+                'other_category' => $request->other_category,
             ]);
         } else {
             $store = Miscellaneous::create([
@@ -40,7 +40,7 @@ class MiscellaneousController extends Controller
         if ($store) {
             SafeReports::create([
                 'member_id' => '-',
-                'transaction_type' => 'نثريات' . " " . ($validated['category']) . " " . ($validated['other_category']),
+                'transaction_type' => 'نثريات' . " " . ($validated['category']) . " " . ($request->other_category),
                 'amount' => $request['amount'],
             ]);
             $sumAmount = $totalSafe->amount - $request['amount'];
@@ -111,5 +111,4 @@ class MiscellaneousController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ ما');
     }
-
 }
