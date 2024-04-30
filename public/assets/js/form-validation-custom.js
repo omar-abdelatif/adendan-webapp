@@ -15,7 +15,6 @@ function validateForm(form) {
             input.classList.add("error");
             isValid = false;
             inputError.classList.remove("d-none");
-            console.log(inputError);
         } else {
             input.classList.remove("error");
             input.classList.add("good");
@@ -44,12 +43,6 @@ function validateForm(form) {
 //! Store Subscriber Form
 const storeSub = document.getElementById("storeSubscriber");
 if (storeSub) {
-    storeSub.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (validateForm(storeSub)) {
-            this.submit();
-        }
-    });
     function nextStepFunction() {
         if (validateForm(storeSub)) {
             nextStep();
@@ -211,6 +204,14 @@ if (storeSub) {
         } else {
             birthReq.classList.add("d-none");
             birthdayMsg.classList.remove("d-none");
+        }
+    });
+    //! Validation on Submit Button
+    const subSubmit = document.getElementById("submitButton");
+    subSubmit.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (validateForm(storeSub)) {
+            storeSub.submit();
         }
     });
 }
@@ -475,12 +476,6 @@ if (tomb) {
 //! Validation For Store Workers
 const workers = document.getElementById("workers");
 if (workers) {
-    // workers.addEventListener("submit", function (event) {
-    //     event.preventDefault();
-    //     if (validateForm(workers)) {
-    //         workers.submit();
-    //     }
-    // });
     //! Validation For Worker Name
     const workerName = document.getElementById("worker_name");
     const nameMsg = document.getElementById("nameMsg");

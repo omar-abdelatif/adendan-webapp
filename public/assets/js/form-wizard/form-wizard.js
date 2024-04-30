@@ -41,12 +41,8 @@ function nextStep() {
             ) {
                 //! Create and append the submit button
                 let button = document.createElement("button");
-                button.classList.add(
-                    "btn",
-                    "btn-primary",
-                    "w-100",
-                    "text-center"
-                );
+                button.classList.add("btn", "btn-primary", "w-100", "text-center");
+                button.id = "submitButton";
                 button.type = "submit";
                 button.textContent = "تأكيد";
                 document.getElementById("submitButton").appendChild(button);
