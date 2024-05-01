@@ -2,7 +2,6 @@ let f1 = 0;
 let f2 = 0;
 let f3 = 0;
 let f4 = 0;
-
 // ! Validation Function Stamp
 function validateForm(form) {
     let isValid = true;
@@ -55,13 +54,12 @@ function validateImage(img, imgReq, imgExt, invoice_img, imgSizeMsg) {
         "image/jpeg",
         "image/jpg",
         "image/png",
-        // "image/webp",
+        "image/webp",
     ];
-
     imgReq.classList.add("d-none");
     imgExt.classList.add("d-none");
     imgSizeMsg.classList.add("d-none");
-    if (img.length === 0) {
+    if (!img) {
         invoice_img.classList.remove("good");
         invoice_img.classList.add("error");
         imgReq.classList.remove("d-none");
@@ -783,7 +781,7 @@ if (miscForm) {
             }
         }
     });
-    //! Validation Submit Form
+    //! Validation Amount Number
     const amount = document.getElementById("amount");
     const amountReq = document.getElementById("amountReq");
     const amountMsg = document.getElementById("amountMsg");
@@ -830,16 +828,122 @@ if (miscForm) {
     if (miscSubmit) {
         miscSubmit.addEventListener("click", function (event) {
             event.preventDefault();
-            if (
-                validateForm(miscForm) &&
-                validateImage(invoice_img, imgReq, imgExt, imgSize)
-            ) {
+            // const img = invoice_img.files[0];
+            if (validateForm(miscForm)) {
                 miscForm.submit();
             }
         });
     }
 }
 //! Validation For Store Board Members
-const storeBoard = document.getElementById("");
-if (storeBoard) {
+const boardForm = document.getElementById("boardForm");
+if (boardForm) {
+    //! Validation For Board Name
+    const boardName = document.getElementById("boardName");
+    const BoardMsg = document.getElementById("NameMsg");
+    const BoardReq = document.getElementById("NameReq");
+    boardName.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            BoardReq.classList.remove("d-none");
+            BoardMsg.classList.add("d-none");
+            boardName.classList.remove("good");
+            boardName.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                boardName.classList.add("good");
+                boardName.classList.remove("error");
+                BoardMsg.classList.add("d-none");
+                BoardReq.classList.add("d-none");
+            } else {
+                boardName.classList.remove("good");
+                boardName.classList.add("error");
+                BoardMsg.classList.remove("d-none");
+                BoardReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Board Position
+    const BoardPosition = document.getElementById("boardPos");
+    const PosMsg = document.getElementById("PosMsg");
+    const PosReq = document.getElementById("PosReq");
+    BoardPosition.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{5,}$/;
+        if (this.value.trim() === "") {
+            PosReq.classList.remove("d-none");
+            PosMsg.classList.add("d-none");
+            BoardPosition.classList.remove("good");
+            BoardPosition.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                BoardPosition.classList.add("good");
+                BoardPosition.classList.remove("error");
+                PosMsg.classList.add("d-none");
+                PosReq.classList.add("d-none");
+            } else {
+                BoardPosition.classList.remove("good");
+                BoardPosition.classList.add("error");
+                PosMsg.classList.remove("d-none");
+                PosReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Board Mob
+    const BoardMob = document.getElementById("boardMob");
+    const MobMsg = document.getElementById("MobMsg");
+    const MobReq = document.getElementById("MobReq");
+    BoardMob.addEventListener("input", function () {
+        const regMOB = /(?=.{11,})/;
+        if (this.value.trim() === "") {
+            MobReq.classList.remove("d-none");
+            MobMsg.classList.add("d-none");
+            BoardMob.classList.remove("good");
+            BoardMob.classList.add("error");
+        } else {
+            if (regMOB.test(this.value)) {
+                BoardMob.classList.add("good");
+                BoardMob.classList.remove("error");
+                MobReq.classList.add("d-none");
+                MobMsg.classList.add("d-none");
+            } else {
+                BoardMob.classList.remove("good");
+                BoardMob.classList.add("error");
+                MobReq.classList.add("d-none");
+                MobMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Board Image
+    const BoardImg = document.getElementById("boardImg");
+    const BoardimgReq = document.getElementById("imgReq");
+    const BoardimgSize = document.getElementById("imgSize");
+    const BoardimgExt = document.getElementById("imgExt");
+    BoardImg.addEventListener("change", function () {
+        const img = BoardImg.files[0];
+        if (img) {
+            validateImage(
+                img,
+                BoardimgReq,
+                BoardimgExt,
+                BoardImg,
+                BoardimgSize
+            );
+        } else {
+            BoardImg.classList.add("error");
+            BoardImg.classList.remove("good");
+            BoardimgReq.classList.remove("d-none");
+            BoardimgSize.classList.add("d-none");
+            BoardimgExt.classList.add("d-none");
+        }
+    });
+    //! Validation For Submit Button
+    const boardSubmit = document.getElementById("boardSubmit");
+    if (boardSubmit) {
+        boardSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(boardForm)) {
+                boardForm.submit();
+            }
+        });
+    }
 }

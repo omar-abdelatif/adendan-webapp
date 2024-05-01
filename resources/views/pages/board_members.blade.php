@@ -13,27 +13,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('board.store')}} method="post" enctype="multipart/form-data">
+                    <form action={{route('board.store')}} method="post" enctype="multipart/form-data" id="boardForm">
                         @csrf
                         <div class="form-group">
                             <label for="title" class="text-white">الإسم</label>
-                            <input type="text" class="form-control text-white" name="name" placeholder="Name">
+                            <input type="text" minlength="3" id="boardName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-white" name="name" placeholder="Name" required>
+                            <p class="required text-danger mb-0 d-none" id="NameReq">هذا الحقل مطلوب</p>
+                            <p class="required text-danger mb-0 d-none" id="NameMsg">يجب ان يكون الإسم باللغة العربية ولا يقل عن 3 احرف</p>
                         </div>
                         <div class="form-group">
                             <label for="title" class="text-white">المركز</label>
-                            <input type="text" class="form-control text-white" name="position" placeholder="Position">
+                            <input type="text" id="boardPos" minlength="5" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{5,}" class="form-control text-white" name="position" placeholder="Position" required>
+                            <p class="required text-danger mb-0 d-none" id="PosReq">هذا الحقل مطلوب</p>
+                            <p class="required text-danger mb-0 d-none" id="PosMsg">يجب ان يكون المنصب باللغة العربية ولا يقل عن 5 احرف</p>
                         </div>
                         <div class="form-group">
                             <label for="title" class="text-white">رقم المحمول</label>
-                            <input type="number" class="form-control text-white" name="phone_number" placeholder="رقم المحمول">
+                            <input type="text" maxlength="11"  id="boardMob" class="form-control text-white" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="phone_number" placeholder="رقم المحمول" required>
+                            <p class="required text-danger mb-0 d-none" id="MobReq">هذا الحقل مطلوب</p>
+                            <p class="required text-danger mb-0 d-none" id="MobMsg">يجب ان لا يقل رقم المحمول عن 11 رقم</p>
                         </div>
                         <div class="form-group">
                             <label for="title" class="text-white">الصورة</label>
-                            <input type="file" class="form-control text-white" name="img" accept="image/*">
+                            <input type="file" id="boardImg" class="form-control text-white" name="img" accept="image/*" required>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgReq">هذا الحقل مطلوب</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                            <p class="required d-none fw-bold text-danger mb-0" id="imgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                            <button type="submit" id="boardSubmit" role="button" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>
