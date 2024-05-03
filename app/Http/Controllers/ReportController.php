@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\Donations;
 use App\Models\Donators;
+use App\Models\Olddelays;
 use App\Models\OuterDonations;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
@@ -181,4 +182,28 @@ class ReportController extends Controller
         $associates = Subscribers::where('membership_type', 'إنتساب')->get();
         return view('pages.reports.associates', compact('associates'));
     }
+    //! Subscribtions Old Delays
+    public function search(Request $request)
+    {
+        $noOldDelays = 'لا توجد متأخرات';
+        $locname = $request->locname;
+        $amount = $request->amount;
+        $optype = $request->optype;
+
+        $query = Subscribers::select('subscribers.name', 'subscribers.address', 'subscribers.member_id')
+            ->join('olddelays', 'subscribers.member_id', '=', 'olddelays.member_id')
+            ->where('olddelays.old_delay_type', 'إشتراكات')
+            ->selectRaw('olddelays.amount, olddelays.delay_amount, olddelays.delay_remaining');
+
+        if (empty($amount)) {
+            $queryResult = $query->get();
+            return view('pages.reports.sub_old_delays', compact('queryResult', 'noOldDelays'));
+        } else {
+            if ($amount) {
+                $delays = $query->where('olddelays.amount', $optype, $amount)->get();
+                return view('pages.reports.sub_old_delays', compact('delays', 'noOldDelays'));
+            }
+        }
+    }
+
 }

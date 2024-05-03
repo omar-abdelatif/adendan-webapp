@@ -71,16 +71,18 @@ Route::prefix('admin')->group(function () {
             Route::post('associations/update_association', 'update')->name('association.update');
         });
         Route::controller(ReportController::class)->group(function () {
-            Route::get('reports/all', 'index')->name('reports.subscriptions');
-            Route::get('reports/jobs', 'jobs')->name('reports.jobs');
             Route::get('reports/age', 'ages')->name('reports.age');
-            Route::get('reports/location', 'locations')->name('reports.location');
-            Route::get('reports/donations', 'outerdonations')->name('reports.donations');
-            Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
-            Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
+            Route::get('reports/jobs', 'jobs')->name('reports.jobs');
             Route::get('reports/safe', 'safe')->name('reports.safe');
+            Route::get('reports/search', 'search')->name('reports.search');
+            Route::get('reports/all', 'index')->name('reports.subscriptions');
+            Route::get('reports/location', 'locations')->name('reports.location');
             Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
             Route::get('reports/associates', 'associates')->name('reports.associates');
+            Route::get('reports/donations', 'outerdonations')->name('reports.donations');
+            Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
+            Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
+            Route::get('reports/subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');

@@ -36,6 +36,9 @@
                                     <th class="text-center">رقم العضوية</th>
                                     <th class="text-center">إسم العضو</th>
                                     <th class="text-center">رقم المحمول</th>
+                                    <th class="text-center">العنوان</th>
+                                    <th class="text-center">تاريخ الميلاد</th>
+                                    <th class="text-center">الوظيفة</th>
                                     <th class="text-center">نوع العضوية</th>
                                     <th class="text-center">حالة الإشتراك</th>
                                 </thead>
@@ -46,6 +49,9 @@
                                             <td>{{$associate->member_id}}</td>
                                             <td>{{$associate->name}}</td>
                                             <td>{{$associate->mobile_no}}</td>
+                                            <td>{{$associate->address}}</td>
+                                            <td>{{$associate->birthdate}}</td>
+                                            <td>{{$associate->job}}</td>
                                             <td>{{$associate->membership_type}}</td>
                                             <td>
                                                 @if($associate->status == 0)

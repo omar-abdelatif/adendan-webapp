@@ -18,6 +18,6 @@ class Olddelays extends Model
     ];
     public function subscribers()
     {
-        return $this->belongsTo(Subscribers::class);
+        return $this->belongsTo(Subscribers::class, 'member_id', 'member_id');
     }
 }

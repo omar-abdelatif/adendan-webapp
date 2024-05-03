@@ -29,7 +29,7 @@
                                         <tr>
                                             <td>{{$debt->member_id}}</td>
                                             <td>{{$debt->name}}</td>
-                                            @if ($debt->delays)
+                                            @if (count($debt->delays) > 0)
                                                 @foreach ($debt->delays as $delay)
                                                     <td class="text-muted text-center">
                                                         <span class="text-muted bg-secondary rounded-pill px-4">{{$delay->yearly_cost}}</span>
@@ -42,9 +42,9 @@
                                                     ج.م
                                                 </td>
                                             @endif
-                                            @if ($debt->delays)
+                                            @if (count($debt->delays) > 0)
                                                 @foreach ($debt->delays as $delay)
-                                                    @if($delay->remain != null)
+                                                    @if($delay->remaing != null)
                                                         <td class="text-center">
                                                             <span class="text-white bg-secondary rounded-pill px-4">{{$delay->remaing}}</span>
                                                             ج.م
@@ -56,6 +56,11 @@
                                                         </td>
                                                     @endif
                                                 @endforeach
+                                            @else
+                                                <td class="text-muted text-center">
+                                                    <span class="text-muted bg-warning rounded-pill px-3">0</span>
+                                                    ج.م
+                                                </td>
                                             @endif
                                             <td>
                                                 @if ($debt->status === 0)

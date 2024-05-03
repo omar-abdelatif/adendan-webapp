@@ -92,5 +92,4 @@ class SubscriptionsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-
 }

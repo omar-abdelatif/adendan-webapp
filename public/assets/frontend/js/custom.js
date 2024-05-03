@@ -9,10 +9,12 @@ window.addEventListener("scroll", () => {
         document.querySelector(".navbar").classList.remove("fixed");
     }
 });
+//! Play Music On Page Load
 window.onload = function (event) {
     event.preventDefault;
     document.getElementById("audio-player").play();
 };
+//! Arabic Direction To The News Bar
 $(document).ready(function () {
     $("#newsTicker2").breakingNews({
         direction: "rtl",
