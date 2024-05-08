@@ -971,3 +971,4 @@ if (boardForm) {
         });
     }
 }
+//! Donations
