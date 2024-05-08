@@ -95,11 +95,14 @@
                                                             <img width="80" height="80" src="https://img.icons8.com/external-filled-outline-design-circle/80/external-Roll-Brush-real-estate-filled-outline-design-circle.png" alt="external-Roll-Brush-real-estate-filled-outline-design-circle"/>
                                                         </div>
                                                         <div class="text-details p-3 w-100">
-                                                            <div class="title mb-3 text-center">
-                                                                <h3 class="mb-0">{{$cn->name}}</h3>
+                                                            <div class="title mb-3 d-flex align-items-center justify-content-center">
+                                                                <h4 class="mb-0">الإسم: {{$cn->name}}</h4>
                                                             </div>
-                                                            <div class="mobile text-center">
-                                                                <h6 class="mb-0">{{$cn->phone_number}}</h6>
+                                                            <div class="mobile d-flex align-items-center justify-content-center">
+                                                                <h5 class="mb-0">رقم التلفون: {{$cn->phone_number}}</h5>
+                                                            </div>
+                                                            <div class="location mt-3 text-center">
+                                                                <h4 class="mb-0">السكن: {{$cn->location}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -124,11 +127,14 @@
                                                             <img width="80" height="80" src="https://img.icons8.com/external-others-phat-plus/80/external-electric-electric-vehicles-color-line-others-phat-plus-11.png" alt="external-electric-electric-vehicles-color-line-others-phat-plus-11"/>
                                                         </div>
                                                         <div class="text-details p-3 w-100">
-                                                            <div class="title mb-3 text-center">
-                                                                <h3 class="mb-0">{{$dn->name}}</h3>
+                                                            <div class="title mb-3 d-flex align-items-center justify-content-center">
+                                                                <h4 class="mb-0">الإسم: {{$dn->name}}</h4>
                                                             </div>
-                                                            <div class="mobile text-center">
-                                                                <h6 class="mb-0">{{$dn->phone_number}}</h6>
+                                                            <div class="mobile d-flex align-items-center justify-content-center">
+                                                                <h5 class="mb-0">رقم التلفون: {{$dn->phone_number}}</h5>
+                                                            </div>
+                                                            <div class="location mt-3 text-center">
+                                                                <h4 class="mb-0">السكن: {{$dn->location}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -153,11 +159,14 @@
                                                             <img width="80" height="80" src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/80/external-wrench-plumbing-icongeek26-linear-colour-icongeek26-1.png" alt="external-wrench-plumbing-icongeek26-linear-colour-icongeek26-1"/>
                                                         </div>
                                                         <div class="text-details p-3 w-100">
-                                                            <div class="title mb-3 text-center">
-                                                                <h3 class="mb-0">{{$wn->name}}</h3>
+                                                            <div class="title mb-3 d-flex align-items-center justify-content-center">
+                                                                <h4 class="mb-0">الإسم: {{$wn->name}}</h4>
                                                             </div>
-                                                            <div class="mobile text-center">
-                                                                <h6 class="mb-0">{{$wn->phone_number}}</h6>
+                                                            <div class="mobile d-flex align-items-center justify-content-center">
+                                                                <h5 class="mb-0">رقم التلفون: {{$wn->phone_number}}</h5>
+                                                            </div>
+                                                            <div class="location mt-3 text-center">
+                                                                <h4 class="mb-0">السكن: {{$wn->location}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -182,14 +191,14 @@
                                                             <img width="80" height="80" src="https://img.icons8.com/bubbles/80/question-mark.png" alt="question-mark"/>
                                                         </div>
                                                         <div class="text-details p-3 w-100">
-                                                            <div class="title mb-3 text-center">
-                                                                <h3 class="mb-0">{{$sn->name}}</h3>
+                                                            <div class="title mb-3 d-flex align-items-center justify-content-center">
+                                                                <h4 class="mb-0">الإسم: {{$sn->name}}</h4>
                                                             </div>
-                                                            <div class="mobile text-center">
-                                                                <h6 class="mb-0">{{$sn->phone_number}}</h6>
+                                                            <div class="mobile d-flex align-items-center justify-content-center">
+                                                                <h5 class="mb-0">رقم التلفون: {{$sn->phone_number}}</h5>
                                                             </div>
-                                                            <div class="text-center">
-                                                                <p class="mb-0">{{$sn->other_craft}}</p>
+                                                            <div class="location mt-3 text-center">
+                                                                <h4 class="mb-0">السكن: {{$sn->location}}</h4>
                                                             </div>
                                                         </div>
                                                     </div>

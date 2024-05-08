@@ -192,7 +192,7 @@
                                 <div class="col-md-6 col-lg-3">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
-                                            <img src="{{asset('assets/images/news-imgs/'.$wn->img)}}" alt="{{$wn->img}}">
+                                            <img src="{{asset('assets/images/news-imgs/'.$wn->img)}}" class="w-100" alt="{{$wn->img}}">
                                             <div class="text-details p-3 w-100">
                                                 <div class="title mb-3 text-center">
                                                     <h5 class="mb-0">{{$wn->title}}</h5>

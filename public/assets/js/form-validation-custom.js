@@ -6,7 +6,7 @@ let f4 = 0;
 function validateForm(form) {
     let isValid = true;
     let inputs = form.querySelectorAll(
-        "input[type='number'][required],input[type='text'][required], textarea[required]"
+        "input[type='number'][required],input[type='text'][required]"
     );
     inputs.forEach(function (input) {
         let inputError = input.nextElementSibling;
@@ -45,6 +45,19 @@ function validateForm(form) {
             img.classList.add("error");
             imgError.classList.remove("d-none");
             isValid = false;
+        }
+    });
+    const textareas = form.querySelectorAll("textarea[required]");
+    textareas.forEach(function (text) {
+        let textareaErrorMsg = text.nextElementSibling;
+        if (text.value.trim() === "") {
+            text.classList.add("error");
+            textareaErrorMsg.classList.remove("d-none");
+            isValid = false;
+        } else {
+            text.classList.remove("error");
+            text.classList.add("good");
+            textareaErrorMsg.classList.add("d-none");
         }
     });
     return isValid;
@@ -273,53 +286,47 @@ if (newsform) {
     const newsMsg = document.getElementById("newsMsg");
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
-    title.addEventListener("keyup", function () {
+    title.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s]{7,}$/;
-        if (letters.test(title.value)) {
-            title.classList.add("good");
+        if (this.value.trim() === "") {
+            newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
-        } else {
             title.classList.remove("good");
             title.classList.add("error");
-            newsMsg.classList.remove("d-none");
-        }
-    });
-    title.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            newsReq.classList.remove("d-none");
-            newsMsg.classList.add("d-none");
         } else {
-            newsReq.classList.add("d-none");
-            newsMsg.classList.remove("d-none");
-        }
-    });
-    title.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            newsReq.classList.remove("d-none");
-        } else {
-            newsReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                title.classList.add("good");
+                title.classList.remove("error");
+                newsMsg.classList.add("d-none");
+                newsReq.classList.add("d-none");
+            } else {
+                title.classList.remove("good");
+                title.classList.add("error");
+                newsMsg.classList.remove("d-none");
+                newsReq.classList.add("d-none");
+            }
         }
     });
     //! Validation For Input News TextArea
     const details = document.getElementById("details");
     const newsDetailsMsg = document.getElementById("detailsMsg");
     const newsDetailsReq = document.getElementById("detailsReq");
-    details.addEventListener("keyup", function () {
-        let letters = /^[\u0600-\u06FF\s]+$/;
-        if (letters.test(details.value)) {
-            details.classList.add("good");
-            newsDetailsMsg.classList.add("d-none");
-        } else {
-            details.classList.remove("good");
-            details.classList.add("error");
-            newsDetailsMsg.classList.remove("d-none");
-        }
-    });
     details.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{7,}$/;
         if (this.value.trim() === "") {
             newsDetailsReq.classList.remove("d-none");
+            newsDetailsMsg.classList.add("d-none");
+            details.classList.remove("good");
+            details.classList.add("error");
         } else {
-            newsDetailsReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                details.classList.add("good");
+                newsDetailsReq.classList.add("d-none");
+            } else {
+                details.classList.remove("good");
+                details.classList.add("error");
+                newsDetailsReq.classList.remove("d-none");
+            }
         }
     });
     //! Validation For Category Select
@@ -336,8 +343,25 @@ if (newsform) {
             categoryMsg.classList.add("d-none");
         }
     });
+    //! Validation For News Image
+    const newsImg = document.getElementById("newsImg");
+    const NewsimgReq = document.getElementById("imgReq");
+    const NewsimgSize = document.getElementById("imgSize");
+    const NewsimgExt = document.getElementById("imgExt");
+    newsImg.addEventListener("change", function () {
+        const img = newsImg.files[0];
+        if (img) {
+            validateImage(img, NewsimgReq, NewsimgExt, newsImg, NewsimgSize);
+        } else {
+            newsImg.classList.add("error");
+            newsImg.classList.remove("good");
+            NewsimgReq.classList.remove("d-none");
+            NewsimgSize.classList.add("d-none");
+            NewsimgExt.classList.add("d-none");
+        }
+    });
     //! Validation ON Submit
-    const submit = document.getElementById("submit");
+    const submit = document.getElementById("newsSubmit");
     submit.addEventListener("click", function (event) {
         event.preventDefault();
         if (validateForm(newsform)) {

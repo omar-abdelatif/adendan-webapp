@@ -74,7 +74,7 @@
                                                                 <th class="text-muted text-center">نوع الدفع</th>
                                                                 <th class="text-muted text-center">تاريخ الدفع</th>
                                                                 <th class="text-muted text-center">رقم الإيصال</th>
-                                                                <th class="text-muted text-center">قيمة المتأخرات</th>
+                                                                <th class="text-muted text-center">قيمة المتأخرات المدفوعة</th>
                                                                 {{-- <th class="text-muted text-center">فترة المديونية بالسنوات</th> --}}
                                                                 <th class="text-muted text-center">Actions</th>
                                                             </tr>

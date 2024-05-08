@@ -50,7 +50,10 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-lg-3 mb-md-2" id="img">
                                     <label for="img" class="text-white">صورة الخبر</label>
-                                    <input type="file" name="img" id="img" class="form-control" accept="image/*">
+                                    <input type="file" name="img" id="newsImg" class="form-control" accept="image/*" required>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="imgReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="imgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="imgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                 </div>
                                 <div class="form-group mb-lg-3 mb-md-2" id="thumbs">
                                     <label for="thumb" class="text-white">صورة المصغرة</label>
@@ -65,7 +68,7 @@
                             <div class="col-lg-12">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
-                                    <button type="submit" id="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                    <button type="submit" id="newsSubmit" role="button" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
                         </div>

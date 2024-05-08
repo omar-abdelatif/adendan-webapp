@@ -19,7 +19,7 @@ class SubscriptionsController extends Controller
             $memberId = $subscriber->member_id;
             $subscriptions = $subscriber->subscriptions;
             $delays = $subscriber->delays;
-            $oldelays = Olddelays::where('member_id', $memberId)->get();
+            $oldelays = Olddelays::where('member_id', $memberId)->where('old_delay_type', 'إشتراكات')->get();
             return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions', 'delays', 'oldelays'));
         }
     }

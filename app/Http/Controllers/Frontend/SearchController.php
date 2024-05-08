@@ -50,8 +50,8 @@ class SearchController extends Controller
             return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح');
         } else {
             if ($member) {
-                $noDelays = 'لا توجد مديونية';
-                $noOldDelays = 'لا توجد متأخرات';
+                $noDelays = 'لا توجد مديونية إشتراكات';
+                $noOldDelays = 'لا توجد متأخرات إشتراكات';
                 $delays = $member->delays;
                 $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
                 $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();

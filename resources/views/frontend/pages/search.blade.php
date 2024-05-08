@@ -76,7 +76,7 @@
                                             <div class="card-body bg-light">
                                                 <div class="card-content">
                                                     <div class="row align-items-center justify-content-evenly">
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-6 mb-3">
                                                             <div class="delays justify-content-center">
                                                                 <div class="delays-content d-flex justify-content-center flex-column align-items-center">
                                                                     @if (count($member->delays) >= 1)
@@ -84,7 +84,8 @@
                                                                             <div class="w-100 border border-1 border-dark ms-1 rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>                                                                                مديونية الإشتراك السنوي
+                                                                                        <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
+                                                                                        م.إشتراك السنة الحالية
                                                                                     </h4>
                                                                                     <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
                                                                                         <div class="col-lg-3 p-1 py-2">
@@ -144,12 +145,21 @@
                                                                             </div>
                                                                         @endforeach
                                                                     @else
-                                                                        <p class="mb-0 text-center empty-msg fw-bold fs-1">{{$noDelays}}</p>
+                                                                        <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                    <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>                                                                                مديونية الإشتراك السنوي
+                                                                                </h4>
+                                                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    <p class="mb-0 text-center empty-msg fw-bold fs-3">{{$noDelays}}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-6 mb-3">
                                                             <div class="old-delays">
                                                                 <div class="old-content">
                                                                     <div class="row justify-content-center g-0">
@@ -162,7 +172,7 @@
                                                                                     </h4>
                                                                                     <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
                                                                                         @foreach ($oldDelays as $delay)
-                                                                                            <div class="col-lg-12 p-1 py-2">
+                                                                                            <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h4 role="presentation">
                                                                                                         <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
@@ -170,7 +180,7 @@
                                                                                                     </h4>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            {{-- @if ($delay->paied == null || $delay->remaing == null)
+                                                                                            @if ($delay->delay_amount == null || $delay->delay_remaining == null)
                                                                                                 <div class="col-lg-4 p-1 py-2">
                                                                                                     <div class="text-center">
                                                                                                         <h4 role="presentation">
@@ -204,19 +214,29 @@
                                                                                                         </h3>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            @endif --}}
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <p class="mb-0 text-center fs-1 fw-bold empty-msg">{{$noOldDelays}}</p>
+                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
+                                                                                        متأخرات الإشتراكات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        <p class="mb-0 text-center fs-3 fw-bold empty-msg">{{$noOldDelays}}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 mt-3">
+                                                        <div class="col-lg-6 mb-3">
                                                             <div class="old-donations">
                                                                 <div class="old-donation-content">
                                                                     <div class="row justify-content-center g-0">
@@ -283,7 +303,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 mt-3">
+                                                        <div class="col-lg-6 mb-3">
                                                             <div class="delay-donaion">
                                                                 <div class="delay-donaiton-content">
                                                                     <div class="row justify-content-center g-0">
@@ -328,7 +348,17 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <h1 class="text-center mb-0">لا توجد مديونية تبرعات</h1>
+                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
+                                                                                        مديونية التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        <h3 class="text-center mb-0">لا توجد مديونية تبرعات</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         @endif
                                                                     </div>
                                                                 </div>

@@ -16,8 +16,10 @@
                                 <div class="container">
                                     <div class="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-center justify-content-md-start">
                                         <img src="{{asset('assets/images/border-photos/'.$border->img)}}" class="rounded-5" width="500" alt="{{$border->name}}">
-                                        <div class="d-flex flex-column ms-0 ms-md-5 mt-3 mt-md-0">
-                                            <h2 class="text-primary-blue"><b>{{$border->position}}</b></h2>
+                                        <div class="d-flex flex-column ms-0 me-5 ms-md-5 mt-3 mt-md-0">
+                                            <h2 class="text-primary-blue">
+                                                <b>{{$border->position}}</b>
+                                            </h2>
                                             <span class="text-primary-green fs-4 fw-bolder">أ/ {{$border->name}}</span>
                                             <span class=" mb-0 fs-5"><b dir="ltr">+{{$border->phone_number}}</b></span>
                                         </div>

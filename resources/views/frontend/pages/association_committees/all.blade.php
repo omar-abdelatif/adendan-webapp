@@ -28,7 +28,7 @@
                                     </div>
                                 </a>
                             </div>
-                        @elseif ($association->name === 'اللجنة الثقافية و الفنية')
+                        @elseif ($association->name === 'اللجنة الثقافية')
                             <div class="ag-courses_item overflow-hidden rounded-5 text-center mb-5">
                                 <a href="{{route('site.assossiation_details', $association->id)}}" class="ag-courses-item_link d-block position-relative overflow-hidden bg-white py-3 px-4">
                                     <div class="ag-courses-item_bg position-absolute rounded-circle"></div>

@@ -23,9 +23,7 @@ class RequestsAssociationCommittes extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'required',
             'boss' => 'required',
-            'tasks' => 'required'
         ];
     }
 }
