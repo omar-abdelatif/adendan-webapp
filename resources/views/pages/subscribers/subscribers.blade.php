@@ -86,7 +86,7 @@
                         <span class="fw-bold rounded-pill badge badge-warning text-dark fs-6">تكلفة الإشتراك = {{$cost}} ج.م لعام {{$year}}</span>
                     </div>
                     <div class="current-sub-cost px-2">
-                        <span class="fs-6 fw-bold badge badge-success rounded-pill"> الإشتراك الحالي للعضو الجديد: {{$currentSubCost + 10}} ج.م</span>
+                        <span class="fs-6 fw-bold badge badge-success rounded-pill"> الإشتراك الحالي للعضو الجديد: {{$currentSubCost + 50}} ج.م</span>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -144,37 +144,41 @@
                                                 <label class="form-label text-muted" for="name">
                                                     الأسم الكامل
                                                 </label>
-                                                <input class="form-control text-muted" id="name" type="text" name="name" placeholder="أدخل الأسم باللغة العربية" pattern="[\u0600-\u06FF\s]{3,}" required>
-                                                <p id="nameMsg" class="d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
+                                                <input class="form-control text-muted" id="name" type="text" name="name" placeholder="أدخل الأسم باللغة العربية" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" required>
                                                 <p id="nameMsgRequired" class="d-none required mb-0">حقل الإسم مطلوب</p>
+                                                <p id="nameMsg" class="required d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
-                                                <label class="form-label text-muted" for="email-basic-wizard">
+                                                <label class="form-label text-muted" for="nickname">
                                                     اللقب و إسم الشهرة
                                                 </label>
-                                                <input class="form-control text-muted" id="email-basic-wizard" type="text" name="nickname" placeholder="مثلا: محمد أحمد محمود">
+                                                <input class="form-control text-muted" id="nickname" type="text" name="nickname" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="مثلا: محمد أحمد محمود">
+                                                <p class="required d-none text-danger mb-0" id="nickReq">هذا الحقل مطلوب</p>
+                                                <p class="required d-none text-danger mb-0" id="nickMsg">يجب ان يكون حقل اللقب باللغة العربية ولا يقل عن 5 احرف</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="form-label text-muted" for="confirmpasswordwizard">
                                                     تاريخ الميلاد
                                                 </label>
                                                 <input class="datepicker-here form-control text-muted digits" id="birthdate" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl" required>
-                                                <p id="birthdateMsg" class="d-none mb-0">يجب إدخال التاريخ بصيغة صحيحة</p>
-                                                <p id="birthdateMsgRequired" class="d-none required mb-0">حقل تاريخ الميلاد مطلوب</p>
+                                                <p id="birthdateMsgRequired" class="required d-none required mb-0">حقل تاريخ الميلاد مطلوب</p>
+                                                <p id="birthdateMsg" class="required d-none mb-0">يجب إدخال التاريخ بصيغة صحيحة</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
-                                                <label class="col-6-6 form-label text-muted" for="passwordwizard">
+                                                <label class="col-6-6 form-label text-muted" for="address">
                                                     العنوان
                                                 </label>
-                                                <input class="form-control text-muted" name="address" id="passwordwizard" type="text" placeholder="عنوان المشترك">
+                                                <input class="form-control text-muted" name="address" id="address" type="text" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="عنوان المشترك">
+                                                <p class="required d-none mb-0 text-danger" id="addressReq">هذا الحقل مطلوب</p>
+                                                <p class="required d-none mb-0 text-danger" id="addressMsg">يجب ان يكون العنوان باللغة العربية</p>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label text-muted" for="confirmpasswordwizard">
                                                     رقم المحمول
                                                 </label>
                                                 <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول" required>
-                                                <p id="mobileMsg" class="d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                                 <p id="mobileMsgRequired" class="d-none required mb-0">حقل الرقم المحمول مطلوب</p>
+                                                <p id="mobileMsg" class="d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -183,32 +187,43 @@
                                                     الصورة الشخصية
                                                 </label>
                                                 <input class="form-control text-muted" name="img" id="personalImg" type="file" accept="image/*">
+                                                <p class="required d-none fw-bold text-danger mb-0" id="personalimgReq">هذا الحقل مطلوب</p>
+                                                <p class="required d-none fw-bold text-danger mb-0" id="personalimgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                                <p class="required d-none fw-bold text-danger mb-0" id="personalimgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
-                                                <label class="form-label text-muted" for="personalImg">
+                                                <label class="form-label text-muted" for="idImg">
                                                     صورة البطاقة الشخصية
                                                 </label>
-                                                <input class="form-control text-muted" name="id_img" id="personalImg" type="file" accept="image/*">
+                                                <input class="form-control text-muted" name="id_img" id="idImg" type="file" accept="image/*">
+                                                <p class="required d-none fw-bold text-danger mb-0" id="idimgReq">هذا الحقل مطلوب</p>
+                                                <p class="required d-none fw-bold text-danger mb-0" id="idimgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                                <p class="required d-none fw-bold text-danger mb-0" id="idimgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="form-label text-muted" for="ssn">
                                                     الرقم القومي
                                                 </label>
                                                 <input type="text" id="ssn" name="ssn" maxlength="14" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل الرقم القومي" required>
-                                                <p id="ssnMsg" class="d-none mb-0">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
                                                 <p id="ssnMsgRequired" class="d-none required mb-0">حقل الرقم القومي مطلوب</p>
+                                                <p id="ssnMsg" class="d-none mb-0">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
                                             </div>
                                             <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
-                                                <label class="form-label text-muted" for="firstnamewizard">
+                                                <label class="form-label text-muted" for="martial_status">
                                                     الحالة الإجتماعية
                                                 </label>
-                                                <input class="form-control text-muted" id="firstnamewizard" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
+                                                <select name="martial_status" id="martial_status" class="form-select">
+                                                    <option selected disabled>الحالة الإجتماعية</option>
+                                                    <option value="أعزف">أعزف</option>
+                                                    <option value="متزوج">متزوج</option>
+                                                    <option value="أرمل">أرمل</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label text-muted" for="firstnamewizard">
+                                                <label class="form-label text-muted" for="home_tel">
                                                     ت المنزل
                                                 </label>
-                                                <input class="form-control text-muted" id="firstnamewizard" name="home_tel" type="number" placeholder="ت المنزل">
+                                                <input class="form-control text-muted" id="home_tel" name="home_tel" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="ت المنزل">
                                             </div>
                                         </div>
                                     </div>
