@@ -119,39 +119,33 @@ if (storeSub) {
     const nameSub = document.getElementById("name");
     const nameSubMsg = document.getElementById("nameMsg");
     const nameReq = document.getElementById("nameMsgRequired");
-    nameSub.addEventListener("keyup", function () {
+    nameSub.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s]{3,}$/;
-        if (letters.test(nameSub.value)) {
-            nameSub.classList.add("good");
+        if (this.value.trim() === "") {
+            nameReq.classList.remove("d-none");
             nameSubMsg.classList.add("d-none");
-            f3 = 1;
-            if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
-                document.getElementById("nextbtn").disabled = false;
-            } else {
-                document.getElementById("nextbtn").disabled = true;
-            }
-        } else {
             nameSub.classList.remove("good");
             nameSub.classList.add("error");
-            nameSubMsg.classList.remove("d-none");
-            f3 = 0;
-            document.getElementById("nextbtn").disabled = true;
-        }
-    });
-    nameSub.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            nameReq.classList.remove("d-none");
-            nameSubMsg.classList.add("d-none");
         } else {
-            nameReq.classList.add("d-none");
-            nameSubMsg.classList.remove("d-none");
-        }
-    });
-    nameSub.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            nameReq.classList.remove("d-none");
-        } else {
-            nameReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                nameSub.classList.add("good");
+                nameSub.classList.remove("error");
+                nameSubMsg.classList.add("d-none");
+                nameReq.classList.add("d-none");
+                f3 = 1;
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                    document.getElementById("nextbtn").disabled = false;
+                } else {
+                    document.getElementById("nextbtn").disabled = true;
+                }
+            } else {
+                nameSub.classList.remove("good");
+                nameSub.classList.add("error");
+                nameSubMsg.classList.remove("d-none");
+                nameReq.classList.add("d-none");
+                f3 = 0;
+                document.getElementById("nextbtn").disabled = true;
+            }
         }
     });
     //! Validation Subscriber NICKNAME
@@ -183,80 +177,66 @@ if (storeSub) {
     const ssn = document.getElementById("ssn");
     const ssnMsg = document.getElementById("ssnMsg");
     const ssnReq = document.getElementById("ssnMsgRequired");
-    ssn.addEventListener("keyup", function () {
-        const regSSN = /(?=.{14,})/;
-        if (regSSN.test(ssn.value)) {
-            ssn.classList.add("good");
+    ssn.addEventListener("input", function () {
+        let letters = /(?=.{14,})/;
+        if (this.value.trim() === "") {
+            ssnReq.classList.remove("d-none");
             ssnMsg.classList.add("d-none");
-            ssnReq.classList.add("d-none");
-            f1 = 1;
-            if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
-                document.getElementById("nextbtn").disabled = false;
-            } else {
-                document.getElementById("nextbtn").disabled = true;
-            }
-        } else {
             ssn.classList.remove("good");
             ssn.classList.add("error");
-            ssnMsg.classList.remove("d-none");
-            f1 = 0;
-            document.getElementById("nextbtn").disabled = true;
-        }
-    });
-    ssn.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            ssnReq.classList.remove("d-none");
-            ssnMsg.classList.add("d-none");
         } else {
-            ssnReq.classList.add("d-none");
-            ssnMsg.classList.remove("d-none");
-        }
-    });
-    ssn.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            ssnReq.classList.remove("d-none");
-        } else {
-            ssnReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                ssn.classList.add("good");
+                ssn.classList.remove("error");
+                ssnMsg.classList.add("d-none");
+                ssnReq.classList.add("d-none");
+                f1 = 1;
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                    document.getElementById("nextbtn").disabled = false;
+                } else {
+                    document.getElementById("nextbtn").disabled = true;
+                }
+            } else {
+                ssn.classList.remove("good");
+                ssn.classList.add("error");
+                ssnMsg.classList.remove("d-none");
+                ssnReq.classList.add("d-none");
+                f1 = 0;
+                document.getElementById("nextbtn").disabled = true;
+            }
         }
     });
     //! Validation Subscriber Mobile
     const mobile = document.getElementById("mobile_no");
     const mobileMsg = document.getElementById("mobileMsg");
     const mobReq = document.getElementById("mobileMsgRequired");
-    mobile.addEventListener("keyup", function () {
-        const regMOB = /(?=.{11,})/;
-        if (regMOB.test(mobile.value)) {
-            mobile.classList.add("good");
+    mobile.addEventListener("input", function () {
+        let letters = /(?=.{11,})/;
+        if (mobile.value.trim() === "") {
+            mobReq.classList.remove("d-none");
             mobileMsg.classList.add("d-none");
-            mobReq.classList.add("d-none");
-            f2 = 1;
-            if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
-                document.getElementById("nextbtn").disabled = false;
-            } else {
-                document.getElementById("nextbtn").disabled = true;
-            }
-        } else {
             mobile.classList.remove("good");
             mobile.classList.add("error");
-            mobileMsg.classList.remove("d-none");
-            f2 = 0;
-            document.getElementById("nextbtn").disabled = true;
-        }
-    });
-    mobile.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            mobReq.classList.remove("d-none");
-            mobileMsg.classList.add("d-none");
         } else {
-            mobReq.classList.add("d-none");
-            mobileMsg.classList.remove("d-none");
-        }
-    });
-    mobile.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            mobReq.classList.remove("d-none");
-        } else {
-            mobReq.classList.add("d-none");
+            if (letters.test(mobile.value)) {
+                mobile.classList.add("good");
+                mobile.classList.remove("error");
+                mobileMsg.classList.add("d-none");
+                mobReq.classList.add("d-none");
+                f2 = 1;
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                    document.getElementById("nextbtn").disabled = false;
+                } else {
+                    document.getElementById("nextbtn").disabled = true;
+                }
+            } else {
+                mobile.classList.remove("good");
+                mobile.classList.add("error");
+                mobileMsg.classList.remove("d-none");
+                mobReq.classList.add("d-none");
+                f2 = 0;
+                document.getElementById("nextbtn").disabled = true;
+            }
         }
     });
     //! Validation Subscriber Birthdate
@@ -264,35 +244,23 @@ if (storeSub) {
     const birthdayMsg = document.getElementById("birthdateMsg");
     const birthReq = document.getElementById("birthdateMsgRequired");
     birthday.addEventListener("blur", function () {
-        if (this.value) {
-            birthday.classList.add("good");
+        if (this.value.trim() === "") {
+            birthReq.classList.remove("d-none");
             birthdayMsg.classList.add("d-none");
+            birthday.classList.remove("good");
+            birthday.classList.add("error");
+            document.getElementById("nextbtn").disabled = true;
+        } else {
+            birthday.classList.remove("error");
+            birthdayMsg.classList.add("d-none");
+            birthReq.classList.add("d-none");
+            birthday.classList.add("good");
             f4 = 1;
             if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
                 document.getElementById("nextbtn").disabled = false;
             } else {
                 document.getElementById("nextbtn").disabled = true;
             }
-        } else {
-            birthday.classList.remove("good");
-            birthday.classList.add("error");
-            birthdayMsg.classList.remove("d-none");
-            f4 = 0;
-            document.getElementById("nextbtn").disabled = true;
-        }
-        if (this.value.trim() === "") {
-            birthReq.classList.remove("d-none");
-        } else {
-            birthReq.classList.add("d-none");
-        }
-    });
-    birthday.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            birthReq.classList.remove("d-none");
-            birthdayMsg.classList.add("d-none");
-        } else {
-            birthReq.classList.add("d-none");
-            birthdayMsg.classList.remove("d-none");
         }
     });
     //! Validation on Subscriber Address
@@ -466,62 +434,50 @@ if (costYears) {
     const year = document.getElementById("year");
     const yearMsg = document.getElementById("yearMsg");
     const yearReq = document.getElementById("yearReq");
-    year.addEventListener("keyup", function () {
+    year.addEventListener("input", function () {
         let letters = /^\d{4}$/;
-        if (letters.test(year.value)) {
-            year.classList.add("good");
+        if (this.value.trim() === "") {
+            yearReq.classList.remove("d-none");
             yearMsg.classList.add("d-none");
-        } else {
             year.classList.remove("good");
             year.classList.add("error");
-            yearMsg.classList.remove("d-none");
-        }
-    });
-    year.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            yearReq.classList.remove("d-none");
-            yearMsg.classList.add("d-none");
         } else {
-            yearReq.classList.add("d-none");
-            yearMsg.classList.remove("d-none");
-        }
-    });
-    year.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            yearReq.classList.remove("d-none");
-        } else {
-            yearReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                year.classList.add("good");
+                year.classList.remove("error");
+                yearMsg.classList.add("d-none");
+                yearReq.classList.add("d-none");
+            } else {
+                year.classList.remove("good");
+                year.classList.add("error");
+                yearMsg.classList.remove("d-none");
+                yearReq.classList.add("d-none");
+            }
         }
     });
     //! Validation For Year Cost
     const cost = document.getElementById("cost");
     const amountMsg = document.getElementById("amountMsg");
     const amountReq = document.getElementById("amountReq");
-    cost.addEventListener("keyup", function () {
+    cost.addEventListener("input", function () {
         let letters = /^(?!-)(?!0+$)\d{2,10}$/;
-        if (letters.test(cost.value)) {
-            cost.classList.add("good");
+        if (this.value.trim() === "") {
+            amountReq.classList.remove("d-none");
             amountMsg.classList.add("d-none");
-        } else {
             cost.classList.remove("good");
             cost.classList.add("error");
-            amountMsg.classList.remove("d-none");
-        }
-    });
-    cost.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            amountReq.classList.remove("d-none");
-            amountMsg.classList.add("d-none");
         } else {
-            amountReq.classList.add("d-none");
-            amountMsg.classList.remove("d-none");
-        }
-    });
-    cost.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            amountReq.classList.remove("d-none");
-        } else {
-            amountReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                cost.classList.add("good");
+                cost.classList.remove("error");
+                amountMsg.classList.add("d-none");
+                amountReq.classList.add("d-none");
+            } else {
+                cost.classList.remove("good");
+                cost.classList.add("error");
+                amountMsg.classList.remove("d-none");
+                amountReq.classList.add("d-none");
+            }
         }
     });
     //! Validation For Submit Cost
@@ -546,39 +502,31 @@ if (tomb) {
     const tombName = document.getElementById("tombName");
     const tombReq = document.getElementById("tombReq");
     const tombMsg = document.getElementById("tombMsg");
-    tombName.addEventListener("keyup", function () {
+    tombName.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s]{3,}$/;
-        if (letters.test(tombName.value.trim())) {
-            tombName.classList.remove("error");
-            tombName.classList.add("good");
+        if (this.value.trim() === "") {
+            tombReq.classList.remove("d-none");
             tombMsg.classList.add("d-none");
-        } else {
             tombName.classList.remove("good");
             tombName.classList.add("error");
-            tombMsg.classList.remove("d-none");
-        }
-    });
-    tombName.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            tombReq.classList.remove("d-none");
-            tombMsg.classList.add("d-none");
         } else {
-            tombReq.classList.add("d-none");
-            tombMsg.classList.remove("d-none");
-        }
-    });
-    tombName.addEventListener("blur", function () {
-        if (this.value.trim() === "") {
-            tombReq.classList.remove("d-none");
-        } else {
-            tombReq.classList.add("d-none");
+            if (letters.test(this.value)) {
+                tombName.classList.add("good");
+                tombName.classList.remove("error");
+                tombMsg.classList.add("d-none");
+                tombReq.classList.add("d-none");
+            } else {
+                tombName.classList.remove("good");
+                tombName.classList.add("error");
+                tombMsg.classList.remove("d-none");
+                tombReq.classList.add("d-none");
+            }
         }
     });
     //! Validation For Region
     const tombRegion = document.getElementById("regionSelect");
     const regionMsg = document.getElementById("regionMsg");
-    tombRegion.addEventListener("change", function (event) {
-        event.preventDefault();
+    tombRegion.addEventListener("change", function () {
         if (this.options[this.selectedIndex].value === "المنطقة") {
             tombRegion.classList.add("error");
             regionMsg.classList.remove("d-none");
@@ -589,32 +537,46 @@ if (tomb) {
             regionMsg.classList.add("d-none");
         }
     });
-    tombRegion.addEventListener("input", function () {
+    //! Validation For Tomb Guard Mobile Number
+    const tombGuardMobileNumber = document.getElementById("tomb_guard_number");
+    const guardMsg = document.getElementById("guardMob");
+    tombGuardMobileNumber.addEventListener("input", function () {
+        let guardMob = /(?=.{11,})/;
         if (this.value.trim() === "") {
-            regionMsg.classList.add("d-none");
+            guardMsg.classList.remove("d-none");
+            tombGuardMobileNumber.classList.remove("good");
+            tombGuardMobileNumber.classList.add("error");
         } else {
-            regionMsg.classList.remove("d-none");
+            if (guardMob.test(this.value)) {
+                tombGuardMobileNumber.classList.add("good");
+                tombGuardMobileNumber.classList.remove("error");
+                guardMsg.classList.add("d-none");
+            } else {
+                tombGuardMobileNumber.classList.remove("good");
+                tombGuardMobileNumber.classList.add("error");
+                guardMsg.classList.add("d-none");
+            }
         }
     });
     //! Validation For Location
     const tombLocation = document.getElementById("location");
     const locationReq = document.getElementById("locationReq");
-    tombLocation.addEventListener("keyup", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
-        if (letters.test(tombLocation.value)) {
-            tombLocation.classList.add("good");
-            locationReq.classList.add("d-none");
-        } else {
+    tombLocation.addEventListener("input", function () {
+        let urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+        if (this.value.trim() === "") {
+            locationReq.classList.remove("d-none");
             tombLocation.classList.remove("good");
             tombLocation.classList.add("error");
-            locationReq.classList.remove("d-none");
-        }
-    });
-    tombLocation.addEventListener("input", function () {
-        if (this.value.trim() === "") {
-            locationReq.classList.add("d-none");
         } else {
-            locationReq.classList.remove("d-none");
+            if (urlRegex.test(this.value)) {
+                tombLocation.classList.add("good");
+                tombLocation.classList.remove("error");
+                locationReq.classList.add("d-none");
+            } else {
+                tombLocation.classList.remove("good");
+                tombLocation.classList.add("error");
+                locationReq.classList.add("d-none");
+            }
         }
     });
     //! Validation For Submit Form
@@ -1055,4 +1017,4 @@ if (boardForm) {
         });
     }
 }
-//! Donations
+//! Adding debt

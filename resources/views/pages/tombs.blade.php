@@ -22,7 +22,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="title" class="text-muted">إسم المقبره</label>
-                                    <input type="text" class="form-control text-muted" id="tombName" pattern="[\u0600-\u06FF\s]{3,}" name="title" placeholder="إسم المقبره" required>
+                                    <input type="text" class="form-control text-muted" id="tombName" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="title" placeholder="إسم المقبره" required>
                                     <p class="required d-none text-danger mb-0" id="tombReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="tombMsg">يجب أن يكون الإسم باللغة العربية ولا يقل عن 3 أحرف</p>
                                 </div>
@@ -41,15 +41,16 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tomb_guard_name" class="text-muted">إسم التربي</label>
-                                    <input type="text" id="tomb_guard_name" class="form-control text-muted" name="tomb_guard_name" placeholder="إسم التربي">
+                                    <input type="text" id="tomb_guard_name" class="form-control text-muted" pattern="[\u0600-\u06FF\s]{10,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="tomb_guard_name" placeholder="إسم التربي">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tomb_guard_number" class="text-muted">رقم المحمول</label>
-                                    <input type="number" id="tomb_guard_number" class="form-control text-muted" name="tomb_guard_number" placeholder="رقم المحمول">
+                                    <input type="number" id="tomb_guard_number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control text-muted" name="tomb_guard_number" placeholder="رقم المحمول">
+                                    <p class="required d-none text-danger mb-0" id="guardMob">يجب ان يكون رقم المحمول مكون من 11 رقم</p>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="text-muted">الموقع</label>
-                                    <input type="text" name="location" id="location" placeholder="موقع المقبره" class="form-control text-muted" required>
+                                    <input type="url" name="location" id="location" placeholder="موقع المقبره" class="form-control text-muted" required>
                                     <p class="d-none required text-danger" id="locationReq">حقل الموقع مطلوب</p>
                                 </div>
                                 <div class="modal-footer">
@@ -97,9 +98,25 @@
                                             <td class="text-muted">{{$i++}}</td>
                                             <td class="text-muted">{{$tomb->title}}</td>
                                             <td class="text-muted">{{$tomb->region}}</td>
-                                            <td class="text-muted">{{$tomb->tomb_guard_name}}</td>
-                                            <td class="text-muted">{{$tomb->tomb_guard_number}}</td>
-                                            <td class="text-muted">{{$tomb->location}}</td>
+                                            <td class="text-muted">
+                                                @if ($tomb->tomb_guard_name)
+                                                    {{$tomb->tomb_guard_name}}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td class="text-muted">
+                                                @if ($tomb->tomb_guard_number)
+                                                    {{$tomb->tomb_guard_number}}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td class="text-muted">
+                                                <a href="{{$tomb->location}}" class="btn">
+                                                    <i class="fa-solid fa-link text-muted fs-6"></i>
+                                                </a>
+                                            </td>
                                             <td>
                                                 {{-- ! Update ! --}}
                                                 <button type="button" class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target="#editingborder_{{$tomb->id}}">

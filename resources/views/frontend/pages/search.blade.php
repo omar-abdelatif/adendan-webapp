@@ -408,7 +408,7 @@
                                                                     </p>
                                                                 </div>
                                                             <div class="tomb-item-body mt-3 w-100 text-center">
-                                                                <a href="{{$tomb->location}}" class="rounded-pill bg-smoke-white text-secondary px-4 fs-5 py-1">
+                                                                <a href="{{$tomb->location}}" class="rounded-pill bg-smoke-white text-secondary px-4 fs-5 py-1" target="blank">
                                                                     <b>الموقع</b>
                                                                 </a>
                                                             </div>

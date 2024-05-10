@@ -23,7 +23,7 @@ class CostYearsRequest extends FormRequest
     {
         return [
             'cost' => ['required'],
-            'year' => ['required'],
+            'year' => ['required', 'unique:cost_years,year'],
         ];
     }
 }

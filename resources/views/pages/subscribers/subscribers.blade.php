@@ -178,7 +178,7 @@
                                                 </label>
                                                 <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول" required>
                                                 <p id="mobileMsgRequired" class="d-none required mb-0">حقل الرقم المحمول مطلوب</p>
-                                                <p id="mobileMsg" class="d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                                <p id="mobileMsg" class=" required d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -235,7 +235,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group mb-3">
                                                 <label class="form-label text-white" for="placeholdername1">المؤهل الدراسي</label>
-                                                <input class="form-control text-white" id="placeholdername1" name="educational_qualification" type="text" placeholder="المؤهل الدراسي">
+                                                <input class="form-control text-white" id="placeholdername1" name="educational_qualification" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" type="text" placeholder="المؤهل الدراسي">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -255,13 +255,13 @@
                                                 <label class="form-label text-muted" for="email-basic">
                                                     الوظيفة
                                                 </label>
-                                                <input class="form-control text-muted" name="job" id="email-basic" type="text" placeholder="الوظيفة">
+                                                <input class="form-control text-muted" name="job" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" id="email-basic" type="text" placeholder="الوظيفة">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="form-label text-muted" for="validationCustom996">
                                                     جهة العمل
                                                 </label>
-                                                <input class="form-control text-muted" name="job_destination" id="validationCustom996" type="text" placeholder="جهة العمل">
+                                                <input class="form-control text-muted" name="job_destination" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" id="validationCustom996" type="text" placeholder="جهة العمل">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -269,13 +269,13 @@
                                                 <label class="form-label text-muted" for="validationCustom996">
                                                     عنوان العمل
                                                 </label>
-                                                <input class="form-control text-muted" name="job_address" id="validationCustom996" type="text" placeholder="عنوان العمل">
+                                                <input class="form-control text-muted" name="job_address" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" id="validationCustom996" type="text" placeholder="عنوان العمل">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label class="form-label text-muted" for="validationCustom996">
                                                     ت العمل
                                                 </label>
-                                                <input class="form-control text-muted" name="job_tel" id="validationCustom996" type="text" placeholder="ت العمل">
+                                                <input class="form-control text-muted" name="job_tel" id="validationCustom996" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" placeholder="ت العمل">
                                             </div>
                                         </div>
                                     </div>
@@ -302,7 +302,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
-                                            <input type="number" name="invoice_no" maxlength="4" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
+                                            <input type="text" name="invoice_no" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
                                         </div>
                                     </div>
                                 </div>

@@ -19,11 +19,11 @@ class CostYearsController extends Controller
         if ($validated) {
             $store = CostYears::create($validated);
             if ($store) {
-                // $notificationSuccess = [
-                //     'message' => "تم الإضافة بنجاح",
-                //     'alert-type' => 'success'
-                // ];
-                return back();
+                $notificationSuccess = [
+                    'message' => "تم الإضافة بنجاح",
+                    'alert-type' => 'success'
+                ];
+                return back()->with($notificationSuccess);
             } else {
                 return back()->withErrors($validated);
             }
