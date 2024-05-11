@@ -75,7 +75,6 @@
                                                                 <th class="text-muted text-center">تاريخ الدفع</th>
                                                                 <th class="text-muted text-center">رقم الإيصال</th>
                                                                 <th class="text-muted text-center">قيمة المتأخرات المدفوعة</th>
-                                                                {{-- <th class="text-muted text-center">فترة المديونية بالسنوات</th> --}}
                                                                 <th class="text-muted text-center">Actions</th>
                                                             </tr>
                                                         </thead>
@@ -107,13 +106,6 @@
                                                                             <span class="fw-bold">-</span>
                                                                         @endif
                                                                     </td>
-                                                                    {{-- <td class="text-muted text-center">
-                                                                        @if ($item->delays_period)
-                                                                            <span>{{$item->delays_period}}</span>
-                                                                        @else
-                                                                            <span class="fw-bold">-</span>
-                                                                        @endif
-                                                                    </td> --}}
                                                                     <td>
                                                                         <div class="btn-group" role="group">
                                                                             <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -278,7 +270,7 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <form action="{{route('subscription.pay')}}" method="post">
+                                                                                    <form action="{{route('subscription.pay')}}" method="post" id="delayForm" data-payDelay-id="{{$delay->id}}">
                                                                                         @csrf
                                                                                         <div class="row">
                                                                                             <input type="hidden" name="id" value="{{$delay->id}}"/>
@@ -293,17 +285,21 @@
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                     <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                    <input type="number" class="text-muted form-control" name="invoice_no" id="invoice" placeholder="رقم الإيصال">
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="invoice_no" id="invoice" maxlength="5" data-invoice-id="{{$delay->id}}" placeholder="رقم الإيصال" required>
+                                                                                                    <p class="required d-none text-danger mb-0 invReq" id="invReq" data-invoice-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger mb-0 invMsg" id="invMsg" data-invoice-id="{{$delay->id}}">يجب ان يكون رقم الإيصال مكون من 5 ارقام</p>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                     <label for="paied" class="text-muted">المبلغ المدفوع</label>
-                                                                                                    <input type="number" class="text-muted form-control" name="paied" id="paied" placeholder="المبلغ المدفوع من العضو">
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="paied" minlength="2" maxlength="5" id="paied" data-delay-id="{{$delay->id}}" placeholder="المبلغ المدفوع" required>
+                                                                                                    <p class="required d-none text-danger mb-0 payReq" data-delay-id="{{$delay->id}}" id="payReq">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger mb-0 payMsg" data-delay-id="{{$delay->id}}" id="payMsg">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                                            <button type="submit" id="delaySubmit" role="button" data-DelaysForm-id = "{{$delay->id}}" class="btn btn-primary">تأكيد</button>
                                                                                         </div>
                                                                                     </form>
                                                                                 </div>
@@ -365,7 +361,7 @@
                                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                     </div>
                                                                                     <div class="modal-body">
-                                                                                        <form action="{{route('oldDelays.pay')}}" method="post">
+                                                                                        <form action="{{route('oldDelays.pay')}}" method="post" data-paymentForm-id="{{$delay->id}}">
                                                                                             @csrf
                                                                                             <div class="row">
                                                                                                 <input type="hidden" name="id" value="{{$delay->id}}"/>
@@ -376,16 +372,20 @@
                                                                                                     </div>
                                                                                                     <div class="form-group mb-3">
                                                                                                         <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                        <input type="number" class="text-muted form-control" name="invoice_no" id="invoice" placeholder="رقم الإيصال">
+                                                                                                        <input type="text" class="text-muted form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="invoice" minlength="2" maxlength="5" placeholder="رقم الإيصال" data-inv-id="{{$delay->id}}" required>
+                                                                                                        <p class="required d-none text-danger paymentInvReq" data-inv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                        <p class="required d-none text-danger paymentInvMsg" data-inv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
                                                                                                     </div>
                                                                                                     <div class="form-group mb-3">
                                                                                                         <label for="olddelay" class="text-muted">المبلغ المدفوع</label>
-                                                                                                        <input type="number" class="text-muted form-control" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو">
+                                                                                                        <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
+                                                                                                        <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                        <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                                    <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                                                    <button type="submit" role="button" data-PaymentSubmit-id="{{$delay->id}}" class="btn btn-primary">تأكيد</button>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </form>

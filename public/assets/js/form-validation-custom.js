@@ -26,7 +26,8 @@ function validateForm(form) {
         if (
             select.value === "التصنيف" ||
             select.value === "المنطقة" ||
-            select.value === "الحرفة"
+            select.value === "الحرفة" ||
+            select.value === "السنة"
         ) {
             select.classList.add("error");
             select.classList.remove("good");
@@ -424,12 +425,6 @@ if (newsform) {
 //! Validation For Store Cost Years
 const costYears = document.getElementById("costYears");
 if (costYears) {
-    costYears.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (validateForm(costYears)) {
-            this.submit();
-        }
-    });
     //! Validation For Year Cost
     const year = document.getElementById("year");
     const yearMsg = document.getElementById("yearMsg");
@@ -492,12 +487,6 @@ if (costYears) {
 //! Validation For Store Tombs
 const tomb = document.getElementById("tombForm");
 if (tomb) {
-    tomb.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (validateForm(tomb)) {
-            this.submit();
-        }
-    });
     //! Validation For Tomb Name
     const tombName = document.getElementById("tombName");
     const tombReq = document.getElementById("tombReq");
@@ -729,12 +718,6 @@ if (workers) {
 //! Validation For Store Associations Committes
 const associate = document.getElementById("associateForm");
 if (associate) {
-    associate.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (validateForm(associate)) {
-            this.submit();
-        }
-    });
     //! Validation For Association Name
     const associateName = document.getElementById("associateName");
     const associateNameReq = document.getElementById("associateNameReq");
@@ -800,9 +783,6 @@ if (miscForm) {
     //! Validation Select Category And Other Category
     const categorySelect = document.getElementById("category");
     const catReq = document.getElementById("catReq");
-    const otherCat = document.getElementById("other_category");
-    const otherReq = document.getElementById("otherReq");
-    const otherMsg = document.getElementById("otherMsg");
     categorySelect.addEventListener("change", function () {
         if (this.options[this.selectedIndex].value === "التصنيف") {
             categorySelect.classList.add("error");
@@ -830,6 +810,10 @@ if (miscForm) {
             otherReq.classList.add("d-none");
         }
     });
+    //! Validation Other Category
+    const otherCat = document.getElementById("other_category");
+    const otherReq = document.getElementById("otherReq");
+    const otherMsg = document.getElementById("otherMsg");
     otherCat.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s]{3,}$/;
         if (this.value.trim() === "") {
@@ -1017,4 +1001,227 @@ if (boardForm) {
         });
     }
 }
-//! Adding debt
+//! Adding Debt
+const debtForm = document.getElementById("debtForm");
+if (debtForm) {
+    //! Validation For Choosen Year
+    const yearSelect = document.getElementById("costYear");
+    const costYearMsg = document.getElementById("costYearMsg");
+    yearSelect.addEventListener("change", function () {
+        if (this.options[this.selectedIndex].value === "السنة") {
+            yearSelect.classList.add("error");
+            yearSelect.classList.remove("good");
+            costYearMsg.classList.remove("d-none");
+        } else {
+            yearSelect.classList.remove("error");
+            yearSelect.classList.add("good");
+            costYearMsg.classList.add("d-none");
+        }
+    });
+    //! Validation For Year Cost
+    const yearSub = document.getElementById("yearly_cost");
+    const costMsg = document.getElementById("costMsg");
+    const costReq = document.getElementById("costReq");
+    yearSub.addEventListener("input", function () {
+        let regCost = /(?=.{2,4})/;
+        if (this.value.trim() === "") {
+            costReq.classList.remove("d-none");
+            costMsg.classList.add("d-none");
+            yearSub.classList.remove("good");
+            yearSub.classList.add("error");
+        } else {
+            if (regCost.test(this.value)) {
+                yearSub.classList.add("good");
+                yearSub.classList.remove("error");
+                costReq.classList.add("d-none");
+                costMsg.classList.add("d-none");
+            } else {
+                yearSub.classList.remove("good");
+                yearSub.classList.add("error");
+                costReq.classList.add("d-none");
+                costMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Submit Button
+    const debtSubmit = document.getElementById("debtSubmit");
+    if (debtSubmit) {
+        debtSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(debtForm)) {
+                debtForm.submit();
+            }
+        });
+    }
+}
+//! Pay Debts
+const DelaysForm = document.querySelectorAll("[data-payDelay-id]");
+if (DelaysForm) {
+    const invoices = document.querySelectorAll("[data-invoice-id]");
+    const AllDebts = document.querySelectorAll("[data-delay-id]");
+    DelaysForm.forEach((form) => {
+        //! Invoices Number Validation
+        invoices.forEach((inv) => {
+            let invoiceNo = form.querySelector(`input[name="invoice_no"][data-invoice-id="${inv.dataset.invoiceId}"]`);
+            let invReq = form.querySelector(`p.invReq[data-invoice-id="${inv.dataset.invoiceId}"]`);
+            let invMsg = form.querySelector(`p.invMsg[data-invoice-id="${inv.dataset.invoiceId}"]`);
+            if (invoiceNo) {
+                inv.addEventListener("input", function () {
+                    let invoiceReg = /^\d{5}$/;
+                    if (this.value.trim() === "") {
+                        invReq.classList.remove("d-none");
+                        invMsg.classList.add("d-none");
+                        inv.classList.remove("good");
+                        inv.classList.add("error");
+                    } else {
+                        if (invoiceReg.test(this.value)) {
+                            inv.classList.add("good");
+                            inv.classList.remove("error");
+                            invReq.classList.add("d-none");
+                            invMsg.classList.add("d-none");
+                        } else {
+                            inv.classList.remove("good");
+                            inv.classList.add("error");
+                            invReq.classList.add("d-none");
+                            invMsg.classList.remove("d-none");
+                        }
+                    }
+                });
+            }
+        });
+        //! Debt Amount Validation
+        AllDebts.forEach((debt) => {
+            let debtAmount = form.querySelector(
+                `input[name="paied"][data-delay-id="${debt.dataset.delayId}"]`
+            );
+            let debtReq = form.querySelector(
+                `p.payReq[data-delay-id="${debt.dataset.delayId}"]`
+            );
+            let debtMsg = form.querySelector(
+                `p.payMsg[data-delay-id="${debt.dataset.delayId}"]`
+            );
+            if (debtAmount) {
+                debt.addEventListener("input", function () {
+                    let debtReg = /(?=.{2,5})/;
+                    if (this.value.trim() === "") {
+                        debtReq.classList.remove("d-none");
+                        debtMsg.classList.add("d-none");
+                        debt.classList.remove("good");
+                        debt.classList.add("error");
+                    } else {
+                        if (debtReg.test(this.value)) {
+                            debt.classList.add("good");
+                            debt.classList.remove("error");
+                            debtReq.classList.add("d-none");
+                            debtMsg.classList.add("d-none");
+                        } else {
+                            debt.classList.remove("good");
+                            debt.classList.add("error");
+                            debtReq.classList.add("d-none");
+                            debtMsg.classList.remove("d-none");
+                        }
+                    }
+                });
+            }
+        });
+        //! Validation For Submit Button
+        const AllDelaySubmit = form.querySelectorAll("[data-DelaysForm-id]");
+        if (AllDelaySubmit) {
+            AllDelaySubmit.forEach((delay) => {
+                delay.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    if (validateForm(form)) {
+                        form.submit();
+                    }
+                });
+            });
+        }
+    });
+}
+//! Pay Old Payment
+const OldPaymentForm = document.querySelectorAll("[data-paymentForm-id]");
+if (OldPaymentForm) {
+    const paymentInvs = document.querySelectorAll("[data-inv-id]");
+    const paymentAmount = document.querySelectorAll("[data-pay-id]");
+    OldPaymentForm.forEach((payment) => {
+        //! Invoices Number Validation
+        paymentInvs.forEach((inv) => {
+            let payInput = payment.querySelector(`input[name="invoice_no"][data-inv-id="${inv.dataset.invId}"]`);
+            let payReq = payment.querySelector(`p.paymentInvReq[data-inv-id="${inv.dataset.invId}"]`);
+            let payMsg = payment.querySelector(`p.paymentInvMsg[data-inv-id="${inv.dataset.invId}"]`);
+            if (payInput) {
+                inv.addEventListener("input", function () {
+                    let invoiceReg = /^\d{5}$/;
+                    if (this.value.trim() === "") {
+                        payReq.classList.remove("d-none");
+                        payMsg.classList.add("d-none");
+                        inv.classList.remove("good");
+                        inv.classList.add("error");
+                    } else {
+                        if (invoiceReg.test(this.value)) {
+                            inv.classList.add("good");
+                            inv.classList.remove("error");
+                            payReq.classList.add("d-none");
+                            payMsg.classList.add("d-none");
+                        } else {
+                            inv.classList.remove("good");
+                            inv.classList.add("error");
+                            payReq.classList.add("d-none");
+                            payMsg.classList.remove("d-none");
+                        }
+                    }
+                })
+            }
+        });
+        //! Payment Amount Validation
+        paymentAmount.forEach((pay) => {
+            let amountInput = payment.querySelector(`input[name="olddelay"][data-pay-id="${pay.dataset.payId}"]`);
+            let amountReq = payment.querySelector(`p.paymentAmountReq[data-pay-id="${pay.dataset.payId}"]`);
+            let amountMsg = payment.querySelector(`p.paymentAmountMsg[data-pay-id="${pay.dataset.payId}"]`);
+            if (amountInput) {
+                pay.addEventListener("input", function () {
+                    const amountReg = /(?=.{2,5})/;
+                    if (this.value.trim() === "") {
+                        amountReq.classList.remove("d-none");
+                        amountMsg.classList.add("d-none");
+                        pay.classList.remove("good");
+                        pay.classList.add("error");
+                    } else {
+                        if (amountReg.test(this.value)) {
+                            pay.classList.add("good");
+                            pay.classList.remove("error");
+                            amountReq.classList.add("d-none");
+                            amountMsg.classList.add("d-none");
+                        } else {
+                            pay.classList.remove("good");
+                            pay.classList.add("error");
+                            amountReq.classList.add("d-none");
+                            amountMsg.classList.remove("d-none");
+                        }
+                    }
+                })
+            }
+        })
+        //! Validation For Submit Button
+        const PaymentSubmit = payment.querySelectorAll("[data-PaymentSubmit-id]");
+        if (PaymentSubmit) {
+            PaymentSubmit.forEach((pay) => {
+                pay.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    if (validateForm(payment)) {
+                        payment.submit();
+                    }
+                });
+            });
+        }
+    });
+}
+
+
+
+
+
+
+
+
+

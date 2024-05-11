@@ -69,7 +69,9 @@
                 <div class="modal-body">
                     <form action="{{route('subscriber.bulk')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control" name="import" accept=".xlsx, .xls">
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="import" accept=".xlsx, .xls">
+                        </div>
                         <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
                     </form>
                 </div>
@@ -335,32 +337,31 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('delays.costbyyear')}}" method="post">
+                    <form action="{{route('delays.costbyyear')}}" method="post" id="debtForm">
                         @csrf
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="groups">
-                                        <div class="form-group mb-3">
-                                            <label for="cost-year" class="text-muted">السنة</label>
-                                            <select name="year" id="cost-year" class="form-select">
-                                                <option selected>-- إختار السنة --</option>
-                                                @foreach ($years as $year)
-                                                    <option value="{{$year->year}}">{{$year->year}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="cost" class="text-muted">المبلغ</label>
-                                            <input type="number" name="yearly_cost" id="cost" class="form-control" placeholder="المبلغ">
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group mb-3">
+                                    <label for="costYear" class="text-muted">السنة</label>
+                                    <select name="year" id="costYear" class="form-select text-muted" required>
+                                        <option selected disabled>السنة</option>
+                                        @foreach ($years as $year)
+                                            <option value="{{$year->year}}">{{$year->year}}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="required text-danger mb-0 d-none fw-bold" id="costYearMsg">يجب الإختيار من القائمة أعلاه</p>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="yearly_cost" class="text-muted">المبلغ</label>
+                                    <input type="text" name="yearly_cost" maxlength="4" minlength="2" id="yearly_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control" placeholder="المبلغ" required>
+                                    <p class="required d-none text-danger mb-0 fw-bold" id="costReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0 fw-bold" id="costMsg">يجب ان يكون اقصى رقم هو 4 ارقام</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="submit" role="button" id="debtSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>
