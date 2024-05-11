@@ -16,23 +16,28 @@
                     <h3 class="text-center mb-0">سحب مبلغ من الخزنة الى البنك</h3>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('withdraw')}}" method="post" enctype="multipart/form-data">
+                    <form id="safeForm" action="{{route('withdraw')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="withdrawn_amount" class="text-muted">المبلغ المسحوب</label>
-                                    <input type="number" name="amount" id="withdrawn_amount" placeholder="المبلغ المسحوب" class="form-control text-muted">
+                                    <input type="text"  class="form-control text-muted"name="amount" id="withdrawn_amount" placeholder="المبلغ المسحوب" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" required>
+                                    <p class="required d-none text-danger fw-bold" id="withdrawReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger fw-bold" id="withdrawMsg">يجب ان لا يكون الرقم المسحوب بالسالب و مكون من 2 رقم على الأقل</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="proof_withdraw" class="text-muted">إثبات السحب</label>
-                                    <input type="file" name="proof_img" id="proof_withdraw" class="form-control text-muted" accept="image/*">
+                                    <input type="file" name="proof_img" id="proof_withdraw" class="form-control text-muted" accept="image/*" required>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
+                                </div>
+                                <div class="modal-footer mt-3">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="submit" role="button" id="withdrawSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer mt-3">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>
@@ -156,7 +161,7 @@
                                             <td class="text-center" dir="ltr">{{$safe->created_at->format('h:i a')}}</td>
                                             <td class="text-center">{{$safe->transaction_type}}</td>
                                             <td class="text-center">
-                                                @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/إيداع' || $safe->transaction_type === 'متأخرات التبرعات' || $safe->transaction_type === 'تبرع كلي' || $safe->transaction_type === 'تبرع جزئي')
+                                                @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/إيداع' || $safe->transaction_type === 'متأخرات التبرعات' || $safe->transaction_type === 'تبرع كلي' || $safe->transaction_type === 'تبرع جزئي'|| $safe->transaction_type === 'خزنة/إيداع')
                                                     <h3 class="badge rounded-pill badge-success" style="font-size: 13px;">إيداع</h3>
                                                 @else
                                                     <h3 class="badge rounded-pill badge-danger" style="font-size: 13px;">سـحب</h3>

@@ -1001,7 +1001,7 @@ if (boardForm) {
         });
     }
 }
-//! Adding Debt
+//! Adding Debt Validation
 const debtForm = document.getElementById("debtForm");
 if (debtForm) {
     //! Validation For Choosen Year
@@ -1054,7 +1054,7 @@ if (debtForm) {
         });
     }
 }
-//! Pay Debts
+//! Pay Debts Validation
 const DelaysForm = document.querySelectorAll("[data-payDelay-id]");
 if (DelaysForm) {
     const invoices = document.querySelectorAll("[data-invoice-id]");
@@ -1138,7 +1138,7 @@ if (DelaysForm) {
         }
     });
 }
-//! Pay Old Payment
+//! Pay Old Payment Validation
 const OldPaymentForm = document.querySelectorAll("[data-paymentForm-id]");
 if (OldPaymentForm) {
     const paymentInvs = document.querySelectorAll("[data-inv-id]");
@@ -1216,6 +1216,119 @@ if (OldPaymentForm) {
         }
     });
 }
+//! Safe Validation
+const safeDataForm = document.getElementById("safeForm");
+if (safeDataForm) {
+    //! Validation For Safe Amount
+    const withdrawnAmount = document.getElementById("withdrawn_amount");
+    const withdrawReq = document.getElementById("withdrawReq");
+    const withdrawMsg = document.getElementById("withdrawMsg");
+    withdrawnAmount.addEventListener("input", function () {
+        const withdrawReg = /(?=.{2,})/;
+        if (this.value.trim() === "") {
+            withdrawReq.classList.remove("d-none");
+            withdrawMsg.classList.add("d-none");
+            withdrawnAmount.classList.remove("good");
+            withdrawnAmount.classList.add("error");
+        } else {
+            if (withdrawReg.test(this.value)) {
+                withdrawnAmount.classList.add("good");
+                withdrawnAmount.classList.remove("error");
+                withdrawReq.classList.add("d-none");
+                withdrawMsg.classList.add("d-none");
+            } else {
+                withdrawnAmount.classList.remove("good");
+                withdrawnAmount.classList.add("error");
+                withdrawReq.classList.add("d-none");
+                withdrawMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Safe Image
+    const proofImg = document.getElementById("proof_withdraw");
+    const ProofimgReq = document.getElementById("withdrawimgReq");
+    const ProofimgSize = document.getElementById("withdrawimgSize");
+    const ProofimgExt = document.getElementById("withdrawimgExt");
+    proofImg.addEventListener("change", function () {
+        const img = proofImg.files[0];
+        if (img) {
+            validateImage(img,ProofimgReq,ProofimgExt,proofImg,ProofimgSize);
+        } else {
+            proofImg.classList.add("error");
+            proofImg.classList.remove("good");
+            ProofimgReq.classList.remove("d-none");
+            ProofimgSize.classList.add("d-none");
+            ProofimgExt.classList.add("d-none");
+        }
+    })
+    //! Validation For Safe Submit Button
+    const withdrawFormSubmit = document.getElementById("withdrawSubmit");
+    if (withdrawFormSubmit) {
+        withdrawFormSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(safeDataForm)) {
+                safeDataForm.submit();
+            }
+        });
+    }
+}
+//! Bank Validation
+const BankForm = document.getElementById("BankForm");
+if (BankForm) {
+    //! Validation For Bank Amount
+    const bankAmount = document.getElementById("withdrawn_bank");
+    const bankReq = document.getElementById("bankReq");
+    const bankMsg = document.getElementById("bankMsg");
+    bankAmount.addEventListener("input", function () {
+        const bankReg = /(?=.{2,})/;
+        if (this.value.trim() === "") {
+            bankReq.classList.remove("d-none");
+            bankMsg.classList.add("d-none");
+            bankAmount.classList.remove("good");
+            bankAmount.classList.add("error");
+        } else {
+            if (bankReg.test(this.value)) {
+                bankAmount.classList.add("good");
+                bankAmount.classList.remove("error");
+                bankReq.classList.add("d-none");
+                bankMsg.classList.add("d-none");
+            } else {
+                bankAmount.classList.remove("good");
+                bankAmount.classList.add("error");
+                bankReq.classList.add("d-none");
+                bankMsg.classList.remove("d-none");
+            }
+        }
+    })
+    //! Validation For Bank Image
+    const proofBankImg = document.getElementById("proof_bank");
+    const ProofBankimgReq = document.getElementById("bankImgReq");
+    const ProofBankimgSize = document.getElementById("bankImgSize");
+    const ProofBankimgExt = document.getElementById("bankImgExt");
+    proofBankImg.addEventListener("change", function () {
+        const img = proofBankImg.files[0];
+        if (img) {
+            validateImage(img,ProofBankimgReq,ProofBankimgExt,proofBankImg,ProofBankimgSize);
+        } else {
+            proofBankImg.classList.add("error");
+            proofBankImg.classList.remove("good");
+            ProofBankimgReq.classList.remove("d-none");
+            ProofBankimgSize.classList.add("d-none");
+            ProofBankimgExt.classList.add("d-none");
+        }
+    })
+    //! Validation For Bank Submit Button
+    const BankSubmit = document.getElementById("BankSubmit");
+    if (BankSubmit) {
+        BankSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(BankForm)) {
+                BankForm.submit();
+            }
+        });
+    }
+}
+
 
 
 

@@ -40,7 +40,7 @@ class WithdrawController extends Controller
                     'member_id' => '-',
                     'proof_img' => $imagename,
                     'amount' => $validated['amount'],
-                    'transaction_type' => 'بنك/سحب',
+                    'transaction_type' => 'خزنة/سحب',
                 ]);
                 if ($store) {
                     $newAmount = $totalSafe->amount - $validated['amount'];
@@ -49,7 +49,7 @@ class WithdrawController extends Controller
                     $totalBank->update(['amount' => $newBank]);
                     Bank::create([
                         'amount' => $newBank,
-                        'transaction_type' => 'سحب',
+                        'transaction_type' => 'بنك/ايداع',
                         'proof_img' => $imagename,
                     ]);
                     $notificationSuccess = [
@@ -64,7 +64,6 @@ class WithdrawController extends Controller
         }
         return back()->withErrors($validated);
     }
-
     public function bankWithdraw(Request $request)
     {
         $totalSafe = TotalSafe::findOrFail(1);
@@ -94,7 +93,7 @@ class WithdrawController extends Controller
                 $store = Bank::create([
                     'proof_img' => $extention,
                     'amount' =>  $validated['amount'],
-                    'transaction_type' => 'سحب',
+                    'transaction_type' => 'بنك/سحب',
                 ]);
                 if ($store) {
                     $newAmount = $totalSafe->amount + $validated['amount'];
@@ -105,7 +104,7 @@ class WithdrawController extends Controller
                         'member_id' => '-',
                         'amount' => $validated['amount'],
                         'proof_img' => $extention,
-                        'transaction_type' => 'بنك/إيداع'
+                        'transaction_type' => 'خزنة/إيداع'
                     ]);
                     $notificationSuccess = [
                         'message' => 'تم السحب',

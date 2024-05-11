@@ -16,23 +16,28 @@
                     <h3 class="text-center mb-0">سحب مبلغ من البنك الى الخزنة</h3>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('bank.withdraw')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('bank.withdraw')}}" method="post" enctype="multipart/form-data" id="BankForm">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="withdrawn_amount" class="text-muted">المبلغ المسحوب</label>
-                                    <input type="number" name="amount" id="withdrawn_amount" placeholder="المبلغ المسحوب" class="form-control text-muted">
+                                    <input type="text" name="amount" id="withdrawn_bank" placeholder="المبلغ المسحوب" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" required>
+                                    <p class="required d-none text-danger mb-0 fw-bold" id="bankReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger mb-0 fw-bold" id="bankMsg">يجب ان لا يكون المبلغ اقل من 2 رقم و اكثر من 5 رقم</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="proof_withdraw" class="text-muted">إثبات السحب</label>
-                                    <input type="file" name="proof_img" id="proof_withdraw" class="form-control text-muted" accept="image/*">
+                                    <input type="file" name="proof_img" id="proof_bank" class="form-control text-muted" accept="image/*" required>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="bankImgReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="bankImgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                    <p class="required d-none fw-bold text-danger mb-0" id="bankImgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer mt-3">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                            <button type="submit" role="button" id="BankSubmit" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
                 </div>
@@ -109,7 +114,7 @@
                                             <td class="text-center">{{$item->created_at->format('Y-m-d')}}</td>
                                             <td class="text-center">{{$item->created_at->format('H:i')}}</td>
                                             <td class="text-center">
-                                                @if ($item->transaction_type === 'إيداع')
+                                                @if ($item->transaction_type === 'بنك/ايداع' || $item->transaction_type === 'ايداع')
                                                     <span class="badge badge-success rounded-pill">إيداع</span>
                                                 @else
                                                     <span class="badge badge-danger rounded-pill">سحب</span>
