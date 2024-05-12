@@ -1328,7 +1328,66 @@ if (BankForm) {
         });
     }
 }
-
+//! Donation Debt
+const DonationDebtForm = document.getElementById("DonationDebtForm");
+if (DonationDebtForm) {
+    //! Validation For Reason Field
+    const delayReason = document.getElementById("delay_reason");
+    const reasonReq = document.getElementById("reasonReq");
+    delayReason.addEventListener("input", function () {
+        let reasonReg = /^[\u0600-\u06FF\s]+$/;
+        if (this.value.trim() === "") {
+            reasonReq.classList.remove("d-none");
+            delayReason.classList.remove("good");
+            delayReason.classList.add("error");
+        } else {
+            if (reasonReg.test(this.value)) {
+                delayReason.classList.add("good");
+                delayReason.classList.remove("error");
+                reasonReq.classList.add("d-none");
+            } else {
+                delayReason.classList.remove("good");
+                delayReason.classList.add("error");
+                reasonReq.classList.add("d-none");
+            }
+        }
+    });
+    //! Validation For Donation Debt Amount
+    const DelayAmount = document.getElementById("delay_amount");
+    const DelayAmountReq = document.getElementById("DelayAmountReq");
+    const DelayAmountMsg = document.getElementById("DelayAmountMsg");
+    DelayAmount.addEventListener("input", function () {
+        let DelayAmountReg = /(?=.{2,})/;
+        if (this.value.trim() === "") {
+            DelayAmountReq.classList.remove("d-none");
+            DelayAmountMsg.classList.add("d-none");
+            DelayAmount.classList.remove("good");
+            DelayAmount.classList.add("error");
+        } else {
+            if (DelayAmountReg.test(this.value)) {
+                DelayAmount.classList.add("good");
+                DelayAmount.classList.remove("error");
+                DelayAmountReq.classList.add("d-none");
+                DelayAmountMsg.classList.add("d-none");
+            } else {
+                DelayAmount.classList.remove("good");
+                DelayAmount.classList.add("error");
+                DelayAmountReq.classList.add("d-none");
+                DelayAmountMsg.classList.remove("d-none");
+            }
+        }
+    });
+    //! Validation For Donation Debt Submit
+    const DonationDebtSubmit = document.getElementById("DonationDebtSubmit");
+    if (DonationDebtSubmit) {
+        DonationDebtSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(DonationDebtForm)) {
+                DonationDebtForm.submit();
+            }
+        });
+    }
+}
 
 
 
