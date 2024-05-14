@@ -1388,7 +1388,84 @@ if (DonationDebtForm) {
         });
     }
 }
-
+//! Validation For Paying Donation Debt
+const PayDonationDebtForm = document.querySelectorAll("[data-paydonation-id]");
+if (PayDonationDebtForm) {
+    const donationAmount = document.querySelectorAll("[data-donationamount-id]");
+    const donationInvoice = document.querySelectorAll("[data-donationinv-id]");
+    PayDonationDebtForm.forEach((paydon) => {
+        //! Donation Invoice
+        donationInvoice.forEach((inv) => {
+            let invInput = paydon.querySelector(`input[name="invoice_no"][data-donationinv-id="${inv.dataset.donationinvId}"]`);
+            let donationInvReq = paydon.querySelector(`p.donationInvReq[data-donationinv-id="${inv.dataset.donationinvId}"]`);
+            let donationInvMsg = paydon.querySelector(`p.donationInvMsg[data-donationinv-id="${inv.dataset.donationinvId}"]`);
+            if (invInput) {
+                inv.addEventListener("input", function () {
+                    let invoiceReg = /^\d{5}$/;
+                    if (this.value.trim() === "") {
+                        donationInvReq.classList.remove("d-none");
+                        donationInvMsg.classList.add("d-none");
+                        inv.classList.remove("good");
+                        inv.classList.add("error");
+                    } else {
+                        if (invoiceReg.test(this.value)) {
+                            inv.classList.add("good");
+                            inv.classList.remove("error");
+                            donationInvReq.classList.add("d-none");
+                            donationInvMsg.classList.add("d-none");
+                        } else {
+                            inv.classList.remove("good");
+                            inv.classList.add("error");
+                            donationInvReq.classList.add("d-none");
+                            donationInvMsg.classList.remove("d-none");
+                        }
+                    }
+                });
+            }
+        });
+        //! Donation Amount
+        donationAmount.forEach((amount) => {
+            let amountInput = paydon.querySelector(`input[name="amount"][data-donationamount-id="${amount.dataset.donationamountId}"]`);
+            let donationAmountReq = paydon.querySelector(`p.donationAmountReq[data-donationamount-id="${amount.dataset.donationamountId}"]`);
+            let donationAmountMsg = paydon.querySelector(`p.donationAmountMsg[data-donationamount-id="${amount.dataset.donationamountId}"]`);
+            if (amountInput) {
+                amount.addEventListener("input", function () {
+                    let amountReg = /(?=.{2,5})/;
+                    if (this.value.trim() === "") {
+                        donationAmountReq.classList.remove("d-none");
+                        donationAmountMsg.classList.add("d-none");
+                        amount.classList.remove("good");
+                        amount.classList.add("error");
+                    } else {
+                        if (amountReg.test(this.value)) {
+                            amount.classList.add("good");
+                            amount.classList.remove("error");
+                            donationAmountReq.classList.add("d-none");
+                            donationAmountMsg.classList.add("d-none");
+                        } else {
+                            amount.classList.remove("good");
+                            amount.classList.add("error");
+                            donationAmountReq.classList.add("d-none");
+                            donationAmountMsg.classList.remove("d-none");
+                        }
+                    }
+                });
+            }
+        });
+        //! Validation For Donation Debt Payment Submit Form
+        const DonationDebtSubmit = paydon.querySelectorAll("[data-donationSubmitForm-id]");
+        if(DonationDebtSubmit){
+            DonationDebtSubmit.forEach((debt)=>{
+                debt.addEventListener("click",function(event){
+                    event.preventDefault();
+                    if (validateForm(paydon)) {
+                        paydon.submit();
+                    }
+                })
+            })
+        }
+    })
+}
 
 
 

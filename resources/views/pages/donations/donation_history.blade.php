@@ -253,7 +253,7 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <form action="{{route('pay.delayDonation')}}" method="post">
+                                                                                    {{-- <form action="{{route('pay.delayDonation')}}" method="post">
                                                                                         @csrf
                                                                                         <div class="row">
                                                                                             <input type="hidden" name="id" value="{{$delay->id}}"/>
@@ -281,6 +281,42 @@
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
                                                                                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form> --}}
+                                                                                    <form action="{{route('pay.delayDonation')}}" method="post" data-paydonation-id="{{$delay->id}}">
+                                                                                        @csrf
+                                                                                        <div class="row">
+                                                                                            <input type="hidden" name="id" value="{{$delay->id}}"/>
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="member_id" class="text-muted">رقم العضوية</label>
+                                                                                                    <input type="text" class="form-control text-muted" name="member_id" value="{{$delay->member_id}}" placeholder="رقم العضوية" id="member_id" readonly>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="donation_type" class="text-muted">نوع التبرع</label>
+                                                                                                    <input type="text" class="form-control text-muted" name="donation_type" value="مادي" placeholder="نوع التبرع" id="donation_type" readonly>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="donation_category" class="text-muted">تصنيف التبرع</label>
+                                                                                                    <input type="text" class="form-control text-muted" name="donation_category" value="{{$delay->donation_type}}" placeholder="نوع التبرع" id="donation_category" readonly>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="invoice_no" class="text-muted">رقم الإيصال</label>
+                                                                                                    <input type="text" name="invoice_no" id="invoice_no" class="form-control text-muted" data-donationinv-id="{{$delay->id}}" placeholder="رقم الإيصال" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="5" required >
+                                                                                                    <p class="required d-none text-danger mb-0 fw-bold donationInvReq" data-donationinv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger mb-0 fw-bold donationInvMsg" data-donationinv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="amount" class="text-muted">المبلغ المدفوع</label>
+                                                                                                    <input type="text" name="amount" id="amount" class="form-control text-muted" placeholder="المبلغ المدفوع" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" data-donationamount-id={{$delay->id}} required>
+                                                                                                    <p class="required d-none text-danger mb-0 fw-bold donationAmountReq" data-donationamount-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger mb-0 fw-bold donationAmountMsg" data-donationamount-id="{{$delay->id}}">يجب ان يكون المبلغ مكون من 5 ارقام</p>
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                                    <button type="submit" data-donationSubmitForm-id="{{$delay->id}}" role="button" class="btn btn-primary">تأكيد</button>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
