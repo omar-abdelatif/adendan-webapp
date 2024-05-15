@@ -217,7 +217,7 @@ class DonationsController extends Controller
                                 'amount' => $sumAmount,
                             ]);
                             $notificationSuccess = [
-                                'message' => 'تم دفع جزء من المبلغ',
+                                'message' => 'تم دفع كل المبلغ',
                                 'alert-type' => 'success'
                             ];
                             return back()->with($notificationSuccess);

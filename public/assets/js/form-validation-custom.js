@@ -1466,7 +1466,84 @@ if (PayDonationDebtForm) {
         }
     })
 }
-
+//! Validation For Paying Old Donation
+const PayOldDonationDebt = document.querySelectorAll("[data-payolddonation-id]");
+if (PayOldDonationDebt) {
+    const oldDonationInvoice = document.querySelectorAll("[data-oldinv-id]");
+    const oldDonationAmount = document.querySelectorAll("[data-oldamount-id]");
+    PayOldDonationDebt.forEach((olddon) => {
+        //! Old Donation Invoice
+        oldDonationInvoice.forEach((inv) => {
+            let invInput = olddon.querySelector(`input[name="invoice_no"][data-oldinv-id="${inv.dataset.oldinvId}"]`);
+            let oldDonationInvReq = olddon.querySelector(`p.oldDonationInvReq[data-oldinv-id="${inv.dataset.oldinvId}"]`);
+            let oldDonationInvMsg = olddon.querySelector(`p.oldDonationInvMsg[data-oldinv-id="${inv.dataset.oldinvId}"]`);
+            if (invInput) {
+                inv.addEventListener("input", function () {
+                    let invoiceReg = /^\d{5}$/;
+                    if (this.value.trim() === "") {
+                        oldDonationInvReq.classList.remove("d-none");
+                        oldDonationInvMsg.classList.add("d-none");
+                        inv.classList.remove("good");
+                        inv.classList.add("error");
+                    } else {
+                        if (invoiceReg.test(this.value)) {
+                            inv.classList.add("good");
+                            inv.classList.remove("error");
+                            oldDonationInvReq.classList.add("d-none");
+                            oldDonationInvMsg.classList.add("d-none");
+                        } else {
+                            inv.classList.remove("good");
+                            inv.classList.add("error");
+                            oldDonationInvReq.classList.add("d-none");
+                            oldDonationInvMsg.classList.remove("d-none");
+                        }
+                    }
+                })
+            }
+        });
+        //! Old Donation Amount
+        oldDonationAmount.forEach((oldamount) => {
+            let oldAmountInput = olddon.querySelector(`input[name="amount"][data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
+            let oldDonationAmountReq = olddon.querySelector(`p.oldDonationAmountReq[data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
+            let oldDonationAmountMsg = olddon.querySelector(`p.oldDonationAmountMsg[data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
+            if (oldAmountInput) {
+                oldamount.addEventListener("input", function () {
+                    let amountReg = /(?=.{2,5})/;
+                    if (this.value.trim() === "") {
+                        oldDonationAmountReq.classList.remove("d-none");
+                        oldDonationAmountMsg.classList.add("d-none");
+                        oldamount.classList.remove("good");
+                        oldamount.classList.add("error");
+                    } else {
+                        if (amountReg.test(this.value)) {
+                            oldamount.classList.add("good");
+                            oldamount.classList.remove("error");
+                            oldDonationAmountReq.classList.add("d-none");
+                            oldDonationAmountMsg.classList.add("d-none");
+                        } else {
+                            oldamount.classList.remove("good");
+                            oldamount.classList.add("error");
+                            oldDonationAmountReq.classList.add("d-none");
+                            oldDonationAmountMsg.classList.remove("d-none");
+                        }
+                    }
+                });
+            }
+        });
+        //! Old Donation Submit Button
+        const OldDonationSubmit = olddon.querySelectorAll("[data-oldDonationSubmit-id]");
+        if (OldDonationSubmit) {
+            OldDonationSubmit.forEach((oldsubmit) => {
+                oldsubmit.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    if (validateForm(olddon)) {
+                        olddon.submit();
+                    }
+                })
+            })
+        }
+    })
+}
 
 
 
