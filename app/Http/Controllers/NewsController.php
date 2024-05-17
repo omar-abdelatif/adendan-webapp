@@ -70,9 +70,9 @@ class NewsController extends Controller
                 'message' => "تم الإضافة بنجاح",
                 'alert-type' => 'success',
             ];
-            return redirect()->route('news.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         } else {
-            return redirect()->route('news.all')->withErrors($validatedData);
+            return redirect()->back()->withErrors($validatedData);
         }
     }
     public function destroyNews($id)
@@ -101,7 +101,7 @@ class NewsController extends Controller
                     'message' => "تم الحذف بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('news.all')->with($notification);
+                return redirect()->back()->with($notification);
             }
         }
     }
@@ -148,7 +148,7 @@ class NewsController extends Controller
                     'message' => "تم الحديث بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('news.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
     }
@@ -194,7 +194,7 @@ class NewsController extends Controller
                     'alert-type' => 'success'
                 ];
             }
-            return redirect()->route('news.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         }
     }
     public function updateVideo(Request $request)
@@ -208,10 +208,10 @@ class NewsController extends Controller
                     'message' => "تم الحديث بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('news.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('news.all')->withErrors('خطأ حدث أثناء التحديث');
+        return redirect()->back()->withErrors('خطأ حدث أثناء التحديث');
     }
     public function storeVideo(Request $request, $id)
     {

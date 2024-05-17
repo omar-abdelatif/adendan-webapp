@@ -53,10 +53,10 @@ class DelayController extends Controller
                     'message' => "تم الاستيراد بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('subscriber.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('subscriber.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function paySubscription(Request $request) //! Pay Single Subscription Delay For Single Subscriber
     {

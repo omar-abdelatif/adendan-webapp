@@ -34,10 +34,10 @@ class BoardMembersController extends Controller
                     'message' => "تم الإضافة بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('board.all')->with($notification);
+                return redirect()->back()->with($notification);
             }
         }
-        return redirect()->route('board.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function deleteMember($id)
     {
@@ -54,16 +54,16 @@ class BoardMembersController extends Controller
                         'message' => "تم الحذف بنجااح",
                         'alert-type' => 'success'
                     ];
-                    return redirect()->route('board.all')->with($notificationSuccess);
+                    return redirect()->back()->with($notificationSuccess);
                 }
                 $notificationError = [
                     'message' => "خطأ أثناء الحذف",
                     'alert-type' => 'error'
                 ];
-                return redirect()->route('board.all')->with($notificationError);
+                return redirect()->back()->with($notificationError);
             }
         }
-        return redirect()->route('board.all')->withErrors('خطأ أثناء الحذف');
+        return redirect()->back()->withErrors('خطأ أثناء الحذف');
     }
     public function updateMember(BoardMembersRequest $request)
     {
@@ -97,10 +97,10 @@ class BoardMembersController extends Controller
                         'message' => "تم التحديث بنجاح",
                         'alert-type' => 'success'
                     ];
-                    return redirect()->route('board.all')->with($notification);
+                    return redirect()->back()->with($notification);
                 }
             }
-            return redirect()->route('board.all')->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
         }
     }
 }

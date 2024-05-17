@@ -22,13 +22,13 @@ class AssociationCommittesController extends Controller
                 'message' => "تم الإضافة بنجاح",
                 'alert-type' => 'success'
             ];
-            return redirect()->route('association.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         }
         $notificationError = [
             'message' => "حدث خطأ يرجى المحاولة مره أخرى",
             'alert-type' => 'error'
         ];
-        return redirect()->route('association.all')->with($notificationError);
+        return redirect()->back()->with($notificationError);
     }
     public function remove($id)
     {
@@ -40,14 +40,14 @@ class AssociationCommittesController extends Controller
                     'message' => 'تم الحذف بنجاح',
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('association.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
         $notificationError = [
             'message' => 'هناك خطأ ما يرجى المحاولة',
             'alert-type' => 'error'
         ];
-        return redirect()->route('association.all')->with($notificationError);
+        return redirect()->back()->with($notificationError);
     }
     public function update(RequestsAssociationCommittes $request)
     {
@@ -61,19 +61,19 @@ class AssociationCommittesController extends Controller
                     'message' => 'تم التعديل بنجاح',
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('association.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             } else {
                 $notificationError = [
                     'message' => 'حدث خطأ أثناء التعديل',
                     'alert-type' => 'error'
                 ];
-                return redirect()->route('association.all')->with($notificationError);
+                return redirect()->back()->with($notificationError);
             }
         }
         $notificationError = [
             'message' => 'حدث خطأ أثناء التعديل',
             'alert-type' => 'error'
         ];
-        return redirect()->route('association.all')->with($notificationError);
+        return redirect()->back()->with($notificationError);
     }
 }

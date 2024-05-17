@@ -129,7 +129,6 @@ class ReportController extends Controller
 
         $donationDev = Donations::where('other_donation', 'تبرع تنمية')->get();
         $donationDevSum = $donationDev->sum('amount');
-        // dd();
         return view('pages.reports.inner_donations', compact([
             'donations',
             'donationMoneyZakatSum',

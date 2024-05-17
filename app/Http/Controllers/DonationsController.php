@@ -67,13 +67,13 @@ class DonationsController extends Controller
                     'message' => "تم الحذف بنجاح!",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('subscriber.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
             $notificationErrors = [
                 'message' => "هذا العنصر غير موجود",
                 'alert-type' => 'error'
             ];
-            return redirect()->route('subscriber.all')->with($notificationErrors);
+            return redirect()->back()->with($notificationErrors);
         }
     }
     public function updateDonation(RequestDonations $request)

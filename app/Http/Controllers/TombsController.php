@@ -23,10 +23,10 @@ class TombsController extends Controller
                     'message' => 'تم الإضافة بنجاح',
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('tomb.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('tomb.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function deleteTomb($id)
     {
@@ -38,14 +38,14 @@ class TombsController extends Controller
                     "message" => "تم الحذف بنجاح",
                     "alert-type" => "success"
                 ];
-                return redirect()->route('tomb.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
         $notificationError = [
             "type" => "error",
             "message" => "لم يتم الحذف"
         ];
-        return redirect()->route('tomb.all')->with($notificationError);
+        return redirect()->back()->with($notificationError);
     }
     public function updateTomb(TombRequest $request)
     {
@@ -60,10 +60,10 @@ class TombsController extends Controller
                         'message' => 'تم التعديل بنجاح',
                         'alert-type' => 'success',
                     ];
-                    return redirect()->route('tomb.all')->with($notificationSuccess);
+                    return redirect()->back()->with($notificationSuccess);
                 }
             }
         }
-        return redirect()->route('tomb.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
 }

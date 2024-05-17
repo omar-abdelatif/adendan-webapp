@@ -22,9 +22,9 @@ class WorkerController extends Controller
                 "message" => "تم الإضافة بنجاح",
                 "alert-type" => "success"
             ];
-            return redirect()->route('workers.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         } else {
-            return redirect()->route('workers.all')->withErrors($validation);
+            return redirect()->back()->withErrors($validation);
         }
     }
     public function delete($id)
@@ -37,10 +37,10 @@ class WorkerController extends Controller
                     "message" => "تم الحذف بنجاح!",
                     "alert-type" => "success"
                 ];
-                return redirect()->route('workers.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('workers.all')->withErrors('حدث خطأ ما');
+        return redirect()->back()->withErrors('حدث خطأ ما');
     }
     public function update(WorkersRequest $request)
     {
@@ -60,9 +60,9 @@ class WorkerController extends Controller
                     "message" => "تم التعديل بنجاح!",
                     "alert-type" => "success"
                 ];
-                return redirect()->route('workers.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('workers.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
 }

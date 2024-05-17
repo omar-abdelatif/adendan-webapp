@@ -111,9 +111,9 @@ class SubscribersController extends Controller
                 "message" => "تم الإضافة بنجاح",
                 "alert-type" => "success",
             ];
-            return redirect()->route('subscriber.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         } else {
-            return redirect()->route('subscriber.all')->withErrors($validatedData);
+            return redirect()->back()->withErrors($validatedData);
         }
     }
     public function destroy($id)
@@ -138,7 +138,7 @@ class SubscribersController extends Controller
                     'message' => "تم الحذف بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('subscriber.all')->with($notification);
+                return redirect()->back()->with($notification);
             }
         }
     }
@@ -217,7 +217,7 @@ class SubscribersController extends Controller
                 return redirect()->route('subscriber.details', $member->id)->with($notificationSuccess);
             }
         }
-        return redirect()->route('subscriber.all')->withErrors($validatedData);
+        return redirect()->back()->withErrors($validatedData);
     }
     public function bulkUpload(Request $request)
     {
@@ -231,10 +231,10 @@ class SubscribersController extends Controller
                     'message' => "تم الاستيراد بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('subscriber.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('subscriber.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function insertHalfDelay()
     {

@@ -45,7 +45,7 @@
         {{-- ! Page Body Start ! --}}
         <div class="page-body-wrapper">
             {{-- ! Page Sidebar Start ! --}}
-            @include('subscription_role.layouts.components.navigation')
+            @include('layouts.components.sidebar')
             <div class="page-body">
                 <div class="container-fluid">
                     <div class="page-title">

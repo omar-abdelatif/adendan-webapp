@@ -9,6 +9,7 @@ use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\CostYearsController;
 use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\OuterDonationsController;
 use App\Http\Controllers\SubscriptionRole\SubscriptionRoleController;
@@ -82,6 +83,12 @@ Route::prefix('admin/subscriptions')->group(function () {
             Route::post('costyears/store', 'storeYears')->name('subscriptionRole.costyears.store');
             Route::get('costyears/delete/{id}', 'removeYear')->name('subscriptionRole.costyears.remove');
             Route::post('costyears/update', 'updateYear')->name('subscriptionRole.costyears.update');
+        });
+        Route::controller(MiscellaneousController::class)->group(function () {
+            Route::get('miscellaneous/all', 'index')->name('subscriptionRole.miscellaneous.all');
+            Route::post('miscellaneous/store', 'storeMiscellaneous')->name('subscriptionRole.miscellaneous.store');
+            Route::get('miscellaneous/delete/{id}', 'deleteMiscellaneous')->name('subscriptionRole.miscellaneous.delete');
+            Route::post('miscellaneous/update', 'updateMiscellaneous')->name('subscriptionRole.miscellaneous.update');
         });
         Route::controller(WithdrawController::class)->group(function () {
             Route::post('withdraw', 'withdraw')->name('subscriptionRole.withdraw');

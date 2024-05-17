@@ -43,9 +43,9 @@ class WeddingController extends Controller
                 'message' => 'تم الإضافة بنجاح',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('weddings.all')->with($notificationSuccess);
+            return redirect()->back()->with($notificationSuccess);
         }
-        return redirect()->route('weddings.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function weddingRemove($id)
     {
@@ -63,10 +63,10 @@ class WeddingController extends Controller
                     'message' => "تم الحذف بنجااح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('weddings.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('weddings.all')->withErrors('خطأ أثناء الحذف');
+        return redirect()->back()->withErrors('خطأ أثناء الحذف');
     }
     public function weddingUpdate(WeddingRequest $request)
     {
@@ -101,9 +101,9 @@ class WeddingController extends Controller
                     'message' => 'تم التحديث بنجاح',
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('weddings.all')->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->route('weddings.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
 }
