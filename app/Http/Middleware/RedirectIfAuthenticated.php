@@ -23,10 +23,19 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // Check the role of the authenticated user
+                $user = Auth::user();
+                if ($user->role === 'admin') {
+                    return redirect()->route('admin.dashboard');
+                } elseif ($user->role === 'subscriptions') {
+                    return redirect()->route('subscriptionRole.index');
+                } else {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 
         return $next($request);
     }
+
 }

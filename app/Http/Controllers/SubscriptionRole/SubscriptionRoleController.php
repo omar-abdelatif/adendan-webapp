@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class SubscriptionRoleController extends Controller
 {
-    //
+    public function RoleIndex()
+    {
+        return view('subscription_role.home');
+    }
 }

@@ -151,11 +151,4 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
-Route::prefix('subscriptions')->group(function () {
-    //! Home Page
-    Route::controller(SubscriptionRoleController::class)->group(function(){});
-});
-Route::prefix('media')->group(function(){
-    //! Home Page
-    Route::controller(MediaRoleController::class)->group(function(){});
-});
+

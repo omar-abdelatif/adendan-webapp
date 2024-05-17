@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 class Role
@@ -16,12 +17,12 @@ class Role
     public function handle(Request $request, Closure $next, $role): Response
     {
         if ($request->user() && $request->user()->role !== $role) {
-            if ($request->user()->role === 'vendor') {
-                return redirect()->route('vendor.dashboard');
-            } elseif ($request->user()->role === 'admin') {
+            if ($request->user()->role === 'subscriptions') {
+                return redirect()->route('subscriptionRole.index');
+            } elseif ($request->user()->role === 'media') {
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('dashboard');
+                return redirect(RouteServiceProvider::HOME);
             }
         }
         return $next($request);

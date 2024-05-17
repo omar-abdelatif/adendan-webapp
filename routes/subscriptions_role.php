@@ -1,6 +1,91 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DelayController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DonatorsController;
+use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\CostYearsController;
+use App\Http\Controllers\DonationsController;
+use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\OuterDonationsController;
+use App\Http\Controllers\SubscriptionRole\SubscriptionRoleController;
 
 Auth::routes();
 
+
+Route::prefix('admin/subscriptions')->group(function () {
+    Route::middleware(['auth', 'role:subscriptions'])->group(function () {
+        //! Home Page
+        Route::controller(SubscriptionRoleController::class)->group(function () {
+            Route::get('dashboard', 'RoleIndex')->name('subscriptionRole.index');
+        });
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('reports/age', 'ages')->name('subscriptionRole.reports.age');
+            Route::get('reports/jobs', 'jobs')->name('subscriptionRole.reports.jobs');
+            Route::get('reports/safe', 'safe')->name('subscriptionRole.reports.safe');
+            Route::get('reports/search', 'search')->name('subscriptionRole.reports.search');
+            Route::get('reports/all', 'index')->name('subscriptionRole.reports.subscriptions');
+            Route::get('reports/location', 'locations')->name('subscriptionRole.reports.location');
+            Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
+            Route::get('reports/associates', 'associates')->name('subscriptionRole.reports.associates');
+            Route::get('reports/donations', 'outerdonations')->name('subscriptionRole.reports.donations');
+            Route::get('reports/indebtedness', 'indebtedness')->name('subscriptionRole.reports.indebtedness');
+            Route::get('reports/inner_donations', 'innerDonations')->name('subscriptionRole.reports.innerDonations');
+            Route::get('reports/subscriptions_old_delays', 'subOldDelay')->name('subscriptionRole.reports.subOlddelay');
+        });
+        Route::controller(SubscribersController::class)->group(function () {
+            Route::get('subscribers/all', 'index')->name('subscriptionRole.subscriber.all');
+            Route::post('subscribers/store', 'storeSubs')->name('subscriptionRole.subscribe.store');
+            Route::get('subscriber/delete/{id}', 'destroy')->name('subscriptionRole.subscribe.destroy');
+            Route::post('subscriber/update', 'update')->name('subscriptionRole.subscribe.update');
+            Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriptionRole.subscriber.details');
+            Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriptionRole.subscriber.bulk');
+        });
+        Route::controller(SubscriptionsController::class)->group(function () {
+            Route::get('subscription/history/{id}', 'index')->name('subscriptionRole.subscription.history');
+            Route::post('subscription/store', 'storeSubscription')->name('subscriptionRole.subscription.store');
+            Route::get('subscription/delete/{id}', 'destroyingSubscription')->name('subscriptionRole.subscription.destroy');
+            Route::post('subscription/updating', 'updatingSubscription')->name('subscriptionRole.subscription.update');
+        });
+        Route::controller(DelayController::class)->group(function () {
+            Route::post('delays/upload_delays', 'uploadDelays')->name('subscriptionRole.delays.costbyyear');
+            Route::post('delays/subscriber_delays', 'subscriberDelay')->name('subscriptionRole.bulk_subscriber_delay');
+            Route::post('delays/pay', 'paySubscription')->name('subscriptionRole.subscription.pay');
+            Route::post('delays/old_delays', 'payOldDelay')->name('subscriptionRole.oldDelays.pay');
+        });
+        Route::controller(DonatorsController::class)->group(function () {
+            Route::get('donators/all', 'index')->name('subscriptionRole.donators.all');
+            Route::post('donators/store', 'storeDonator')->name('subscriptionRole.donators.store');
+            Route::get('donators/remove/{id}', 'removeDonator')->name('subscriptionRole.donators.remove');
+            Route::post('donators/update', 'donatorUpdate')->name('subscriptionRole.donators.update');
+        });
+        Route::controller(DonationsController::class)->group(function () {
+            Route::get('donations/showAll/{id}', 'index')->name("subscriptionRole.donations.showAll");
+            Route::post('donations/store', 'storeDonations')->name('subscriptionRole.donations.store');
+            Route::get('donations/remove/{id}', 'removeDonation')->name('subscriptionRole.donation.remove');
+            Route::post('donations/update', 'updateDonation')->name('subscriptionRole.donations.update');
+            Route::post('donations/delays/upload_bulk', 'donationsOnSubscribers')->name('subscriptionRole.delays.uploadDonations');
+            Route::post('donation/pay_old_donation', 'payOldDonation')->name('subscriptionRole.pay.oldDonation');
+            Route::post('donations/pay_delay_donation', 'payDelayDonation')->name('subscriptionRole.pay.delayDonation');
+        });
+        Route::controller(OuterDonationsController::class)->group(function () {
+            Route::get('outer_donations/history/{id}', 'index')->name('subscriptionRole.outer_donations.history');
+            Route::post('outer_donations/history/store', 'storeOuterDonations')->name('subscriptionRole.outer_donations.store');
+            Route::get('outer_donations/history/delete/{id}', 'removeOuterDonations')->name('subscriptionRole.outer_donations.delete');
+            Route::post('outer_donations/history/update', 'updateOuterDonations')->name('subscriptionRole.outer_donations.update');
+        });
+        Route::controller(CostYearsController::class)->group(function () {
+            Route::get('costyears/all', 'index')->name('subscriptionRole.costyears.all');
+            Route::post('costyears/store', 'storeYears')->name('subscriptionRole.costyears.store');
+            Route::get('costyears/delete/{id}', 'removeYear')->name('subscriptionRole.costyears.remove');
+            Route::post('costyears/update', 'updateYear')->name('subscriptionRole.costyears.update');
+        });
+        Route::controller(WithdrawController::class)->group(function () {
+            Route::post('withdraw', 'withdraw')->name('subscriptionRole.withdraw');
+            Route::post('withdraw/bank', 'bankWithdraw')->name('subscriptionRole.bank.withdraw');
+        });
+    });
+});

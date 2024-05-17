@@ -19,30 +19,12 @@
         <nav class="sidebar-main">
             <div id="sidebar-menu">
                 <ul class="sidebar-links w-100" id="simple-bar">
-                    @if ($user->email === 'subscriptions@adendan.com')
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="{{route('subscriber.all')}}">
-                                <svg class="stroke-icon">
-                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                                </svg>
-                                <span>المشتركين</span>
-                            </a>
-                        </li>
-                    @endif
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="{{ route('home') }}">
+                        <a class="sidebar-link sidebar-title" href="{{ route('subscriptionRole.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                             </svg>
                             <span>لوحة التحكم</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="{{route('news.all')}}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
-                            </svg>
-                            <span>الأخبار</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -66,47 +48,11 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a href="{{route('board.all')}}" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                            </svg>
-                            <span>مجلس الإدارة</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="{{route('association.all')}}" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                            </svg>
-                            <span>لجان الجمعية</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="{{route('workers.all')}}" class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                            </svg>
-                            <span>حرفيين</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
                         <a href="{{route('donators.all')}}" class="sidebar-link sidebar-title">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                             </svg>
                             <span>التبرعات</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-solid fa-tombstone-blank text-muted fs-5"></i>
-                            <span>المقابر</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
-                            <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
-                            <span>الأفراح</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
