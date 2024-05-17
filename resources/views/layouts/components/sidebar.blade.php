@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 <div class="sidebar-wrapper" sidebar-layout="stroke-svg">
     <div>
         <div class="logo-wrapper">
@@ -16,6 +19,18 @@
         <nav class="sidebar-main">
             <div id="sidebar-menu">
                 <ul class="sidebar-links w-100" id="simple-bar">
+                    @if ($user->email == 'subscriptions@adendan.com')
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="{{route('subscriber.all')}}">
+                                <svg class="stroke-icon">
+                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
+                                </svg>
+                                <span>المشتركين</span>
+                            </a>
+                        </li>
+                    @else
+
+                    @endif
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="{{ route('home') }}">
                             <svg class="stroke-icon">

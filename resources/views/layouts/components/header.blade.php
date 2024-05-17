@@ -1,5 +1,5 @@
 @php
-    $user = Auth::user()
+    $user = Auth::user();
 @endphp
 <div class="page-header">
     <div class="header-wrapper row m-0">

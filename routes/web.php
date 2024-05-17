@@ -7,26 +7,28 @@ use App\Http\Controllers\MsgController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TombsController;
 use App\Http\Controllers\DelayController;
-use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\TombsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\DonatorsController;
+use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\CostYearsController;
 use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\BoardMembersController;
-use App\Http\Controllers\SubscriptionsController;
-use App\Http\Controllers\AssociationCommittesController;
-use App\Http\Controllers\CostYearsController;
 use App\Http\Controllers\MiscellaneousController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\OuterDonationsController;
-use App\Http\Controllers\WithdrawController;
+use App\Http\Controllers\MediaRole\MediaRoleController;
+use App\Http\Controllers\AssociationCommittesController;
+use App\Http\Controllers\SubscriptionRole\SubscriptionRoleController;
 
 Auth::routes();
 
+Route::view('login', 'auth.login');
 Route::prefix('admin')->group(function () {
-    Route::view('login', 'auth.login');
     Route::middleware('auth')->group(function () {
         Route::controller(HomeController::class)->group(function () {
             Route::get('dashboard', 'index')->name('home');
@@ -148,4 +150,12 @@ Route::prefix('admin')->group(function () {
             Route::post('withdraw/bank', 'bankWithdraw')->name('bank.withdraw');
         });
     });
+});
+Route::prefix('subscriptions')->group(function () {
+    //! Home Page
+    Route::controller(SubscriptionRoleController::class)->group(function(){});
+});
+Route::prefix('media')->group(function(){
+    //! Home Page
+    Route::controller(MediaRoleController::class)->group(function(){});
 });
