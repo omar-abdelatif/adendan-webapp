@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل التبرعات')
 @section('breadcrumb-title')
@@ -179,7 +182,7 @@
                                                                     <td>{{$subscriber->name}}</td>
                                                                     <td>
                                                                         {{-- ! Donation ! --}}
-                                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#donating_{{$subscriber->id}}">
+                                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#donating_{{$subscriber->id}}">
                                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
                                                                         </button>
                                                                         <div class="modal fade" id="donating_{{$subscriber->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -232,9 +235,19 @@
                                                                             </div>
                                                                         </div>
                                                                         {{-- ! Donation History ! --}}
-                                                                        <a href="{{route('donations.showAll', $subscriber->id)}}" class="btn btn-primary px-2 py-1">
-                                                                            <i class="fa-solid fa-book-heart"></i>
-                                                                        </a>
+                                                                        @if ($user->role === 'subscriptions')
+                                                                            <a href="{{route('subscriptionRole.donations.showAll', $subscriber->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                <i class="fa-solid fa-book-heart"></i>
+                                                                            </a>
+                                                                        @elseif ($user->role === 'media')
+                                                                            <a href="{{route('donations.showAll', $subscriber->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                <i class="fa-solid fa-book-heart"></i>
+                                                                            </a>
+                                                                        @else
+                                                                            <a href="{{route('donations.showAll', $subscriber->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                <i class="fa-solid fa-book-heart"></i>
+                                                                            </a>
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -289,21 +302,31 @@
                                                                             </button>
                                                                             <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                                                 {{-- ! Donation ! --}}
-                                                                                <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" data-bs-target="#donating_{{$donator->id}}">
+                                                                                <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" title="تبرع جديد" data-bs-target="#donating_{{$donator->id}}">
                                                                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                                                                 </button>
                                                                                 {{-- ! Update ! --}}
-                                                                                <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#update_donator_{{$donator->id}}">
+                                                                                <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" title="تحديث بيانات" data-bs-target="#update_donator_{{$donator->id}}">
                                                                                     <i class="fa-solid fa-pen"></i>
                                                                                 </button>
                                                                                 {{-- ! Delete ! --}}
-                                                                                <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" data-bs-target="#delete_donator_{{$donator->id}}">
+                                                                                <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" title="حذف المتبرع" data-bs-target="#delete_donator_{{$donator->id}}">
                                                                                     <i class="fa-solid fa-trash"></i>
                                                                                 </button>
                                                                                 {{-- ! Donation History ! --}}
-                                                                                <a href="{{route('outer_donations.history', $donator->id)}}" class="btn btn-primary px-2 py-1">
-                                                                                    <i class="fa-solid fa-book-heart"></i>
-                                                                                </a>
+                                                                                @if ($user->role === 'subscriptions')
+                                                                                    <a href="{{route('subscriptionRole.outer_donations.history', $donator->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                        <i class="fa-solid fa-book-heart"></i>
+                                                                                    </a>
+                                                                                @elseif ($user->role === 'media')
+                                                                                    <a href="{{route('outer_donations.history', $donator->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                        <i class="fa-solid fa-book-heart"></i>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a href="{{route('outer_donations.history', $donator->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
+                                                                                        <i class="fa-solid fa-book-heart"></i>
+                                                                                    </a>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
                                                                         {{-- ! Delete ! --}}

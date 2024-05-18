@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', $subscriber->name)
 @section('breadcrumb-title')
@@ -5,7 +8,13 @@
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
-        <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        @if ($user->role === 'subscriptions')
+            <a href="{{route('subscriptionRole.index')}}">كل المشتركين</a>
+        @elseif ($user->role === 'media')
+            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        @else
+            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        @endif
     </li>
     <li class="breadcrumb-item active">كل الإشتراكات</li>
 @endsection
@@ -113,7 +122,7 @@
                                                                             </button>
                                                                             <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                                                 {{-- ! Delete ! --}}
-                                                                                <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" data-bs-target="#deleting_{{$item->id}}">
+                                                                                <button type="button" class="btn btn-danger px-2 py-1" title="حذف الإشتراك" data-bs-toggle="modal" data-bs-target="#deleting_{{$item->id}}">
                                                                                     <i class="icofont icofont-trash"></i>
                                                                                 </button>
                                                                                 {{-- ! Updating ! --}}
@@ -259,7 +268,7 @@
                                                                 <td class="text-center">{{$delay->paied}}</td>
                                                                 <td class="text-center">{{$delay->remaing}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#payment_history_{{$delay->id}}">
+                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" title="دفع المديونية" data-bs-target="#payment_history_{{$delay->id}}">
                                                                         <i class="fa-solid fa-money-bill"></i>
                                                                     </button>
                                                                     <div class="modal fade" id="payment_history_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -350,7 +359,7 @@
                                                                         <td>{{$delay->delay_remaining}}</td>
                                                                     @endif
                                                                     <td>
-                                                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
+                                                                        <button class="btn btn-secondary" title="دفع المتأخرات" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
                                                                             <i class="fa-solid fa-money-bill"></i>
                                                                         </button>
                                                                         <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

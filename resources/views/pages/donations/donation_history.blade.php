@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل التبرعات')
 @section('breadcrumb-title')
@@ -5,7 +8,13 @@
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
-        <a href="{{route('donators.all')}}">كل المتبرعين</a>
+        @if ($user->role === 'subscriptions')
+            <a href="{{route('subscriptionRole.donators.all')}}">كل المتبرعين</a>
+        @elseif ($user->role === 'media')
+            <a href="{{route('subscriber.all')}}">كل المتبرعين</a>
+        @else
+            <a href="{{route('donators.all')}}">كل المتبرعين</a>
+        @endif
     </li>
 @endsection
 @section('content')
@@ -105,11 +114,11 @@
                                                                             </button>
                                                                             <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                                                 {{-- ! Edit ! --}}
-                                                                                <button type="button" class="btn btn-warning text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#update_donation_{{$donation->id}}">
+                                                                                <button type="button" class="btn btn-warning text-white px-2 py-1" title="تعديل التبرع" data-bs-toggle="modal" data-bs-target="#update_donation_{{$donation->id}}">
                                                                                     <i class="fa-solid fa-pen"></i>
                                                                                 </button>
                                                                                 {{-- ! Delete ! --}}
-                                                                                <button type="button" class="btn btn-danger text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#delete_donation_{{$donation->id}}">
+                                                                                <button type="button" class="btn btn-danger text-white px-2 py-1" title="حذف التبرع" data-bs-toggle="modal" data-bs-target="#delete_donation_{{$donation->id}}">
                                                                                     <i class="fa-solid fa-trash"></i>
                                                                                 </button>
                                                                             </div>
@@ -242,7 +251,7 @@
                                                                 @endif
                                                                 <td class="text-center">{{$delay->created_at->format('Y-m-d')}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn bg-secondary" type="button" data-bs-target="#oldDdonationPayment_{{$delay->id}}" data-bs-toggle="modal">
+                                                                    <button class="btn bg-secondary" type="button" title="دفع المديونية" data-bs-target="#oldDdonationPayment_{{$delay->id}}" data-bs-toggle="modal">
                                                                         <i class="fa-solid fa-dollar-sign"></i>
                                                                     </button>
                                                                     <div class="fade modal" tabindex="-1" id="oldDdonationPayment_{{$delay->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -329,7 +338,7 @@
                                                                 <td class="text-center">{{$delay->delay_amount}}</td>
                                                                 <td class="text-center">{{$delay->delay_remaining}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn bg-secondary" type="button" data-bs-target="#donationPayment_{{$delay->id}}" data-bs-toggle="modal">
+                                                                    <button class="btn bg-secondary" title="دفع المتأخرات" type="button" data-bs-target="#donationPayment_{{$delay->id}}" data-bs-toggle="modal">
                                                                         <i class="fa-solid fa-dollar-sign"></i>
                                                                     </button>
                                                                     <div class="fade modal" tabindex="-1" id="donationPayment_{{$delay->id}}" aria-labelledby="exampleModalLabel" aria-hidden="true">

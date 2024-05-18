@@ -10,10 +10,19 @@ window.addEventListener("scroll", () => {
     }
 });
 //! Play Music On Page Load
-window.onload = function (event) {
-    event.preventDefault;
-    document.getElementById("audio-player").play();
-};
+document.addEventListener("DOMContentLoaded", function () {
+    var audio = document.getElementById("audio-player");
+    function playAudioAfterDelay() {
+        setTimeout(function () {
+            audio.play();
+        }, 3000);
+    }
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 10) {
+            playAudioAfterDelay();
+        }
+    });
+});
 //! Arabic Direction To The News Bar
 $(document).ready(function () {
     $("#newsTicker2").breakingNews({

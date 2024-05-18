@@ -45,7 +45,7 @@
                                             <td class="text-center">{{$donations->donation_destination}}</td>
                                             <td class="text-center">
                                                 {{-- ! Delete ! --}}
-                                                <button type="button" class="btn btn-danger text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#delete_donator_{{$donations->id}}">
+                                                <button type="button" class="btn btn-danger text-white px-2 py-1" title="حذف المتبرع" data-bs-toggle="modal" data-bs-target="#delete_donator_{{$donations->id}}">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                                 <div class="modal fade" id="delete_donator_{{$donations->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -71,7 +71,7 @@
                                                     </div>
                                                 </div>
                                                 {{-- ! Update ! --}}
-                                                <button type="button" class="btn btn-warning text-white px-2 py-1" data-bs-toggle="modal" data-bs-target="#update_donator_{{$donations->id}}">
+                                                <button type="button" class="btn btn-warning text-white px-2 py-1" title="تعديل البيانات" data-bs-toggle="modal" data-bs-target="#update_donator_{{$donations->id}}">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
                                                 <div class="modal fade" id="update_donator_{{$donations->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

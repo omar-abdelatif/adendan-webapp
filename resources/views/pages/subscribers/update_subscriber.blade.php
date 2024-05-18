@@ -7,19 +7,15 @@
     <h3>تعديل المشترك {{$subscriber->name}}</h3>
 @endsection
 @section('breadcrumb-items')
-    @if ($user->role === 'subscriptions')
-        <li class="breadcrumb-item active">
+    <li class="breadcrumb-item active">
+        @if ($user->role === 'subscriptions')
             <a href="{{route('subscriptionRole.index')}}">كل المشتركين</a>
-        </li>
-    @elseif ($user->role === 'media')
-        <li class="breadcrumb-item active">
+        @elseif ($user->role === 'media')
             <a href="{{route('subscriber.all')}}">كل المشتركين</a>
-        </li>
-    @else
-        <li class="breadcrumb-item active">
+        @else
             <a href="{{route('subscriber.all')}}">كل المشتركين</a>
-        </li>
-    @endif
+        @endif
+    </li>
     <li class="breadcrumb-item active">تعديل المشترك</li>
 @endsection
 @section('script')

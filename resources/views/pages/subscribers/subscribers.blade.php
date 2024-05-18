@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل المشتركين')
 @section('breadcrumb-title')
@@ -436,13 +439,33 @@
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                         {{-- ! History ! --}}
-                                                        <a class="btn btn-primary px-2 py-1" role="button" href={{route('subscription.history',$member->id)}}>
-                                                            <i class="icofont icofont-eye"></i>
-                                                        </a>
+                                                        @if ($user->role === 'subscriptions')
+                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscriptionRole.subscription.history',$member->id)}}>
+                                                                <i class="icofont icofont-eye"></i>
+                                                            </a>
+                                                        @elseif ($user->role === 'media')
+                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscription.history',$member->id)}}>
+                                                                <i class="icofont icofont-eye"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscription.history',$member->id)}}>
+                                                                <i class="icofont icofont-eye"></i>
+                                                            </a>
+                                                        @endif
                                                         {{-- ! Edit Member ! --}}
-                                                        <a class="btn btn-warning px-2 py-1" role="button" href={{route('subscriber.details',$member->id)}}>
-                                                            <i class="icofont icofont-ui-edit"></i>
-                                                        </a>
+                                                        @if ($user->role === 'subscriptions')
+                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
+                                                                <i class="icofont icofont-ui-edit"></i>
+                                                            </a>
+                                                        @elseif ($user->role === 'media')
+                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
+                                                                <i class="icofont icofont-ui-edit"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriber.details',$member->id)}}>
+                                                                <i class="icofont icofont-ui-edit"></i>
+                                                            </a>
+                                                        @endif
                                                         {{-- ! Add Subscription ! --}}
                                                         {{-- <button type="button" class="btn btn-success fw-bold px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
