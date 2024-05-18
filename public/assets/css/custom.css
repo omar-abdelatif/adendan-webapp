@@ -225,3 +225,7 @@ html[dir=rtl] .checkbox_animated, html[dir=rtl] .radio_animated{
 html[dir=rtl] .page-wrapper.compact-wrapper .page-body-wrapper .sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a i{
     margin-left: 15px;
 }
+.dropdown-menu.show {
+    display: inline-flex;
+    flex-direction: column;
+}

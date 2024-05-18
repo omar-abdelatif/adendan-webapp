@@ -9,7 +9,7 @@
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
         @if ($user->role === 'subscriptions')
-            <a href="{{route('subscriptionRole.index')}}">كل المشتركين</a>
+            <a href="{{route('subscriptionRole.subscriber.all')}}">كل المشتركين</a>
         @elseif ($user->role === 'media')
             <a href="{{route('subscriber.all')}}">كل المشتركين</a>
         @else

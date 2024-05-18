@@ -53,7 +53,7 @@
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                 </svg>
-                                <span>التبرعات</span>
+                                <span>التبرعات الخارجية</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
