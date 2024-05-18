@@ -15,15 +15,6 @@
         <i class="icofont icofont-eye"></i>
         <span class="ms-3">إضافة متبرع جديد</span>
     </button>
-    <div class="btn-group" role="group">
-        <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
-        <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
-
-        </div>
-    </div>
-    {{-- ! Insert New Donator Modal ! --}}
     <div class="modal fade" id="new_donator" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -54,59 +45,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
                             <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ! Insert Bulk Donations Modal ! --}}
-    <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة متأخرات التبرعات بالجملة</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('bulk_subscriber_delay')}}" enctype="multipart/form-data" method="POST">
-                        @csrf
-                        <input type="file" class="form-control" name="import-delay" accept=".xlsx, .xls">
-                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ! Insert Bulk Donations On Subscribers Modal ! --}}
-    <div class="modal fade" id="insert_bulk_donation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-muted" id="insert-delay">إضافة مدينوية التبرعات على كل المشتركين</h1>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('delays.uploadDonations')}}" method="post" id="DonationDebtForm">
-                        @csrf
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="delay_name" class="text-muted">سبب المديونية</label>
-                                    <input type="text" class="form-control text-muted" name="donation_category" placeholder="سبب المديونية" id="delay_reason" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" required>
-                                    <p class="required d-none text-danger mb-0 fw-bold fs-6" id="reasonReq">هذا الحقل مطلوب</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="delay_amount" class="text-muted">مبلغ المديونية</label>
-                                    <input type="text" class="form-control text-muted" name="delay_amount" placeholder="مبلغ المديونية" id="delay_amount" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" required>
-                                    <p class="required d-none text-danger mb-0 fw-bold fs-6" id="DelayAmountReq">هذا الحقل مطلوب</p>
-                                    <p class="required d-none text-danger mb-0 fw-bold fs-6" id="DelayAmountMsg">يجب ان يكون المبلغ مكون من 2 رقم على الاقل</p>
-                                </div>
-                                <div class="modal-footer mt-3">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                    <button type="submit" role="button" id="DonationDebtSubmit" class="btn btn-primary">تأكيد</button>
-                                </div>
-                            </div>
                         </div>
                     </form>
                 </div>
