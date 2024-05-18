@@ -39,11 +39,40 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
-            {{-- ! Insert Bulk Subscribers ! --}}
-            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_upload">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة مشتركين بالجملة</span>
-            </button>
+            @if ($user->role === 'subscriptions')
+                {{-- ! Insert Bulk Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 d-none" data-bs-toggle="modal" data-bs-target="#bulk_upload">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مشتركين بالجملة</span>
+                </button>
+                {{-- ! Insert Bulk Delay ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات بالجملة</span>
+                </button>
+            @elseif ($user->role === 'media')
+                {{-- ! Insert Bulk Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 d-none" data-bs-toggle="modal" data-bs-target="#bulk_upload">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مشتركين بالجملة</span>
+                </button>
+                {{-- ! Insert Bulk Delay ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات بالجملة</span>
+                </button>
+            @else
+                {{-- ! Insert Bulk Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_upload">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مشتركين بالجملة</span>
+                </button>
+                {{-- ! Insert Bulk Delay ! --}}
+                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات بالجملة</span>
+                </button>
+            @endif
             {{-- ! Insert Single Subscriber ! --}}
             <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subscriber">
                 <i class="icofont icofont-plus fw-bold"></i>
@@ -53,11 +82,6 @@
             <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
                 <i class="icofont icofont-plus fw-bold"></i>
                 <span>إضافة مديونية على كل الأعضاء</span>
-            </button>
-            {{-- ! Insert Bulk Delay ! --}}
-            <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة متأخرات بالجملة</span>
             </button>
         </div>
     </div>

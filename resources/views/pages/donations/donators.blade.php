@@ -15,15 +15,29 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
+            @if ($user->role === 'subscriptions')
+                {{-- ! Insert Bulk Donations ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 ms-3 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات التبرعات بالجملة</span>
+                </button>
+            @elseif ($user->role === 'media')
+                {{-- ! Insert Bulk Donations ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 ms-3 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات التبرعات بالجملة</span>
+                </button>
+            @else
+                {{-- ! Insert Bulk Donations ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 ms-3" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة متأخرات التبرعات بالجملة</span>
+                </button>
+            @endif
             {{-- ! Insert New Donator ! --}}
             <button type="button" class="btn btn-success text-dark px-2 py-1" data-bs-toggle="modal" data-bs-target="#new_donator">
                 <i class="icofont icofont-eye"></i>
                 <span class="ms-3">إضافة متبرع جديد</span>
-            </button>
-            {{-- ! Insert Bulk Donations ! --}}
-            <button type="button" class="btn btn-success px-2 py-1 ms-3" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة متأخرات التبرعات بالجملة</span>
             </button>
             {{-- ! Insert Bulk Donations On Subscribers ! --}}
             <button type="button" class="btn btn-success px-2 py-1 ms-3" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
