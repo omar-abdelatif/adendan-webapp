@@ -1,12 +1,25 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'تعديل مشترك')
 @section('breadcrumb-title')
     <h3>تعديل المشترك {{$subscriber->name}}</h3>
 @endsection
 @section('breadcrumb-items')
-    <li class="breadcrumb-item active">
-        <a href="{{route('subscriber.all')}}">كل المشتركين</a>
-    </li>
+    @if ($user->role === 'subscriptions')
+        <li class="breadcrumb-item active">
+            <a href="{{route('subscriptionRole.index')}}">كل المشتركين</a>
+        </li>
+    @elseif ($user->role === 'media')
+        <li class="breadcrumb-item active">
+            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        </li>
+    @else
+        <li class="breadcrumb-item active">
+            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+        </li>
+    @endif
     <li class="breadcrumb-item active">تعديل المشترك</li>
 @endsection
 @section('script')

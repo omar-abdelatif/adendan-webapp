@@ -52,7 +52,7 @@ class DonationsController extends Controller
                     'message' => "تم الإضافة بنجاح",
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('donations.showAll', $subscribers->id)->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
         return redirect()->route('donations.showAll', $subscribers->id)->withErrors($validated);

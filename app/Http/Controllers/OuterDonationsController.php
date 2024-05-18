@@ -48,7 +48,7 @@ class OuterDonationsController extends Controller
                     'message' => 'تم الإضافة بنجاح',
                     'alert-type' => 'success'
                 ];
-                return redirect()->route('outer_donations.history', $donators->id)->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
         return redirect()->back()->withErrors($validated);

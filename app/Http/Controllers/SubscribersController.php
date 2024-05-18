@@ -214,7 +214,7 @@ class SubscribersController extends Controller
                     'message' => "تم التعديل بنجاح",
                     'alert-type' => 'success',
                 ];
-                return redirect()->route('subscriber.details', $member->id)->with($notificationSuccess);
+                return redirect()->back()->with($notificationSuccess);
             }
         }
         return redirect()->back()->withErrors($validatedData);

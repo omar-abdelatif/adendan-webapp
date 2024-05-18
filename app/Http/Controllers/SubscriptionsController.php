@@ -47,7 +47,7 @@ class SubscriptionsController extends Controller
                         "message" => "تم الإضافة بنجاح",
                         "alert-type" => "success"
                     ];
-                    return redirect()->route('subscription.history', $subscriber->id)->with($notificationSuccess);
+                    return redirect()->back()->with($notificationSuccess);
                 }
             }
         }
