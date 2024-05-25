@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdsController;
-use App\Http\Controllers\MsgController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
@@ -21,9 +19,7 @@ use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\OuterDonationsController;
-use App\Http\Controllers\MediaRole\MediaRoleController;
 use App\Http\Controllers\AssociationCommittesController;
-use App\Http\Controllers\SubscriptionRole\SubscriptionRoleController;
 
 Auth::routes();
 
@@ -34,8 +30,10 @@ Route::prefix('admin')->group(function () {
             Route::get('dashboard', 'index')->name('home');
         });
         Route::controller(UserController::class)->group(function () {
-            Route::get('profile', 'index')->name('user.profile');
+            Route::get('dashboard/profile', 'index')->name('user.profile');
             Route::post('dashboard/update_profile', 'update')->name('user.update');
+            Route::get('dashboard/users/all', 'index')->name('user.index');
+            Route::post('dashboard/user/store', 'store')->name('user.store');
         });
         Route::controller(NewsController::class)->group(function () {
             Route::get('news/all', 'index')->name('news.all');

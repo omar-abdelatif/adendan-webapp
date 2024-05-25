@@ -1544,7 +1544,182 @@ if (PayOldDonationDebt) {
         }
     })
 }
-
+//! craftSelect
+let SelectedOption = document.getElementById("craftSelect");
+if (SelectedOption) {
+    SelectedOption.addEventListener("change", function () {
+        let selectedOption = this.options[this.selectedIndex].value;
+        let otherCraftInput = document.getElementsByName("other_craft")[0];
+        otherCraftInput.value = "";
+        otherCraftInput.disabled = selectedOption !== "أخرى";
+    });
+}
+//! category News Select
+const categorySelect = document.getElementById("categorySelect");
+const inputsDiv = document.getElementById("inputs");
+const img = document.getElementById("img");
+const thumbs = document.getElementById("thumbs");
+if (categorySelect) {
+    categorySelect.addEventListener("change", function () {
+        if (this.value === "عزاء") {
+            inputsDiv.classList.add("hidden");
+            img.classList.add("hidden");
+            thumbs.classList.add("hidden");
+            inputsDiv.querySelectorAll("input").forEach(function (input) {
+                input.disabled = true;
+            });
+        } else {
+            inputsDiv.classList.remove("hidden");
+            img.classList.remove("hidden");
+            thumbs.classList.remove("hidden");
+            inputsDiv.querySelectorAll("input").forEach(function (input) {
+                input.disabled = false;
+            });
+        }
+    });
+}
+//! updateCraft Worker Page
+let selectElements = document.querySelectorAll("[data-worker-id]");
+if (selectElements) {
+    selectElements.forEach((selectElement) => {
+        let otherCraftInput = document.querySelector(`input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+        function handleUpdateCraft() {
+            let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+            if (selectedOption === "أخرى") {
+                otherCraftInput.disabled = false;
+            } else {
+                otherCraftInput.value = "";
+                otherCraftInput.disabled = true;
+                otherCraftInput.removeAttribute("value");
+            }
+        }
+        selectElement.addEventListener("change", function () {
+            handleUpdateCraft();
+        });
+    });
+}
+//! Insert Donation
+let allDonations = document.querySelectorAll("[data-donation-id]");
+if (allDonations) {
+    allDonations.forEach((donation) => {
+        let otherDonation = document.querySelector(`input[name="other_donation"][data-donation-id="${donation.dataset.donationId}"]`);
+        let categoryType = document.querySelector(`select[name="donation_category"][data-donation-id="${donation.dataset.donationId}"]`);
+        let Amount = document.querySelector(`input[name="amount"][data-donation-id="${donation.dataset.donationId}"]`);
+        function donationUpdate() {
+            let donationValue = donation.options[donation.selectedIndex].value;
+            if (donationValue == "أخرى") {
+                Amount.classList.remove("d-none");
+                Amount.disabled = false;
+                categoryType.classList.add("d-none");
+                categoryType.disabled = true;
+                otherDonation.classList.remove("d-none");
+                otherDonation.disabled = false;
+            } else if (donationValue == "مادي") {
+                Amount.classList.remove("d-none");
+                Amount.disabled = false;
+                categoryType.classList.remove("d-none");
+                categoryType.disabled = false;
+                otherDonation.classList.add("d-none");
+                otherDonation.disabled = true;
+            }
+        }
+        donation.addEventListener("change", function () {
+            donationUpdate();
+        });
+    });
+}
+//! Outer Donators Period
+let donationSelect = document.getElementById("donator_type");
+if (donationSelect) {
+    donationSelect.addEventListener("change", function () {
+        let donationValue = this.options[this.selectedIndex].value;
+        let donationName = document.getElementById("duration");
+        if (donationValue == "منتظم") {
+            donationName.classList.remove("d-none");
+        } else {
+            donationName.value = "";
+            donationName.classList.add("d-none");
+        }
+    });
+}
+//! miscellaneous Insertion
+let category = document.getElementById("category");
+if (category) {
+    category.addEventListener("change", function () {
+        let selectedOption = this.options[this.selectedIndex].value;
+        let otherCategory = document.getElementById("other_category");
+        if (selectedOption === "أخرى") {
+            otherCategory.classList.remove("d-none");
+        } else {
+            otherCategory.value = "";
+            otherCategory.classList.add("d-none");
+        }
+    });
+}
+//! Update miscellaneous
+let selectMiscs = document.querySelectorAll("[data-misc-id]");
+if (selectMiscs) {
+    selectMiscs.forEach((misc) => {
+        let otherCategory = document.querySelector(
+            `input[name="other_category"][data-misc-id="${misc.dataset.miscId}"]`
+        );
+        function handleUpdateCraft() {
+            let selectedOption = misc.options[misc.selectedIndex].value;
+            if (selectedOption === "أخرى") {
+                otherCategory.disabled = false;
+            } else {
+                otherCategory.value = "";
+                otherCategory.disabled = true;
+                otherCategory.removeAttribute("value");
+            }
+        }
+        misc.addEventListener("change", function () {
+            handleUpdateCraft();
+        });
+    });
+}
+//! Pay Subscription or Old Delays
+let paymentTypes = document.querySelectorAll("[data-payment-id]");
+if (paymentTypes) {
+    paymentTypes.forEach((payment) => {
+        let subscriptionCost = document.querySelector(`input[name="subscription_cost"][data-payment-id="${payment.dataset.paymentId}"]`);
+        let subscriptionPeriod = document.querySelector(`input[name="period"][data-payment-id="${payment.dataset.paymentId}"]`);
+        let delayAmount = document.querySelector(`input[name="delays"][data-payment-id="${payment.dataset.paymentId}"]`);
+        let delayPeriod = document.querySelector(`input[name="delays_period"][data-payment-id="${payment.dataset.paymentId}"]`);
+        function handleDelay() {
+            let selectedPayment = payment.options[payment.selectedIndex].value;
+            if (selectedPayment === "إشتراك") {
+                subscriptionCost.classList.remove("d-none");
+                subscriptionPeriod.classList.remove("d-none");
+                delayAmount.classList.add("d-none");
+                delayPeriod.classList.add("d-none");
+            } else if (selectedPayment === "متأخرات") {
+                subscriptionCost.classList.add("d-none");
+                subscriptionPeriod.classList.add("d-none");
+                delayAmount.classList.remove("d-none");
+                delayPeriod.classList.remove("d-none");
+            } else {
+                subscriptionCost.classList.add("d-none");
+                subscriptionPeriod.classList.add("d-none");
+                delayAmount.classList.add("d-none");
+                delayPeriod.classList.add("d-none");
+            }
+        }
+        payment.addEventListener("change", function () {
+            handleDelay();
+        });
+    });
+}
+//!
+//!
+//!
+//!
+//!
+//!
+//!
+//!
+//!
+//!
 
 
 

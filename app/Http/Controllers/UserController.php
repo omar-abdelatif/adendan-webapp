@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('pages.users.profile', compact('user'));
+        $users = User::all();
+        return view('pages.users.index', compact('users'));
     }
     public function update(Request $request)
     {
@@ -53,5 +54,37 @@ class UserController extends Controller
             'alert-type' => 'error'
         ];
         return redirect()->route('user.profile')->with($notificationError);
+    }
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'role' => 'required'
+        ]);
+        $user = User::create($validator);
+        if ($user) {
+            $notificationSuccess = [
+                'message' => 'تم اضافة المستخدم بنجاح',
+                'alert-type' => 'success',
+            ];
+            return redirect()->back()->with($notificationSuccess);
+        }
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            $errorMessages = [];
+
+            foreach ($errors->all() as $error) {
+                $errorMessages[] = $error;
+            }
+
+            $notificationError = [
+                'message' => 'خطأ في اضافة المستخدم: ' . implode(' ', $errorMessages),
+                'alert-type' => 'error'
+            ];
+
+            return redirect()->back()->withErrors($validator)->with('notificationError', $notificationError);
+        }
     }
 }

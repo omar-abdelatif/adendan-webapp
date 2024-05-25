@@ -386,6 +386,12 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="sidebar-list">
+                            <a href="{{route('user.index')}}" class="sidebar-link sidebar-title">
+                                <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
+                                <span>المستخدمين</span>
+                            </a>
+                        </li>
                         {{-- <li class="sidebar-list">
                             <a href="" class="sidebar-link sidebar-title">
                                 <i data-feather="log-in" class="text-white"></i>
