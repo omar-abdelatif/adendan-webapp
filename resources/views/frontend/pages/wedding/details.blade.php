@@ -42,6 +42,9 @@
                                 مشاركة
                             </span>
                             {!! $socialShare !!}
+                            <p class="copy mb-0" onclick="copyToClipboard()">
+                                <img width="48" height="48" src="https://img.icons8.com/color/48/copy--v1.png" alt="copy--v1"/>
+                            </p>
                         </div>
                     </div>
                 </div>

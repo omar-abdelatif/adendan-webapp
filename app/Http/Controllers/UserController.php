@@ -57,36 +57,32 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
             'role' => 'required'
         ]);
-        $user = User::create($validator);
-        if ($user) {
-            $notificationSuccess = [
-                'message' => 'تم اضافة المستخدم بنجاح',
-                'alert-type' => 'success',
-            ];
-            return redirect()->back()->with($notificationSuccess);
-        }
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            $errorMessages = [];
-
-            foreach ($errors->all() as $error) {
-                $errorMessages[] = $error;
+        try {
+            $user = User::create($validator);
+            if ($user) {
+                $notificationSuccess = [
+                    'message' => 'تم إضافة المستخدم بنجاح',
+                    'alert-type' => 'success',
+                ];
+                return redirect()->back()->with($notificationSuccess);
             }
-
+            throw new \Exception('Failed to create user.');
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
             $notificationError = [
-                'message' => 'خطأ في اضافة المستخدم: ' . implode(' ', $errorMessages),
+                'message' => 'خطأ في إضافة المستخدم: ' . $errorMessage,
                 'alert-type' => 'error'
             ];
-
-            return redirect()->back()->withErrors($validator)->with('notificationError', $notificationError);
+            return redirect()->back()->withErrors([$errorMessage])->with($notificationError);
         }
     }
+
     public function AllUsers()
     {
         $users = User::all();
@@ -100,6 +96,21 @@ class UserController extends Controller
             if ($delete) {
                 $notificationSuccess = [
                     'message' => 'تم حذف المستخدم بنجاح',
+                    'alert-type' => 'success',
+                ];
+                return redirect()->back()->with($notificationSuccess);
+            }
+        }
+    }
+    public function updateUser(Request $request)
+    {
+        $id = $request->id;
+        $user = User::find($id);
+        if ($user) {
+            $user = $user->update($request->all());
+            if ($user) {
+                $notificationSuccess = [
+                    'message' => 'تم تعديل المستخدم بنجاح',
                     'alert-type' => 'success',
                 ];
                 return redirect()->back()->with($notificationSuccess);
