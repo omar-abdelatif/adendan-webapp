@@ -98,30 +98,35 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('association.update')}} method="post">
+                                                                <form action={{route('newuser.update')}} method="post">
                                                                     @csrf
                                                                     <div class="row">
                                                                         <input type="hidden" name="id" value={{$user->id}} >
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <label for="title" class="text-muted">إسم اللجنة</label>
-                                                                                <input type="text" class="form-control text-muted" name="name" value="{{$user->name}}" placeholder="إسم اللجنة">
+                                                                                <label for="title" class="text-muted">إسم المستخدم</label>
+                                                                                <input type="text" class="form-control text-muted" name="name" value="{{$user->name}}" placeholder="إسم المستخدم" id="userName" required autocomplete="false">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-muted">عن اللجنة</label>
-                                                                                <textarea name="description" class="form-control text-muted" placeholder="عن اللجنة" cols="30" rows="3">{{$user->description}}</textarea>
+                                                                                <label for="title" class="text-muted">البريد الإلكتروني</label>
+                                                                                <input type="email" class="form-control text-muted" value="{{$user->email}}" name="email" placeholder="البريد الإلكتروني" id="userEmail" required>
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-muted">رئيس اللجنة</label>
-                                                                                <input type="text" class="form-control text-muted" name="boss" value="{{$user->boss}}" placeholder="رئيس الجمعية">
+                                                                                <label for="title" class="text-muted">كلمة السر</label>
+                                                                                <input type="password" class="form-control text-muted" value="{{$user->password}}" name="password" id="password" placeholder="كلمة السر">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-muted">مهام الجمعية</label>
-                                                                                <input type="text" class="form-control text-muted" name="tasks" value="{{$user->tasks}}" placeholder="مهام الجمعية">
+                                                                                <label for="title" class="text-muted">دور المستخدم</label>
+                                                                                <select name="role" class="form-select text-muted" id="role">
+                                                                                    <option selected disabled>الدور</option>
+                                                                                    <option value="admin" {{$user->role === 'admin' ? 'selected' : ''}}>Admin</option>
+                                                                                    <option value="subscription" {{$user->role === 'subscription' ? 'selected' : ''}}>Subscription</option>
+                                                                                    <option value="media" {{$user->role === 'media' ? 'selected' : ''}}>Media</option>
+                                                                                </select>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
+                                                                                <button type="submit" role="button" id="userSubmit" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>

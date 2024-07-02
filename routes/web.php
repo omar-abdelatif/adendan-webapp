@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
                 Route::get('users/all', 'AllUsers')->name('user.index');
                 Route::post('user/store', 'store')->name('user.store');
                 Route::get('user/delete/{id}', 'destroy')->name('user.delete');
+                Route::post('user/update', 'updateUser')->name('newuser.update');
             });
         });
         Route::controller(NewsController::class)->group(function () {
