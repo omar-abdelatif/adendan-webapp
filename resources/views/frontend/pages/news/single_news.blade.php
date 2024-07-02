@@ -7,7 +7,6 @@
 @endsection
 @section('meta')
     @if (Route::currentRouteName() === 'site.single_news')
-        <!-- Meta tags for single news page -->
         <meta property="og:url" content="{{ url()->current() }}">
         @if ($news->category === 'عزاء')
             <meta property="og:image" content="{{ asset('assets/frontend/images/bg/news/death/download.jpeg') }}">
@@ -15,7 +14,6 @@
             <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
         @endif
     @else
-        <!-- Meta tags for other pages -->
         <meta property="og:url" content="https://adendan.com/">
         <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
     @endif
@@ -52,6 +50,9 @@
                                     مشاركة
                                 </span>
                                 {!! $socialShare !!}
+                                <p class="copy mb-0" onclick="copyToClipboard()">
+                                    <img width="48" height="48" src="https://img.icons8.com/color/48/copy--v1.png" alt="copy--v1"/>
+                                </p>
                             </div>
                         </div>
                     </div>
