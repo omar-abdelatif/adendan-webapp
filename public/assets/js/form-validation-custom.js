@@ -362,13 +362,11 @@ if (newsform) {
     });
     //! Validation For Input News TextArea
     const details = document.getElementById("details");
-    const newsDetailsMsg = document.getElementById("detailsMsg");
     const newsDetailsReq = document.getElementById("detailsReq");
     details.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsDetailsReq.classList.remove("d-none");
-            newsDetailsMsg.classList.add("d-none");
             details.classList.remove("good");
             details.classList.add("error");
         } else {
