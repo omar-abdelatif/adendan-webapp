@@ -1,4 +1,8 @@
 @extends('frontend.layouts.master')
+@section('meta')
+    <meta property="og:url" content="https://adendan.com/">
+    <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
+@endsection
 @section('site_styles')
     <link rel="stylesheet" href={{asset('assets/frontend/css/cards.css')}}>
 @endsection
