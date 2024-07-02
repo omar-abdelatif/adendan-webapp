@@ -107,6 +107,32 @@
                             <img src="{{asset('assets/frontend/images/associations/kfala/Humanitarian_Help-cuate.svg')}}" width="500" alt="about-img">
                         </div>
                     </div>
+                @elseif ($association->name === 'لجنة العلاقات العامة')
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">نبذه عن اللجنة</h2>
+                            <p class="fs-5 fw-bold">
+                                لجنة العلاقات العامة هي إحدى اللجان الرئيسية في جمعية أدندان الخيرية النوبية. تلعب هذه اللجنة دورًا حيويًا في بناء وتطوير العلاقات الداخلية والخارجية للجمعية، وتسعى لتعزيز التواصل مع المجتمع المحلي.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img width="500" src="https://static.vecteezy.com/system/resources/previews/009/352/684/non_2x/public-relations-illustration-concept-on-white-background-vector.jpg" alt="">
+                        </div>
+                    </div>
+                @elseif ($association->name === 'اللجنة الفنية')
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">نبذه عن اللجنة</h2>
+                            <p class="fs-5 fw-bold"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img src="" width="500" alt="">
+                        </div>
+                    </div>
                 @endif
             </div>
             <div class="row align-items-center justify-content-center">
@@ -254,6 +280,32 @@
                             </p>
                         </div>
                     </div>
+                @elseif ($association->name === 'لجنة العلاقات العامة')
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/007/784/457/non_2x/online-digital-marketing-illustration-concept-flat-illustration-isolated-on-white-background-vector.jpg" width="500" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">الرسالة و الأهداف</h2>
+                            <p class="fs-5 fw-bold">
+                                رسالة لجنة العلاقات العامة هي تعزيز صورة جمعية أدندان الخيرية النوبية وبناء جسور التواصل الفعّال مع المجتمع لزيادة الوعي بأهداف الجمعية وأنشطتها، وجذب الدعم والتعاون اللازم لتحقيق أهدافها الإنسانية والتنموية.
+                            </p>
+                            <p class="fs-5 fw-bold">
+                                <ul>
+                                    <li>تعزيز التواصل الفعّال</li>
+                                    <li>زيادة الوعي والدعم</li>
+                                    <li>تعزيز صورة الجمعية</li>
+                                    <li>بناء وتطوير العلاقات</li>
+                                    <li>تقديم التقارير الدورية</li>
+                                    <li>إدارة وسائل التواصل الاجتماعي</li>
+                                    <li>إدارة وتنظيم الفعاليات</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                @elseif ($association->name === 'اللجنة الفنية')
                 @endif
             </div>
             <div class="row align-items-center justify-content-center">
@@ -411,6 +463,32 @@
                             <img src="{{asset('assets/frontend/images/associations/kfala/Humanitarian_Help-rafiki.svg')}}" width="400" alt="about-img">
                         </div>
                     </div>
+                @elseif ($association->name === 'لجنة العلاقات العامة')
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">الرؤية و المهام</h2>
+                            <p class="fs-5">
+                                رؤية لجنة العلاقات العامة هي أن تكون الجسر الذي يربط جمعية أدندان الخيرية النوبية بالمجتمع المحلي، وتساهم في بناء صورة إيجابية ومؤثرة للجمعية، مما يسهم في تحقيق أهدافها الإنسانية والتنموية بشكل فعال ومستدام.
+                            </p>
+                            <p class="fs-5 fw-bold">
+                                من مهام اللجنة:
+                                <ul>
+                                    <li>إعداد المواد الترويجية</li>
+                                    <li>تنظيم حملات إعلامية</li>
+                                    <li>التواصل مع الأعضاء والداعمين</li>
+                                    <li>إدارة وسائل التواصل الاجتماعي</li>
+                                    <li>إدارة التواصل الإعلامي</li>
+                                    <li>تنظيم الفعاليات</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/007/783/542/non_2x/business-activities-illustration-concept-flat-illustration-isolated-on-white-background-vector.jpg" width="500" alt="">
+                        </div>
+                    </div>
+                @elseif ($association->name === 'اللجنة الفنية')
                 @endif
             </div>
         </div>
