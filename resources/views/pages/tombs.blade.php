@@ -113,9 +113,13 @@
                                                 @endif
                                             </td>
                                             <td class="text-muted">
-                                                <a href="{{$tomb->location}}" class="btn">
-                                                    <i class="fa-solid fa-link text-muted fs-6"></i>
-                                                </a>
+                                                @if ($tomb->location)
+                                                    <a href="{{$tomb->location}}" class="btn">
+                                                        <i class="fa-solid fa-link text-muted fs-6"></i>
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
                                             <td>
                                                 {{-- ! Update ! --}}

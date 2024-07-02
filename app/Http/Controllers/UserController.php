@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('pages.users.index', compact('users'));
+        return view('pages.users.profile', compact('users'));
     }
     public function update(Request $request)
     {
@@ -86,5 +86,10 @@ class UserController extends Controller
 
             return redirect()->back()->withErrors($validator)->with('notificationError', $notificationError);
         }
+    }
+    public function AllUsers()
+    {
+        $users = User::all();
+        return view('pages.users.index', compact('users'));
     }
 }

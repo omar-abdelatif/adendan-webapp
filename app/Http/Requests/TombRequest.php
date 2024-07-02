@@ -26,7 +26,7 @@ class TombRequest extends FormRequest
             'region' => 'required',
             'tomb_guard_name' => 'nullable',
             'tomb_guard_number' => 'nullable',
-            'location' => 'required'
+            'location' => 'nullable'
         ];
     }
 }
