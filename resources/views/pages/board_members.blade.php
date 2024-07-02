@@ -3,6 +3,9 @@
 @section('breadcrumb-title')
     <h3>كل أعضاء مجلس الإدارة</h3>
 @endsection
+@section('breadcrumb-items')
+    <li class="breadcrumb-item active">مجلس الإدارة</li>
+@endsection
 @section('modals')
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_cat">إضافة عضو جديد</button>
     <div class="modal fade" id="add_cat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -49,9 +52,6 @@
             </div>
         </div>
     </div>
-@endsection
-@section('breadcrumb-items')
-    <li class="breadcrumb-item active">مجلس الإدارة</li>
 @endsection
 @section('content')
     @if ($errors->any())

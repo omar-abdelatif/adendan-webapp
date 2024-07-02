@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class MediaRoleController extends Controller
 {
-    //
+    public function MediaRole(){
+        
+    }
 }
