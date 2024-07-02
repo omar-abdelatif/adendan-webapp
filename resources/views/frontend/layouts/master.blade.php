@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
     <head>
-        @yield('meta')
         <meta charset="UTF-8">
         @vite('resources/js/app.js')
         <title>جمعية أدندان الخيرية</title>
@@ -13,6 +12,7 @@
         <meta property="og:url" content="https://adendan.com/">
         <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
         <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+        @yield('meta')
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
         @include('frontend.layouts.assets.css')
