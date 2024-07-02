@@ -8,7 +8,11 @@
 @section('meta')
     <meta property="og:title" content="{{$news->title}}">
     <meta property="og:description" content="{{$news->description}}">
-    <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
+    @if ($news->category === 'عزاء')
+        <meta property="og:image" content="{{ asset('assets/frontend/images/bg/news/death/download.jpeg') }}">
+    @else
+        <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
+    @endif
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="article" />
 @endsection

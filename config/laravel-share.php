@@ -34,11 +34,9 @@ return [
         ],
         'reddit' => [
             'uri' => 'https://www.reddit.com/submit',
-            'text' => 'Default share text',
         ],
         'telegram' => [
             'uri' => 'https://telegram.me/share/url',
-            'text' => 'Default share text',
         ],
     ],
 
