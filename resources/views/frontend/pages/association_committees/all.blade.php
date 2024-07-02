@@ -87,6 +87,30 @@
                                     </div>
                                 </a>
                             </div>
+                        @elseif ($association->name === 'اللجنة الفنية')
+                            <div class="ag-courses_item overflow-hidden rounded-5 text-center mb-5">
+                                <a href="{{route('site.assossiation_details', $association->id)}}" class="ag-courses-item_link d-block position-relative overflow-hidden bg-white py-3 px-4">
+                                    <div class="ag-courses-item_bg position-absolute rounded-circle"></div>
+                                    <div class="icon mb-3">
+                                        <img width="75" height="75" src="https://img.icons8.com/bubbles/75/play.png" alt="play"/>
+                                    </div>
+                                    <div class="ag-courses-item_title overflow-hidden fw-bold fs-2 mb-4 text-decoration-underline position-relative">
+                                        {{$association->name}}
+                                    </div>
+                                </a>
+                            </div>
+                        @elseif ($association->name === 'لجنة العلاقات العامة')
+                            <div class="ag-courses_item overflow-hidden rounded-5 text-center mb-5">
+                                <a href="{{route('site.assossiation_details', $association->id)}}" class="ag-courses-item_link d-block position-relative overflow-hidden bg-white py-3 px-4">
+                                    <div class="ag-courses-item_bg position-absolute rounded-circle"></div>
+                                    <div class="icon mb-3">
+                                        <img width="75" height="75" src="https://img.icons8.com/matisse/75/public-speaking.png" alt="public-speaking"/>
+                                    </div>
+                                    <div class="ag-courses-item_title overflow-hidden fw-bold fs-2 mb-4 text-decoration-underline position-relative">
+                                        {{$association->name}}
+                                    </div>
+                                </a>
+                            </div>
                         @endif
                     </div>
                 @endforeach
