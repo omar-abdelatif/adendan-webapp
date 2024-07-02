@@ -29,3 +29,14 @@ $(document).ready(function () {
         direction: "rtl",
     });
 });
+//! Copy To Clipboard
+function copyToClipboard() {
+    var tempInput = document.createElement("input");
+    tempInput.value = window.location.href;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("Copied the URL: " + tempInput.value);
+}
+
