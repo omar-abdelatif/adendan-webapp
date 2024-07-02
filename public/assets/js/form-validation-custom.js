@@ -365,7 +365,7 @@ if (newsform) {
     const newsDetailsMsg = document.getElementById("detailsMsg");
     const newsDetailsReq = document.getElementById("detailsReq");
     details.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsDetailsReq.classList.remove("d-none");
             newsDetailsMsg.classList.add("d-none");
@@ -492,7 +492,7 @@ if (tomb) {
     const tombReq = document.getElementById("tombReq");
     const tombMsg = document.getElementById("tombMsg");
     tombName.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
         if (this.value.trim() === "") {
             tombReq.classList.remove("d-none");
             tombMsg.classList.add("d-none");

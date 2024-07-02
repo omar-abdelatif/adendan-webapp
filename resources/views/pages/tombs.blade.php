@@ -22,7 +22,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="title" class="text-muted">إسم المقبره</label>
-                                    <input type="text" class="form-control text-muted" id="tombName" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="title" placeholder="إسم المقبره" required>
+                                    <input type="text" class="form-control text-muted" id="tombName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-\.\,]/g, '')" name="title" placeholder="إسم المقبره" required>
                                     <p class="required d-none text-danger mb-0" id="tombReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="tombMsg">يجب أن يكون الإسم باللغة العربية ولا يقل عن 3 أحرف</p>
                                 </div>

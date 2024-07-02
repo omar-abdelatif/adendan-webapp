@@ -385,7 +385,7 @@
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 @foreach ($tombsByRegion as $region => $tombs)
-                                    <div class="card position-relative border border-secondary border-2 p-4 w-100">
+                                    <div class="card position-relative border border-secondary border-2 p-4 w-100 mb-5">
                                         <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
                                             <h3 class="mb-0 font-weight-bold text-center text-white">مقابر {{$region}}</h3>
                                         </div>
