@@ -64,7 +64,12 @@ class UserController extends Controller
             'role' => 'required'
         ]);
         try {
-            $user = User::create($validator);
+            $user = User::create([
+                'name' => $validator['name'],
+                'email' => $validator['email'],
+                'password' => bcrypt($validator['password']),
+                'role' => $validator['role']
+            ]);
             if ($user) {
                 $notificationSuccess = [
                     'message' => 'تم إضافة المستخدم بنجاح',
@@ -82,7 +87,6 @@ class UserController extends Controller
             return redirect()->back()->withErrors([$errorMessage])->with($notificationError);
         }
     }
-
     public function AllUsers()
     {
         $users = User::all();
