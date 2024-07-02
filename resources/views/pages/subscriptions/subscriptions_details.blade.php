@@ -11,7 +11,7 @@
         @if ($user->role === 'subscriptions')
             <a href="{{route('subscriptionRole.subscriber.all')}}">كل المشتركين</a>
         @elseif ($user->role === 'media')
-            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
+            <a class="d-none" href="{{route('subscriber.all')}}">كل المشتركين</a>
         @else
             <a href="{{route('subscriber.all')}}">كل المشتركين</a>
         @endif

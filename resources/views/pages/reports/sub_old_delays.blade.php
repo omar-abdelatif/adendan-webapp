@@ -9,7 +9,7 @@
 @section('content')
     <section class="old_sub">
         <div class="container-fluid">
-               <div class="col-lg-12">
+            <div class="col-lg-12">
                 <h3 class="light-card balance-card widget-hover w-50 mx-auto justify-content-center rounded-pill bg-primary mb-4">
                     <i class="fas fa-dollar-sign" style="font-size:30px;"></i>
                     تقارير متأخرات الإشتراك
@@ -19,15 +19,14 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                                   <div class="col-lg-12">
-                                        <h3 class="light-card balance-card widget-hover text-white w-25 mx-auto justify-content-center rounded-pill bg-success mb-4">
-                                            بـحـث مـتقدم
-                                        </h3>
-                                    </div>
+                            <div class="col-lg-12">
+                                <h3 class="light-card balance-card widget-hover text-white w-25 mx-auto justify-content-center rounded-pill bg-success mb-4">
+                                    بـحـث مـتقدم
+                                </h3>
+                            </div>
                             <div class="filter-form">
                                 <form action="{{ route('reports.search') }}" method="get">
                                     <div class="forms d-flex w-100 justify-content-center mx-auto">
-
                                         <div class="form-group me-5">
                                             <input type="number" class="form-control" placeholder="المبلغ" name="amount">
                                         </div>
