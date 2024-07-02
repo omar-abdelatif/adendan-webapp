@@ -92,4 +92,18 @@ class UserController extends Controller
         $users = User::all();
         return view('pages.users.index', compact('users'));
     }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $delete = $user->delete();
+            if ($delete) {
+                $notificationSuccess = [
+                    'message' => 'تم حذف المستخدم بنجاح',
+                    'alert-type' => 'success',
+                ];
+                return redirect()->back()->with($notificationSuccess);
+            }
+        }
+    }
 }

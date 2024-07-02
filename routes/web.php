@@ -29,11 +29,14 @@ Route::prefix('admin')->group(function () {
         Route::controller(HomeController::class)->group(function () {
             Route::get('dashboard', 'index')->name('home');
         });
-        Route::controller(UserController::class)->group(function () {
-            Route::get('dashboard/profile', 'index')->name('user.profile');
-            Route::post('dashboard/update_profile', 'update')->name('user.update');
-            Route::get('dashboard/users/all', 'AllUsers')->name('user.index');
-            Route::post('dashboard/user/store', 'store')->name('user.store');
+        Route::prefix('dashboard')->group(function () {
+            Route::controller(UserController::class)->group(function () {
+                Route::get('profile', 'index')->name('user.profile');
+                Route::post('update_profile', 'update')->name('user.update');
+                Route::get('users/all', 'AllUsers')->name('user.index');
+                Route::post('user/store', 'store')->name('user.store');
+                Route::get('user/delete/{id}', 'destroy')->name('user.delete');
+            });
         });
         Route::controller(NewsController::class)->group(function () {
             Route::get('news/all', 'index')->name('news.all');

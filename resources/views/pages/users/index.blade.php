@@ -142,7 +142,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('association.delete', $user->id)}} method="get">
+                                                                <form action={{route('user.delete', $user->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h3 class="text-muted my-2">هل أنت متأكد من الحذف</h3>
