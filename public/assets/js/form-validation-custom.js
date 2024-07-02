@@ -340,7 +340,7 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
