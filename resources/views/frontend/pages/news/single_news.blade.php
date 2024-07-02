@@ -6,15 +6,21 @@
     <li class="breadcrumb-item active" aria-current="page">{{$news->title}}</li>
 @endsection
 @section('meta')
-    <meta property="og:title" content="{{$news->title}}">
-    <meta property="og:description" content="{{$news->description}}">
-    @if ($news->category === 'عزاء')
-        <meta property="og:image" content="{{ asset('assets/frontend/images/bg/news/death/download.jpeg') }}">
+    @if (Route::currentRouteName() === 'site.single_news')
+        <!-- Meta tags for single news page -->
+        <meta property="og:url" content="{{ url()->current() }}">
+        @if ($news->category === 'عزاء')
+            <meta property="og:image" content="{{ asset('assets/frontend/images/bg/news/death/download.jpeg') }}">
+        @else
+            <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
+        @endif
     @else
-        <meta property="og:image" content="{{ asset('assets/images/news-imgs/'.$news->img ) }}">
+        <!-- Meta tags for other pages -->
+        <meta property="og:url" content="https://adendan.com/">
+        <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
     @endif
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ $news->title }}">
+    <meta property="og:description" content="{{ $news->description }}">
 @endsection
 @section('site')
     <section class="news-details my-5">

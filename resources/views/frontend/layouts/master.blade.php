@@ -9,8 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="description" content="جمعية أدندان الخيرية">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="og:url" content="https://adendan.com/">
-        <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
         <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         @yield('meta')
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
