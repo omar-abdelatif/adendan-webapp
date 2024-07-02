@@ -87,10 +87,10 @@
                                             <td class="text-center">{{ $user->role }}</td>
                                             <td class="text-center">
                                                 {{-- ! Update ! --}}
-                                                <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#editing_{{$asso->id}}">
+                                                <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#editing_{{$user->id}}">
                                                     <i class="fa-solid fa-pen"></i>
                                                 </button>
-                                                <div class="modal fade" id="editing_{{$asso->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="editing_{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -101,23 +101,23 @@
                                                                 <form action={{route('association.update')}} method="post">
                                                                     @csrf
                                                                     <div class="row">
-                                                                        <input type="hidden" name="id" value={{$asso->id}} >
+                                                                        <input type="hidden" name="id" value={{$user->id}} >
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
                                                                                 <label for="title" class="text-muted">إسم اللجنة</label>
-                                                                                <input type="text" class="form-control text-muted" name="name" value="{{$asso->name}}" placeholder="إسم اللجنة">
+                                                                                <input type="text" class="form-control text-muted" name="name" value="{{$user->name}}" placeholder="إسم اللجنة">
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="title" class="text-muted">عن اللجنة</label>
-                                                                                <textarea name="description" class="form-control text-muted" placeholder="عن اللجنة" cols="30" rows="3">{{$asso->description}}</textarea>
+                                                                                <textarea name="description" class="form-control text-muted" placeholder="عن اللجنة" cols="30" rows="3">{{$user->description}}</textarea>
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="title" class="text-muted">رئيس اللجنة</label>
-                                                                                <input type="text" class="form-control text-muted" name="boss" value="{{$asso->boss}}" placeholder="رئيس الجمعية">
+                                                                                <input type="text" class="form-control text-muted" name="boss" value="{{$user->boss}}" placeholder="رئيس الجمعية">
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="title" class="text-muted">مهام الجمعية</label>
-                                                                                <input type="text" class="form-control text-muted" name="tasks" value="{{$asso->tasks}}" placeholder="مهام الجمعية">
+                                                                                <input type="text" class="form-control text-muted" name="tasks" value="{{$user->tasks}}" placeholder="مهام الجمعية">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
@@ -131,18 +131,18 @@
                                                     </div>
                                                 </div>
                                                 {{-- ! Delete ! --}}
-                                                <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" data-bs-target="#deleting_{{$asso->id}}">
+                                                <button type="button" class="btn btn-danger px-2 py-1" data-bs-toggle="modal" data-bs-target="#deleting_{{$user->id}}">
                                                     <i class="icofont icofont-trash"></i>
                                                 </button>
-                                                <div class="modal fade" id="deleting_{{$asso->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="deleting_{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">جار حذف اللجنة {{$asso->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">جار حذف اللجنة {{$user->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('association.delete', $asso->id)}} method="get">
+                                                                <form action={{route('association.delete', $user->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h3 class="text-muted my-2">هل أنت متأكد من الحذف</h3>

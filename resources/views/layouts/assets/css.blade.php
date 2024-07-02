@@ -2,22 +2,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontawesome-6-pro@6.4.0/css/all.min.css"/>
-<!-- ico-font-->
+{{-- ! ico-font ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/icofont.css')}}">
-<!-- Themify icon-->
+{{-- ! Themify icon ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/themify.css')}}">
-<!-- Flag icon-->
+{{-- ! Flag icon ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/flag-icon.css')}}">
-<!-- Feather icon-->
+{{-- ! Feather icon ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/feather-icon.css')}}">
-<!-- Plugins css start-->
+{{-- ! Plugins css start ! --}}
 @yield('css')
 <link rel="stylesheet" href="{{asset('assets/css/vendors/slick.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/vendors/slick-theme.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/vendors/scrollbar.css')}}">
-<!-- Bootstrap css-->
+{{-- ! Bootstrap css ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/bootstrap.css')}}">
-<!-- App css-->
+{{-- ! App css ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css')}}" media="screen">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">

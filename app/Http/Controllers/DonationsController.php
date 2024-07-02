@@ -45,9 +45,7 @@ class DonationsController extends Controller
                     'amount' => $request['amount'],
                 ]);
                 $sumAmount = $totalSafe->amount + $request['amount'];
-                $totalSafe->update([
-                    'amount' => $sumAmount,
-                ]);
+                $totalSafe->update(['amount' => $sumAmount]);
                 $notificationSuccess = [
                     'message' => "تم الإضافة بنجاح",
                     'alert-type' => 'success'

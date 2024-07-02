@@ -32,7 +32,7 @@ Route::prefix('admin')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('dashboard/profile', 'index')->name('user.profile');
             Route::post('dashboard/update_profile', 'update')->name('user.update');
-            Route::get('dashboard/users/all', 'index')->name('user.index');
+            Route::get('dashboard/users/all', 'AllUsers')->name('user.index');
             Route::post('dashboard/user/store', 'store')->name('user.store');
         });
         Route::controller(NewsController::class)->group(function () {

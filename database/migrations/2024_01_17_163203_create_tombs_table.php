@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('region');
-            $table->string('location');
-            $table->string('tomb_guard_name');
-            $table->bigInteger('tomb_guard_number');
+            $table->string('location')->nullable();
+            $table->string('tomb_guard_name')->nullable();
+            $table->bigInteger('tomb_guard_number')->nullable();
             $table->timestamps();
         });
     }
