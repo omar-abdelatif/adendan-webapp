@@ -125,12 +125,14 @@
                     <div class="col-lg-6">
                         <div class="about-details" dir="rtl">
                             <h2 class="details-title text-center mb-4">نبذه عن اللجنة</h2>
-                            <p class="fs-5 fw-bold"></p>
+                            <p class="fs-5 fw-bold">
+                                اللجنة الفنية هي إحدى اللجان الحيوية في جمعية أدندان الخيرية النوبية، وتتمثل مهمتها الرئيسية في تعزيز الأنشطة الفنية داخل المجتمع النوبي وخارجه. تعمل اللجنة على إحياء التراث الثقافي والفني، وتنمية المواهب، وتنظيم الفعاليات التي تسهم في نشر الوعي الفني.
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="about-img text-center">
-                            <img src="" width="500" alt="">
+                            <img src="https://img.freepik.com/free-vector/bookmarks-concept-illustration_114360-3316.jpg?w=740&t=st=1719993730~exp=1719994330~hmac=1c85bb73916219dcf5e959f0dec058757ad73c19704085e7424a93638850cd13" width="500" alt="">
                         </div>
                     </div>
                 @endif
@@ -306,6 +308,31 @@
                         </div>
                     </div>
                 @elseif ($association->name === 'اللجنة الفنية')
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img src="https://img.freepik.com/free-vector/task-concept-illustration_114360-3578.jpg?w=740&t=st=1719993847~exp=1719994447~hmac=02bc69f5c446262e46ab225efd8f620399f1b815ba45acfbfb2f9b1b62c4772a" width="500" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">الرسالة و الأهداف</h2>
+                            <p class="fs-5 fw-bold">
+                                رسالة اللجنة الفنية هي إحياء التراث الثقافي والفني النوبي، وتعزيز الوعي الثقافي والفني في المجتمع، وتنمية المواهب الفنية لدى الأعضاء، من خلال تنظيم الفعاليات والأنشطة التي تسهم في نشر الثقافة والفنون النوبية والمحافظة عليها.
+                            </p>
+                            <p class="fs-5 fw-bold">
+                                <ul>
+                                    <li>تنمية المواهب الفنية</li>
+                                    <li>إحياء التراث النوبي</li>
+                                    <li>التعاون مع الفرق الفنية</li>
+                                    <li>تعزيز الوعي الثقافي والفني</li>
+                                    <li>تنمية المواهب الفنية</li>
+                                    <li>تنظيم الفعاليات الفنية</li>
+                                    <li>تقديم الدعم الفني</li>
+                                    <li>التعاون الفني</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
                 @endif
             </div>
             <div class="row align-items-center justify-content-center">
@@ -489,6 +516,31 @@
                         </div>
                     </div>
                 @elseif ($association->name === 'اللجنة الفنية')
+                    <div class="col-lg-6">
+                        <div class="about-details" dir="rtl">
+                            <h2 class="details-title text-center mb-4">الرؤية و المهام</h2>
+                            <p class="fs-5">
+                                رؤية اللجنة الفنية في جمعية أدندان الخيرية النوبية هي أن تكون منارة للإبداع الفني والثقافي، تسعى إلى إحياء التراث النوبي والمحافظة عليه، وتعمل على تعزيز الوعي الثقافي والفني في المجتمع. تهدف اللجنة إلى خلق بيئة تحفّز على الابتكار والتعبير الفني، وتساهم في بناء جيل واعٍ يعتز بتراثه وينمي مهاراته الفنية.
+                            </p>
+                            <p class="fs-5">
+                                <ul>
+                                    <li>ورش العمل الفنية</li>
+                                    <li>إحياء المناسبات التراثية</li>
+                                    <li>التعاون مع الفنانين والمثقفين</li>
+                                    <li>تنظيم الأنشطة الفنية</li>
+                                    <li>تقديم الدعم الفني</li>
+                                    <li>إدارة وتطوير المواهب</li>
+                                    <li>إنتاج المواد الفنية</li>
+                                    <li>إحياء الفنون التقليدية</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-img text-center">
+                            <img src="https://img.freepik.com/free-vector/data-analysis-concept-illustration_114360-8073.jpg?w=740&t=st=1719993885~exp=1719994485~hmac=b1d5e86fa21dc8b2402a385595905229d7fe0582f84f4c3700fadf6d12b22e2b" width="500" alt="">
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>
