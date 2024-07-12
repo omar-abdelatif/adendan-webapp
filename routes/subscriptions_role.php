@@ -30,7 +30,7 @@ Route::prefix('admin/subscriptions')->group(function () {
             Route::get('reports/search', 'search')->name('subscriptionRole.reports.search');
             Route::get('reports/all', 'index')->name('subscriptionRole.reports.subscriptions');
             Route::get('reports/location', 'locations')->name('subscriptionRole.reports.location');
-            Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
+            Route::get('reports/bank', 'bankTransactions')->name('subscriptionRole.bankTransactios');
             Route::get('reports/associates', 'associates')->name('subscriptionRole.reports.associates');
             Route::get('reports/donations', 'outerdonations')->name('subscriptionRole.reports.donations');
             Route::get('reports/indebtedness', 'indebtedness')->name('subscriptionRole.reports.indebtedness');
