@@ -145,7 +145,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('bankTransactios')}}">
+                                    <a href="{{route('subscriptionRole.bankTransactios')}}">
                                         <svg class="stroke-icon">
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                         </svg>
@@ -164,7 +164,7 @@
                             </a>
                         </li>
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="{{route('news.all')}}">
+                            <a class="sidebar-link sidebar-title" href="{{route('mediaRole.news.all')}}">
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                                 </svg>
@@ -172,7 +172,7 @@
                             </a>
                         </li>
                         <li class="sidebar-list">
-                            <a href="{{route('workers.all')}}" class="sidebar-link sidebar-title">
+                            <a href="{{route('mediaRole.workers.all')}}" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                                 </svg>
@@ -180,7 +180,7 @@
                             </a>
                         </li>
                         <li class="sidebar-list">
-                            <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
+                            <a href="{{route('mediaRole.tomb.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-solid fa-tombstone-blank text-muted fs-5"></i>
                                 <span>المقابر</span>
                             </a>
