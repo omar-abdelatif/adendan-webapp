@@ -43,10 +43,10 @@ class LoginController extends Controller
         $url = '';
         if ($request->user()->role === 'subscriptions') {
             $url = 'admin/subscriptions/dashboard';
-        } elseif ($request->user()->role === 'vendor') {
-            $url = 'vendor/dashboard';
+        } elseif ($request->user()->role === 'media') {
+            $url = 'media/dashboard/main';
         } else {
-            $url = 'admin/dashboard';
+            $url = 'admin/dashboard/main';
         }
         $notification = [
             'message' => "تم تسجيل الدخول",

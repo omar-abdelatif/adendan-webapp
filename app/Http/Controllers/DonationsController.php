@@ -94,7 +94,7 @@ class DonationsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function donationsOnSubscribers(Request $request)
+    public function donationsOnSubscribers(Request $request) //! تبرعات على الأعضاء
     {
         $validated = $request->validate(['donation_category' => 'required',
             'delay_amount' => 'required'
@@ -120,7 +120,7 @@ class DonationsController extends Controller
         }
         return redirect()->back()->withErrors($validated);
     }
-    public function payOldDonation(Request $request)
+    public function payOldDonation(Request $request) //! متأخرات التبرعات
     {
         $memberId = $request->member_id;
         $validated = $request->validate([
@@ -258,7 +258,7 @@ class DonationsController extends Controller
         }
         return back()->withErrors($validated);
     }
-    public function payDelayDonation(Request $request)
+    public function payDelayDonation(Request $request) //! مديونية التبرعات
     {
         $memberId = $request->member_id;
         $validated = $request->validate([

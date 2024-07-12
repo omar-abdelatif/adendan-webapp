@@ -26,10 +26,12 @@ Auth::routes();
 Route::view('login', 'auth.login');
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
-        Route::controller(HomeController::class)->group(function () {
-            Route::get('dashboard', 'index')->name('home');
-        });
         Route::prefix('dashboard')->group(function () {
+            Route::controller(HomeController::class)->group(function () {
+                Route::get('main', 'index')->name('home');
+            });
+        });
+        Route::prefix('users')->group(function () {
             Route::controller(UserController::class)->group(function () {
                 Route::get('profile', 'index')->name('user.profile');
                 Route::post('update_profile', 'update')->name('user.update');
@@ -39,16 +41,18 @@ Route::prefix('admin')->group(function () {
                 Route::post('user/update', 'updateUser')->name('newuser.update');
             });
         });
-        Route::controller(NewsController::class)->group(function () {
-            Route::get('news/all', 'index')->name('news.all');
-            Route::post('news/store_news', 'storeNews')->name('news.store');
-            Route::get('news/delete_news/{id}', 'destroyNews')->name('news.destroy');
-            Route::post('news/update_news', 'updateNews')->name('news.update');
-            Route::get('news/all_news/all_thumbs/{id}', 'showThumbnails')->name('show.thumbs');
-            Route::get('news/delete_single_thumbs/{id}', 'deleteSingleImage')->name('thumbs.delete');
-            Route::get('news/delete_video/{id}', 'deleteVideo')->name('video.delete');
-            Route::post('update_video', 'updateVideo')->name('video.update');
-            Route::post('store_video/{id}', 'storeVideo')->name('video.store');
+        Route::prefix('news')->group(function () {
+            Route::controller(NewsController::class)->group(function () {
+                Route::get('all', 'index')->name('news.all');
+                Route::post('store_news', 'storeNews')->name('news.store');
+                Route::get('delete_news/{id}', 'destroyNews')->name('news.destroy');
+                Route::post('update_news', 'updateNews')->name('news.update');
+                Route::get('all_news/all_thumbs/{id}', 'showThumbnails')->name('show.thumbs');
+                Route::get('delete_single_thumbs/{id}', 'deleteSingleImage')->name('thumbs.delete');
+                Route::get('delete_video/{id}', 'deleteVideo')->name('video.delete');
+                Route::post('update_video', 'updateVideo')->name('video.update');
+                Route::post('store_video/{id}', 'storeVideo')->name('video.store');
+            });
         });
         Route::controller(TombsController::class)->group(function () {
             Route::get('tombs/all', 'index')->name('tomb.all');

@@ -43,7 +43,7 @@
                                     <select name="role" class="form-select text-muted" id="role">
                                         <option selected disabled>الدور</option>
                                         <option value="admin">Admin</option>
-                                        <option value="subscription">Subscription</option>
+                                        <option value="subscriptions">Subscriptions</option>
                                         <option value="media">Media</option>
                                     </select>
                                     <p class="required d-none text-danger mb-0" id="roleReq">هذا الحقل مطلوب</p>

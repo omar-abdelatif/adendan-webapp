@@ -18,9 +18,9 @@ class Role
     {
         if ($request->user() && $request->user()->role !== $role) {
             if ($request->user()->role === 'subscriptions') {
-                return redirect()->route('subscriptionRole.index');
+                return redirect(RouteServiceProvider::SUBSCRIPTIONS);
             } elseif ($request->user()->role === 'media') {
-                return redirect()->route('admin.dashboard');
+                return redirect(RouteServiceProvider::MEDIA);
             } else {
                 return redirect(RouteServiceProvider::HOME);
             }

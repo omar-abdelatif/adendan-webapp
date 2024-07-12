@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nickname')->nullable();
             $table->bigInteger('ssn')->unique();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('educational_qualification')->nullable();
             $table->date('qualification_date')->nullable();
             $table->string('job')->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->bigInteger('job_tel')->nullable();
             $table->string('job_address')->nullable();
             $table->string('home_tel')->nullable();
-            $table->string('marital_status')->nullable();
+            $table->string('martial_status')->nullable();
             $table->date('birthdate');
             $table->bigInteger('mobile_no')->unique();
             $table->tinyInteger('status')->default(0);

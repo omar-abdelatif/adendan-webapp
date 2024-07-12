@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('delays', function (Blueprint $table) {
             $table->renameColumn('amount', 'paied');
-            $table->renameColumn('delay_period', 'remaing');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('delays', function (Blueprint $table) {
             $table->renameColumn('paied', 'amount');
-            $table->renameColumn('remaing', 'delay_period');
         });
     }
 };
