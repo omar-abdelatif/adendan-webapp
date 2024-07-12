@@ -156,7 +156,7 @@
                         </li>
                     @elseif ($user->role === 'media')
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title" href="{{ route('home') }}">
+                            <a class="sidebar-link sidebar-title" href="{{ route('mediaRole.index') }}">
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg>
@@ -169,22 +169,6 @@
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                                 </svg>
                                 <span>الأخبار</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-list">
-                            <a href="{{route('board.all')}}" class="sidebar-link sidebar-title">
-                                <svg class="stroke-icon">
-                                    <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
-                                </svg>
-                                <span>مجلس الإدارة</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-list">
-                            <a href="{{route('association.all')}}" class="sidebar-link sidebar-title">
-                                <svg class="stroke-icon">
-                                    <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                </svg>
-                                <span>لجان الجمعية</span>
                             </a>
                         </li>
                         <li class="sidebar-list">

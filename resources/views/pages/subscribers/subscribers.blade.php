@@ -39,13 +39,29 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <div class="dropdown-menu text-center py-2 px-3" style="left: 0px;top: 40px;" aria-labelledby="btnGroupVerticalDrop1">
-            {{-- ! Insert Single Subscriber ! --}}
-            <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#add_subscriber">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة مشترك جديد</span>
-            </button>
-            {{-- ! Insert Bulk Subscribers && Insert Bulk Delay ! --}}
             @if ($user->role === 'subscriptions')
+                {{-- ! Insert Single Subscriber ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#add_subscriber">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مشترك جديد</span>
+                </button>
+                {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مديونية على كل الأعضاء</span>
+                </button>
+            @else
+                {{-- ! Insert Single Subscriber ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#add_subscriber">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مشترك جديد</span>
+                </button>
+                {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مديونية على كل الأعضاء</span>
+                </button>
+                {{-- ! Insert Bulk Subscribers && Insert Bulk Delay ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2 d-none" data-bs-toggle="modal" data-bs-target="#bulk_upload">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة مشتركين بالجملة</span>
@@ -54,52 +70,17 @@
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة متأخرات بالجملة</span>
                 </button>
-            @elseif ($user->role === 'media')
-                <button type="button" class="btn btn-success px-2 py-1 mb-2 d-none" data-bs-toggle="modal" data-bs-target="#bulk_upload">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مشتركين بالجملة</span>
-                </button>
+                {{-- ! Insert Bulk Donations ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات بالجملة</span>
+                    <span>إضافة متأخرات التبرعات بالجملة</span>
                 </button>
-            @else
-                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_upload">
+                {{-- ! Insert Bulk Donations On Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مشتركين بالجملة</span>
-                </button>
-                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات بالجملة</span>
+                    <span>إضافة مدينوية التبرعات على كل المشتركين</span>
                 </button>
             @endif
-            {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
-            <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة مديونية على كل الأعضاء</span>
-            </button>
-            {{-- ! Insert Bulk Donations ! --}}
-            @if ($user->role === 'subscriptions')
-                <button type="button" class="btn btn-success px-2 py-1 mb-2 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات التبرعات بالجملة</span>
-                </button>
-            @elseif ($user->role === 'media')
-                <button type="button" class="btn btn-success px-2 py-1 mb-2 d-none" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات التبرعات بالجملة</span>
-                </button>
-            @else
-                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات التبرعات بالجملة</span>
-                </button>
-            @endif
-            {{-- ! Insert Bulk Donations On Subscribers ! --}}
-            <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
-                <i class="icofont icofont-plus fw-bold"></i>
-                <span>إضافة مدينوية التبرعات على كل المشتركين</span>
-            </button>
         </div>
     </div>
     {{-- ! Insert Single Subscriber ! --}}
@@ -240,7 +221,7 @@
                                                 </label>
                                                 <select name="martial_status" id="martial_status" class="form-select">
                                                     <option selected disabled>الحالة الإجتماعية</option>
-                                                    <option value="أعزف">أعزف</option>
+                                                    <option value="أعزب">أعزب</option>
                                                     <option value="متزوج">متزوج</option>
                                                     <option value="أرمل">أرمل</option>
                                                 </select>
@@ -323,7 +304,7 @@
                                             @if (!is_null($newMemberId))
                                                 <input type="number" name="member_id" class="form-control text-white" value="{{$newMemberId}}" placeholder="رقم العضوية" id="validationMemberId" readonly>
                                             @else
-                                                <input type="number" name="member_id" class="form-control text-white" placeholder="رقم العضوية" id="validationMemberId" readonly>
+                                                <input type="number" name="member_id" class="form-control text-white" value=1 placeholder="رقم العضوية" id="validationMemberId" readonly>
                                             @endif
                                         </div>
                                         <div class="col-lg-12">
@@ -413,7 +394,7 @@
         </div>
     </div>
     {{-- ! Insert Bulk Delay With Excel ! --}}
-    {{-- <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -429,7 +410,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- ! Insert Bulk Donations Modal ! --}}
     <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -497,12 +478,10 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <?php $i =1 ?>
                         <div class="table-responsible">
                             <table id="table" class="table table-hover align-middle text-center table-hover" data-order='[[0, "asc"]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-muted text-center">#</th>
                                         <th class="text-muted text-center">رقم العضوية</th>
                                         <th class="text-muted text-center">الإسم</th>
                                         <th class="text-muted text-center">حالة الإشتراك</th>
@@ -512,7 +491,6 @@
                                 <tbody>
                                     @foreach ($members as $member)
                                         <tr>
-                                            <td class="text-muted text-center">{{$i++}}</td>
                                             <td class="text-muted text-center">{{$member->member_id}}</td>
                                             <td class="text-muted text-center">{{$member->name}}</td>
                                             <td class="text-muted text-center">
@@ -533,47 +511,17 @@
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                         {{-- ! History ! --}}
-                                                        @if ($user->role === 'subscriptions')
-                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscriptionRole.subscription.history',$member->id)}}>
-                                                                <i class="icofont icofont-eye"></i>
-                                                            </a>
-                                                        @elseif ($user->role === 'media')
-                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscription.history',$member->id)}}>
-                                                                <i class="icofont icofont-eye"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="btn btn-primary px-2 py-1" title="الإشتراكات السابقة" role="button" href={{route('subscription.history',$member->id)}}>
-                                                                <i class="icofont icofont-eye"></i>
-                                                            </a>
-                                                        @endif
+                                                        <a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href={{route('subscriptionRole.subscription.history',$member->id)}}>
+                                                            <i class="icofont icofont-eye"></i>
+                                                        </a>
                                                         {{-- ! Edit Member ! --}}
-                                                        @if ($user->role === 'subscriptions')
-                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
-                                                                <i class="icofont icofont-ui-edit"></i>
-                                                            </a>
-                                                        @elseif ($user->role === 'media')
-                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
-                                                                <i class="icofont icofont-ui-edit"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="btn btn-warning px-2 py-1" title="تعديل البيانات" role="button" href={{route('subscriber.details',$member->id)}}>
-                                                                <i class="icofont icofont-ui-edit"></i>
-                                                            </a>
-                                                        @endif
+                                                        <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
+                                                            <i class="icofont icofont-ui-edit"></i>
+                                                        </a>
                                                         {{-- ! Donation History ! --}}
-                                                        @if ($user->role === 'subscriptions')
-                                                            <a href="{{route('subscriptionRole.donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
-                                                                <i class="fa-solid fa-book-heart"></i>
-                                                            </a>
-                                                        @elseif ($user->role === 'media')
-                                                            <a href="{{route('donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
-                                                                <i class="fa-solid fa-book-heart"></i>
-                                                            </a>
-                                                        @else
-                                                            <a href="{{route('donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
-                                                                <i class="fa-solid fa-book-heart"></i>
-                                                            </a>
-                                                        @endif
+                                                        <a href="{{route('subscriptionRole.donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
+                                                            <i class="fa-solid fa-book-heart"></i>
+                                                        </a>
                                                         {{-- ! Donation ! --}}
                                                         <button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_{{$member->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>

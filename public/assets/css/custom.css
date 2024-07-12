@@ -227,5 +227,5 @@ html[dir=rtl] .page-wrapper.compact-wrapper .page-body-wrapper .sidebar-wrapper 
 }
 .dropdown-menu.show {
     display: inline-flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }

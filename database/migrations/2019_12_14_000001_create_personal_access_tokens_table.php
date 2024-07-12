@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
+            $table->engine = 'MyISAM';
             $table->id();
             $table->morphs('tokenable');
             $table->string('name');
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
         });
     }
 

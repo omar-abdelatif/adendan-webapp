@@ -9,7 +9,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-start">
-            <div class="col-xxl-4 col-sm-6 box-col-6">
+            <div class="col-lg-6 box-col-6">
                 <div class="card profile-box">
                     <div class="card-body">
                         <div class="media media-wrapper justify-content-between">
