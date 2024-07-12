@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('member_id');
             $table->integer('subscription_cost');
             $table->integer('invoice_no');
-            $table->date('pay_date');
+            $table->date('pay_date')->nullable();
             $table->integer('subscribers_id')->index()->references('id')->on('subscribers')->onDelete('cascade');
             $table->year('period');
             $table->string('delays')->nullable();
