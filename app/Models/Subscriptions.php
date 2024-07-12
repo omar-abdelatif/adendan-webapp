@@ -16,9 +16,7 @@ class Subscriptions extends Model
         'period',
         'delays',
         'payment_type',
-        'delays_period',
         'subscribers_id',
-        'pay_date'
     ];
     public function subscribers()
     {
