@@ -537,15 +537,10 @@
                                                                 <i class="fa-solid fa-book-heart"></i>
                                                             </a>
                                                         @endif
-
                                                         {{-- ! Donation ! --}}
                                                         <button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_{{$member->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
                                                         </button>
-                                                        {{-- ! Add Subscription ! --}}
-                                                        {{-- <button type="button" class="btn btn-success fw-bold px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subs_{{$member->id}}">
-                                                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                                                        </button> --}}
                                                     </div>
                                                 </div>
                                                 <div class="modal fade" id="newdonating_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -579,9 +574,6 @@
                                                                                     <option selected disabled>-- إختر نوع التبرع المادي --</option>
                                                                                     <option value="تبرع تنمية">تبرع تنمية</option>
                                                                                     <option value="تبرع إنتساب">تبرع إنتساب</option>
-                                                                                    <option value="تبرع زكاة مال">تبرع زكاة مال</option>
-                                                                                    <option value="تبرع زكاة فطر">تبرع زكاة فطر</option>
-                                                                                    <option value="تبرع كفالة أيتام">تبرع كفالة أيتام</option>
                                                                                 </select>
                                                                                 <input type="text" class="form-control mt-3 d-none" placeholder="نوع التبرع الأخر" data-donation-id="{{$member->id}}" id="otherDonation" name="other_donation" disabled>
                                                                                 <input type="number" class="form-control mt-3 d-none" placeholder="المبلغ" data-donation-id="{{$member->id}}" id="otherDonation" name="amount" disabled>
@@ -597,50 +589,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- ! Add Subscription ! --}}
-                                                {{-- <div class="modal fade" id="add_subs_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد إشتراك أو مديونية للعضو {{$member->name}}</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action={{route('subscription.store')}} method="post">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="col-lg-12">
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">رقم العضوية</label>
-                                                                                <input type="number" class="form-control text-muted" value="{{$member->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
-                                                                            </div>
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">رقم الإيصال</label>
-                                                                                <input type="number" class="form-control text-muted" name="invoice_no" placeholder="رقم الإيضال">
-                                                                            </div>
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="payment_type" class="text-muted">نوع المدفوعات</label>
-                                                                                <select name="payment_type" class="form-select text-muted" id="payment_type" data-payment-id="{{$member->id}}">
-                                                                                    <option selected>إختر نوع المدفوعات</option>
-                                                                                    <option value="إشتراك">إشتراك</option>
-                                                                                    <option value="متأخرات">متأخرات</option>
-                                                                                </select>
-                                                                                <input type="number" class="form-control text-muted d-none mt-3" id="subscriptionCost" name="subscription_cost" data-payment-id="{{$member->id}}" placeholder="أدخل مبلغ الإشتراك">
-                                                                                <input type="text" class="form-control text-muted d-none mt-3" id="subscriptionPeriod" name="period" data-payment-id="{{$member->id}}" placeholder="مدة الإشتراك" min="2000" max="3000">
-                                                                                <input type="number" class="form-control text-muted d-none mt-3" id="delayAmount" name="delays_period" data-payment-id="{{$member->id}}" placeholder="أدخل مبلغ المديونية">
-                                                                                <input type="number" class="form-control text-muted mt-3 d-none" id="delayPeriod" name="delays" data-payment-id="{{$member->id}}" id="delayPeriod" placeholder="مدة المديونية">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                            <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                             </td>
                                         </tr>
                                     @endforeach

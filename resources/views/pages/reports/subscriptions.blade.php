@@ -13,7 +13,7 @@
             <div class="col-lg-12">
                 <h3 class="light-card balance-card mb-4 widget-hover w-50 mx-auto d-flex justify-content-center bg-primary rounded-pill">
                     <i class="fas fa-dollar-sign" style="font-size:30px;"></i>
-                    تـقرير الإشـتراكـات الـسنوي
+                    تـقرير الإشـتراكـات
                 </h3>
             </div>
             <div class="col-xl-4 box-col-4">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">1800</h5>
+                            <h5 class="mb-1">{{$count}}</h5>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">1000</h5>
+                            <h5 class="mb-1">{{$activeSubscribers}}</h5>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">800</h5>
+                            <h5 class="mb-1">{{$nonActiveSubscribers}}</h5>
                         </div>
                     </div>
                 </div>
