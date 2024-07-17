@@ -1,12 +1,21 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل التبرعات')
 @section('breadcrumb-title')
     <h3>كل التبرعات الخاصة بالمتبرع {{$donators->name}}</h3>
 @endsection
 @section('breadcrumb-items')
-    <li class="breadcrumb-item">
-        <a href="{{route('donators.all')}}">كل المتبرعين</a>
-    </li>
+    @if ($user->role === 'subscriptions')
+        <li class="breadcrumb-item">
+            <a href="{{route('subscriptionRole.donators.all')}}">كل المتبرعين</a>
+        </li>
+    @else
+        <li class="breadcrumb-item">
+            <a href="{{route('donators.all')}}">كل المتبرعين</a>
+        </li>
+    @endif
     <li class="breadcrumb-item active">التبرعات السابقة</li>
 @endsection
 @section('content')

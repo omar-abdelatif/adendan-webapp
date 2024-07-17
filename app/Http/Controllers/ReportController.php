@@ -19,8 +19,11 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $subscribers = Subscribers::with('subscriptions')->get();
+        $count = $subscribers->count();
+        $activeSubscribers = $subscribers->where('status', 1)->count();
+        $nonActiveSubscribers = $subscribers->where('status', 0)->count();
         $subscriptions = $this->subscriptionFilter();
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions'));
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers'));
     }
     public function subscriptionFilter()
     {

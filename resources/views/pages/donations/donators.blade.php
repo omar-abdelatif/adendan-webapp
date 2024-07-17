@@ -101,7 +101,7 @@
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                         {{-- ! Donation ! --}}
-                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0" data-bs-toggle="modal" title="تبرع جديد" data-bs-target="#donating_{{$donator->id}}">
+                                                        <button type="button" class="btn btn-info px-2 py-1 ms-0 me-1" data-bs-toggle="modal" title="تبرع جديد" data-bs-target="#donating_{{$donator->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
                                                         </button>
                                                         {{-- ! Update ! --}}
@@ -115,10 +115,6 @@
                                                         {{-- ! Donation History ! --}}
                                                         @if ($user->role === 'subscriptions')
                                                             <a href="{{route('subscriptionRole.outer_donations.history', $donator->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
-                                                                <i class="fa-solid fa-book-heart"></i>
-                                                            </a>
-                                                        @elseif ($user->role === 'media')
-                                                            <a href="{{route('outer_donations.history', $donator->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1">
                                                                 <i class="fa-solid fa-book-heart"></i>
                                                             </a>
                                                         @else
