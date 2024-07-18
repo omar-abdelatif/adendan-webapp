@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                 // Check the role of the authenticated user
                 $user = Auth::user();
                 if ($user->role === 'admin') {
-                    return redirect()->route('admin.dashboard');
+                    return redirect()->route('home');
                 } elseif ($user->role === 'subscriptions') {
                     return redirect()->route('subscriptionRole.index');
                 } else {
