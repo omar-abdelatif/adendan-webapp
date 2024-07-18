@@ -22,8 +22,9 @@ class ReportController extends Controller
         $count = $subscribers->count();
         $activeSubscribers = $subscribers->where('status', 1)->count();
         $nonActiveSubscribers = $subscribers->where('status', 0)->count();
+        $pendingSubscribers = $subscribers->where('status', 2)->count();
         $subscriptions = $this->subscriptionFilter();
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers'));
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers'));
     }
     public function subscriptionFilter()
     {
@@ -44,12 +45,12 @@ class ReportController extends Controller
     {
         $keyword = $request->input('search');
         $jobs = collect();
-        if ($keyword === '') {
-            $message = 'Please enter a valid job name.';
+        if ($keyword == "") {
+            $message = "برجاء إدخال إسم وظيفة.";
         } else {
             $jobs = Subscribers::where('job', 'like', "%$keyword%")->get();
             if ($jobs->isEmpty()) {
-                $message = 'No results found for "' . $keyword . '".';
+                $message = 'لا توجد نتائج بحث عن "' . $keyword . '".';
             }
         }
         return [$keyword, $jobs, $message ?? null];

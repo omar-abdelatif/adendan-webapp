@@ -54,48 +54,29 @@ class SubscribersController extends Controller
             $pImg = time() . '.' . $filename->getClientOriginalExtension();
             $destinationPath = public_path('assets/images/subscribers/avatar/');
             $filename->move($destinationPath, $pImg);
-            $store = Subscribers::create([
-                'member_id' => $request['member_id'],
-                'nickname' => $request['nickname'],
-                'name' => $request['name'],
-                'ssn' => $request['ssn'],
-                'address' => $request['address'],
-                'birthdate' => $request['birthdate'],
-                'mobile_no' => $request['mobile_no'],
-                'job' => $request['job'],
-                'job_tel' => $request['job_tel'],
-                'home_tel' => $request['home_tel'],
-                'job_address' => $request['job_address'],
-                'job_destination' => $request['job_destination'],
-                'martial_status' => $request['martial_status'],
-                'membership_type' => $request['membership_type'],
-                'educational_qualification' => $request['educational_qualification'],
-                'qualification_date' => $request['qualification_date'],
-                'img' => $pImg,
-                'id_img' => $idImg,
-                'status' => 1
-            ]);
-        } else {
-            $store = Subscribers::create([
-                'member_id' => $request['member_id'],
-                'nickname' => $request['nickname'],
-                'name' => $request['name'],
-                'ssn' => $request['ssn'],
-                'address' => $request['address'],
-                'birthdate' => $request['birthdate'],
-                'mobile_no' => $request['mobile_no'],
-                'job' => $request['job'],
-                'job_tel' => $request['job_tel'],
-                'job_address' => $request['job_address'],
-                'job_destination' => $request['job_destination'],
-                'home_tel' => $request['home_tel'],
-                'martial_status' => $request['martial_status'],
-                'membership_type' => $request['membership_type'],
-                'educational_qualification' => $request['educational_qualification'],
-                'qualification_date' => $request['qualification_date'],
-                'status' => 1
-            ]);
         }
+        //! Insert The Subscriber
+        $store = Subscribers::create([
+            'member_id' => $request['member_id'],
+            'nickname' => $request['nickname'],
+            'name' => $request['name'],
+            'ssn' => $request['ssn'],
+            'address' => $request['address'],
+            'birthdate' => $request['birthdate'],
+            'mobile_no' => $request['mobile_no'],
+            'job' => $request['job'],
+            'job_tel' => $request['job_tel'],
+            'home_tel' => $request['home_tel'],
+            'job_address' => $request['job_address'],
+            'job_destination' => $request['job_destination'],
+            'martial_status' => $request['martial_status'],
+            'membership_type' => $request['membership_type'],
+            'educational_qualification' => $request['educational_qualification'],
+            'qualification_date' => $request['qualification_date'],
+            'img' => $pImg ?? null,
+            'id_img' => $idImg ?? null,
+            'status' => 1
+        ]);
         if ($store) {
             $subscriberId = $store->id;
             Subscriptions::create([
