@@ -26,12 +26,10 @@
                         </div>
                         <div class="table-responsive">
                             <div class="searchResultTitle text-center mb-5">
-                                @if (isset($keyword))
-                                    @if ($jobs->isNotEmpty())
-                                        <h1>نتائج البحث عن "{{ $keyword }}"</h1>
-                                    @elseif (isset($message))
-                                        <h1>{{ $message }}</h1>
-                                    @endif
+                                @if (isset($keyword) && $jobs->isNotEmpty())
+                                    <h1>نتائج البحث عن "{{ $keyword }}"</h1>
+                                @else
+                                    <h1>{{ $message }}</h1>
                                 @endif
                             </div>
                             @if (isset($keyword) && $jobs->isNotEmpty())
