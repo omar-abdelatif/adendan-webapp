@@ -207,7 +207,7 @@ class SubscribersController extends Controller
             if ($request->status) {
                 $member->update(['status' => 2]);
             } else {
-                $member->update(['status' => 0]);
+                $member->update(['status' => 1]);
             }
             if ($update) {
                 $notificationSuccess = [
