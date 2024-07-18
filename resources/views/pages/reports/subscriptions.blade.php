@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 box-col-12">
+            {{-- <div class="col-xl-12 box-col-12">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -145,14 +145,6 @@
                                             <i class="fas fa-calendar-week"></i>
                                             رقـم الموبايل
                                         </th>
-                                        {{-- <th class="text-center">
-                                            <i class="fas fa-question-circle"></i>
-                                            السنه
-                                        </th>
-                                        <th class="text-center">
-                                            <i class="fas fa-dollar-sign"></i>
-                                            المبلغ
-                                        </th> --}}
                                         <th class="text-center">
                                             <i class="fa-duotone fa-gear"></i>
                                             Action
@@ -177,95 +169,37 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="horizontal-wizard-wrapper">
-                                                                    <div class="row g-3">
-                                                                        <div class="col-12 main-horizontal-header">
-                                                                            <div class="nav nav-pills horizontal-options justify-content-center" id="horizontal-wizard-tab" role="tablist" aria-orientation="vertical">
-                                                                                <a class="nav-link active" id="wizard-info-tab_{{$subscriber->id}}" data-bs-toggle="pill" href="#wizard-info_{{$subscriber->id}}" role="tab" aria-controls="wizard-info" aria-selected="true">
-                                                                                    <div class="horizontal-wizard">
-                                                                                        <div class="stroke-icon-wizard">
-                                                                                            <i class="fa fa-user text-white"></i>
-                                                                                        </div>
-                                                                                        <div class="horizontal-wizard-content">
-                                                                                            <h6 class="text-white">بيانات شخصية</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
-                                                                                <a class="nav-link" id="bank-wizard-tab_{{$subscriber->id}}" data-bs-toggle="pill" href="#bank-wizard_{{$subscriber->id}}" role="tab" aria-controls="bank-wizard" aria-selected="false" tabindex="-1">
-                                                                                    <div class="horizontal-wizard">
-                                                                                        <div class="stroke-icon-wizard">
-                                                                                            <i class="fa fa-chain-broken text-white"></i>
-                                                                                        </div>
-                                                                                        <div class="horizontal-wizard-content">
-                                                                                            <h6 class="text-white">تفاصيل الإشتراك</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <div class="tab-content dark-field" id="horizontal-wizard-tabContent">
-                                                                                <div class="tab-pane fade show active" id="wizard-info_{{$subscriber->id}}" role="tabpanel" aria-labelledby="wizard-info-tab">
-                                                                                    <form class="row g-3 needs-validation" novalidate="">
-                                                                                        <div class="col-xl-6">
-                                                                                            <label class="form-label text-white" for="customLastname">
-                                                                                                الرقم القومي
-                                                                                            </label>
-                                                                                            <input class="form-control" value="{{$subscriber->ssn}}" type="text" placeholder="الرقم القومي" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-xl-6">
-                                                                                            <label class="form-label text-white">
-                                                                                                الرقم المحمول
-                                                                                            </label>
-                                                                                            <input class="form-control" type="number" value="{{$subscriber->mobile_no}}" placeholder="الرقم المحمول" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-xl-6">
-                                                                                            <label class="form-label text-white" for="custom-zipcode">تاريخ الميلاد</label>
-                                                                                            <input class="form-control" type="text" value="{{$subscriber->birthdate}}" readonly>
-                                                                                        </div>
-                                                                                        <div class="col-xl-6">
-                                                                                            <label class="form-label text-white" for="customContact1">العنوان</label>
-                                                                                            <input class="form-control" type="text" value="{{$subscriber->address}}" readonly>
-                                                                                        </div>
-                                                                                    </form>
+                                                                <div class="table-responsive">
+                                                                    <table class="table display align-middle text-center table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center">قيمة الإشتراك</th>
+                                                                                <th class="text-center">رقم الإيضال</th>
+                                                                                <th class="text-center">تاريخ الدفع</th>
+                                                                                <th class="text-center">فترة الإشتراك</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @if ($subscriber->subscriptions->count())
+                                                                                @foreach ($subscriber->subscriptions as $subscription)
+                                                                                    <tr>
+                                                                                        <td>{{$subscription->subscription_cost}}</td>
+                                                                                        <td>{{$subscription->invoice_no}}</td>
+                                                                                        <td>{{$subscription->created_at->format('Y-m-d')}}</td>
+                                                                                        <td>{{$subscription->period}}</td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            @else
+                                                                            <tr>
+                                                                                <div class="col-lg-12">
+                                                                                    <td colspan="4">
+                                                                                        <h1 class="text-center text-white">لا توجد إشتراكات سابقة لهذا المشترك</h1>
+                                                                                    </td>
                                                                                 </div>
-                                                                                <div class="tab-pane fade" id="bank-wizard_{{$subscriber->id}}" role="tabpanel" aria-labelledby="bank-wizard-tab">
-                                                                                    <div class="table-responsive">
-                                                                                        <table class="table display align-middle text-center table-hover">
-                                                                                            <thead>
-                                                                                                <tr>
-                                                                                                    <th class="text-center">قيمة الإشتراك</th>
-                                                                                                    <th class="text-center">رقم الإيضال</th>
-                                                                                                    <th class="text-center">تاريخ الدفع</th>
-                                                                                                    <th class="text-center">فترة الإشتراك</th>
-                                                                                                </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                                @if ($subscriber->subscriptions->count())
-                                                                                                    @foreach ($subscriber->subscriptions as $subscription)
-                                                                                                        <tr>
-                                                                                                            <td>{{$subscription->subscription_cost}}</td>
-                                                                                                            <td>{{$subscription->invoice_no}}</td>
-                                                                                                            <td>{{$subscription->created_at->format('Y-m-d')}}</td>
-                                                                                                            <td>{{$subscription->period}}</td>
-                                                                                                        </tr>
-                                                                                                    @endforeach
-                                                                                                @else
-                                                                                                <tr>
-                                                                                                    <div class="col-lg-12">
-                                                                                                        <td colspan="4">
-                                                                                                            <h1 class="text-center text-white">لا توجد إشتراكات سابقة لهذا المشترك</h1>
-                                                                                                        </td>
-                                                                                                    </div>
-                                                                                                </tr>
-                                                                                                @endif
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                            </tr>
+                                                                            @endif
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -274,34 +208,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- <tr>
-                                        <td class="text-center"> 5556</td>
-                                        <td class="text-center">عمر السيد</td>
-                                        <td class="text-center">01002154202</td>
-                                        <td class="text-center">
-                                            <strong>2024</strong>
-                                        </td>
-                                        <td class="text-center">
-                                            <h6>
-                                                <span class="badge rounded-pill badge-danger"> 120 ج.م</span>
-                                            </h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"> 5556</td>
-                                        <td class="text-center">طارق محمود</td>
-                                        <td class="text-center">01005658547</td>
-                                        <td class="text-center">
-                                            <strong>2024</strong>
-                                        </td>
-                                        <td class="text-center">
-                                            <h6>
-                                                <span class="badge rounded-pill badge-danger"> 120 ج.م</span>
-                                            </h6>
-                                        </td>
-                                        <td></td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>

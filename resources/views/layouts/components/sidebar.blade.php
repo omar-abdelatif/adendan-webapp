@@ -80,14 +80,14 @@
                                         <span>السكن</span>
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="{{route('subscriptionRole.reports.age')}}">
                                         <svg class="stroke-icon">
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
                                         </svg>
                                         <span>السن</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{route('subscriptionRole.reports.jobs')}}">
                                         <svg class="stroke-icon">
