@@ -11,7 +11,7 @@
                 <i class="status_toggle middle sidebar-toggle" data-feather="grid"></i>
             </div>
         </div>
-        <div class="logo-icon-wrapper text-center mt-3 mb-5 mx-3 p-0">
+        <div class="logo-icon-wrapper text-center mt-3 w-lg-100 p-0" style="width: 100px">
             <a href={{route('home')}}>
                 <img class="img-fluid me-0" src="{{ asset('assets/images/logo/لوجو الجمعية.png') }}" width="70" alt="Logo">
             </a>
