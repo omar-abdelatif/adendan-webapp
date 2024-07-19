@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TombsController;
 use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\MediaRole\MediaRoleController;
 
 Auth::routes();
@@ -44,6 +45,14 @@ Route::prefix('media')->group(function () {
                 Route::post('store', 'storeTomb')->name('mediaRole.tomb.store');
                 Route::get('delete/{id}', 'deleteTomb')->name('mediaRole.tomb.delete');
                 Route::post('update', 'updateTomb')->name('mediaRole.tomb.update');
+            });
+        });
+        Route::prefix('weddings')->group(function () {
+            Route::controller(WeddingController::class)->group(function () {
+                Route::get('all', 'index')->name('mediaRole.weddings.all');
+                Route::post('store', 'weddingStore')->name('mediaRole.weddings.store');
+                Route::get('delete/{id}', 'weddingRemove')->name('mediaRole.weddings.delete');
+                Route::post('update', 'weddingUpdate')->name('mediaRole.weddings.update');
             });
         });
     });
