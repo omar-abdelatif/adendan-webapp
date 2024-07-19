@@ -46,21 +46,6 @@
                 </h3>
             </div>
             <div class="col-xl-4 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="64" height="64" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/external-condo-city-scape-xnimrodx-lineal-color-xnimrodx.png" alt="external-condo-city-scape-xnimrodx-lineal-color-xnimrodx"/>
-                            </div>
-                            <h5 class="mb-0">صيانة مقر</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$donationHeadquartersSum}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-12">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -80,42 +65,27 @@
                     <div class="card-body align-items-center">
                         <div class="widget-content">
                             <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/external-condo-city-scape-xnimrodx-lineal-color-xnimrodx.png" alt="external-condo-city-scape-xnimrodx-lineal-color-xnimrodx"/>
+                            </div>
+                            <h5 class="mb-0">ص.مقر</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">{{$donationHeadquartersSum}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/external-konkapp-outline-color-konkapp/70/external-van-transportation-konkapp-outline-color-konkapp.png" alt="external-van-transportation-konkapp-outline-color-konkapp"/>
                             </div>
                             <h5 class="mb-0">ص.سيارة</h5>
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{$donationDeathCarSum}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="64" height="64" src="https://img.icons8.com/external-bzzricon-flat-bzzricon-studio/64/external-zakat-ramadan-bzzricon-flat-bzzricon-flat-bzzricon-studio.png" alt="external-zakat-ramadan-bzzricon-flat-bzzricon-flat-bzzricon-studio"/>
-                            </div>
-                            <h5 class="mb-0">زكاة مال</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$donationMoneyZakatSum}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="64" height="64" src="https://img.icons8.com/stickers/64/food-donor.png" alt="food-donor"/>
-                            </div>
-                            <h5 class="mb-0">زكاة فطر</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$donationFoodZakatSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -150,36 +120,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="64" height="64" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-kids-modelling-agency-flaticons-lineal-color-flat-icons-3.png" alt="external-kids-modelling-agency-flaticons-lineal-color-flat-icons-3"/>                            </div>
-                            <h5 class="mb-0">كفالة يتيم</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$donationOrphanSum}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="70" height="70" src="https://img.icons8.com/bubbles/70/question-mark.png" alt="question-mark"/>
-                            </div>
-                            <h5 class="mb-0">أخرى</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$donationOtherSum}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-absolute">

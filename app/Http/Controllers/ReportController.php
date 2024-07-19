@@ -104,44 +104,22 @@ class ReportController extends Controller
     public function innerDonations()
     {
         $donations = Donations::get();
-
         $donationMoney = Donations::where('donation_type', 'مادي')->get();
-
-        $donationMoneyZakat = Donations::where('donation_category', 'تبرع زكاة مال')->get();
-        $donationMoneyZakatSum = $donationMoneyZakat->sum('amount');
-
-        $donationFoodZakat = Donations::where('donation_category', 'تبرع زكاة فطر')->get();
-        $donationFoodZakatSum = $donationFoodZakat->sum('amount');
-
-        $donationOther = Donations::where('donation_type', 'أخرى')->get();
-        $donationOtherSum = $donationOther->sum('amount');
-
         $donationDeathCar = Donations::where('other_donation', 'صيانة سيارة الموتى')->get();
         $donationDeathCarSum = $donationDeathCar->sum('amount');
-
         $donationTombs = Donations::where('other_donation', 'المقابر')->get();
         $donationTombsSum = $donationTombs->sum('amount');
-
         $donationHeadquarters = Donations::where('other_donation', 'صيانة المقر')->get();
         $donationHeadquartersSum = $donationHeadquarters->sum('amount');
-
-        $donationOrphan = Donations::where('other_donation', 'كفالة يتيم')->get();
-        $donationOrphanSum = $donationOrphan->sum('amount');
-
         $donationAffiliate = Donations::where('other_donation', 'تبرع انتساب')->get();
         $donationAffiliateSum = $donationAffiliate->sum('amount');
-
         $donationDev = Donations::where('other_donation', 'تبرع تنمية')->get();
         $donationDevSum = $donationDev->sum('amount');
         return view('pages.reports.inner_donations', compact([
             'donations',
-            'donationMoneyZakatSum',
-            'donationFoodZakatSum',
-            'donationOtherSum',
             'donationDeathCarSum',
             'donationTombsSum',
             'donationHeadquartersSum',
-            'donationOrphanSum',
             'donationAffiliateSum',
             'donationDevSum'
         ]));
