@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل الأفراح')
 @section('breadcrumb-title')
@@ -16,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('weddings.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{$user->role === 'admin' ? route('weddings.store') : route('mediaRole.weddings.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -105,7 +108,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('wedding.delete', $wedding->id)}} method="get">
+                                                                <form action={{$user->role === 'admin' ? route('wedding.delete', $wedding->id) : route('mediaRole.wedding.delete', $wedding->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>
@@ -131,7 +134,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{route('weddings.update')}}" method="post" enctype="multipart/form-data">
+                                                                <form action="{{$user->role === 'admin' ? route('weddings.update') : route('mediaRole.weddings.update')}}" method="post" enctype="multipart/form-data">
                                                                     @csrf
                                                                     <div class="row">
                                                                         <input type="hidden" name="id" value="{{$wedding->id}}">
