@@ -1,3 +1,6 @@
+@php
+    $user = Auth::user();
+@endphp
 @extends('layouts.master')
 @section('title', 'كل المقابر')
 @section('breadcrumb-title')
@@ -16,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{route('tomb.store')}} method="post" id="tombForm">
+                    <form action={{$user->role === 'admin' ? route('tomb.store') : route('mediaRole.tomb.store')}} method="post" id="tombForm">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -134,7 +137,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('tomb.update')}} method="post">
+                                                                <form action={{$user->role === 'admin' ? route('tomb.update') : route('mediaRole.tomb.update')}} method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value={{$tomb->id}}>
                                                                     <div class="row">
@@ -190,7 +193,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{route('tomb.delete', $tomb->id)}} method="get">
+                                                                <form action={{$user->role === 'admin' ? route('tomb.delete', $tomb->id) : route('mediaRole.tomb.delete', $tomb->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
