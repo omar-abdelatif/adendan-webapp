@@ -18,6 +18,7 @@ Route::prefix('media')->group(function () {
                 Route::get('main', 'MediaRole')->name('mediaRole.index');
             });
         });
+        //! News Page Routes
         Route::prefix('news')->group(function () {
             Route::controller(NewsController::class)->group(function () {
                 Route::get('all', 'index')->name('mediaRole.news.all');
@@ -31,6 +32,7 @@ Route::prefix('media')->group(function () {
                 Route::post('store_video/{id}', 'storeVideo')->name('mediaRole.video.store');
             });
         });
+        //! Workers Page Routes
         Route::prefix('workers')->group(function () {
             Route::controller(WorkerController::class)->group(function () {
                 Route::get('all', 'index')->name('mediaRole.workers.all');
@@ -39,6 +41,7 @@ Route::prefix('media')->group(function () {
                 Route::post('update', 'update')->name('mediaRole.worker.update');
             });
         });
+        //! Tombs Page Routes
         Route::prefix('tombs')->group(function () {
             Route::controller(TombsController::class)->group(function () {
                 Route::get('all', 'index')->name('mediaRole.tomb.all');
@@ -47,6 +50,7 @@ Route::prefix('media')->group(function () {
                 Route::post('update', 'updateTomb')->name('mediaRole.tomb.update');
             });
         });
+        //! Weddings Page Routes
         Route::prefix('weddings')->group(function () {
             Route::controller(WeddingController::class)->group(function () {
                 Route::get('all', 'index')->name('mediaRole.weddings.all');
