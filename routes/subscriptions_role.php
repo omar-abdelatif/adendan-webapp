@@ -23,19 +23,22 @@ Route::prefix('admin/subscriptions')->group(function () {
             Route::get('dashboard', 'RoleIndex')->name('subscriptionRole.index');
         });
         //! Reports Routes
-        Route::controller(ReportController::class)->group(function () {
-            Route::get('reports/age', 'ages')->name('subscriptionRole.reports.age');
-            Route::get('reports/jobs', 'jobs')->name('subscriptionRole.reports.jobs');
-            Route::get('reports/safe', 'safe')->name('subscriptionRole.reports.safe');
-            Route::get('reports/search', 'search')->name('subscriptionRole.reports.search');
-            Route::get('reports/all', 'index')->name('subscriptionRole.reports.subscriptions');
-            Route::get('reports/location', 'locations')->name('subscriptionRole.reports.location');
-            Route::get('reports/bank', 'bankTransactions')->name('subscriptionRole.bankTransactios');
-            Route::get('reports/associates', 'associates')->name('subscriptionRole.reports.associates');
-            Route::get('reports/donations', 'outerdonations')->name('subscriptionRole.reports.donations');
-            Route::get('reports/indebtedness', 'indebtedness')->name('subscriptionRole.reports.indebtedness');
-            Route::get('reports/inner_donations', 'innerDonations')->name('subscriptionRole.reports.innerDonations');
-            Route::get('reports/subscriptions_old_delays', 'subOldDelay')->name('subscriptionRole.reports.subOlddelay');
+        Route::prefix('reports')->group(function () {
+            Route::controller(ReportController::class)->group(function () {
+                Route::get('age', 'ages')->name('subscriptionRole.reports.age');
+                Route::get('safe', 'safe')->name('subscriptionRole.reports.safe');
+                Route::get('jobs', 'jobs')->name('subscriptionRole.reports.jobs');
+                Route::get('search', 'search')->name('subscriptionRole.reports.search');
+                Route::get('all', 'index')->name('subscriptionRole.reports.subscriptions');
+                Route::get('location', 'locations')->name('subscriptionRole.reports.location');
+                Route::get('bank', 'bankTransactions')->name('subscriptionRole.bankTransactios');
+                Route::get('incomplete', 'incomplete')->name('subscriptionRole.reports.incompete');
+                Route::get('associates', 'associates')->name('subscriptionRole.reports.associates');
+                Route::get('donations', 'outerdonations')->name('subscriptionRole.reports.donations');
+                Route::get('indebtedness', 'indebtedness')->name('subscriptionRole.reports.indebtedness');
+                Route::get('inner_donations', 'innerDonations')->name('subscriptionRole.reports.innerDonations');
+                Route::get('subscriptions_old_delays', 'subOldDelay')->name('subscriptionRole.reports.subOlddelay');
+            });
         });
         //! Subscribers Routes
         Route::controller(SubscribersController::class)->group(function () {

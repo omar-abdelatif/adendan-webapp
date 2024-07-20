@@ -137,6 +137,14 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="{{route('subscriptionRole.reports.incompete')}}">
+                                        <svg class="stroke-icon">
+                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                        </svg>
+                                        <span>البيانات الغير مكتمله</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{route('subscriptionRole.reports.safe')}}">
                                         <svg class="stroke-icon">
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
@@ -350,6 +358,14 @@
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                         </svg>
                                         <span>المنتسبين</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('reports.incompete')}}">
+                                        <svg class="stroke-icon">
+                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
+                                        </svg>
+                                        <span>البيانات الغير مكتمله</span>
                                     </a>
                                 </li>
                                 <li>

@@ -91,6 +91,7 @@ Route::prefix('admin')->group(function () {
             Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
             Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
             Route::get('reports/subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
+            Route::get('reports/incomplete', 'incomplete')->name('reports.incompete');
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');
