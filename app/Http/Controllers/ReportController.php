@@ -190,9 +190,12 @@ class ReportController extends Controller
     //! Incomplete
     public function incomplete()
     {
-        $incompleteSSN = Subscribers::where('ssn', 0)->count();
-        $incompleteMobile = Subscribers::where('mobile_no', 0)->count();
-        $incompleteAddress = Subscribers::where('address', 'null')->count();
-        dd($incompleteSSN, $incompleteMobile, $incompleteAddress);
+        $incompleteSSN = Subscribers::where('ssn', 0)->get();
+        $incompleteSSNCount = $incompleteSSN->count();
+        $incompleteMobile = Subscribers::where('mobile_no', 0)->get();
+        $incompleteMobileCount = $incompleteMobile->count();
+        $incompleteAddress = Subscribers::where('address', 'null')->get();
+        $incompleteAddressCount = $incompleteAddress->count();
+        dd($incompleteSSN, $incompleteMobile, $incompleteAddress, $incompleteSSNCount, $incompleteMobileCount, $incompleteAddressCount);
     }
 }
