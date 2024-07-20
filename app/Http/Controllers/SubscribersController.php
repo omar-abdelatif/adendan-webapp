@@ -219,12 +219,10 @@ class SubscribersController extends Controller
     }
     public function insertHalfDelay()
     {
-        $currentDate = Carbon::now();
-        $currentDate->day(1);
-        $currentDate->subMonth();
+        $currentDate = Carbon::now()->startOfMonth();
         $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
         if ($currentDate > $june30) {
-            $newJune30 = Carbon::create($currentDate->year + 1, 6, 30, 0, 0, 0);
+            $newJune30 = Carbon::create($currentDate->year + 1, 7, 1, 0, 0, 0);
             $differenceInMonths = $currentDate->diffInMonths($newJune30);
             return $differenceInMonths;
         } else {
@@ -236,15 +234,15 @@ class SubscribersController extends Controller
     {
         $currentDate = Carbon::now();
         $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
-        $yearlyCost = CostYears::where('year', $currentDate->year)->first();
         if ($currentDate->gt($june30)) {
+            $nextYear = $currentDate->copy()->addYear()->year;
+            $yearlyCost = CostYears::where('year', $nextYear)->first();
+            $costYearly = $yearlyCost->cost;
+            return [$costYearly, $nextYear];
+        } else {
+            $yearlyCost = CostYears::where('year', $currentDate->year)->first();
             $costYearly = $yearlyCost->cost;
             return [$costYearly, $currentDate->year];
-        } else {
-            $previousYear = $currentDate->copy()->subYear();
-            $yearlyCost = CostYears::where('year', $previousYear->year)->first();
-            $costYearly = $yearlyCost->cost;
-            return [$costYearly, $previousYear->year];
         }
     }
     function safeInsert(Request $request)
