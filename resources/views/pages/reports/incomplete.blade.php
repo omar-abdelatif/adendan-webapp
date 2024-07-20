@@ -39,7 +39,7 @@
                                                     <tbody>
                                                         @foreach ($incompleteSSN as $ssn)
                                                             <tr>
-                                                                <td>{{$ssn->member_id}}</td>`
+                                                                <td>{{$ssn->member_id}}</td>
                                                                 <td>{{$ssn->name}}</td>
                                                                 <td>{{$ssn->ssn}}</td>
                                                             </tr>
@@ -84,7 +84,15 @@
                                                             <th>رقم المحمول</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                        @foreach ($incompleteMobile as $mobile)
+                                                            <tr>
+                                                                <td>{{$mobile->member_id}}</td>
+                                                                <td>{{$mobile->name}}</td>
+                                                                <td>{{$mobile->mobile_no}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -124,7 +132,15 @@
                                                             <th>العنوان</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                        @foreach ($incompleteAddress as $address)
+                                                            <tr>
+                                                                <td>{{$address->member_id}}</td>
+                                                                <td>{{$address->name}}</td>
+                                                                <td>{{$address->address}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
