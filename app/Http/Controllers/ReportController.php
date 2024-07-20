@@ -24,7 +24,8 @@ class ReportController extends Controller
         $nonActiveSubscribers = $subscribers->where('status', 0)->count();
         $pendingSubscribers = $subscribers->where('status', 2)->count();
         $subscriptions = $this->subscriptionFilter();
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers'));
+        $incomplete = $this->incomplete();
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'incomplete'));
     }
     public function subscriptionFilter()
     {
@@ -185,5 +186,11 @@ class ReportController extends Controller
                 return view('pages.reports.sub_old_delays', compact('delays', 'noOldDelays'));
             }
         }
+    }
+    //! Incomplete
+    public function incomplete()
+    {
+        $incompleteSSN = Subscribers::where('mobile_no', 0)->get();
+        dd($incompleteSSN);
     }
 }
