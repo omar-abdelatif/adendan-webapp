@@ -79,9 +79,9 @@
                                                 <table class="table display align-middle text-center table-hover" id="table36" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                                     <thead>
                                                         <tr>
-                                                            <th>رقم العضوية</th>
-                                                            <th>إسم العضو</th>
-                                                            <th>رقم المحمول</th>
+                                                            <th class="text-center">رقم العضوية</th>
+                                                            <th class="text-center">إسم العضو</th>
+                                                            <th class="text-center">رقم المحمول</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -127,9 +127,9 @@
                                                 <table class="table display align-middle text-center table-hover" id="table37" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                                     <thead>
                                                         <tr>
-                                                            <th>رقم العضوية</th>
-                                                            <th>إسم العضو</th>
-                                                            <th>العنوان</th>
+                                                            <th class="text-center">رقم العضوية</th>
+                                                            <th class="text-center">إسم العضو</th>
+                                                            <th class="text-center">العنوان</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
