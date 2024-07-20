@@ -44,7 +44,7 @@ class CostYearsController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ ما');
     }
-    public function updateYear(CostYearsRequest $request)
+    public function updateYear(Request $request)
     {
         $id = $request->id;
         $years = CostYears::find($id);
