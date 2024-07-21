@@ -14,28 +14,19 @@ $(document).ready(function () {
         paging: true,
         scrollY: 400,
         ordering: true,
-        select: {
-            style: "multi",
-        },
-        columnDefs: [
-            {
-                targets: 0,
-                checkboxes: {
-                    selectRow: true,
-                },
-            },
-        ],
         autoWidth: true,
         searching: true,
         pageLength: 20,
         pagingTag: "button",
         pagingType: "simple_numbers",
+        ordering: true,
+        deferRender: true,
+        serverSide: true,
+        ordering: false,
+        scroller: {
+            loadingIndicator: true,
+        },
     });
-    //! Add Class to Jquery Checkbox
-    $("#table").on("draw.dt", function () {
-        $(this).find(":checkbox").addClass("checkbox_animated subscriber-data");
-    });
-    $("#table").trigger("draw.dt");
     //! Add new row
     $(".addRow").click(function () {
         let newRow = $(
@@ -49,24 +40,6 @@ $(document).ready(function () {
     //! Remove row
     $("#inputs").on("click", ".removeRow", function () {
         $(this).closest(".d-flex").remove();
-    });
-    //! Delete All Selected Records
-    $("#deleteRecord").click(function () {});
-    //! Add Selected Class To Selected Records
-    let selectAll = document.getElementById("selectAll");
-    if (selectAll) {
-        if (selectAll.checked) {
-            console.log("checked");
-        }
-    }
-    $("#selectAll").change(function () {
-        if (this.checked) {
-            $(".subscriber-data").prop("checked", true); // Check all checkboxes
-            $(".subscriber-data").closest("tr").addClass("selected"); // Add 'selected' class to their parent <tr> elements
-        } else {
-            $(".subscriber-data").prop("checked", false); // Uncheck all checkboxes if 'selectAll' is unchecked
-            $(".subscriber-data").closest("tr").removeClass("selected"); // Remove 'selected' class from their parent <tr> elements
-        }
     });
     //! Change Date Separator
     $(".datepicker-age").datepicker({
