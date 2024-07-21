@@ -134,7 +134,7 @@ if (storeSub) {
                 nameSubMsg.classList.add("d-none");
                 nameReq.classList.add("d-none");
                 f3 = 1;
-                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1 && f5 === 1) {
                     document.getElementById("nextbtn").disabled = false;
                 } else {
                     document.getElementById("nextbtn").disabled = true;
@@ -192,7 +192,7 @@ if (storeSub) {
                 ssnMsg.classList.add("d-none");
                 ssnReq.classList.add("d-none");
                 f1 = 1;
-                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1 && f5 === 1) {
                     document.getElementById("nextbtn").disabled = false;
                 } else {
                     document.getElementById("nextbtn").disabled = true;
@@ -225,7 +225,7 @@ if (storeSub) {
                 mobileMsg.classList.add("d-none");
                 mobReq.classList.add("d-none");
                 f2 = 1;
-                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1 && f5 === 1) {
                     document.getElementById("nextbtn").disabled = false;
                 } else {
                     document.getElementById("nextbtn").disabled = true;
@@ -257,7 +257,7 @@ if (storeSub) {
             birthReq.classList.add("d-none");
             birthday.classList.add("good");
             f4 = 1;
-            if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
+            if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1 && f5 === 1) {
                 document.getElementById("nextbtn").disabled = false;
             } else {
                 document.getElementById("nextbtn").disabled = true;
@@ -281,11 +281,19 @@ if (storeSub) {
                 address.classList.remove("error");
                 addressMsg.classList.add("d-none");
                 addressReq.classList.add("d-none");
+                f5 = 1;
+                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1 && f5 === 1) {
+                    document.getElementById("nextbtn").disabled = false;
+                } else {
+                    document.getElementById("nextbtn").disabled = true;
+                }
             } else {
                 address.classList.remove("good");
                 address.classList.add("error");
                 addressMsg.classList.remove("d-none");
                 addressReq.classList.add("d-none");
+                f5 = 0;
+                document.getElementById("nextbtn").disabled = true;
             }
         }
     });

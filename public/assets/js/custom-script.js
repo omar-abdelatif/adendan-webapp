@@ -100,6 +100,12 @@ for (let i = 0; i < 500; i++) {
         searching: true,
         pagingTag: "button",
         pagingType: "simple_numbers",
+        deferRender: true,
+        serverSide: true,
+        ordering: false,
+        scroller: {
+            loadingIndicator: true,
+        },
     });
 }
 //! Remove Alert After  5 Seconds

@@ -52,7 +52,7 @@
                             <div class="bg-round">
                                 <img width="65" height="65" src="https://img.icons8.com/external-hidoc-kerismaker/65/external-Headstone-funeral-hidoc-kerismaker.png" alt="external-Headstone-funeral-hidoc-kerismaker" />
                             </div>
-                            <h5 class="mb-0">المقابر</h5>
+                            <h5 class="mb-0">المقابر القديمة</h5>
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{$donationTombsSum}} ج.م</h5>
@@ -120,6 +120,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-absolute">
@@ -131,8 +132,8 @@
                             <table class="table display align-middle text-muted table-hover" id="inner_donations" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
                                         <th class="text-center">رقم العضوية</th>
+                                        <th class="text-center">اسم العضو</th>
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">نوع التبرع</th>
                                         <th class="text-center">تبرعات أخرى</th>
@@ -141,11 +142,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1 ?>
                                     @foreach ($donations as $donation)
                                         <tr>
-                                            <td class="text-center">{{$i++}}</td>
                                             <td class="text-center">{{$donation->member_id}}</td>
+                                            <td class="text-center">{{$donation->subscribers->name}}</td>
                                             <td class="text-center">{{$donation->invoice_no}}</td>
                                             <td class="text-center">{{$donation->donation_type}}</td>
                                             <td class="text-center">
@@ -168,10 +168,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td class="text-center">
+                                        <td class="text-right" colspan="6">
                                             <b>الإجمالي</b>
                                         </td>
-                                        <td id="totalAmount" class="text-left" colspan="6"></td>
+                                        <td id="totalAmount" class="text-center"></td>
                                     </tr>
                                 </tfoot>
                             </table>

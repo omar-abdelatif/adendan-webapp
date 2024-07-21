@@ -28,6 +28,7 @@ class RequestDonations extends FormRequest
             'donation_type'        => ['required'],
             'other_donation'       => ['nullable'],
             'donation_category'    => ['nullable'],
+            'donation_destination' => ['nullable'],
         ];
     }
 }
