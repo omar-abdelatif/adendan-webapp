@@ -38,8 +38,7 @@
                                                 @endforeach
                                             @else
                                                 <td class="text-muted text-center">
-                                                    <span class="text-muted bg-success rounded-pill px-3">0</span>
-                                                    ج.م
+                                                    <span class="text-muted bg-success rounded-pill px-3">-</span>
                                                 </td>
                                             @endif
                                             @if (count($debt->delays) > 0)
@@ -51,8 +50,7 @@
                                                         </td>
                                                     @else
                                                         <td class="text-muted text-center">
-                                                            <span class="text-white bg-success rounded-pill px-3">0</span>
-                                                            ج.م
+                                                            <span class="text-white bg-success rounded-pill px-3">-</span>
                                                         </td>
                                                     @endif
                                                 @endforeach

@@ -33,7 +33,7 @@
                                         <div class="form-group me-5">
                                             <select name="optype" class="form-select pe-4 ps-3">
                                                 <option disabled selected>
-                                                   أختر العمليه
+                                                    أختر العمليه
                                                 </option>
                                                 <option value=">">
                                                     أكثر من
@@ -52,61 +52,16 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                {{-- <table id="table" class="table align-middle table-hover text-center text-muted" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">الإسم</th>
-                                            <th class="text-center">رقم العضوية</th>
-                                            <th class="text-center">المبلغ الكلي</th>
-                                            <th class="text-center">المدفوع</th>
-                                            <th class="text-center">باقي المبلغ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach ($query as $sub)
-                                            <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td>{{ $sub->name }}</td>
-                                                <td>{{ $sub->member_id }}</td>
-                                                <td>{{$sub->amount}}</td>
-                                                <td>
-                                                    @if ($sub->delay_amount)
-                                                        {{$sub->delay_amount}}
-                                                    @else
-                                                        <span class="fw-bold">-</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($sub->delay_remaining)
-                                                        {{$sub->delay_remaining}}
-                                                    @else
-                                                        <span class="fw-bold">-</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="3" class="text-right">الإجمالي</td>
-                                            <td>{{$totalAmount}}</td>
-                                        </tr>
-                                    </tfoot>
-                                </table> --}}
                                 @if(isset($queryResult))
                                     @if($queryResult->isEmpty())
-                                        <p>{{ $noOldDelays }}</p>
+                                        <p class="text-center fs-3 fw-bold">{{ $noOldDelays }}</p>
                                     @else
                                         <table id="table" class="table align-middle table-hover text-center text-muted" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">#</th>
                                                     <th class="text-center">الإسم</th>
                                                     <th class="text-center">رقم العضوية</th>
                                                     <th class="text-center">المبلغ الكلي</th>
@@ -115,10 +70,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $i = 1 ?>
                                                 @foreach($queryResult as $subscriber)
                                                     <tr>
-                                                        <td>{{ $i++ }}</td>
                                                         <td>{{ $subscriber->name }}</td>
                                                         <td>{{ $subscriber->member_id }}</td>
                                                         <td>{{ $subscriber->amount }}</td>
@@ -148,7 +101,6 @@
                                         <table id="table" class="table align-middle table-hover text-center text-muted" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">#</th>
                                                     <th class="text-center">الإسم</th>
                                                     <th class="text-center">رقم العضوية</th>
                                                     <th class="text-center">العنوان</th>
@@ -158,10 +110,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $i = 1 ?>
                                                 @foreach($delays as $delay)
                                                     <tr>
-                                                        <td>{{ $i++ }}</td>
                                                         <td>{{ $delay->name }}</td>
                                                         <td>{{ $delay->member_id }}</td>
                                                         <td>{{ $delay->address }}</td>
