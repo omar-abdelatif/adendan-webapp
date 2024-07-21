@@ -129,6 +129,7 @@ class ReportController extends Controller
     public function indebtedness()
     {
         $debts = Subscribers::where('status', 0)->get();
+        dd($debts);
         return view('pages.reports.indebtedness', compact('debts'));
     }
     //! Safe
