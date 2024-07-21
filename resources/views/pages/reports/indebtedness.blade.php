@@ -32,7 +32,7 @@
                                             @if (count($debt->delays) > 0)
                                                 @foreach ($debt->delays as $delay)
                                                     <td class="text-muted text-center">
-                                                        <span class="text-muted bg-secondary rounded-pill px-4">{{$delay->amount}}</span>
+                                                        <span class="text-muted bg-secondary rounded-pill px-4">{{$delay->paied}}</span>
                                                         ج.م
                                                     </td>
                                                 @endforeach
@@ -45,7 +45,7 @@
                                                 @foreach ($debt->delays as $delay)
                                                     @if($delay->remaing != null)
                                                         <td class="text-center">
-                                                            <span class="text-white bg-secondary rounded-pill px-4">{{$delay->delay_remaining}}</span>
+                                                            <span class="text-white bg-secondary rounded-pill px-4">{{$delay->remaing}}</span>
                                                             ج.م
                                                         </td>
                                                     @else
