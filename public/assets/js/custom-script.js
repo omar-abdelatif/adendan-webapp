@@ -21,8 +21,7 @@ $(document).ready(function () {
         pagingType: "simple_numbers",
         ordering: true,
         deferRender: true,
-        serverSide: true,
-        ordering: false,
+        // serverSide: true,
         scroller: {
             loadingIndicator: true,
         },
@@ -57,25 +56,12 @@ for (let i = 0; i < 500; i++) {
         paging: true,
         // scrollY: tables[i],
         ordering: true,
-        select: {
-            style: "os",
-            selector: "th:first-child",
-        },
-        columnDefs: [
-            {
-                targets: 0,
-                checkboxes: {
-                    selectRow: true,
-                },
-            },
-        ],
         autoWidth: true,
         searching: true,
         pagingTag: "button",
         pagingType: "simple_numbers",
         deferRender: true,
-        serverSide: true,
-        ordering: false,
+        // serverSide: true,
         scroller: {
             loadingIndicator: true,
         },
