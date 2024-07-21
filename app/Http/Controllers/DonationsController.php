@@ -36,6 +36,7 @@ class DonationsController extends Controller
                 'donation_type' => $request['donation_type'],
                 'other_donation' => $request['other_donation'],
                 'donation_category' => $request['donation_category'],
+                'donation_destination' => $request['donation_destination'],
                 'subscribers_id' => $subscribers->id,
             ]);
             if ($store) {

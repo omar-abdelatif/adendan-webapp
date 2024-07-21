@@ -106,15 +106,15 @@ class ReportController extends Controller
     {
         $donations = Donations::get();
         $donationMoney = Donations::where('donation_type', 'مادي')->get();
-        $donationDeathCar = Donations::where('other_donation', 'صيانة سيارة الموتى')->get();
+        $donationDeathCar = Donations::where('donation_category', 'ص.سيارة')->get();
         $donationDeathCarSum = $donationDeathCar->sum('amount');
-        $donationTombs = Donations::where('other_donation', 'المقابر')->get();
+        $donationTombs = Donations::where('donation_category', 'مقابر قديمة')->get();
         $donationTombsSum = $donationTombs->sum('amount');
-        $donationHeadquarters = Donations::where('other_donation', 'صيانة المقر')->get();
+        $donationHeadquarters = Donations::where('donation_category', 'ص.مقر')->get();
         $donationHeadquartersSum = $donationHeadquarters->sum('amount');
-        $donationAffiliate = Donations::where('other_donation', 'تبرع انتساب')->get();
+        $donationAffiliate = Donations::where('donation_category', 'تبرع إنتساب')->get();
         $donationAffiliateSum = $donationAffiliate->sum('amount');
-        $donationDev = Donations::where('other_donation', 'تبرع تنمية')->get();
+        $donationDev = Donations::where('donation_category', 'تبرع تنمية')->get();
         $donationDevSum = $donationDev->sum('amount');
         return view('pages.reports.inner_donations', compact([
             'donations',
@@ -187,7 +187,7 @@ class ReportController extends Controller
             }
         }
     }
-    //! Incomplete
+    //! Incomplete Reports
     public function incomplete()
     {
         $incompleteSSN = Subscribers::where('ssn', 0)->get();
