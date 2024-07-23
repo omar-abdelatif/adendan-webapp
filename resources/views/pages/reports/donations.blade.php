@@ -27,8 +27,7 @@
             let totalAmount = 0;
             table.rows().every(function () {
                 let row = this.data();
-                console.log(row)
-                let amount = parseFloat(row[6].replace(",", ""));
+                let amount = parseFloat(row[5].replace(",", ""));
                 if (!isNaN(amount)) {
                     totalAmount += amount;
                 }
@@ -50,7 +49,6 @@
                             <table class="table display align-middle text-muted table-hover" id="donations" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
                                         <th class="text-center">إسم المتبرع</th>
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">نوع المتبرع</th>
@@ -60,10 +58,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1 ?>
                                     @foreach ($donators as $donator)
                                         <tr>
-                                            <td class="text-center">{{$i++}}</td>
                                             <td class="text-center">{{$donator->name}}</td>
                                             <td class="text-center">{{$donator->invoice_id}}</td>
                                             <td class="text-center">{{$donator->donator_type}}</td>
@@ -81,10 +77,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr class="px-3">
-                                        <td class="text-center">
+                                        <td class="text-right" colspan="5">
                                             <b>الإجمالي</b>
                                         </td>
-                                        <td id="totalAmount" class="pe-6 text-left" colspan="6"></td>
+                                        <td id="totalAmount" class="text-center"></td>
                                     </tr>
                                 </tfoot>
                             </table>

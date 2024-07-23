@@ -70,7 +70,7 @@
                                             <tr>
                                                 <td class="text-center">{{$i++}}</td>
                                                 <td class="text-center">{{$year->year}}</td>
-                                                <td class="text-center">{{$year->cost}}</td>
+                                                <td class="text-center">07/{{$year->cost}}</td>
                                                 <td class="text-center">
                                                     {{-- ! Update ! --}}
                                                     <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#editing_{{$year->id}}">
