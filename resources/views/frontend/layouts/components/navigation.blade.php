@@ -11,9 +11,6 @@
             <li class="nav-item {{ request()->routeIs('site.borders') ? 'active' : '' }}">
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.borders')}}">مجلس الإدارة</a>
             </li>
-            <li class="nav-item {{ request()->routeIs('workers.index') ? 'active' : ''}}">
-                <a class="nav-link rounded-pill bg-primary" href="{{route('workers.index')}}">حرف و خدمات</a>
-            </li>
             <li class="nav-item {{ request()->routeIs('site.assossiation') ? 'active' : '' }}">
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.assossiation')}}">لجان الجمعية</a>
             </li>
@@ -21,6 +18,9 @@
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.search')}}">
                     الإستعلامات
                 </a>
+            </li>
+            <li class="nav-item {{ request()->routeIs('workers.index') ? 'active' : ''}}">
+                <a class="nav-link rounded-pill bg-primary" href="{{route('workers.index')}}">حرف و خدمات</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link bg-primary rounded-pill" href="#" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
