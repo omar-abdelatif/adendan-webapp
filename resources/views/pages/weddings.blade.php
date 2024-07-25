@@ -87,7 +87,7 @@
                                 <tbody>
                                     @foreach ($weddings as $wedding)
                                         <tr>
-                                            <td>{{$iteration->loop}}</td>
+                                            <td>{{$loop->iteration}}</td>
                                             <td class="text-white text-center">{{$wedding->title}}</td>
                                             <td class="text-white text-center">{{$wedding->date}}</td>
                                             <td class="text-white text-center">{{$wedding->location}}</td>
