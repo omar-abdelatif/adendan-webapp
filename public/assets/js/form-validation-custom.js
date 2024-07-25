@@ -269,7 +269,7 @@ if (storeSub) {
     const addressReq = document.getElementById("addressReq");
     const addressMsg = document.getElementById("addressMsg");
     address.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]+$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             addressReq.classList.remove("d-none");
             addressMsg.classList.add("d-none");

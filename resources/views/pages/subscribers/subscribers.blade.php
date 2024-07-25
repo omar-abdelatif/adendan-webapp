@@ -173,7 +173,7 @@
                                                 <label class="col-6-6 form-label text-muted" for="address">
                                                     العنوان
                                                 </label>
-                                                <input class="form-control text-muted" name="address" id="address" type="text" pattern="[\u0600-\u06FF\s]{5,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="عنوان المشترك" required>
+                                                <input class="form-control text-muted" name="address" id="address" type="text" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};:'\\|,.<>\/?~`]/g, '')" placeholder="عنوان المشترك" required>
                                                 <p class="required d-none mb-0 text-danger" id="addressReq">هذا الحقل مطلوب</p>
                                                 <p class="required d-none mb-0 text-danger" id="addressMsg">يجب ان يكون العنوان باللغة العربية</p>
                                             </div>

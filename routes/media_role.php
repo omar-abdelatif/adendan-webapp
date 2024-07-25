@@ -55,7 +55,7 @@ Route::prefix('media')->group(function () {
             Route::controller(WeddingController::class)->group(function () {
                 Route::get('all', 'index')->name('mediaRole.weddings.all');
                 Route::post('store', 'weddingStore')->name('mediaRole.weddings.store');
-                Route::get('delete/{id}', 'weddingRemove')->name('mediaRole.wedding.delete');
+                Route::get('delete/{id}', 'weddingRemove')->name('mediaRole.weddings.delete');
                 Route::post('update', 'weddingUpdate')->name('mediaRole.weddings.update');
             });
         });
