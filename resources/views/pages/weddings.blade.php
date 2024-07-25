@@ -85,10 +85,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1 ?>
                                     @foreach ($weddings as $wedding)
                                         <tr>
-                                            <td>{{$i++}}</td>
+                                            <td>{{$iteration->loop}}</td>
                                             <td class="text-white text-center">{{$wedding->title}}</td>
                                             <td class="text-white text-center">{{$wedding->date}}</td>
                                             <td class="text-white text-center">{{$wedding->location}}</td>
@@ -108,7 +107,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{$user->role === 'admin' ? route('wedding.delete', $wedding->id) : route('mediaRole.wedding.delete', $wedding->id)}} method="get">
+                                                                <form action={{$user->role === 'admin' ? route('wedding.delete', $wedding->id) : route('mediaRole.weddings.delete', $wedding->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>
