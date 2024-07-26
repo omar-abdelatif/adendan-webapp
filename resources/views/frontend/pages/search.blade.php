@@ -465,7 +465,7 @@
                                                                     <td>{{$wed->day}}</td>
                                                                     <td>{{$wed->date}}</td>
                                                                     <td>{{$wed->groom_name}}</td>
-                                                                    <td>{{$wed->pride_father_name}}</td>
+                                                                    <td>كريمة / {{$wed->pride_father_name}}</td>
                                                                     <td>{{$wed->address}}</td>
                                                                     <td dir="ltr">{{$wed->from_time}}</td>
                                                                     <td dir="ltr">{{$wed->to_time}}</td>
