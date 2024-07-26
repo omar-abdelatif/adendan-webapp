@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 box-col-12">
+            <div class="col-xl-6 box-col-6">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -84,36 +84,36 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 box-col-12">
+            <div class="col-xl-6 box-col-6">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
                             <div class="bg-round">
-                                <img width="60" height="60" src="https://img.icons8.com/dusk/60/average-2.png" alt="average-2" />
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/average-2.png" alt="average-2" />
                             </div>
                             <div>
-                                <h5>إجمالي متأخرات إشـتراك الأعـضـاء</h5>
+                                <h5>إجمالي متأخرات إشـتراك</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">27,000  ج.م</h5>
+                            <h5 class="mb-1">{{$sumTotalOldDelays}}  ج.م</h5>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-6 box-col-6">
+            <div class="col-xl-12 box-col-12">
                 <div class="card widget-1">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
                             <div class="bg-round">
-                                <img width="70" height="70" src="https://img.icons8.com/color/70/money-transfer.png" alt="money-transfer" />
+                                <img width="80" height="80" src="https://img.icons8.com/color/80/money-transfer.png" alt="money-transfer" />
                             </div>
                             <div>
                                 <h5>الـمحصـل</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">20,000 ج.م</h5>
+                            <h5 class="mb-1">{{$sumDelayAmount}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -123,18 +123,18 @@
                     <div class="card-body align-items-center">
                         <div class="widget-content">
                             <div class="bg-round">
-                                <img width="70" height="70" src="https://img.icons8.com/dusk/70/question-mark.png" alt="question-mark" />
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
                                 <h5>المتبقي</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">7,000 ج.م</h5>
+                            <h5 class="mb-1">{{$sumDelayRemaining}} ج.م</h5>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
