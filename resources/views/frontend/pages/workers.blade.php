@@ -191,13 +191,16 @@
                                                             <img width="80" height="80" src="https://img.icons8.com/bubbles/80/question-mark.png" alt="question-mark"/>
                                                         </div>
                                                         <div class="text-details p-3 w-100">
-                                                            <div class="title mb-3 d-flex align-items-center justify-content-center">
+                                                            <div class="title mb-3 text-center">
                                                                 <h4 class="mb-0">الإسم: {{$sn->name}}</h4>
                                                             </div>
-                                                            <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: {{$sn->phone_number}}</h5>
+                                                            <div class="mobile mb-3 text-center">
+                                                                <h4 class="mb-0">رقم التلفون: {{$sn->phone_number}}</h4>
                                                             </div>
-                                                            <div class="location mt-3 text-center">
+                                                            <div class="craft mb-3 text-center">
+                                                                <h4 class="mb-0">المهنة: {{$sn->other_craft}}</h4>
+                                                            </div>
+                                                            <div class="location text-center">
                                                                 <h4 class="mb-0">السكن: {{$sn->location}}</h4>
                                                             </div>
                                                         </div>
