@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('weddings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->longText('details');
+            $table->string('day');
             $table->date('date');
+            $table->string('groom_name');
+            $table->string('pride_father_name');
             $table->string('address');
-            $table->string('location');
-            $table->string('img');
+            $table->string('from_time');
+            $table->string('to_time');
             $table->timestamps();
         });
     }
