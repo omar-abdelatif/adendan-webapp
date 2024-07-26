@@ -116,7 +116,7 @@
                                             <td class="text-white text-center">{{$wedding->day}}</td>
                                             <td class="text-white text-center">{{$wedding->date}}</td>
                                             <td class="text-white text-center">{{$wedding->groom_name}}</td>
-                                            <td class="text-white text-center">كريمة / {{$wedding->pride_father_name}}</td>
+                                            <td class="text-white text-center">كريمة/{{$wedding->pride_father_name}}</td>
                                             <td class="text-white text-center">{{$wedding->address}}</td>
                                             <td class="text-white text-center" dir="ltr">{{$wedding->from_time}}</td>
                                             <td class="text-white text-center" dir="ltr">{{$wedding->to_time}}</td>
