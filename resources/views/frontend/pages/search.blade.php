@@ -434,7 +434,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="wedding" role="tabpanel" aria-labelledby="pills-wedding">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 <div class="wedding-cards">
