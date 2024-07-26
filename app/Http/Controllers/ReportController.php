@@ -26,8 +26,9 @@ class ReportController extends Controller
         $pendingSubscribers = $subscribers->where('status', 2)->count();
         $TotalOldDelays = Olddelays::get();
         $sumTotalOldDelays = $TotalOldDelays->sum('amount');
-        dd($sumTotalOldDelays);
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers'));
+        $sumDelayAmount = $TotalOldDelays->sum('delay_amount');
+        $sumDelayRemaining = $TotalOldDelays->sum('delay_remaining');
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelays', 'sumDelayAmount', 'sumDelayRemaining'));
     }
     public function subscriptionFilter()
     {
