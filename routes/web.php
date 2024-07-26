@@ -78,20 +78,22 @@ Route::prefix('admin')->group(function () {
             Route::get('associations/delete_association/{id}', 'remove')->name('association.delete');
             Route::post('associations/update_association', 'update')->name('association.update');
         });
-        Route::controller(ReportController::class)->group(function () {
-            Route::get('reports/age', 'ages')->name('reports.age');
-            Route::get('reports/jobs', 'jobs')->name('reports.jobs');
-            Route::get('reports/safe', 'safe')->name('reports.safe');
-            Route::get('reports/search', 'search')->name('reports.search');
-            Route::get('reports/all', 'index')->name('reports.subscriptions');
-            Route::get('reports/location', 'locations')->name('reports.location');
-            Route::get('reports/bank', 'bankTransactions')->name('bankTransactios');
-            Route::get('reports/associates', 'associates')->name('reports.associates');
-            Route::get('reports/donations', 'outerdonations')->name('reports.donations');
-            Route::get('reports/indebtedness', 'indebtedness')->name('reports.indebtedness');
-            Route::get('reports/inner_donations', 'innerDonations')->name('reports.innerDonations');
-            Route::get('reports/subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
-            Route::get('reports/incomplete', 'incomplete')->name('reports.incompete');
+        Route::prefix('reports')->group(function () {
+            Route::controller(ReportController::class)->group(function () {
+                Route::get('age', 'ages')->name('reports.age');
+                Route::get('jobs', 'jobs')->name('reports.jobs');
+                Route::get('safe', 'safe')->name('reports.safe');
+                Route::get('search', 'search')->name('reports.search');
+                Route::get('all', 'index')->name('reports.subscriptions');
+                Route::get('location', 'locations')->name('reports.location');
+                Route::get('bank', 'bankTransactions')->name('bankTransactios');
+                Route::get('incomplete', 'incomplete')->name('reports.incompete');
+                Route::get('associates', 'associates')->name('reports.associates');
+                Route::get('donations', 'outerdonations')->name('reports.donations');
+                Route::get('indebtedness', 'indebtedness')->name('reports.indebtedness');
+                Route::get('inner_donations', 'innerDonations')->name('reports.innerDonations');
+                Route::get('subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
+            });
         });
         Route::controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');

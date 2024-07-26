@@ -19,13 +19,15 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $subscribers = Subscribers::with('subscriptions')->get();
+        $subscriptions = $this->subscriptionFilter();
         $count = $subscribers->count();
         $activeSubscribers = $subscribers->where('status', 1)->count();
         $nonActiveSubscribers = $subscribers->where('status', 0)->count();
         $pendingSubscribers = $subscribers->where('status', 2)->count();
-        $subscriptions = $this->subscriptionFilter();
-        $incomplete = $this->incomplete();
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'incomplete'));
+        $TotalOldDelays = Olddelays::get();
+        $sumTotalOldDelays = $TotalOldDelays->sum('amount');
+        dd($sumTotalOldDelays);
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers'));
     }
     public function subscriptionFilter()
     {
@@ -187,7 +189,7 @@ class ReportController extends Controller
             }
         }
     }
-    //! Incomplete Reports
+    //! Incomplete Data Reports
     public function incomplete()
     {
         $incompleteSSN = Subscribers::where('ssn', 0)->get();

@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-12 box-col-12">
+            <div class="col-xl-12 box-col-12">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -92,7 +92,7 @@
                                 <img width="60" height="60" src="https://img.icons8.com/dusk/60/average-2.png" alt="average-2" />
                             </div>
                             <div>
-                                <h5>إجمالي تكلفه إشـتراك الأعـضـاء</h5>
+                                <h5>إجمالي متأخرات إشـتراك الأعـضـاء</h5>
                             </div>
                         </div>
                         <div class="font-Info">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 box-col-6">
+            {{-- <div class="col-xl-6 box-col-6">
                 <div class="card widget-1">
                     <div class="card-body align-items-center">
                         <div class="widget-content">

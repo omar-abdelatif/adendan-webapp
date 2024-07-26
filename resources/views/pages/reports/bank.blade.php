@@ -84,65 +84,66 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table display align-middle table-hover" id="table" data-order='[[0, "desc"], [1, "desc"]]' data-page-length='10'>
-                                <thead>
-                                    <th class="text-center">
-                                        <i class="fas fa-calendar-week pe-2"></i>
-                                        تـاريخ المـعامله
-                                    </th>
-                                    <th class="text-center">
-                                        <i class="fas fa-question-circle pe-2"></i>
-                                        توقيت المعامله
-                                    </th>
-                                    <th class="text-center">
-                                        <i class="fas fa-question-circle pe-2"></i>
-                                        نوع المعامله
-                                    </th>
-                                    <th class="text-center">
-                                        <i class="fa-duotone fa-image pe-2"></i>
-                                        مستند المعاملة
-                                    </th>
-                                    <th class="text-center">
-                                        <i class="fas fa-dollar-sign pe-2"></i>
-                                        المبلغ
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($transactions as $item)
-                                        <tr>
-                                            <td class="text-center">{{$item->created_at->format('Y-m-d')}}</td>
-                                            <td class="text-center">{{$item->created_at->format('H:i')}}</td>
-                                            <td class="text-center">
-                                                @if ($item->transaction_type === 'بنك/ايداع' || $item->transaction_type === 'ايداع')
-                                                    <span class="badge badge-success rounded-pill">إيداع</span>
-                                                @else
-                                                    <span class="badge badge-danger rounded-pill">سحب</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if ($item->proof_img !== null)
-                                                    <button type="button" class="btn btn-transparent" data-bs-target="#proof_{{$item->id}}" data-bs-toggle="modal">
-                                                        <img src="{{asset('assets/images/withdraws/'.$item->proof_img)}}" width="70" class="rounded" alt="{{$item->proof_img}}">
-                                                    </button>
-                                                    <div class="modal fade" id="proof_{{$item->id}}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body p-0">
-                                                                    <img src="{{asset('assets/images/withdraws/'.$item->proof_img)}}" class="rounded w-100" alt="{{$item->proof_img}}">
+                            <div class="table-responsive">
+                                <table class="table display align-middle table-hover" id="table" data-order='[[0, "desc"], [1, "desc"]]' data-page-length='10'>
+                                    <thead>
+                                        <th class="text-center">
+                                            <i class="fas fa-calendar-week pe-2"></i>
+                                            تـاريخ المـعامله
+                                        </th>
+                                        <th class="text-center">
+                                            <i class="fas fa-question-circle pe-2"></i>
+                                            توقيت المعامله
+                                        </th>
+                                        <th class="text-center">
+                                            <i class="fas fa-question-circle pe-2"></i>
+                                            نوع المعامله
+                                        </th>
+                                        <th class="text-center">
+                                            <i class="fa-duotone fa-image pe-2"></i>
+                                            مستند المعاملة
+                                        </th>
+                                        <th class="text-center">
+                                            <i class="fas fa-dollar-sign pe-2"></i>
+                                            المبلغ
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($transactions as $item)
+                                            <tr>
+                                                <td class="text-center">{{$item->created_at->format('Y-m-d')}}</td>
+                                                <td class="text-center">{{$item->created_at->format('H:i')}}</td>
+                                                <td class="text-center">
+                                                    @if ($item->transaction_type === 'بنك/ايداع' || $item->transaction_type === 'ايداع')
+                                                        <span class="badge badge-success rounded-pill">إيداع</span>
+                                                    @else
+                                                        <span class="badge badge-danger rounded-pill">سحب</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($item->proof_img !== null)
+                                                        <button type="button" class="btn btn-transparent" data-bs-target="#proof_{{$item->id}}" data-bs-toggle="modal">
+                                                            <img src="{{asset('assets/images/withdraws/'.$item->proof_img)}}" width="70" class="rounded" alt="{{$item->proof_img}}">
+                                                        </button>
+                                                        <div class="modal fade" id="proof_{{$item->id}}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body p-0">
+                                                                        <img src="{{asset('assets/images/withdraws/'.$item->proof_img)}}" class="rounded w-100" alt="{{$item->proof_img}}">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                @else
-                                                    <span class="fw-bold">-</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{$item->amount}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                    @else
+                                                        <span class="fw-bold">-</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">{{$item->amount}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
