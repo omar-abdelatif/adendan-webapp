@@ -445,7 +445,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive overflow-hidden">
-                                                    <table class="table table-striped table-borderless rounded table-hover text-right mt-3 text-center">
+                                                    <table class="table table-striped align-middle table-borderless rounded table-hover text-right mt-3 text-center">
                                                         <thead class="table-primary">
                                                             <tr>
                                                                 <th>#</th>
