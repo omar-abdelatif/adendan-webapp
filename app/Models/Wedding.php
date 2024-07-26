@@ -10,11 +10,12 @@ class Wedding extends Model
     use HasFactory;
     protected $table = 'weddings';
     protected $fillable = [
-        'title',
-        'details',
+        'day',
         'date',
+        'groom_name',
+        'pride_father_name',
         'address',
-        'location',
-        'img'
+        'from_time',
+        'to_time'
     ];
 }

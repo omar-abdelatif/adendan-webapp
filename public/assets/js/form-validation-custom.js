@@ -348,7 +348,7 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
@@ -372,7 +372,7 @@ if (newsform) {
     const details = document.getElementById("details");
     const newsDetailsReq = document.getElementById("detailsReq");
     details.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsDetailsReq.classList.remove("d-none");
             details.classList.remove("good");

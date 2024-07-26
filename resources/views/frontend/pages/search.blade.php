@@ -297,7 +297,17 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <h1 class="text-center mb-0">لا توجد متأخرات تبرعات</h1>
+                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="65" height="65" src="https://img.icons8.com/fluency/65/add-dollar.png" alt="add-dollar"/>
+                                                                                        متأخرات التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        <p class="mb-0 text-center fs-3 fw-bold empty-msg">لا توجد متأخرات تبرعات</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -438,21 +448,27 @@
                                                     <table class="table table-striped table-borderless rounded table-hover text-right mt-3 text-center">
                                                         <thead class="table-primary">
                                                             <tr>
-                                                                <th>عنوان الخبر</th>
-                                                                <th>التاريخ</th>
-                                                                <th>التفاصيل</th>
+                                                                <th>#</th>
+                                                                <th>اليوم</th>
+                                                                <th>تاريخ المناسبة</th>
+                                                                <th>إسم العريس</th>
+                                                                <th>والد العروس</th>
+                                                                <th>المكان</th>
+                                                                <th>من الساعة</th>
+                                                                <th>الى الساعة</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($weddings as $wed)
                                                                 <tr>
-                                                                    <td>{{$wed->title}}</td>
+                                                                    <td>{{$loop->iteration}}</td>
+                                                                    <td>{{$wed->day}}</td>
                                                                     <td>{{$wed->date}}</td>
-                                                                    <td>
-                                                                        <a href="{{route('site.weddingDetails', $wed->id)}}" class="btn btn-success text-white">
-                                                                            <i class="fa-regular fa-eye"></i>
-                                                                        </a>
-                                                                    </td>
+                                                                    <td>{{$wed->groom_name}}</td>
+                                                                    <td>{{$wed->pride_father_name}}</td>
+                                                                    <td>{{$wed->address}}</td>
+                                                                    <td dir="ltr">{{$wed->from_time}}</td>
+                                                                    <td dir="ltr">{{$wed->to_time}}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>

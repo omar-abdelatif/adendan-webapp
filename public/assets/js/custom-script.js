@@ -20,11 +20,6 @@ $(document).ready(function () {
         pagingTag: "button",
         pagingType: "simple_numbers",
         ordering: true,
-        deferRender: true,
-        // serverSide: true,
-        scroller: {
-            loadingIndicator: true,
-        },
     });
     //! Add new row
     $(".addRow").click(function () {

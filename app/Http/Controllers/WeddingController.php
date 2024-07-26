@@ -16,28 +16,19 @@ class WeddingController extends Controller
     public function weddingStore(WeddingRequest $request)
     {
         $validated = $request->validated();
-        if ($request->hasFile('img')) {
-            $image = $request->file('img');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('assets/images/weddings');
-            $image->move($destinationPath, $imageName);
-            $store = Wedding::create([
-                'title' => $request['title'],
-                'details' => $request['details'],
-                'date' => $request['date'],
-                'address' => $request['address'],
-                'location' => $request['location'],
-                'img' => $imageName
-            ]);
-        } else {
-            $store = Wedding::create([
-                'title' => $request['title'],
-                'details' => $request['details'],
-                'date' => $request['date'],
-                'address' => $request['address'],
-                'location' => $request['location'],
-            ]);
-        }
+        $fromTime = $request['from_time'];
+        $toTime = $request['to_time'];
+        $fromTime12 = date("g:i A", strtotime($fromTime));
+        $toTime12 = date("g:i A", strtotime($toTime));
+        $store = Wedding::create([
+            'day' => $request['day'],
+            'date' => $request['date'],
+            'groom_name' => $request['groom_name'],
+            'pride_father_name' => $request['pride_father_name'],
+            'address' => $request['address'],
+            'from_time' => $fromTime12,
+            'to_time' => $toTime12,
+        ]);
         if ($store) {
             $notificationSuccess = [
                 'message' => 'تم الإضافة بنجاح',
@@ -51,12 +42,6 @@ class WeddingController extends Controller
     {
         $removeWedding = Wedding::findOrFail($id);
         if ($removeWedding) {
-            if ($removeWedding->img !== null) {
-                $oldPath = public_path('assets/images/weddings/' . $removeWedding->img);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
-                }
-            }
             $delete = $removeWedding->delete();
             if ($delete) {
                 $notificationSuccess = [
@@ -74,28 +59,7 @@ class WeddingController extends Controller
         $id = $request->id;
         $removeWedding = Wedding::findOrFail($id);
         if ($removeWedding) {
-            //! Remove Old Image
-            if ($request->hasFile('img') && $removeWedding->img !== null) {
-                $oldPath = public_path('assets/images/weddings/' . $removeWedding->img);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
-                }
-            }
-            //! Insert Old Images
-            if ($request->hasFile('img')) {
-                $image = $request->file('img');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('assets/images/weddings');
-                $image->move($destinationPath, $imageName);
-                $removeWedding->img = $imageName;
-            }
-            $update = $removeWedding->update([
-                'title' => $request->title,
-                'details' => $request->details,
-                'date' => $request->date,
-                'address' => $request->address,
-                'location' => $request->location,
-            ]);
+            $update = $removeWedding->update($request->all());
             if ($update) {
                 $notificationSuccess = [
                     'message' => 'تم التحديث بنجاح',

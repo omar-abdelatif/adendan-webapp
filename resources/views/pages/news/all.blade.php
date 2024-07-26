@@ -28,13 +28,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-lg-3 mb-md-2">
                                     <label for="title" class="text-white">العنوان</label>
-                                    <input type="text" class="form-control text-white" id="newsTitle" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':\\\|,.<>\/?~`]/g, '')" name="title" placeholder="عنوان الخبر" required>
+                                    <input type="text" class="form-control text-white" id="newsTitle" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};:'\\|,.<>\/?~`]/g, '')" name="title" placeholder="عنوان الخبر" required>
                                     <p class="required d-none text-danger fw-bold mb-0" id="newsReq">حقل العنوان مطلوب</p>
                                     <p class="required d-none text-danger fw-bold mb-0" id="newsMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 7 أحرف</p>
                                 </div>
                                 <div class="form-group mb-lg-3 mb-md-2">
                                     <label for="details" class="text-white">تفاصيل الخبر</label>
-                                    <textarea name="description" id="details" class="form-control text-light text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s!@#$%^&*()_+\-=\[\]{};':\\\|,.<>\/?~`]/g, '')" placeholder="تفاصيل الخبر" required></textarea>
+                                    <textarea name="description" id="details" class="form-control text-light text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};:'\\|,.<>\/?~`]/g, '')" placeholder="تفاصيل الخبر" required></textarea>
                                     <p class="required d-none text-danger fw-bold mb-0" id="detailsReq">حقل التفاصيل مطلوب</p>
                                 </div>
                                 <div class="form-group mb-lg-3 mb-md-2">
