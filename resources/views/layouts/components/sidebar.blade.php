@@ -80,14 +80,6 @@
                                         <span>السكن</span>
                                     </a>
                                 </li>
-                                {{-- <li>
-                                    <a href="{{route('subscriptionRole.reports.age')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
-                                        </svg>
-                                        <span>السن</span>
-                                    </a>
-                                </li> --}}
                                 <li>
                                     <a href="{{route('subscriptionRole.reports.jobs')}}">
                                         <svg class="stroke-icon">
@@ -185,12 +177,6 @@
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#fill-user') }}"></use>
                                 </svg>
                                 <span>حرفيين</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-list">
-                            <a href="{{route('mediaRole.tomb.all')}}" class="sidebar-link sidebar-title">
-                                <i class="fa-solid fa-tombstone-blank text-muted fs-5"></i>
-                                <span>المقابر</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
