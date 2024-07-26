@@ -81,7 +81,7 @@ class SubscribersController extends Controller
             $subscriberId = $store->id;
             Subscriptions::create([
                 'member_id' => $request->member_id,
-                'subscription_cost' => $cost + 10,
+                'subscription_cost' => $cost + 50,
                 'invoice_no' => $request->invoice_no,
                 'period' => $year,
                 'payment_type' => 'إشتراك',

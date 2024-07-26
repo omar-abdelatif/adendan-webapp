@@ -93,10 +93,6 @@
                                         </th>
                                         <th class="text-center">
                                             <i class="fas fa-question-circle pe-2"></i>
-                                            توقيت المعامله
-                                        </th>
-                                        <th class="text-center">
-                                            <i class="fas fa-question-circle pe-2"></i>
                                             نوع المعامله
                                         </th>
                                         <th class="text-center">
@@ -112,7 +108,6 @@
                                         @foreach ($transactions as $item)
                                             <tr>
                                                 <td class="text-center">{{$item->created_at->format('Y-m-d')}}</td>
-                                                <td class="text-center">{{$item->created_at->format('H:i')}}</td>
                                                 <td class="text-center">
                                                     @if ($item->transaction_type === 'بنك/ايداع' || $item->transaction_type === 'ايداع')
                                                         <span class="badge badge-success rounded-pill">إيداع</span>

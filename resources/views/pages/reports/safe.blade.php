@@ -132,10 +132,6 @@
                                             تـاريخ المـعامله
                                         </th>
                                         <th class="text-center">
-                                            <i class="fas fa-calendar-week pe-2"></i>
-                                            توقيت المـعامله
-                                        </th>
-                                        <th class="text-center">
                                             <i class="fas fa-question-circle pe-2"></i>
                                             الـنوع
                                         </th>
@@ -158,7 +154,6 @@
                                         <tr>
                                             <td class="text-center">{{$safe->member_id}}</td>
                                             <td class="text-center">{{$safe->created_at->format('Y-m-d')}}</td>
-                                            <td class="text-center" dir="ltr">{{$safe->created_at->format('h:i a')}}</td>
                                             <td class="text-center">{{$safe->transaction_type}}</td>
                                             <td class="text-center">
                                                 @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/إيداع' || $safe->transaction_type === 'متأخرات التبرعات' || $safe->transaction_type === 'تبرع كلي' || $safe->transaction_type === 'تبرع جزئي'|| $safe->transaction_type === 'خزنة/إيداع')
