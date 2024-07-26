@@ -88,7 +88,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{$user->role === 'admin' ? route('thumbs.delete', $thumb->id) : route('mediaRole.thumbs.delete')}} method="get">
+                                                                <form action={{$user->role === 'admin' ? route('thumbs.delete', $thumb->id) : route('mediaRole.thumbs.delete', $thumb->id)}} method="get">
                                                                     @csrf
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
@@ -183,7 +183,7 @@
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-body">
-                                                                                    <form action={{$user->role === 'admin' ? route('video.delete', $vid->id) : route('mediaRole.video.delete')}} method="get">
+                                                                                    <form action={{$user->role === 'admin' ? route('video.delete', $vid->id) : route('mediaRole.video.delete', $vid->id)}} method="get">
                                                                                         @csrf
                                                                                         <div class="form-title text-center">
                                                                                             <h3 class="text-white my-2">هل أنت متأكد من الحذف</h3>
