@@ -30,7 +30,7 @@
                             @if ($news->category === 'عزاء')
                                 <img loading="lazy" class="rounded-5 w-100" src={{asset('assets/frontend/images/bg/news/death/download.jpeg')}} alt="{{$news->title}}">
                             @else
-                                <img loading="lazy" class="rounded-5 w-100" src="{{$news->img ? asset('assets/images/news-imgs/'.$news->img ): 'https://placehold.co/150'}}" alt="{{$news->title}}">
+                                <img loading="lazy" class="rounded-5 w-100" src="{{$news->img ? asset('assets/images/news-imgs/'.$news->img ) : asset('assets/images/1708715916.png')}}" alt="{{$news->title}}">
                             @endif
                         </div>
                     </div>

@@ -56,7 +56,7 @@
                                             <div class="col-md-6 col-lg-3">
                                                 <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                                     <div class="card-image">
-                                                        <img src="{{asset('assets/images/news-imgs/'.$gn->img)}}" alt="">
+                                                        <div style="width: 100%; height:250px; background-image:url({{ $gn->img ? asset('assets/images/news-imgs/'.$gn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
                                                                 <h5 class="mb-0">{{$gn->title}}</h5>
@@ -94,7 +94,7 @@
                                             <div class="col-md-6 col-lg-3">
                                                 <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                                     <div class="card-image">
-                                                        <img src="{{asset('assets/images/news-imgs/'.$cn->img)}}" alt="{{$cn->img}}">
+                                                        <div style="width: 100%; height:250px; background-image:url({{ $cn->img ? asset('assets/images/news-imgs/'.$cn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
                                                                 <h5 class="mb-0">{{$cn->title}}</h5>
@@ -170,7 +170,7 @@
                                             <div class="col-md-6 col-lg-3">
                                                 <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                                     <div class="card-image">
-                                                        <img src="{{asset('assets/images/news-imgs/'.$wn->img)}}" alt="{{$wn->img}}">
+                                                        <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
                                                                 <h5 class="mb-0">{{$wn->title}}</h5>
@@ -208,7 +208,7 @@
                                             <div class="col-md-6 col-lg-3">
                                                 <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                                     <div class="card-image">
-                                                        <img src="{{asset('assets/images/news-imgs/'.$sn->img)}}" alt="{{$sn->img}}">
+                                                        <div style="width: 100%; height:250px; background-image:url({{ $sn->img ? asset('assets/images/news-imgs/'.$sn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
                                                                 <h5 class="mb-0">{{$sn->title}}</h5>
