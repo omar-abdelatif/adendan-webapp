@@ -104,14 +104,14 @@
                                         <span>التبرعات الداخلية</span>
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="{{route('subscriptionRole.reports.indebtedness')}}">
                                         <svg class="stroke-icon">
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                         </svg>
                                         <span>مديونية الإشتراكات</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{route('subscriptionRole.reports.search')}}">
                                         <svg class="stroke-icon">
@@ -322,14 +322,14 @@
                                         <span>التبرعات الداخلية</span>
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="{{route('reports.indebtedness')}}">
                                         <svg class="stroke-icon">
                                             <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                         </svg>
                                         <span>مديونية الإشتراكات</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="{{route('reports.search')}}">
                                         <svg class="stroke-icon">
