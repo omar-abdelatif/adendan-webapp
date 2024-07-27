@@ -85,7 +85,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table display align-middle table-hover" id="table" data-order='[[0, "desc"], [1, "desc"]]' data-page-length='10'>
+                                <table class="table display align-middle table-hover" id="table" data-order='[[0, "desc"]]' data-page-length='10'>
                                     <thead>
                                         <th class="text-center">
                                             <i class="fas fa-calendar-week pe-2"></i>
