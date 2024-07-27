@@ -19,6 +19,7 @@
                                     <tr>
                                         <th class="text-center">رقم العضوية</th>
                                         <th class="text-center">الإسم</th>
+                                        <th class="text-center">الإشتراك السنوي</th>
                                         <th class="text-center">مبلغ المديونية</th>
                                         <th class="text-center">باقي المبلغ المطلوب</th>
                                         <th class="text-center">حالة الإشتراك</th>
@@ -29,6 +30,7 @@
                                         <tr>
                                             <td>{{$debt->member_id}}</td>
                                             <td>{{$debt->name}}</td>
+                                            <td>{{$debt->yearly_cost}}</td>
                                             @if (count($debt->delays) > 0)
                                                 @foreach ($debt->delays as $delay)
                                                     <td class="text-muted text-center">

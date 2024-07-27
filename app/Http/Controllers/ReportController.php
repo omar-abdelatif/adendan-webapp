@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\Delay;
 use App\Models\Donations;
 use App\Models\Donators;
 use App\Models\Olddelays;
@@ -28,7 +29,11 @@ class ReportController extends Controller
         $sumTotalOldDelays = $TotalOldDelays->sum('amount');
         $sumDelayAmount = $TotalOldDelays->sum('delay_amount');
         $sumDelayRemaining = $TotalOldDelays->sum('delay_remaining');
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelays', 'sumDelayAmount', 'sumDelayRemaining'));
+        $totalDelay = Delay::get();
+        $sumTotalDelays = $totalDelay->sum('yearly_cost');
+        $sumDelayPaied = $totalDelay->sum('paied');
+        $sumDelayRemaing = $totalDelay->sum('remaing');
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelays', 'sumDelayAmount', 'sumDelayRemaining', 'sumTotalDelays', 'sumDelayPaied', 'sumDelayRemaing'));
     }
     public function subscriptionFilter()
     {
