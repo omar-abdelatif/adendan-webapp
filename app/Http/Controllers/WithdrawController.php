@@ -48,7 +48,7 @@ class WithdrawController extends Controller
                     $newBank = $totalBank->amount + $validated['amount'];
                     $totalBank->update(['amount' => $newBank]);
                     Bank::create([
-                        'amount' => $newBank,
+                        'amount' => $validated['amount'],
                         'transaction_type' => 'بنك/ايداع',
                         'proof_img' => $imagename,
                     ]);
