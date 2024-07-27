@@ -135,6 +135,57 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-6 box-col-6">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
+                            </div>
+                            <div>
+                                <h5>إجمالي مديونية الإشتراك</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">{{$sumTotalDelays}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 box-col-6">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
+                            </div>
+                            <div>
+                                <h5>المحصل ( المديونية )</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">{{$sumDelayPaied}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 box-col-6">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
+                            </div>
+                            <div>
+                                <h5>المتبقي ( المديونية )</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">{{$sumDelayRemaing}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
