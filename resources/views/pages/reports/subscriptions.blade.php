@@ -147,7 +147,7 @@
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumTotalDelays}} ج.م</h5>
+                            <h5 class="mb-1">{{$sumTotalOldDelaysSubscriptions}} ج.م</h5>
                         </div>
                     </div>
                 </div>

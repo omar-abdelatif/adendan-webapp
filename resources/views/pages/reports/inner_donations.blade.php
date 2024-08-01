@@ -120,6 +120,36 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-4 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/fluency/64/community-grants.png" alt="community-grants"/>
+                            </div>
+                            <h5 class="mb-0">متأخرات التبرعات</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-0">{{$sumTotalOldDelaysDonations}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 box-col-12">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="64" height="64" src="https://img.icons8.com/color/64/charity-donation.png" alt="charity-donation"/>
+                            </div>
+                            <h5 class="mb-0">مديونية التبرعات</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-0"> {{0}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
