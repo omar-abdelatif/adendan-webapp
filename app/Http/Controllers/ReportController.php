@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\Delay;
 use App\Models\Donations;
-use App\Models\Donators;
 use App\Models\Olddelays;
-use App\Models\OuterDonations;
-use App\Models\SafeReports;
-use App\Models\Subscribers;
 use App\Models\TotalBank;
 use App\Models\TotalSafe;
+use App\Models\SafeReports;
+use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use App\Models\OuterDonations;
 
 class ReportController extends Controller
 {
@@ -26,14 +25,14 @@ class ReportController extends Controller
         $nonActiveSubscribers = $subscribers->where('status', 0)->count();
         $pendingSubscribers = $subscribers->where('status', 2)->count();
         $TotalOldDelays = Olddelays::get();
-        $sumTotalOldDelays = $TotalOldDelays->sum('amount');
+        $sumTotalOldDelaysSubscriptions = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('amount');
         $sumDelayAmount = $TotalOldDelays->sum('delay_amount');
         $sumDelayRemaining = $TotalOldDelays->sum('delay_remaining');
         $totalDelay = Delay::get();
         $sumTotalDelays = $totalDelay->sum('yearly_cost');
         $sumDelayPaied = $totalDelay->sum('paied');
         $sumDelayRemaing = $totalDelay->sum('remaing');
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelays', 'sumDelayAmount', 'sumDelayRemaining', 'sumTotalDelays', 'sumDelayPaied', 'sumDelayRemaing'));
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelaysSubscriptions', 'sumDelayAmount', 'sumDelayRemaining', 'sumTotalDelays', 'sumDelayPaied', 'sumDelayRemaing'));
     }
     public function subscriptionFilter()
     {
@@ -125,13 +124,17 @@ class ReportController extends Controller
         $donationAffiliateSum = $donationAffiliate->sum('amount');
         $donationDev = Donations::where('donation_category', 'تبرع تنمية')->get();
         $donationDevSum = $donationDev->sum('amount');
+        $TotalOldDelays = Olddelays::get();
+        $sumTotalOldDelaysDonations = $TotalOldDelays->where('old_delay_type', 'تبرعات')->sum('amount');
+
         return view('pages.reports.inner_donations', compact([
             'donations',
             'donationDeathCarSum',
             'donationTombsSum',
             'donationHeadquartersSum',
             'donationAffiliateSum',
-            'donationDevSum'
+            'donationDevSum',
+            'sumTotalOldDelaysDonations'
         ]));
     }
     //! Indebtedness ( المديونية )
