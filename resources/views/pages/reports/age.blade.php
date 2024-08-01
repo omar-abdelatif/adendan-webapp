@@ -7,10 +7,10 @@
     <li class="breadcrumb-item">التقارير</li>
     <li class="breadcrumb-item active">تقارير السن</li>
 @endsection
-@section('script')
+{{-- @section('script')
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
-@endsection
+@endsection --}}
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -21,7 +21,7 @@
                             <form action="{{route('reports.age')}}" method="get">
                                 @csrf
                                 <div class="form-group d-flex align-items-center">
-                                    <input class="datepicker-age form-control text-white digits" name="birthdate" readonly id="confirmpasswordwizard" type="text" placeholder="تاريخ الميلاد" data-language="ar" dir="rtl">
+                                    <input class="form-control text-muted" name="birthdate" type="text" placeholder="سنة الميلاد مثال ( 1980 )">
                                     <button type="submit" class="btn btn-success px-4 ms-3">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>

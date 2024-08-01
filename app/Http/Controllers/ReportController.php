@@ -77,7 +77,9 @@ class ReportController extends Controller
         if ($ageKey == "") {
             $message = "برجاء إدخال تاريخ ميلاد صحيح";
         } else {
-            $ages = Subscribers::where('birthdate', 'like', "%$ageKey%")->get();
+            $year = date('Y', strtotime($ageKey));
+            $ages = Subscribers::whereYear('birthdate', $year)->get();
+            dd($ages);
             if ($ages->isEmpty()) {
                 $message = 'لا توجد نتائج بحث عن "' . $ageKey . '".';
             }
