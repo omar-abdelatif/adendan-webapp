@@ -79,7 +79,6 @@ class ReportController extends Controller
         } else {
             $year = date('Y', strtotime($ageKey));
             $ages = Subscribers::whereYear('birthdate', $year)->get();
-            dd($ages);
             if ($ages->isEmpty()) {
                 $message = 'لا توجد نتائج بحث عن "' . $ageKey . '".';
             }
