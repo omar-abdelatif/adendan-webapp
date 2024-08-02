@@ -9,10 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="description" content="جمعية أدندان الخيرية">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
-        @yield('meta')
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         <meta name="keywords" content="جميعة الرسالة, جمعية مصر الخير, جمعية الأورمان, جميعة أدندان الخيرية, أدندان">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2868032844853203" crossorigin="anonymous"></script>
+        @yield('meta')
+        <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         @include('frontend.layouts.assets.css')
     </head>
     <body oncontextmenu="return false;">
