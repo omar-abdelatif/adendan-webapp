@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         @vite('resources/js/app.js')
-        <title>جمعية أدندان الخيرية</title>
+        <title>جمعية أدندان الخيرية | @yield('title')</title>
         <meta name="theme-color" content="#2d6c81" />
         <meta name="author" content="جمعية أدندان الخيرية">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">

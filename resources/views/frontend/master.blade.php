@@ -1,4 +1,7 @@
 @extends('frontend.layouts.master')
+@section('title')
+    الصفحة الرئيسية
+@endsection
 @section('meta')
     <meta property="og:url" content="https://adendan.com/">
     <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
