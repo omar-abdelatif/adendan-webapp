@@ -24,7 +24,7 @@ class SubscribersController extends Controller
         $cost = $value[0];
         $year = $value[1];
         $currentSubCost = $cost / 12 * $halfDelay;
-        $subs = Subscribers::lazy()->paginate(10);
+        $subs = Subscribers::paginate(10);
         $members = Subscribers::with('delays')->get();
         $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
