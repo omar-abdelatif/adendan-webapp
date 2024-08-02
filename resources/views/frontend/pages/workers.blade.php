@@ -1,4 +1,7 @@
 @extends('frontend.layouts.master')
+@section('title')
+    الحرفيين
+@endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item">
         <a href={{route('site.index')}}>الرئيسية</a>
