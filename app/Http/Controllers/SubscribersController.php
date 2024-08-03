@@ -24,7 +24,7 @@ class SubscribersController extends Controller
         $cost = $value[0];
         $year = $value[1];
         $currentSubCost = $cost / 12 * $halfDelay;
-        $subs = Subscribers::paginate(10);
+        $subs = Subscribers::get();
         $members = Subscribers::with('delays')->get();
         $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
@@ -78,10 +78,12 @@ class SubscribersController extends Controller
             'status' => 1
         ]);
         if ($store) {
+            $halfDelay = $this->insertHalfDelay();
+            $currentSubCost = $cost / 12 * $halfDelay;
             $subscriberId = $store->id;
             Subscriptions::create([
                 'member_id' => $request->member_id,
-                'subscription_cost' => $cost + 50,
+                'subscription_cost' => $currentSubCost + 50,
                 'invoice_no' => $request->invoice_no,
                 'period' => $year,
                 'payment_type' => 'إشتراك',

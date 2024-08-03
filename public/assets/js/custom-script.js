@@ -21,28 +21,6 @@ $(document).ready(function () {
         pagingType: "simple_numbers",
         ordering: true,
         deferRender: true,
-        // serverSide: true,
-        // ajax: "{{ route('subscribers.all') }}",
-        // columns: [
-        //     { data: "member_id" },
-        //     { data: "name" },
-        //     { data: "nickname" },
-        //     { data: "ssn" },
-        //     { data: "address" },
-        //     { data: "educational_qualification" },
-        //     { data: "qualification_date" },
-        //     { data: "job" },
-        //     { data: "job_destination" },
-        //     { data: "job_tel" },
-        //     { data: "job_address" },
-        //     { data: "home_tel" },
-        //     { data: "martial_status" },
-        //     { data: "birthdate" },
-        //     { data: "mobile_no" },
-        //     { data: "membership_type" },
-        //     { data: "id_img" },
-        //     { data: "status" },
-        // ],
     });
     //! Add new row
     $(".addRow").click(function () {
