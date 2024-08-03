@@ -30,7 +30,6 @@
             });
         })
     </script>
-    <script src="{{asset('assets/js/ajax_requests.js')}}"></script>
 @endsection
 @section('modals')
     <div class="btn-group" role="group">
@@ -478,7 +477,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsible">
-                            <table id="subscribersTable" class="table table-hover align-middle text-center table-hover" data-order='[[0, "asc"]]' data-page-length='10'>
+                            <table id="table" class="table table-hover align-middle text-center table-hover" data-order='[[0, "asc"]]' data-page-length='10'>
                                 <thead>
                                     <tr>
                                         <th class="text-muted text-center">رقم العضوية</th>
@@ -510,26 +509,33 @@
                                                     </button>
                                                     <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
                                                         @if ($user->role === 'subscriptions')
+                                                            {{-- ! History ! --}}
                                                             <a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href={{route('subscriptionRole.subscription.history',$member->id)}}>
                                                                 <i class="icofont icofont-eye"></i>
                                                             </a>
+                                                            {{-- ! Edit Member ! --}}
                                                             <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
                                                                 <i class="icofont icofont-ui-edit"></i>
                                                             </a>
+                                                            {{-- ! Donation History ! --}}
                                                             <a href="{{route('subscriptionRole.donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
                                                                 <i class="fa-solid fa-book-heart"></i>
                                                             </a>
                                                         @elseif ($user->role === 'admin')
+                                                            {{-- ! History ! --}}
                                                             <a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href={{route('subscription.history',$member->id)}}>
                                                                 <i class="icofont icofont-eye"></i>
                                                             </a>
+                                                            {{-- ! Edit Member ! --}}
                                                             <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href={{route('subscriber.details',$member->id)}}>
                                                                 <i class="icofont icofont-ui-edit"></i>
                                                             </a>
+                                                            {{-- ! Donation History ! --}}
                                                             <a href="{{route('donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
                                                                 <i class="fa-solid fa-book-heart"></i>
                                                             </a>
                                                         @endif
+                                                        {{-- ! Donation ! --}}
                                                         <button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_{{$member->id}}">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
                                                         </button>
