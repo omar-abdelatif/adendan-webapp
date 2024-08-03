@@ -96,7 +96,12 @@
                                             <label class="form-label fw-bold text-white" for="firstnamewizard">
                                                 الحالة الإجتماعية
                                             </label>
-                                            <input class="form-control text-white" id="firstnamewizard" value="{{$subscriber->martial_status}}" name="martial_status" type="text" placeholder="الحالة الإجتماعية">
+                                            <select name="martial_status" id="martial_status" class="form-select">
+                                                <option selected disabled>الحالة الإجتماعية</option>
+                                                <option value="أعزب" {{$subscriber->martial_status === 'أعزب' ? 'selected' : ''}}>أعزب</option>
+                                                <option value="متزوج" {{$subscriber->martial_status === 'متزوج' ? 'selected' : ''}}>متزوج</option>
+                                                <option value="أرمل" {{$subscriber->martial_status === 'أرمل' ? 'selected' : ''}}>أرمل</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-6 mt-3">
                                             <label class="form-label fw-bold text-white" for="firstnamewizard">

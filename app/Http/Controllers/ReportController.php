@@ -26,8 +26,8 @@ class ReportController extends Controller
         $pendingSubscribers = $subscribers->where('status', 2)->count();
         $TotalOldDelays = Olddelays::get();
         $sumTotalOldDelaysSubscriptions = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('amount');
-        $sumDelayAmount = $TotalOldDelays->sum('delay_amount');
-        $sumDelayRemaining = $TotalOldDelays->sum('delay_remaining');
+        $sumDelayAmount = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('delay_amount');
+        $sumDelayRemaining = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('delay_remaining');
         $totalDelay = Delay::get();
         $sumTotalDelays = $totalDelay->sum('yearly_cost');
         $sumDelayPaied = $totalDelay->sum('paied');
@@ -170,7 +170,7 @@ class ReportController extends Controller
         $amount = $transactions->sum('amount');
         return view('pages.reports.bank', compact('transactions', 'amount', 'bankAmount'));
     }
-    //! Associates
+    //! Associates ( إنتساب )
     public function associates()
     {
         $associates = Subscribers::where('membership_type', 'إنتساب')->get();
