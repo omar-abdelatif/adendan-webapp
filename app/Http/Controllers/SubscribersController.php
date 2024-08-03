@@ -43,6 +43,9 @@ class SubscribersController extends Controller
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];
+        $halfDelay = $this->insertHalfDelay();
+        $currentSubCost = ($cost / 12) * $halfDelay;
+        $totalNewSubCost = $currentSubCost + 50;
         if ($request->hasFile('id_img') || $request->hasFile('img')) {
             //! ID Image
             $filename = $request->file('id_img');
@@ -55,6 +58,8 @@ class SubscribersController extends Controller
             $destinationPath = public_path('assets/images/subscribers/avatar/');
             $filename->move($destinationPath, $pImg);
         }
+        $totalSafe = TotalSafe::where('id', 1)->first();
+
         //! Insert The Subscriber
         $store = Subscribers::create([
             'member_id' => $request['member_id'],
@@ -78,18 +83,25 @@ class SubscribersController extends Controller
             'status' => 1
         ]);
         if ($store) {
-            $halfDelay = $this->insertHalfDelay();
-            $currentSubCost = $cost / 12 * $halfDelay;
             $subscriberId = $store->id;
             Subscriptions::create([
                 'member_id' => $request->member_id,
-                'subscription_cost' => $currentSubCost + 50,
+                'subscription_cost' => $totalNewSubCost,
                 'invoice_no' => $request->invoice_no,
                 'period' => $year,
                 'payment_type' => 'إشتراك',
                 'subscribers_id' => $subscriberId
             ]);
-            $this->safeInsert($request);
+            SafeReports::create([
+                'member_id' => $request->member_id,
+                'transaction_type' => 'إشتراك',
+                'amount' => $totalNewSubCost,
+                'invoice_no' => $request->invoice_no,
+            ]);
+            $sumAmount = $totalSafe->amount + $totalNewSubCost;
+            $totalSafe->update([
+                'amount' => $sumAmount,
+            ]);
             $notificationSuccess = [
                 "message" => "تم الإضافة بنجاح",
                 "alert-type" => "success",

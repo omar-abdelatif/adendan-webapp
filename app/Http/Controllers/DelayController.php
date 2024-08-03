@@ -189,7 +189,7 @@ class DelayController extends Controller
                                 'amount' => $sumAmount,
                             ]);
                             $notificationSuccess = [
-                                'message' => 'تم دفع كل المبلغ',
+                                'message' => 'تم دفع جزء من المبلغ',
                                 'alert-type' => 'success'
                             ];
                             return back()->with($notificationSuccess);
