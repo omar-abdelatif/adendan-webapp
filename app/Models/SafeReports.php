@@ -13,6 +13,7 @@ class SafeReports extends Model
         'member_id',
         'transaction_type',
         'amount',
-        'proof_img'
+        'proof_img',
+        'invoice_no'
     ];
 }
