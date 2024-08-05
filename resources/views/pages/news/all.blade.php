@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" id="newsSubmit" role="button" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                                                             <h3 class="text-white my-2">هل أنت متأكد من الحذف</h3>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                             <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                         </div>
                                                     </form>
@@ -229,7 +229,7 @@
                                                                     <input type="file" name="thumbnail[]" class="form-control" multiple accept="image/*">
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                 </div>
                                                             </div>

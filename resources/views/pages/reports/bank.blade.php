@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="modal-footer mt-3">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                             <button type="submit" role="button" id="BankSubmit" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>

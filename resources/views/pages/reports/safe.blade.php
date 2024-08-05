@@ -34,7 +34,7 @@
                                     <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                 </div>
                                 <div class="modal-footer mt-3">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="withdrawSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>

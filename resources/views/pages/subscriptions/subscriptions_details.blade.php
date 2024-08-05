@@ -48,7 +48,7 @@
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
                                 <div class="cart-options-content">
-                                    <h6 class="mb-0">مديونية الإشتراك</h6>
+                                    <h6 class="mb-0">الإشتراك الحالي</h6>
                                 </div>
                             </div>
                         </a>
@@ -82,7 +82,6 @@
                                                                 <th class="text-muted text-center">تاريخ الدفع</th>
                                                                 <th class="text-muted text-center">رقم الإيصال</th>
                                                                 <th class="text-muted text-center">قيمة المتأخرات المدفوعة</th>
-                                                                <th class="text-muted text-center">Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -113,122 +112,6 @@
                                                                             <span class="fw-bold">-</span>
                                                                         @endif
                                                                     </td>
-                                                                    <td>
-                                                                        <div class="btn-group" role="group">
-                                                                            <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                                            </button>
-                                                                            <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">
-                                                                                {{-- ! Delete ! --}}
-                                                                                <button type="button" class="btn btn-danger px-2 py-1" title="حذف الإشتراك" data-bs-toggle="modal" data-bs-target="#deleting_{{$item->id}}">
-                                                                                    <i class="icofont icofont-trash"></i>
-                                                                                </button>
-                                                                                {{-- ! Updating ! --}}
-                                                                                {{-- <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#updating_{{$item->id}}">
-                                                                                    <i class="icofont icofont-ui-edit"></i>
-                                                                                </button> --}}
-                                                                            </div>
-                                                                        </div>
-                                                                        {{-- ! Delete ! --}}
-                                                                        <div class="modal fade" id="deleting_{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">حذف إشتراك العضو {{$subscriber->name}}</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action={{route('subscription.destroy', $item->id)}} method="get">
-                                                                                            @csrf
-                                                                                            <div class="form-title text-center">
-                                                                                                <h1 class="text-white">هل أنت متأكد أنك تريد حذف</h1>
-                                                                                            </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                                <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        {{-- ! Updating ! --}}
-                                                                        {{-- <div class="modal fade" id="updating_{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog modal-lg">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">جار تحديث إشتراك العضو {{$item->name}}</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action={{route('subscription.update')}} method="post">
-                                                                                            @csrf
-                                                                                            <input type="hidden" name="id" value="{{$item->id}}">
-                                                                                            <div class="row">
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="title" class="text-white">رقم العضوية</label>
-                                                                                                        <input type="number" class="form-control text-white" value="{{$subscriber->member_id}}" name="member_id" placeholder="رقم العضوية" readonly>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="" class="text-white">نوع المدفوعات</label>
-                                                                                                        <select name="payment_type" class="form-select">
-                                                                                                            <option value="إشتراك" {{$item->payment_type === 'إشتراك' ? 'selected' : ''}}>إشتراك</option>
-                                                                                                            <option value="مديونية" {{$item->payment_type === 'مديونية' ? 'selected' : ''}}>مديونية</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="title" class="text-white">رقم الإيصال</label>
-                                                                                                        <input type="number" class="form-control text-white" name="invoice_no" value="{{$item->invoice_no}}" placeholder="رقم الإيضال">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="title" class="text-white">تاريخ الدفع</label>
-                                                                                                        <input type="date" class="form-control text-white" name="pay_date" value="{{$item->pay_date}}" placeholder="تاريخ الدفع">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="title" class="text-white">مبلغ إشتراك</label>
-                                                                                                        <input type="number" class="form-control text-white" name="subscription_cost" value="{{$item->subscription_cost}}" placeholder="أدخل مبلغ الإشتراك">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="title" class="text-white">مدة الإشتراك</label>
-                                                                                                        <input type="text" class="form-control text-white" min="2000" max="3000" name="period" value="{{$item->period}}" placeholder="مدة الإشتراك">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group">
-                                                                                                        <label for="delays" class="text-white">مبلغ المديونية</label>
-                                                                                                        <input type="number" id="delays" class="form-control text-white" name="delays" value="{{$item->delays}}" placeholder="أدخل مبلغ المديونية">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-6">
-                                                                                                    <div class="form-group">
-                                                                                                        <label for="delay_period" class="text-white">مدة المديونية</label>
-                                                                                                        <input type="number" id="delay_period" name="delays_period" class="form-control text-white" value="{{$item->delays_period}}" placeholder="مدة المديونية">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-lg-12">
-                                                                                                    <div class="modal-footer">
-                                                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                                        <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div> --}}
-                                                                    </td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -246,13 +129,13 @@
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <table id="table33" class="table display align-middle table-hover text-muted" data-order='[[0,"asc"]]' data-page-length="10">
+                                                <table id="table2" class="table display align-middle table-hover text-muted" data-order='[[0,"asc"]]' data-page-length="10">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">رقم العضوية</th>
                                                             <th class="text-center">فترة الإشتراك</th>
                                                             <th class="text-center">الإشتراك السنوي</th>
-                                                            <th class="text-center">المبلغ السابق</th>
+                                                            <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
@@ -305,7 +188,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                             <button type="submit" id="delaySubmit" role="button" data-DelaysForm-id = "{{$delay->id}}" class="btn btn-primary">تأكيد</button>
                                                                                         </div>
                                                                                     </form>
@@ -330,78 +213,78 @@
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <table id="table34" class="table display align-middle table-hover text-center text-muted" data-order='[[0,"asc"]]' data-page-length="10">
+                                                <table id="table3" class="table display align-middle table-hover text-center text-muted" data-order='[[0,"asc"]]' data-page-length="10">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">رقم العضوية</th>
                                                             <th class="text-muted text-center">المبلغ الكلي</th>
-                                                            <th class="text-muted text-center">المبلغ الإجمالي المدفوع</th>
-                                                            <th class="text-center">المبلغ الإجمالي المطلوب</th>
+                                                            <th class="text-muted text-center">المبلغ المدفوع</th>
+                                                            <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($oldelays as $delay)
-                                                                <tr>
-                                                                    <td>{{$delay->member_id}}</td>
-                                                                    <td>{{$delay->amount}}</td>
-                                                                    @if ($delay->delay_amount == null && $delay->delay_remaining == null)
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                    @else
-                                                                        <td>{{$delay->delay_amount}}</td>
-                                                                        <td>{{$delay->delay_remaining}}</td>
-                                                                    @endif
+                                                            <tr>
+                                                                <td>{{$delay->member_id}}</td>
+                                                                <td>{{$delay->amount}}</td>
+                                                                @if ($delay->delay_amount == null && $delay->delay_remaining == null)
                                                                     <td>
-                                                                        <button class="btn btn-secondary" title="دفع المتأخرات" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
-                                                                            <i class="fa-solid fa-money-bill"></i>
-                                                                        </button>
-                                                                        <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد متأخرات الإشتراك</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action="{{route('oldDelays.pay')}}" method="post" data-paymentForm-id="{{$delay->id}}">
-                                                                                            @csrf
-                                                                                            <div class="row">
-                                                                                                <input type="hidden" name="id" value="{{$delay->id}}"/>
-                                                                                                <div class="col-12">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="member_id" class="text-muted">رقم العضوية</label>
-                                                                                                        <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$delay->member_id}}" readonly>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                        <input type="text" class="text-muted form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="invoice" minlength="2" maxlength="5" placeholder="رقم الإيصال" data-inv-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentInvReq" data-inv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentInvMsg" data-inv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="olddelay" class="text-muted">المبلغ المدفوع</label>
-                                                                                                        <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
-                                                                                                    </div>
+                                                                        <span class="fw-bold">-</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="fw-bold">-</span>
+                                                                    </td>
+                                                                @else
+                                                                    <td>{{$delay->delay_amount}}</td>
+                                                                    <td>{{$delay->delay_remaining}}</td>
+                                                                @endif
+                                                                <td>
+                                                                    <button class="btn btn-secondary" title="دفع المتأخرات" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
+                                                                        <i class="fa-solid fa-money-bill"></i>
+                                                                    </button>
+                                                                    <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد متأخرات الإشتراك</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form action="{{route('oldDelays.pay')}}" method="post" data-paymentForm-id="{{$delay->id}}">
+                                                                                        @csrf
+                                                                                        <div class="row">
+                                                                                            <input type="hidden" name="id" value="{{$delay->id}}"/>
+                                                                                            <div class="col-12">
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="member_id" class="text-muted">رقم العضوية</label>
+                                                                                                    <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$delay->member_id}}" readonly>
                                                                                                 </div>
-                                                                                                <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
-                                                                                                    <button type="submit" role="button" data-PaymentSubmit-id="{{$delay->id}}" class="btn btn-primary">تأكيد</button>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="invoice" class="text-muted">رقم الإيصال</label>
+                                                                                                    <input type="text" class="text-muted form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="invoice" minlength="2" maxlength="5" placeholder="رقم الإيصال" data-inv-id="{{$delay->id}}" required>
+                                                                                                    <p class="required d-none text-danger paymentInvReq" data-inv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger paymentInvMsg" data-inv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="olddelay" class="text-muted">المبلغ المدفوع</label>
+                                                                                                    <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
+                                                                                                    <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
+                                                                                                    <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </form>
-                                                                                    </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
+                                                                                                <button type="submit" role="button" data-PaymentSubmit-id="{{$delay->id}}" class="btn btn-primary">تأكيد</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </td>
-                                                                </tr>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         @endforeach
                                                     </tbody>
                                                 </table>

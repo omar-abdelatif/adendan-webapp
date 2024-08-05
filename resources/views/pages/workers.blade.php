@@ -57,7 +57,7 @@
                                     <p class="required d-none text-danger mb-0" id="locMsg">يجب ان يكون العنوان باللغة العربية</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="workerSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                                                                                 <input type="text" name="location" placeholder="منطقة السكن" value="{{$worker->location}}" class="form-control text-white">
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -185,7 +185,7 @@
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>

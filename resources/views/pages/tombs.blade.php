@@ -57,7 +57,7 @@
                                     <p class="d-none required text-danger" id="locationReq">حقل الموقع مطلوب</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="tombSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                                                                 <input type="text" name="location" value="{{$tomb->location}}" placeholder="موقع المقبره" class="form-control text-muted">
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -199,7 +199,7 @@
                                                                         <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>

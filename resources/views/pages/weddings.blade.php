@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>

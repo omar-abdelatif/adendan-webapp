@@ -44,7 +44,7 @@
                             <p class="required d-none fw-bold text-danger mb-0" id="imgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                             <button type="submit" id="boardSubmit" role="button" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
@@ -127,7 +127,7 @@
                                                                                 <input type="file" class="form-control text-white" id="image" data-member-id="{{ $member->id }}" name="img" accept="image/*" value="{{ $member->img }}">
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -155,7 +155,7 @@
                                                                         <h1 class="text-white">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>

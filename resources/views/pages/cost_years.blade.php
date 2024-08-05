@@ -31,7 +31,7 @@
                             <p class="required d-none text-danger mb-0" id="amountMsg">يجب ان يكون المبلغ اكبر من صفر و مكون من رقمين</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                             <button type="submit" role="button" id="submitCost" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
@@ -69,7 +69,7 @@
                                         @foreach ($years as $year)
                                             <tr>
                                                 <td class="text-center">{{$i++}}</td>
-                                                <td class="text-center">07/{{$year->year}}</td>
+                                                <td class="text-center">{{$year->year}}</td>
                                                 <td class="text-center">{{$year->cost}}</td>
                                                 <td class="text-center">
                                                     {{-- ! Update ! --}}
@@ -98,7 +98,7 @@
                                                                                     <input type="number" name="cost" value="{{$year->cost}}" id="cost" class="form-control text-muted">
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                                 </div>
                                                                             </div>
@@ -126,7 +126,7 @@
                                                                             <h3 class="text-white my-2">هل أنت متأكد من الحذف</h3>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                             <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                         </div>
                                                                     </form>

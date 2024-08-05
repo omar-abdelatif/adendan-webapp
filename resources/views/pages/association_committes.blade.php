@@ -41,7 +41,7 @@
                                     <input type="text" class="form-control text-muted" name="tasks" placeholder="مهام الجمعية">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="associateSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                                                                 <input type="text" class="form-control text-muted" name="tasks" value="{{$asso->tasks}}" placeholder="مهام الجمعية">
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -147,7 +147,7 @@
                                                                         <h3 class="text-muted my-2">هل أنت متأكد من الحذف</h3>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>
