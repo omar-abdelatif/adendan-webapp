@@ -74,7 +74,7 @@ class ReportController extends Controller
         $ageKey = $request->input('birthdate');
         $ages = collect();
         if ($ageKey == "") {
-            $message = "برجاء إدخال تاريخ ميلاد صحيح";
+            $message = "برجاء إدخال سنة ميلاد صحيح";
         } else {
             $year = date('Y', strtotime($ageKey));
             $ages = Subscribers::whereYear('birthdate', $year)->get();
@@ -95,7 +95,7 @@ class ReportController extends Controller
         $locationKey = $request->input('address');
         $locations = collect();
         if ($locationKey == "") {
-            $message = "برجاء إدخال العنوان.";
+            $message = "برجاء إدخال إسم المنطقة.";
         } else {
             $locations = Subscribers::where('address', 'like', "%$locationKey%")->get();
             if ($locations->isEmpty()) {

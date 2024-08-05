@@ -43,7 +43,7 @@
                             <input type="text" class="form-control mt-3 d-none" name="duration" placeholder="مدة التبرع" id="duration">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                             <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                         </div>
                     </form>
@@ -139,7 +139,7 @@
                                                                         <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>
@@ -181,7 +181,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -228,7 +228,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                     </div>
                                                                 </form>

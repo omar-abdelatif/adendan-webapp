@@ -17,7 +17,7 @@
                             <form action="{{route('reports.location')}}" method="get">
                                 @csrf
                                 <div class="form-group d-flex align-items-center">
-                                    <input class="form-control text-white" name="address" type="text" placeholder="منطقة السكن">
+                                    <input class="form-control text-white" name="address" type="text" placeholder="إسم المنطقة">
                                     <button type="submit" class="btn btn-success px-4 ms-3">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
@@ -39,7 +39,7 @@
                                             <th class="text-center">#</th>
                                             <th class="text-center">رقم العضوية</th>
                                             <th class="text-center">الأسم</th>
-                                            <th class="text-center">السكن</th>
+                                            <th class="text-center">العنوان</th>
                                             <th class="text-center">رقم المحمول</th>
                                         </tr>
                                     </thead>
@@ -63,7 +63,7 @@
                                             <th class="text-center"></th>
                                             <th class="text-center">رقم العضوية</th>
                                             <th class="text-center">الأسم</th>
-                                            <th class="text-center">السكن</th>
+                                            <th class="text-center">العنوان</th>
                                             <th class="text-center">رقم المحمول</th>
                                             <th class="text-center">حالة الإشتراك</th>
                                         </tr>

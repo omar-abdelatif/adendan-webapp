@@ -44,9 +44,7 @@
                                         <tr>
                                             <th class="text-center">رقم العضوية</th>
                                             <th class="text-center">الأسم</th>
-                                            <th class="text-center">السن</th>
-                                            <th class="text-center">رقم المحمول</th>
-                                            <th class="text-center">حالة الإشتراك</th>
+                                            <th class="text-center">تاريخ الميلاد</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,14 +53,6 @@
                                                 <td>{{$age->member_id}}</td>
                                                 <td>{{$age->name}}</td>
                                                 <td>{{$age->birthdate}}</td>
-                                                <td>{{$age->mobile_no}}</td>
-                                                <td>
-                                                    @if($age->status == 1)
-                                                        <span class="badge rounded-pill badge-success">الإشتراك مفعل</span>
-                                                    @else
-                                                        <span class="badge rounded-pill badge-danger">الإشتراك غير مفعل</span>
-                                                    @endif
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -74,9 +64,7 @@
                                             <th class="text-center"></th>
                                             <th class="text-center">رقم العضوية</th>
                                             <th class="text-center">الأسم</th>
-                                            <th class="text-center">السن</th>
-                                            <th class="text-center">رقم المحمول</th>
-                                            <th class="text-center">حالة الإشتراك</th>
+                                            <th class="text-center">تاريخ الميلاد</th>
                                         </tr>
                                     </thead>
                                 </table>

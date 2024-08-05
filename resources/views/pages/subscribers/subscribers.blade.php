@@ -381,7 +381,7 @@
                                     <p class="required d-none text-danger mb-0 fw-bold" id="costMsg">يجب ان يكون اقصى رقم هو 4 ارقام</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="debtSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -452,7 +452,7 @@
                                     <p class="required d-none text-danger mb-0 fw-bold fs-6" id="DelayAmountMsg">يجب ان يكون المبلغ مكون من 2 رقم على الاقل</p>
                                 </div>
                                 <div class="modal-footer mt-3">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" id="DonationDebtSubmit" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -582,7 +582,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer mt-3">
-                                                                        <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="button" class="btn btn-danger text-muted" data-bs-dismiss="modal">إغلاق</button>
                                                                         <button type="submit" role="button" class="btn btn-primary text-muted">تأكيد</button>
                                                                     </div>
                                                                 </form>

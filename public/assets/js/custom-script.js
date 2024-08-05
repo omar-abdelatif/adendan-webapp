@@ -22,6 +22,19 @@ $(document).ready(function () {
         ordering: true,
         deferRender: true,
     });
+    //! Multi Datatables in Same Page
+    for (let i = 0; i < 500; i++) {
+        $("#table" + i).DataTable({
+            paging: true,
+            scrollY: table[i],
+            ordering: true,
+            autoWidth: true,
+            searching: true,
+            pagingTag: "button",
+            pagingType: "simple_numbers",
+            deferRender: true,
+        });
+    }
     //! Add new row
     $(".addRow").click(function () {
         let newRow = $(
@@ -44,24 +57,6 @@ $(document).ready(function () {
         dateFormat: "yyyy-mm-dd",
     });
 });
-//! Multi Datatables in Same Page
-for (let i = 0; i < 500; i++) {
-    let table = document.querySelector("#table" + i);
-    new DataTable(table, {
-        paging: true,
-        // scrollY: tables[i],
-        ordering: true,
-        autoWidth: true,
-        searching: true,
-        pagingTag: "button",
-        pagingType: "simple_numbers",
-        deferRender: true,
-        // serverSide: true,
-        scroller: {
-            loadingIndicator: true,
-        },
-    });
-}
 //! Remove Alert After  5 Seconds
 const errors = document.querySelectorAll("#error");
 errors.forEach((error) => {

@@ -32,7 +32,7 @@
                                     <input type="text" name="url[]" class="form-control text-center text-white mb-4" placeholder="رابط الفيديو">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                                                                 <h1 class="text-center">متأكد من الحذف ؟</h1>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                 <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                             </div>
                                                                         </div>
@@ -165,7 +165,7 @@
                                                                                                     <input type="text" class="form-control text-white" name="url" value="{{$vid->url}}" placeholder="عنوان الخبر">
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                                     <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                                                 </div>
                                                                                             </div>
@@ -189,7 +189,7 @@
                                                                                             <h3 class="text-white my-2">هل أنت متأكد من الحذف</h3>
                                                                                         </div>
                                                                                         <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إالغاء</button>
+                                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                                                             <button type="submit" role="button" class="btn btn-primary">تأكيد</button>
                                                                                         </div>
                                                                                     </form>
