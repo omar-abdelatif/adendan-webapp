@@ -76,7 +76,7 @@
                                                     <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-muted text-center">قيمة الإشتراك</th>
+                                                                <th class="text-muted text-center">قيمة الإشتراك المدفوع</th>
                                                                 <th class="text-muted text-center">فترة الإشتراك</th>
                                                                 <th class="text-muted text-center">نوع الدفع</th>
                                                                 <th class="text-muted text-center">تاريخ الدفع</th>

@@ -221,7 +221,7 @@
                                                                     <img src={{asset('assets/images/news-imgs/'.$new->img)}} width="60" data-member-id="{{ $new->id }}" class="rounded img-fluid" id="showImage_{{ $new->id }}" alt="{{$new->img}}">
                                                                 </div>
                                                                 <div class="form-group mt-3">
-                                                                    <label for="" class="text-white">صورة الخبر</label>
+                                                                    <label for="image" class="text-white">صورة الخبر</label>
                                                                     <input type="file" name="img" id="image" data-member-id="{{ $new->id }}" class="form-control" value={{$new->img}} alt="{{$new->img}}" accept="image/*">
                                                                 </div>
                                                                 <div class="form-group mt-3">

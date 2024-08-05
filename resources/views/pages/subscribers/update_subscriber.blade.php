@@ -45,69 +45,79 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label class="form-label fw-bold text-white" for="email-basic-wizard">
-                                                الأسم الكامل
-                                            </label>
-                                            <input class="form-control text-white" id="email-basic-wizard" type="text" value="{{$subscriber->name}}" name="name" placeholder="مثلا: محمد أحمد محمود">
+                                            <div class="form-group">
+                                                <label class="form-label fw-bold text-white" for="email-basic-wizard">
+                                                    الأسم الكامل
+                                                </label>
+                                                <input class="form-control text-white" id="email-basic-wizard" type="text" value="{{$subscriber->name}}" name="name" placeholder="مثلا: محمد أحمد محمود">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="confirmpasswordwizard">
+                                                    تاريخ الميلاد
+                                                </label>
+                                                <input class="form-control text-white" name="birthdate" value="{{$subscriber->birthdate}}" id="confirmpasswordwizard" type="date" placeholder="تاريخ الميلاد">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="validatemobilenumber">
+                                                    رقم المحمول
+                                                </label>
+                                                <input class="form-control text-white" id="validatemobilenumber" value="{{$subscriber->mobile_no}}" name="mobile_no" type="number" placeholder="رقم المحمول">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <div class="id-img mb-3 text-center">
+                                                    <img src={{asset('assets/images/subscribers/'.$subscriber->id_img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="idImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
+                                                </div>
+                                                <label class="form-label fw-bold text-white" for="id_img">
+                                                    صورة البطاقة الشخصية
+                                                </label>
+                                                <input class="form-control text-white" value="{{$subscriber->id_img}}" name="id_img" data-member-id="{{ $subscriber->id }}" id="id_img" type="file" accept="image/*">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="firstnamewizard">
+                                                    الحالة الإجتماعية
+                                                </label>
+                                                <select name="martial_status" id="martial_status" class="form-select">
+                                                    <option selected disabled>الحالة الإجتماعية</option>
+                                                    <option value="أعزب" {{$subscriber->martial_status === 'أعزب' ? 'selected' : ''}}>أعزب</option>
+                                                    <option value="متزوج" {{$subscriber->martial_status === 'متزوج' ? 'selected' : ''}}>متزوج</option>
+                                                    <option value="أرمل" {{$subscriber->martial_status === 'أرمل' ? 'selected' : ''}}>أرمل</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label class="form-label fw-bold text-white" for="email-basic-wizard">
-                                                اللقب و إسم الشهرة
-                                            </label>
-                                            <input class="form-control text-white" id="email-basic-wizard" type="text" name="nickname" value="{{$subscriber->nickname}}" placeholder="مثلا: محمد أحمد محمود">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="confirmpasswordwizard">
-                                                تاريخ الميلاد
-                                            </label>
-                                            <input class="form-control text-white" name="birthdate" value="{{$subscriber->birthdate}}" id="confirmpasswordwizard" type="date" placeholder="تاريخ الميلاد">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="passwordwizard">
-                                                العنوان
-                                            </label>
-                                            <input class="form-control text-white" name="address" id="passwordwizard" value="{{$subscriber->address}}" type="text" placeholder="عنوان المشترك">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="validatemobilenumber">
-                                                رقم المحمول
-                                            </label>
-                                            <input class="form-control text-white" id="validatemobilenumber" value="{{$subscriber->mobile_no}}" name="mobile_no" type="number" placeholder="رقم المحمول">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="personalImg">
-                                                الصورة الشخصية
-                                            </label>
-                                            <input class="form-control text-white" value="{{$subscriber->img}}" name="img" id="personalImg" type="file" accept="image/*">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="personalImg">
-                                                صورة البطاقة الشخصية
-                                            </label>
-                                            <input class="form-control text-white" value="{{$subscriber->id_img}}" name="id_img" id="personalImg" type="file" accept="image/*">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="firstnamewizard">
-                                                الرقم القومي
-                                            </label>
-                                            <input class="form-control text-white" id="firstnamewizard" value="{{$subscriber->ssn}}" name="ssn" type="number" placeholder="أدخل الرقم القومي">
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="firstnamewizard">
-                                                الحالة الإجتماعية
-                                            </label>
-                                            <select name="martial_status" id="martial_status" class="form-select">
-                                                <option selected disabled>الحالة الإجتماعية</option>
-                                                <option value="أعزب" {{$subscriber->martial_status === 'أعزب' ? 'selected' : ''}}>أعزب</option>
-                                                <option value="متزوج" {{$subscriber->martial_status === 'متزوج' ? 'selected' : ''}}>متزوج</option>
-                                                <option value="أرمل" {{$subscriber->martial_status === 'أرمل' ? 'selected' : ''}}>أرمل</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 mt-3">
-                                            <label class="form-label fw-bold text-white" for="firstnamewizard">
-                                                ت المنزل
-                                            </label>
-                                            <input class="form-control text-white" id="firstnamewizard" value="{{$subscriber->home_tel}}" name="home_tel" type="number" placeholder="ت المنزل">
+                                            <div class="form-group">
+                                                <label class="form-label fw-bold text-white" for="email-basic-wizard">
+                                                    اللقب و إسم الشهرة
+                                                </label>
+                                                <input class="form-control text-white" id="email-basic-wizard" type="text" name="nickname" value="{{$subscriber->nickname}}" placeholder="مثلا: محمد أحمد محمود">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="passwordwizard">
+                                                    العنوان
+                                                </label>
+                                                <input class="form-control text-white" name="address" id="passwordwizard" value="{{$subscriber->address}}" type="text" placeholder="عنوان المشترك">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <div class="p-img mb-3 text-center">
+                                                    <img src={{asset('assets/images/subscribers/'.$subscriber->img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="showImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
+                                                </div>
+                                                <label class="form-label fw-bold text-white" for="image">
+                                                    الصورة الشخصية
+                                                </label>
+                                                <input class="form-control text-white" value="{{$subscriber->img}}" name="img" data-member-id="{{ $subscriber->id }}" id="image" type="file" accept="image/*">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="firstnamewizard">
+                                                    الرقم القومي
+                                                </label>
+                                                <input class="form-control text-white" id="firstnamewizard" value="{{$subscriber->ssn}}" name="ssn" type="number" placeholder="أدخل الرقم القومي">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="firstnamewizard">
+                                                    ت المنزل
+                                                </label>
+                                                <input class="form-control text-white" id="firstnamewizard" value="{{$subscriber->home_tel}}" name="home_tel" type="number" placeholder="ت المنزل">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -515,7 +515,7 @@
                                                             </a>
                                                             {{-- ! Edit Member ! --}}
                                                             <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href={{route('subscriptionRole.subscriber.details',$member->id)}}>
-                                                                <i class="icofont icofont-ui-edit"></i>
+                                                                <i class="icofont icofont-ui-edit text-dark"></i>
                                                             </a>
                                                             {{-- ! Donation History ! --}}
                                                             <a href="{{route('subscriptionRole.donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
@@ -528,7 +528,7 @@
                                                             </a>
                                                             {{-- ! Edit Member ! --}}
                                                             <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href={{route('subscriber.details',$member->id)}}>
-                                                                <i class="icofont icofont-ui-edit"></i>
+                                                                <i class="icofont icofont-ui-edit text-dark"></i>
                                                             </a>
                                                             {{-- ! Donation History ! --}}
                                                             <a href="{{route('donations.showAll', $member->id)}}" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">

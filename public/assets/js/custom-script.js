@@ -9,6 +9,15 @@ $(document).ready(function () {
         };
         reader.readAsDataURL(e.target.files[0]);
     });
+    //! Image Upload Preview For Update Subscriber ID Image
+    $(document).on("change", "#id_img", function (e) {
+        let memberId = $(this).data("member-id");
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            $("#idImage_" + memberId).attr("src", e.target.result);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    });
     //! Single Datatable
     $("#table").DataTable({
         paging: true,
