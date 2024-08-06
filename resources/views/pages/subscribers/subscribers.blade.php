@@ -46,7 +46,12 @@
                 {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 ms-2 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مديونية على كل الأعضاء</span>
+                    <span>إضافة إشتراك على الأعضاء</span>
+                </button>
+                {{-- ! Insert Bulk Donations On Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مدينوية التبرعات على كل المشتركين</span>
                 </button>
             @elseif ($user->role === 'admin')
                 {{-- ! Insert Single Subscriber ! --}}
@@ -57,7 +62,7 @@
                 {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مديونية على كل الأعضاء</span>
+                    <span>إضافة إشتراك على الأعضاء</span>
                 </button>
                 {{-- ! Insert Bulk Subscribers && Insert Bulk Delay ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_upload">
@@ -436,14 +441,24 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('delays.uploadDonations')}}" method="post" id="DonationDebtForm">
+                    <form action="{{$user->role === 'admin' ? route('delays.uploadDonations') : route('subscriptionRole.delays.uploadDonations')}}" method="post" id="DonationDebtForm">
                         @csrf
                         <div class="row align-items-center">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="delay_name" class="text-muted">سبب المديونية</label>
-                                    <input type="text" class="form-control text-muted" name="donation_category" placeholder="سبب المديونية" id="delay_reason" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" required>
-                                    <p class="required d-none text-danger mb-0 fw-bold fs-6" id="reasonReq">هذا الحقل مطلوب</p>
+                                    <select name="donation_type" class="form-select" id="delay_reason" required>
+                                        <option selected disabled>نوع التبرع</option>
+                                        <option value="تبرع تنمية">تبرع تنمية</option>
+                                        <option value="تبرع إنتساب">تبرع إنتساب</option>
+                                        <option value="مقابر قديمة">مقابر قديمة</option>
+                                        <option value="ص.مقر">ص.مقر</option>
+                                        <option value="ص.سيارة">ص.سيارة</option>
+                                        <option value="أخرى">أخرى</option>
+                                    </select>
+                                    <p class="required d-none text-danger mb-0 fw-bold fs-bold" id="delayReasonReq">برجاء اختار من القئمة أعلاه</p>
+                                    <input type="text" class="form-control mt-3 d-none" placeholder="نوع التبرع الأخر" id="otherDonationType" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="delay_other_amount" disabled>
+                                    <p class="required d-none text-danger mb-0 fw-bold fs-bold" id="otherDelayReasonReq">هذا الحقل مطلوب</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="delay_amount" class="text-muted">مبلغ المديونية</label>

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->integer('member_id')->index()->references('member_id')->on('subscribers')->onDelete('cascade');
             $table->string('donation_type');
-            $table->string('payment_type');
             $table->bigInteger('delay_amount')->default(0);
             $table->bigInteger('amount_paied')->nullable();
             $table->bigInteger('amount_remaining')->nullable();

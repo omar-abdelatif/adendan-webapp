@@ -12,8 +12,7 @@ class DonationDelay extends Model
     protected  $fillable = [
         'member_id',
         'donation_type',
-        'donation_category',
-        'payment_type',
+        'delay_other_amount',
         'delay_amount',
         'amount_paied',
         'amount_remaining',

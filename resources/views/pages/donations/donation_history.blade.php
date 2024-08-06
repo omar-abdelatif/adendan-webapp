@@ -127,10 +127,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">تصنيف التبرع</th>
+                                                            <th class="text-center">التصنيف الأخر</th>
                                                             <th class="text-center">مبلغ المديونية</th>
                                                             <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
-                                                            <th class="text-center">تاريخ المعاملة</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
@@ -139,6 +139,13 @@
                                                         @foreach ($delayDonation as $delay)
                                                             <tr>
                                                                 <td class="text-center">{{$delay->donation_type}}</td>
+                                                                <td class="text-center">
+                                                                    @if ($delay->delay_other_amount)
+                                                                        {{$delay->delay_other_amount}}
+                                                                    @else
+                                                                        <span class="fw-bold">-</span>
+                                                                    @endif
+                                                                </td>
                                                                 <td class="text-center">{{$delay->delay_amount}}</td>
                                                                 @if ($delay->amount_remaining == null && $delay->amount_paied == null)
                                                                     <td class="text-center">
@@ -151,7 +158,6 @@
                                                                     <td class="text-center">{{$delay->amount_paied}}</td>
                                                                     <td class="text-center">{{$delay->amount_remaining}}</td>
                                                                 @endif
-                                                                <td class="text-center">{{$delay->created_at->format('Y-m-d')}}</td>
                                                                 <td class="text-center">
                                                                     <button class="btn bg-secondary" type="button" title="دفع المديونية" data-bs-target="#oldDdonationPayment_{{$delay->id}}" data-bs-toggle="modal">
                                                                         <i class="fa-solid fa-dollar-sign"></i>
@@ -160,7 +166,7 @@
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تسديد مديونية تبرع للعضو {{$subscriber->name}} and {{$delay->id}}</h1>
+                                                                                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تسديد مديونية تبرع للعضو {{$subscriber->name}}</h1>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
@@ -180,6 +186,10 @@
                                                                                                 <div class="form-group mt-3">
                                                                                                     <label for="donation_category" class="text-muted">تصنيف التبرع</label>
                                                                                                     <input type="text" class="form-control text-muted" name="donation_category" value="{{$delay->donation_type}}" placeholder="نوع التبرع" id="donation_category" readonly>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="donation_category" class="text-muted">التصنيف الأخر</label>
+                                                                                                    <input type="text" class="form-control text-muted" name="donation_category" value="{{$delay->delay_other_amount}}" placeholder="التصنيف الاخر" id="otherDonationAmount" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mt-3">
                                                                                                     <label for="invoice_no" class="text-muted">رقم الإيصال</label>
