@@ -49,7 +49,7 @@
                     <span>إضافة إشتراك على الأعضاء</span>
                 </button>
                 {{-- ! Insert Bulk Donations On Subscribers ! --}}
-                <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
+                <button type="button" class="btn btn-success px-2 py-1 ms-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة مدينوية التبرعات على كل المشتركين</span>
                 </button>
