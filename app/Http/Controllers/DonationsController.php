@@ -97,7 +97,8 @@ class DonationsController extends Controller
     }
     public function donationsOnSubscribers(Request $request) //! تبرعات على الأعضاء
     {
-        $validated = $request->validate(['donation_category' => 'required',
+        $validated = $request->validate([
+            'donation_type' => 'required',
             'delay_amount' => 'required'
         ]);
         if ($validated) {
@@ -105,9 +106,8 @@ class DonationsController extends Controller
             foreach ($subscribers as $subscriber) {
                 $delays = DonationDelay::create([
                     'member_id' => $subscriber->member_id,
-                    'donation_type' => 'أخرى',
-                    'donation_category' => $request->category,
-                    'payment_type' => 'تبرعات',
+                    'donation_type' => $request->donation_type,
+                    'delay_other_amount' => $request->delay_other_amount,
                     'delay_amount' => $request->delay_amount,
                 ]);
             }

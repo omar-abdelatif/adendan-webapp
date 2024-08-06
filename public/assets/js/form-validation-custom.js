@@ -27,7 +27,8 @@ function validateForm(form) {
             select.value === "التصنيف" ||
             select.value === "المنطقة" ||
             select.value === "الحرفة" ||
-            select.value === "السنة"
+            select.value === "السنة" ||
+            select.value === "نوع التبرع"
         ) {
             select.classList.add("error");
             select.classList.remove("good");
@@ -269,7 +270,8 @@ if (storeSub) {
     const addressReq = document.getElementById("addressReq");
     const addressMsg = document.getElementById("addressMsg");
     address.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters =
+            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             addressReq.classList.remove("d-none");
             addressMsg.classList.add("d-none");
@@ -348,7 +350,8 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters =
+            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
@@ -372,7 +375,8 @@ if (newsform) {
     const details = document.getElementById("details");
     const newsDetailsReq = document.getElementById("detailsReq");
     details.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters =
+            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsDetailsReq.classList.remove("d-none");
             details.classList.remove("good");
@@ -1068,9 +1072,15 @@ if (DelaysForm) {
     DelaysForm.forEach((form) => {
         //! Invoices Number Validation
         invoices.forEach((inv) => {
-            let invoiceNo = form.querySelector(`input[name="invoice_no"][data-invoice-id="${inv.dataset.invoiceId}"]`);
-            let invReq = form.querySelector(`p.invReq[data-invoice-id="${inv.dataset.invoiceId}"]`);
-            let invMsg = form.querySelector(`p.invMsg[data-invoice-id="${inv.dataset.invoiceId}"]`);
+            let invoiceNo = form.querySelector(
+                `input[name="invoice_no"][data-invoice-id="${inv.dataset.invoiceId}"]`
+            );
+            let invReq = form.querySelector(
+                `p.invReq[data-invoice-id="${inv.dataset.invoiceId}"]`
+            );
+            let invMsg = form.querySelector(
+                `p.invMsg[data-invoice-id="${inv.dataset.invoiceId}"]`
+            );
             if (invoiceNo) {
                 inv.addEventListener("input", function () {
                     let invoiceReg = /^\d{5}$/;
@@ -1152,9 +1162,15 @@ if (OldPaymentForm) {
     OldPaymentForm.forEach((payment) => {
         //! Invoices Number Validation
         paymentInvs.forEach((inv) => {
-            let payInput = payment.querySelector(`input[name="invoice_no"][data-inv-id="${inv.dataset.invId}"]`);
-            let payReq = payment.querySelector(`p.paymentInvReq[data-inv-id="${inv.dataset.invId}"]`);
-            let payMsg = payment.querySelector(`p.paymentInvMsg[data-inv-id="${inv.dataset.invId}"]`);
+            let payInput = payment.querySelector(
+                `input[name="invoice_no"][data-inv-id="${inv.dataset.invId}"]`
+            );
+            let payReq = payment.querySelector(
+                `p.paymentInvReq[data-inv-id="${inv.dataset.invId}"]`
+            );
+            let payMsg = payment.querySelector(
+                `p.paymentInvMsg[data-inv-id="${inv.dataset.invId}"]`
+            );
             if (payInput) {
                 inv.addEventListener("input", function () {
                     let invoiceReg = /^\d{5}$/;
@@ -1176,14 +1192,20 @@ if (OldPaymentForm) {
                             payMsg.classList.remove("d-none");
                         }
                     }
-                })
+                });
             }
         });
         //! Payment Amount Validation
         paymentAmount.forEach((pay) => {
-            let amountInput = payment.querySelector(`input[name="olddelay"][data-pay-id="${pay.dataset.payId}"]`);
-            let amountReq = payment.querySelector(`p.paymentAmountReq[data-pay-id="${pay.dataset.payId}"]`);
-            let amountMsg = payment.querySelector(`p.paymentAmountMsg[data-pay-id="${pay.dataset.payId}"]`);
+            let amountInput = payment.querySelector(
+                `input[name="olddelay"][data-pay-id="${pay.dataset.payId}"]`
+            );
+            let amountReq = payment.querySelector(
+                `p.paymentAmountReq[data-pay-id="${pay.dataset.payId}"]`
+            );
+            let amountMsg = payment.querySelector(
+                `p.paymentAmountMsg[data-pay-id="${pay.dataset.payId}"]`
+            );
             if (amountInput) {
                 pay.addEventListener("input", function () {
                     const amountReg = /(?=.{2,5})/;
@@ -1205,11 +1227,13 @@ if (OldPaymentForm) {
                             amountMsg.classList.remove("d-none");
                         }
                     }
-                })
+                });
             }
-        })
+        });
         //! Validation For Submit Button
-        const PaymentSubmit = payment.querySelectorAll("[data-PaymentSubmit-id]");
+        const PaymentSubmit = payment.querySelectorAll(
+            "[data-PaymentSubmit-id]"
+        );
         if (PaymentSubmit) {
             PaymentSubmit.forEach((pay) => {
                 pay.addEventListener("click", function (event) {
@@ -1258,7 +1282,13 @@ if (safeDataForm) {
     proofImg.addEventListener("change", function () {
         const img = proofImg.files[0];
         if (img) {
-            validateImage(img,ProofimgReq,ProofimgExt,proofImg,ProofimgSize);
+            validateImage(
+                img,
+                ProofimgReq,
+                ProofimgExt,
+                proofImg,
+                ProofimgSize
+            );
         } else {
             proofImg.classList.add("error");
             proofImg.classList.remove("good");
@@ -1266,7 +1296,7 @@ if (safeDataForm) {
             ProofimgSize.classList.add("d-none");
             ProofimgExt.classList.add("d-none");
         }
-    })
+    });
     //! Validation For Safe Submit Button
     const withdrawFormSubmit = document.getElementById("withdrawSubmit");
     if (withdrawFormSubmit) {
@@ -1305,7 +1335,7 @@ if (BankForm) {
                 bankMsg.classList.remove("d-none");
             }
         }
-    })
+    });
     //! Validation For Bank Image
     const proofBankImg = document.getElementById("proof_bank");
     const ProofBankimgReq = document.getElementById("bankImgReq");
@@ -1314,7 +1344,13 @@ if (BankForm) {
     proofBankImg.addEventListener("change", function () {
         const img = proofBankImg.files[0];
         if (img) {
-            validateImage(img,ProofBankimgReq,ProofBankimgExt,proofBankImg,ProofBankimgSize);
+            validateImage(
+                img,
+                ProofBankimgReq,
+                ProofBankimgExt,
+                proofBankImg,
+                ProofBankimgSize
+            );
         } else {
             proofBankImg.classList.add("error");
             proofBankImg.classList.remove("good");
@@ -1322,7 +1358,7 @@ if (BankForm) {
             ProofBankimgSize.classList.add("d-none");
             ProofBankimgExt.classList.add("d-none");
         }
-    })
+    });
     //! Validation For Bank Submit Button
     const BankSubmit = document.getElementById("BankSubmit");
     if (BankSubmit) {
@@ -1339,22 +1375,51 @@ const DonationDebtForm = document.getElementById("DonationDebtForm");
 if (DonationDebtForm) {
     //! Validation For Reason Field
     const delayReason = document.getElementById("delay_reason");
-    const reasonReq = document.getElementById("reasonReq");
-    delayReason.addEventListener("input", function () {
-        let reasonReg = /^[\u0600-\u06FF\s]+$/;
-        if (this.value.trim() === "") {
-            reasonReq.classList.remove("d-none");
-            delayReason.classList.remove("good");
-            delayReason.classList.add("error");
+    const reasonReq = document.getElementById("delayReasonReq");
+    delayReason.addEventListener("change", function () {
+        const otherDelayReasonReq = document.getElementById(
+            "otherDelayReasonReq"
+        );
+        let selectedOption = this.value;
+        let otherDonationType = document.getElementById("otherDonationType");
+        if (selectedOption === "أخرى") {
+            delayReason.classList.remove("error");
+            delayReason.classList.add("good");
+            otherDonationType.disabled = false;
+            otherDonationType.classList.remove("d-none");
+            otherDonationType.classList.remove("good");
+            otherDonationType.classList.add("error");
+            otherDelayReasonReq.classList.remove("d-none");
         } else {
-            if (reasonReg.test(this.value)) {
-                delayReason.classList.add("good");
-                delayReason.classList.remove("error");
-                reasonReq.classList.add("d-none");
+            otherDonationType.value = "";
+            otherDonationType.classList.add("d-none");
+            otherDonationType.disabled = true;
+            otherDelayReasonReq.classList.add("d-none");
+            delayReason.classList.remove("error");
+            delayReason.classList.add("good");
+            reasonReq.classList.add("d-none");
+        }
+    });
+    //! Validation For Other Donation Type Field
+    const otherDonationType = document.getElementById("otherDonationType");
+    otherDonationType.addEventListener("input", function () {
+        const otherDelayReasonReq = document.getElementById(
+            "otherDelayReasonReq"
+        );
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            otherDonationType.classList.remove("good");
+            otherDonationType.classList.add("error");
+            otherDelayReasonReq.classList.add("d-none");
+        } else {
+            if (letters.test(this.value)) {
+                otherDonationType.classList.add("good");
+                otherDonationType.classList.remove("error");
+                otherDelayReasonReq.classList.add("d-none");
             } else {
-                delayReason.classList.remove("good");
-                delayReason.classList.add("error");
-                reasonReq.classList.add("d-none");
+                otherDonationType.classList.remove("good");
+                otherDonationType.classList.add("error");
+                otherDelayReasonReq.classList.add("d-none");
             }
         }
     });
@@ -1397,14 +1462,22 @@ if (DonationDebtForm) {
 //! Validation For Paying Donation Debt
 const PayDonationDebtForm = document.querySelectorAll("[data-paydonation-id]");
 if (PayDonationDebtForm) {
-    const donationAmount = document.querySelectorAll("[data-donationamount-id]");
+    const donationAmount = document.querySelectorAll(
+        "[data-donationamount-id]"
+    );
     const donationInvoice = document.querySelectorAll("[data-donationinv-id]");
     PayDonationDebtForm.forEach((paydon) => {
         //! Donation Invoice
         donationInvoice.forEach((inv) => {
-            let invInput = paydon.querySelector(`input[name="invoice_no"][data-donationinv-id="${inv.dataset.donationinvId}"]`);
-            let donationInvReq = paydon.querySelector(`p.donationInvReq[data-donationinv-id="${inv.dataset.donationinvId}"]`);
-            let donationInvMsg = paydon.querySelector(`p.donationInvMsg[data-donationinv-id="${inv.dataset.donationinvId}"]`);
+            let invInput = paydon.querySelector(
+                `input[name="invoice_no"][data-donationinv-id="${inv.dataset.donationinvId}"]`
+            );
+            let donationInvReq = paydon.querySelector(
+                `p.donationInvReq[data-donationinv-id="${inv.dataset.donationinvId}"]`
+            );
+            let donationInvMsg = paydon.querySelector(
+                `p.donationInvMsg[data-donationinv-id="${inv.dataset.donationinvId}"]`
+            );
             if (invInput) {
                 inv.addEventListener("input", function () {
                     let invoiceReg = /^\d{5}$/;
@@ -1431,9 +1504,15 @@ if (PayDonationDebtForm) {
         });
         //! Donation Amount
         donationAmount.forEach((amount) => {
-            let amountInput = paydon.querySelector(`input[name="amount"][data-donationamount-id="${amount.dataset.donationamountId}"]`);
-            let donationAmountReq = paydon.querySelector(`p.donationAmountReq[data-donationamount-id="${amount.dataset.donationamountId}"]`);
-            let donationAmountMsg = paydon.querySelector(`p.donationAmountMsg[data-donationamount-id="${amount.dataset.donationamountId}"]`);
+            let amountInput = paydon.querySelector(
+                `input[name="amount"][data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
+            let donationAmountReq = paydon.querySelector(
+                `p.donationAmountReq[data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
+            let donationAmountMsg = paydon.querySelector(
+                `p.donationAmountMsg[data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
             if (amountInput) {
                 amount.addEventListener("input", function () {
                     let amountReg = /(?=.{2,5})/;
@@ -1459,30 +1538,40 @@ if (PayDonationDebtForm) {
             }
         });
         //! Validation For Donation Debt Payment Submit Form
-        const DonationDebtSubmit = paydon.querySelectorAll("[data-donationSubmitForm-id]");
-        if(DonationDebtSubmit){
-            DonationDebtSubmit.forEach((debt)=>{
-                debt.addEventListener("click",function(event){
+        const DonationDebtSubmit = paydon.querySelectorAll(
+            "[data-donationSubmitForm-id]"
+        );
+        if (DonationDebtSubmit) {
+            DonationDebtSubmit.forEach((debt) => {
+                debt.addEventListener("click", function (event) {
                     event.preventDefault();
                     if (validateForm(paydon)) {
                         paydon.submit();
                     }
-                })
-            })
+                });
+            });
         }
-    })
+    });
 }
 //! Validation For Paying Old Donation
-const PayOldDonationDebt = document.querySelectorAll("[data-payolddonation-id]");
+const PayOldDonationDebt = document.querySelectorAll(
+    "[data-payolddonation-id]"
+);
 if (PayOldDonationDebt) {
     const oldDonationInvoice = document.querySelectorAll("[data-oldinv-id]");
     const oldDonationAmount = document.querySelectorAll("[data-oldamount-id]");
     PayOldDonationDebt.forEach((olddon) => {
         //! Old Donation Invoice
         oldDonationInvoice.forEach((inv) => {
-            let invInput = olddon.querySelector(`input[name="invoice_no"][data-oldinv-id="${inv.dataset.oldinvId}"]`);
-            let oldDonationInvReq = olddon.querySelector(`p.oldDonationInvReq[data-oldinv-id="${inv.dataset.oldinvId}"]`);
-            let oldDonationInvMsg = olddon.querySelector(`p.oldDonationInvMsg[data-oldinv-id="${inv.dataset.oldinvId}"]`);
+            let invInput = olddon.querySelector(
+                `input[name="invoice_no"][data-oldinv-id="${inv.dataset.oldinvId}"]`
+            );
+            let oldDonationInvReq = olddon.querySelector(
+                `p.oldDonationInvReq[data-oldinv-id="${inv.dataset.oldinvId}"]`
+            );
+            let oldDonationInvMsg = olddon.querySelector(
+                `p.oldDonationInvMsg[data-oldinv-id="${inv.dataset.oldinvId}"]`
+            );
             if (invInput) {
                 inv.addEventListener("input", function () {
                     let invoiceReg = /^\d{5}$/;
@@ -1504,14 +1593,20 @@ if (PayOldDonationDebt) {
                             oldDonationInvMsg.classList.remove("d-none");
                         }
                     }
-                })
+                });
             }
         });
         //! Old Donation Amount
         oldDonationAmount.forEach((oldamount) => {
-            let oldAmountInput = olddon.querySelector(`input[name="amount"][data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
-            let oldDonationAmountReq = olddon.querySelector(`p.oldDonationAmountReq[data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
-            let oldDonationAmountMsg = olddon.querySelector(`p.oldDonationAmountMsg[data-oldamount-id="${oldamount.dataset.oldamountId}"]`);
+            let oldAmountInput = olddon.querySelector(
+                `input[name="amount"][data-oldamount-id="${oldamount.dataset.oldamountId}"]`
+            );
+            let oldDonationAmountReq = olddon.querySelector(
+                `p.oldDonationAmountReq[data-oldamount-id="${oldamount.dataset.oldamountId}"]`
+            );
+            let oldDonationAmountMsg = olddon.querySelector(
+                `p.oldDonationAmountMsg[data-oldamount-id="${oldamount.dataset.oldamountId}"]`
+            );
             if (oldAmountInput) {
                 oldamount.addEventListener("input", function () {
                     let amountReg = /(?=.{2,5})/;
@@ -1537,7 +1632,9 @@ if (PayOldDonationDebt) {
             }
         });
         //! Old Donation Submit Button
-        const OldDonationSubmit = olddon.querySelectorAll("[data-oldDonationSubmit-id]");
+        const OldDonationSubmit = olddon.querySelectorAll(
+            "[data-oldDonationSubmit-id]"
+        );
         if (OldDonationSubmit) {
             OldDonationSubmit.forEach((oldsubmit) => {
                 oldsubmit.addEventListener("click", function (event) {
@@ -1545,10 +1642,10 @@ if (PayOldDonationDebt) {
                     if (validateForm(olddon)) {
                         olddon.submit();
                     }
-                })
-            })
+                });
+            });
         }
-    })
+    });
 }
 //! craftSelect
 let SelectedOption = document.getElementById("craftSelect");
@@ -1588,9 +1685,12 @@ if (categorySelect) {
 let selectElements = document.querySelectorAll("[data-worker-id]");
 if (selectElements) {
     selectElements.forEach((selectElement) => {
-        let otherCraftInput = document.querySelector(`input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+        let otherCraftInput = document.querySelector(
+            `input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`
+        );
         function handleUpdateCraft() {
-            let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+            let selectedOption =
+                selectElement.options[selectElement.selectedIndex].value;
             if (selectedOption === "أخرى") {
                 otherCraftInput.disabled = false;
             } else {
@@ -1608,9 +1708,15 @@ if (selectElements) {
 let allDonations = document.querySelectorAll("[data-donation-id]");
 if (allDonations) {
     allDonations.forEach((donation) => {
-        let otherDonation = document.querySelector(`input[name="other_donation"][data-donation-id="${donation.dataset.donationId}"]`);
-        let categoryType = document.querySelector(`select[name="donation_category"][data-donation-id="${donation.dataset.donationId}"]`);
-        let Amount = document.querySelector(`input[name="amount"][data-donation-id="${donation.dataset.donationId}"]`);
+        let otherDonation = document.querySelector(
+            `input[name="other_donation"][data-donation-id="${donation.dataset.donationId}"]`
+        );
+        let categoryType = document.querySelector(
+            `select[name="donation_category"][data-donation-id="${donation.dataset.donationId}"]`
+        );
+        let Amount = document.querySelector(
+            `input[name="amount"][data-donation-id="${donation.dataset.donationId}"]`
+        );
         function donationUpdate() {
             let donationValue = donation.options[donation.selectedIndex].value;
             if (donationValue == "أخرى") {
@@ -1688,10 +1794,18 @@ if (selectMiscs) {
 let paymentTypes = document.querySelectorAll("[data-payment-id]");
 if (paymentTypes) {
     paymentTypes.forEach((payment) => {
-        let subscriptionCost = document.querySelector(`input[name="subscription_cost"][data-payment-id="${payment.dataset.paymentId}"]`);
-        let subscriptionPeriod = document.querySelector(`input[name="period"][data-payment-id="${payment.dataset.paymentId}"]`);
-        let delayAmount = document.querySelector(`input[name="delays"][data-payment-id="${payment.dataset.paymentId}"]`);
-        let delayPeriod = document.querySelector(`input[name="delays_period"][data-payment-id="${payment.dataset.paymentId}"]`);
+        let subscriptionCost = document.querySelector(
+            `input[name="subscription_cost"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let subscriptionPeriod = document.querySelector(
+            `input[name="period"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let delayAmount = document.querySelector(
+            `input[name="delays"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
+        let delayPeriod = document.querySelector(
+            `input[name="delays_period"][data-payment-id="${payment.dataset.paymentId}"]`
+        );
         function handleDelay() {
             let selectedPayment = payment.options[payment.selectedIndex].value;
             if (selectedPayment === "إشتراك") {
@@ -1716,7 +1830,6 @@ if (paymentTypes) {
         });
     });
 }
-//!
 //!
 //!
 //!

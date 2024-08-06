@@ -67,23 +67,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-6 box-col-6">
-                <div class="card widget-1 ">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="80" height="80" src="https://img.icons8.com/plasticine/80/hourglass.png" alt="hourglass"/>
-                            </div>
-                            <div>
-                                <h5>الإشتراكات المعلقة</h5>
-                            </div>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$pendingSubscribers}}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             <div class="col-xl-12 box-col-12">
                 <div class="card widget-1 ">
                     <div class="card-body align-items-center">
@@ -92,7 +75,7 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/average-2.png" alt="average-2" />
                             </div>
                             <div>
-                                <h5>إجمالي متأخرات إشـتراك</h5>
+                                <h5>إجمالي متأخرات الإشتراكات السابقة</h5>
                             </div>
                         </div>
                         <div class="font-Info">
@@ -130,7 +113,7 @@
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumDelayRemaining}} ج.م</h5>
+                            <h5 class="mb-1">{{$sumTotalOldDelaysSubscriptions - $sumDelayAmount}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -143,7 +126,7 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>إجمالي مديونية الإشتراك</h5>
+                                <h5>إجمالي قيمة الإشتراك الحالي</h5>
                             </div>
                         </div>
                         <div class="font-Info">
@@ -160,7 +143,7 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>المحصل ( المديونية )</h5>
+                                <h5>المحصل ( قيمة الإشتراك )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
@@ -177,11 +160,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>المتبقي ( المديونية )</h5>
+                                <h5>المتبقي ( قيمة الإشتراك )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumDelayRemaing}} ج.م</h5>
+                            <h5 class="mb-1">{{$sumTotalDelays - $sumDelayPaied}} ج.م</h5>
                         </div>
                     </div>
                 </div>

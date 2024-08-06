@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('donation_delays', function (Blueprint $table) {
-            $table->string('donation_category')->after('donation_type')->nullable();
+            $table->string('delay_other_amount')->nullable()->after('donation_type');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('donation_delays', function (Blueprint $table) {
-            $table->dropColumn('donation_category');
+            $table->dropColumn('delay_other_donation');
         });
     }
 };
