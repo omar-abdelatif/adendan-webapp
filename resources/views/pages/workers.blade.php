@@ -15,7 +15,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة شخص جديد</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة شخص جديد</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -24,35 +24,37 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="title" class="text-white">إسم الشخص</label>
+                                    <label for="title" class="text-muted">إسم الشخص</label>
                                     <input type="text" id="worker_name" class="form-control text-muted" minlength="3" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" name="name" placeholder="إسم الشخص" required>
                                     <p class="required d-none text-danger mb-0" id="nameReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="nameMsg">يجب ان يكون الاسم باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-white">رقم الموبايل</label>
+                                    <label for="title" class="text-muted">رقم الموبايل</label>
                                     <input type="text" id="worker_mob" class="form-control text-muted" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="phone_number" placeholder="رقم الموبايل" required>
                                     <p class="required d-none text-danger mb-0" id="mobReq">هذا الحقل  مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="mobCount">يجب ان يكون رقم الموبايل لا يقل عن 11 رقم</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-white">الحرفة</label>
-                                    <select name="craft" class="form-select text-white" id="craftSelect" required>
+                                    <label for="title" class="text-muted">الحرفة</label>
+                                    <select name="craft" class="form-select text-muted" id="craftSelect" required>
                                         <option selected>الحرفة</option>
                                         <option value="نجار" class="option-control">نجار</option>
                                         <option value="نقاش" class="option-control">نقاش</option>
                                         <option value="سباك" class="option-control">سباك</option>
                                         <option value="كهربائي" class="option-control">كهربائي</option>
+                                        <option value="فني" class="option-control">فني</option>
                                         <option value="أخرى" class="option-control">أخرى</option>
                                     </select>
                                     <p class="required d-none mb-0 text-danger" id="craftReq">يجب اختيار حرفة من القائمة</p>
-                                    <input type="text" id="otherCategory" name="other_craft" class="form-control mt-3 text-white" placeholder="إسم الحرفة الأخرى أن وجد" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" disabled>
+                                    <input type="text" id="otherCategory" name="other_craft" class="form-control mt-3 text-muted d-none" placeholder="إسم الحرفة الأخرى أن وجد" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" disabled>
+                                    <input type="text" id="otherCategory2" name="other_craft" class="form-control mt-3 text-muted d-none" placeholder="إسم الحرفة الأخرى أن وجد" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" disabled>
                                     <p class="d-none mb-0 text-danger" id="otherReq">هذا الحقل مطلوب</p>
                                     <p class="d-none mb-0 text-danger" id="otherMsg">يجب ان يكون اسم الحرفة باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label class="text-white">المنطقة</label>
-                                    <input type="text" id="worker_location" name="location" minlength="5" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="منطقة السكن" class="form-control text-white" required>
+                                    <label class="text-muted">المنطقة</label>
+                                    <input type="text" id="worker_location" name="location" minlength="5" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="منطقة السكن" class="form-control text-muted" required>
                                     <p class="required d-none text-danger mb-0" id="locReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="locMsg">يجب ان يكون العنوان باللغة العربية</p>
                                 </div>
@@ -100,7 +102,7 @@
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$worker->name}}</td>
-                                            <td>{{$worker->phone_number}}</td>
+                                            <td>+20{{$worker->phone_number}}</td>
                                             <td>{{$worker->craft}}</td>
                                             <td>
                                                 @if ($worker->other_craft)
@@ -119,7 +121,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تحديث الحرفي {{$worker->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تحديث الحرفي {{$worker->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -129,16 +131,16 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-white">إسم الحرفي</label>
-                                                                                <input type="text" class="form-control text-center text-white" name="name" value="{{$worker->name}}">
+                                                                                <label for="title" class="text-muted">إسم الحرفي</label>
+                                                                                <input type="text" class="form-control text-center text-muted" name="name" value="{{$worker->name}}">
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-white">رقم المحمول</label>
-                                                                                <input type="number" class="form-control text-center text-white" name="phone_number" value="{{$worker->phone_number}}">
+                                                                                <label for="title" class="text-muted">رقم المحمول</label>
+                                                                                <input type="number" class="form-control text-center text-muted" name="phone_number" value="{{$worker->phone_number}}">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-white">الحرفة</label>
-                                                                                <select name="craft" class="form-select text-white" id="updateCraft" data-worker-id="{{$worker->id}}">
+                                                                                <label for="title" class="text-muted">الحرفة</label>
+                                                                                <select name="craft" class="form-select text-muted" id="updateCraft" data-worker-id="{{$worker->id}}">
                                                                                     <option selected>إختر الحرفة</option>
                                                                                     <option value="نجار" {{$worker->craft === 'نجار' ? 'selected' : ''}} class="option-control">نجار</option>
                                                                                     <option value="نقاش" {{$worker->craft === 'نقاش' ? 'selected' : ''}} class="option-control">نقاش</option>
@@ -147,14 +149,14 @@
                                                                                     <option value="أخرى" {{$worker->craft === 'أخرى' ? 'selected' : ''}} class="option-control">أخرى</option>
                                                                                 </select>
                                                                                 @if ($worker->craft === 'أخرى')
-                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-white" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" value="{{$worker->other_craft}}">
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" value="{{$worker->other_craft}}">
                                                                                 @else
-                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-white" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" disabled>
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" disabled>
                                                                                 @endif
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label class="text-white">المنطقة</label>
-                                                                                <input type="text" name="location" placeholder="منطقة السكن" value="{{$worker->location}}" class="form-control text-white">
+                                                                                <label class="text-muted">المنطقة</label>
+                                                                                <input type="text" name="location" placeholder="منطقة السكن" value="{{$worker->location}}" class="form-control text-muted">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -175,14 +177,14 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">حذف الحرفي {{$worker->name}}</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">حذف الحرفي {{$worker->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form action={{$user->role === 'admin' ? route('worker.delete', $worker->id) : route('mediaRole.worker.delete', $worker->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
-                                                                        <h1 class="text-white">هل أنت متأكد من الحذف</h1>
+                                                                        <h1 class="text-muted">هل أنت متأكد من الحذف</h1>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>

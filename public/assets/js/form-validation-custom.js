@@ -643,8 +643,12 @@ if (workers) {
     //! Validation For Worker Category
     const craft = document.getElementById("craftSelect");
     const craftReq = document.getElementById("craftReq");
+    const otherCraft = document.getElementById("otherCategory");
+    const otherCraft2 = document.getElementById("otherCategory2");
+    const otherReq = document.getElementById("otherReq");
     craft.addEventListener("change", function () {
-        if (this.options[this.selectedIndex].value === "الحرفة") {
+        const SelectedOption = this.options[this.selectedIndex].value;
+        if (SelectedOption === "الحرفة") {
             craft.classList.add("error");
             craft.classList.remove("good");
             craftReq.classList.remove("d-none");
@@ -653,23 +657,34 @@ if (workers) {
             craft.classList.add("good");
             craftReq.classList.add("d-none");
         }
-        if (this.options[this.selectedIndex].value === "أخرى") {
+        if (SelectedOption === "أخرى") {
+            otherCraft2.disabled = true;
+            otherCraft2.classList.add("d-none");
+            otherCraft.classList.remove("d-none");
             otherCraft.disabled = false;
             if (otherCraft.value.trim() === "") {
                 otherReq.classList.remove("d-none");
                 otherCraft.classList.remove("good");
                 otherCraft.classList.add("error");
             }
-        } else {
+        } else if (SelectedOption === "فني") {
+            otherCraft.classList.add("d-none");
             otherCraft.disabled = true;
+            otherCraft2.classList.remove("d-none");
+            otherCraft2.disabled = false;
+            if (otherCraft2.value.trim() === "") {
+                otherReq.classList.remove("d-none");
+                otherCraft2.classList.remove("good");
+                otherCraft2.classList.add("error");
+            }
+        } else {
+            otherCraft.classList.add("d-none");
             otherCraft.classList.remove("good");
             otherCraft.classList.remove("error");
             otherReq.classList.add("d-none");
         }
     });
-    //! Validation For Worker Other Category
-    const otherCraft = document.getElementById("otherCategory");
-    const otherReq = document.getElementById("otherReq");
+    //! Validation For Worker Other Category && Other Craft 2
     otherCraft.addEventListener("input", function () {
         let letters = /^[\u0600-\u06FF\s]{3,}$/;
         if (this.value.trim() === "") {
@@ -686,6 +701,27 @@ if (workers) {
             } else {
                 otherCraft.classList.remove("good");
                 otherCraft.classList.add("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.remove("d-none");
+            }
+        }
+    });
+    otherCraft2.addEventListener("input", function () {
+        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        if (this.value.trim() === "") {
+            otherReq.classList.remove("d-none");
+            otherMsg.classList.remove("d-none");
+            otherCraft2.classList.remove("good");
+            otherCraft2.classList.add("error");
+        } else {
+            if (letters.test(this.value)) {
+                otherCraft2.classList.add("good");
+                otherCraft2.classList.remove("error");
+                otherReq.classList.add("d-none");
+                otherMsg.classList.add("d-none");
+            } else {
+                otherCraft2.classList.remove("good");
+                otherCraft2.classList.add("error");
                 otherReq.classList.add("d-none");
                 otherMsg.classList.remove("d-none");
             }
@@ -794,7 +830,8 @@ if (miscForm) {
     const categorySelect = document.getElementById("category");
     const catReq = document.getElementById("catReq");
     categorySelect.addEventListener("change", function () {
-        if (this.options[this.selectedIndex].value === "التصنيف") {
+        const SelectedOption = this.options[this.selectedIndex].value;
+        if (SelectedOption === "التصنيف") {
             categorySelect.classList.add("error");
             categorySelect.classList.remove("good");
             catReq.classList.remove("d-none");
@@ -803,7 +840,7 @@ if (miscForm) {
             categorySelect.classList.add("good");
             catReq.classList.add("d-none");
         }
-        if (this.options[this.selectedIndex].value === "أخرى") {
+        if (SelectedOption === "أخرى") {
             otherCat.classList.remove("d-none");
             otherCat.disabled = false;
             otherCat.setAttribute("required", true);
