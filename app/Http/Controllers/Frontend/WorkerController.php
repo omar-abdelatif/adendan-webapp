@@ -18,6 +18,8 @@ class WorkerController extends Controller
         $electricCount = $electric->count();
         $plumber = Worker::latest()->where('craft', 'سباك')->paginate(12);
         $plumberCount = $plumber->count();
+        $tech = Worker::latest()->where('craft', 'فني')->paginate(12);
+        $techCount = $tech->count();
         $other = Worker::latest()->where('craft', 'أخرى')->paginate(12);
         $otherCount = $other->count();
         return view('frontend.pages.workers', compact([
@@ -29,6 +31,8 @@ class WorkerController extends Controller
             'electricCount',
             'plumber',
             'plumberCount',
+            'tech',
+            'techCount',
             'other',
             'otherCount',
         ]));

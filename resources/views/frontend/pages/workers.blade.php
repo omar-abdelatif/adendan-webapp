@@ -28,13 +28,13 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-tab="painter" id="pills-painter" data-bs-toggle="pill" href="#painter" role="tab" aria-controls="culture-news" aria-selected="false" data-a11y="child">
+                                <a class="nav-link" id="pills-painter-tab" data-bs-toggle="pill" href="#painter" role="tab" aria-controls="culture-news" aria-selected="false" data-a11y="child">
                                     <i class="bi bi-newspaper"></i>
                                     نقاشة
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-tab="electric-tab" id="pills-electric-tab" data-bs-toggle="pill" href="#electric-tab" role="tab" aria-controls="electric-tab" aria-selected="false" data-a11y="child">
+                                <a class="nav-link" id="pills-electric-tab" data-bs-toggle="pill" href="#electric-tab" role="tab" aria-controls="electric-tab" aria-selected="false" data-a11y="child">
                                     <i class="bi bi-newspaper"></i>
                                     كهرباء
                                 </a>
@@ -46,7 +46,13 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-tab="other-tab" id="pills-other-tab" data-bs-toggle="pill" href="#other-tab" role="tab" aria-controls="other-tab" aria-selected="false" data-a11y="child">
+                                <a class="nav-link" id="pills-tech-tab" data-bs-toggle="pill" href="#tech-tab" role="tab" aria-controls="tech-tab" aria-selected="false" data-a11y="child">
+                                    <i class="bi bi-newspaper"></i>
+                                    فنيين
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="pills-other-tab" data-bs-toggle="pill" href="#other-tab" role="tab" aria-controls="other-tab" aria-selected="false" data-a11y="child">
                                     <i class="bi bi-newspaper"></i>
                                     أخرى
                                 </a>
@@ -70,7 +76,7 @@
                                                                 <h4 class="mb-0">الإسم: {{$gn->name}}</h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: {{$gn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون: 20{{$gn->phone_number}}</h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
                                                                 <h4 class="mb-0">السكن: {{$gn->location}}</h4>
@@ -86,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="painter" role="tabpanel" aria-labelledby="pills-painter">
+                        <div class="tab-pane fade" id="painter-tab" role="tabpanel" aria-labelledby="pills-painter">
                             <div class="container">
                                 <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                                     @if ($painterCount >= 1)
@@ -102,7 +108,7 @@
                                                                 <h4 class="mb-0">الإسم: {{$cn->name}}</h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: {{$cn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون: 20{{$cn->phone_number}}</h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
                                                                 <h4 class="mb-0">السكن: {{$cn->location}}</h4>
@@ -134,7 +140,7 @@
                                                                 <h4 class="mb-0">الإسم: {{$dn->name}}</h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: {{$dn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون: 20{{$dn->phone_number}}</h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
                                                                 <h4 class="mb-0">السكن: {{$dn->location}}</h4>
@@ -166,7 +172,7 @@
                                                                 <h4 class="mb-0">الإسم: {{$wn->name}}</h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: {{$wn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون: 20{{$wn->phone_number}}</h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
                                                                 <h4 class="mb-0">السكن: {{$wn->location}}</h4>
@@ -178,6 +184,41 @@
                                         @endforeach
                                     @else
                                         <h1 class="text-center mb-0 my-3">لا يوجد حرفي في هذا القسم حاليا</h1>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tech-tab" role="tabpanel" aria-labelledby="pills-tech-tab">
+                            <div class="container">
+                                <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
+                                    @if ($techCount >= 1)
+                                        @foreach ($tech as $tn)
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                    <div class="card-body">
+                                                        <div class="card-image text-center">
+                                                            <img width="80" height="80" src="https://img.icons8.com/cotton/80/worker-male--v3.png" alt="worker-male--v3"/>
+                                                        </div>
+                                                        <div class="text-details p-3 w-100">
+                                                            <div class="title mb-3 text-center">
+                                                                <h4 class="mb-0">الإسم: {{$tn->name}}</h4>
+                                                            </div>
+                                                            <div class="mobile mb-3 text-center">
+                                                                <h4 class="mb-0">رقم التلفون: 20{{$tn->phone_number}}</h4>
+                                                            </div>
+                                                            <div class="craft mb-3 text-center">
+                                                                <h4 class="mb-0">المهنة: {{$tn->other_craft}}</h4>
+                                                            </div>
+                                                            <div class="location text-center">
+                                                                <h4 class="mb-0">السكن: {{$tn->location}}</h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <h1 class="text-center mb-0 my-3">لا يوجد فني في هذا القسم حاليا</h1>
                                     @endif
                                 </div>
                             </div>
@@ -198,7 +239,7 @@
                                                                 <h4 class="mb-0">الإسم: {{$sn->name}}</h4>
                                                             </div>
                                                             <div class="mobile mb-3 text-center">
-                                                                <h4 class="mb-0">رقم التلفون: {{$sn->phone_number}}</h4>
+                                                                <h4 class="mb-0">رقم التلفون: 20{{$sn->phone_number}}</h4>
                                                             </div>
                                                             <div class="craft mb-3 text-center">
                                                                 <h4 class="mb-0">المهنة: {{$sn->other_craft}}</h4>
