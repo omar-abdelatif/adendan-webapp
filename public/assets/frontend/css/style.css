@@ -325,7 +325,7 @@ hr{
 {
     background-color: #0d8f75;
     font-weight: bolder;
-    color: #fff !important;
+    color: #fff;
 }
 .nav-link{
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
