@@ -11,7 +11,7 @@ $(function () {
         pagingType: "simple_numbers",
         deferRender: true,
         // processing: true,
-        serverSide: true,
+        // serverSide: true,
         ajax: "{{ route('subscribers.all') }}",
         columns: [
             { data: "member_id", name: "member_id" },
