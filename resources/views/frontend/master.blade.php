@@ -82,7 +82,7 @@
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($generalnewscount > 0)
                             @foreach ($generalnews as $gn)
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <div style="width: 100%; height:250px; background-image:url({{ $gn->img ? asset('assets/images/news-imgs/'.$gn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
@@ -91,8 +91,13 @@
                                                     <h5 class="mb-0">{{$gn->title}}</h5>
                                                 </div>
                                                 <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">{{$gn->created_at->format('Y-m-d')}}</div>
-                                                    <div class="category">{{$gn->category}}</div>
+                                                    <div class="date">
+                                                        <span class="fw-bold">تاريخ النشر: </span>
+                                                        {{$gn->created_at->format('Y-m-d')}}
+                                                    </div>
+                                                    <div class="category ">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$gn->category}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,9 +133,14 @@
                                                 <div class="title mb-3 text-center">
                                                     <h5 class="mb-0">{{$cn->title}}</h5>
                                                 </div>
-                                                <div class="meta d-flex alicn-items-center justify-content-around">
-                                                    <div class="date">{{$cn->created_at->format('Y-m-d')}}</div>
-                                                    <div class="category">{{$cn->category}}</div>
+                                                <div class="meta d-flex align-items-center justify-content-around">
+                                                    <div class="date">
+                                                        <span class="fw-bold">تاريخ النشر: </span>
+                                                        {{$cn->created_at->format('Y-m-d')}}
+                                                    </div>
+                                                    <div class="category ">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$cn->category}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,9 +176,14 @@
                                                 <a href="{{route('site.single_news', $dn->id)}}" class="nav-link text-center">
                                                     <h5 class="mb-0">{{$dn->title}}</h5>
                                                 </a>
-                                                <div class="meta my-3 d-flex alicn-items-center justify-content-around">
-                                                    <div class="date">{{$dn->created_at->format('Y-m-d')}}</div>
-                                                    <div class="category">{{$dn->category}}</div>
+                                                <div class="meta d-flex align-items-center justify-content-around">
+                                                    <div class="date">
+                                                        <span class="fw-bold">تاريخ النشر: </span>
+                                                        {{$dn->created_at->format('Y-m-d')}}
+                                                    </div>
+                                                    <div class="category ">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$dn->category}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -205,8 +220,13 @@
                                                     <h5 class="mb-0">{{$wn->title}}</h5>
                                                 </div>
                                                 <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">{{$wn->created_at->format('Y-m-d')}}</div>
-                                                    <div class="category">{{$wn->category}}</div>
+                                                    <div class="date">
+                                                        <span class="fw-bold">تاريخ النشر: </span>
+                                                        {{$wn->created_at->format('Y-m-d')}}
+                                                    </div>
+                                                    <div class="category ">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$wn->category}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,8 +263,13 @@
                                                     <h5 class="mb-0">{{$sn->title}}</h5>
                                                 </div>
                                                 <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">{{$sn->created_at->format('Y-m-d')}}</div>
-                                                    <div class="category">{{$sn->category}}</div>
+                                                    <div class="date">
+                                                        <span class="fw-bold">تاريخ النشر: </span>
+                                                        {{$sn->created_at->format('Y-m-d')}}
+                                                    </div>
+                                                    <div class="category ">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$sn->category}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

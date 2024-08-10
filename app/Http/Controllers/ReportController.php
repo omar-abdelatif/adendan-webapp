@@ -150,7 +150,7 @@ class ReportController extends Controller
         $totalSafe = TotalSafe::get();
         $donationsReports = SafeReports::whereIn('transaction_type', ['تبرعات', 'متأخرات التبرعات', 'تبرع جزئي', 'تبرع كلي'])->get();
         $sumDonations = $donationsReports->sum('amount');
-        $subscriptionsReports = SafeReports::where('transaction_type', 'إشتراكات')->get();
+        $subscriptionsReports = SafeReports::whereIn('transaction_type', ['إشتراكات', 'إشتراك'])->get();
         $sumSubscriptions = $subscriptionsReports->sum('amount');
         $safeAmounts = [];
         foreach ($totalSafe as $safe) {

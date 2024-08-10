@@ -441,45 +441,55 @@
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 <div class="wedding-cards">
-                                    @foreach ($weddingsByMonth as $month => $weddings)
-                                        <div class="card card-shadow position-relative border border-2 border-secondary rounded mt-5 p-4 w-100">
-                                            <div class="card-header bg-secondary position-absolute rounded-pill w-25 top--20px">
-                                                <h4 class="text-center text-white">أفراح شهر {{ $month }}</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="table-responsive overflow-hidden">
-                                                    <table class="table table-striped align-middle table-borderless rounded table-hover text-right mt-3 text-center">
-                                                        <thead class="table-primary">
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>اليوم</th>
-                                                                <th>تاريخ المناسبة</th>
-                                                                <th>إسم العريس</th>
-                                                                <th>والد العروس</th>
-                                                                <th>المكان</th>
-                                                                <th>من الساعة</th>
-                                                                <th>الى الساعة</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($weddings as $wed)
+                                    @if (count($weddingsByMonth) > 0)
+                                        @foreach ($weddingsByMonth->filter(function ($weddings) {
+                                            return $weddings->some(function ($wed) {
+                                                return \Carbon\Carbon::parse($wed->date)->isAfter(\Carbon\Carbon::today());
+                                            });
+                                        }) as $month => $weddings)
+                                            <div class="card card-shadow position-relative border border-2 border-secondary rounded mt-5 p-4 w-100">
+                                                <div class="card-header bg-secondary position-absolute rounded-pill w-25 top--20px">
+                                                    <h4 class="text-center text-white">أفراح شهر {{ $month }}</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped align-middle table-borderless rounded table-hover text-right mt-3 text-center">
+                                                            <thead class="table-primary">
                                                                 <tr>
-                                                                    <td>{{$loop->iteration}}</td>
-                                                                    <td>{{$wed->day}}</td>
-                                                                    <td>{{$wed->date}}</td>
-                                                                    <td>{{$wed->groom_name}}</td>
-                                                                    <td>كريمة/{{$wed->pride_father_name}}</td>
-                                                                    <td>{{$wed->address}}</td>
-                                                                    <td dir="ltr">{{$wed->from_time}}</td>
-                                                                    <td dir="ltr">{{$wed->to_time}}</td>
+                                                                    <th>اليوم</th>
+                                                                    <th>تاريخ المناسبة</th>
+                                                                    <th>إسم العريس</th>
+                                                                    <th>والد العروس</th>
+                                                                    <th>المكان</th>
+                                                                    <th>من الساعة</th>
+                                                                    <th>الى الساعة</th>
                                                                 </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($weddings as $wed)
+                                                                    <tr>
+                                                                        <td>{{$wed->day}}</td>
+                                                                        <td>{{$wed->date}}</td>
+                                                                        <td>{{$wed->groom_name}}</td>
+                                                                        <td>كريمة/{{$wed->pride_father_name}}</td>
+                                                                        <td>{{$wed->address}}</td>
+                                                                        <td dir="ltr">{{ $wed->from_time }}</td>
+                                                                        <td dir="ltr">{{ $wed->to_time }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6">
+                                                <h1 class="text-center">لا توجد مناسبات حاليا</h1>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </div>
                             </div>
                         </div>
