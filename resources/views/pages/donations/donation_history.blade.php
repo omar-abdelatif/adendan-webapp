@@ -236,7 +236,7 @@
                                                         <tr>
                                                             <th class="text-center">#</th>
                                                             <th class="text-center">المبلغ الإجمالي</th>
-                                                            <th class="text-center">المبلغ المطلوب</th>
+                                                            <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>

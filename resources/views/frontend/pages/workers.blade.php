@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="pills-painter-tab" data-bs-toggle="pill" href="#painter" role="tab" aria-controls="culture-news" aria-selected="false" data-a11y="child">
+                                <a class="nav-link" id="pills-painter-tab" data-bs-toggle="pill" href="#painter-tab" role="tab" aria-controls="painter-tab" aria-selected="false" data-a11y="child">
                                     <i class="bi bi-newspaper"></i>
                                     نقاشة
                                 </a>

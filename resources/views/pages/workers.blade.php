@@ -24,19 +24,19 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="title" class="text-muted">إسم الشخص</label>
-                                    <input type="text" id="worker_name" class="form-control text-muted" minlength="3" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" name="name" placeholder="إسم الشخص" required>
+                                    <label for="worker_name" class="text-muted">إسم الشخص</label>
+                                    <input type="text" id="worker_name" class="form-control text-muted" minlength="3" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" name="name" placeholder="إسم الشخص" autocomplete="false" required>
                                     <p class="required d-none text-danger mb-0" id="nameReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="nameMsg">يجب ان يكون الاسم باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-muted">رقم الموبايل</label>
+                                    <label for="worker_mob" class="text-muted">رقم الموبايل</label>
                                     <input type="text" id="worker_mob" class="form-control text-muted" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="phone_number" placeholder="رقم الموبايل" required>
                                     <p class="required d-none text-danger mb-0" id="mobReq">هذا الحقل  مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="mobCount">يجب ان يكون رقم الموبايل لا يقل عن 11 رقم</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="title" class="text-muted">الحرفة</label>
+                                    <label for="craftSelect" class="text-muted">الحرفة</label>
                                     <select name="craft" class="form-select text-muted" id="craftSelect" required>
                                         <option selected>الحرفة</option>
                                         <option value="نجار" class="option-control">نجار</option>
@@ -53,7 +53,7 @@
                                     <p class="d-none mb-0 text-danger" id="otherMsg">يجب ان يكون اسم الحرفة باللغة العربية و لا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label class="text-muted">المنطقة</label>
+                                    <label for="worker_location" class="text-muted">المنطقة</label>
                                     <input type="text" id="worker_location" name="location" minlength="5" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="منطقة السكن" class="form-control text-muted" required>
                                     <p class="required d-none text-danger mb-0" id="locReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="locMsg">يجب ان يكون العنوان باللغة العربية</p>
@@ -125,38 +125,35 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{$user->role === 'admin' ? route('worker.update') : route('mediaRole.worker.update')}} method="post">
+                                                                <form action="{{ $user->role === 'admin' ? route('worker.update') : route('mediaRole.worker.update') }}" method="post" data-worker-id="{{ $worker->id }}">
                                                                     @csrf
-                                                                    <input type="hidden" name="id" value={{$worker->id}}>
+                                                                    <input type="hidden" name="id" value="{{ $worker->id }}">
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">إسم الحرفي</label>
-                                                                                <input type="text" class="form-control text-center text-muted" name="name" value="{{$worker->name}}">
+                                                                                <label for="worker_name" class="text-muted">إسم الحرفي</label>
+                                                                                <input type="text" class="form-control text-center text-muted" name="name" id="worker_name" value="{{ $worker->name }}" autocomplete="off">
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">رقم المحمول</label>
-                                                                                <input type="number" class="form-control text-center text-muted" name="phone_number" value="{{$worker->phone_number}}">
+                                                                                <label for="worker_mob" class="text-muted">رقم المحمول</label>
+                                                                                <input type="number" id="worker_mob" class="form-control text-center text-muted" name="phone_number" value="{{ $worker->phone_number }}">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="title" class="text-muted">الحرفة</label>
-                                                                                <select name="craft" class="form-select text-muted" id="updateCraft" data-worker-id="{{$worker->id}}">
+                                                                                <label for="updateCraft" class="text-muted">الحرفة</label>
+                                                                                <select name="craft" class="form-select text-muted" id="updateCraft" data-worker-id="{{ $worker->id }}">
                                                                                     <option selected>إختر الحرفة</option>
-                                                                                    <option value="نجار" {{$worker->craft === 'نجار' ? 'selected' : ''}} class="option-control">نجار</option>
-                                                                                    <option value="نقاش" {{$worker->craft === 'نقاش' ? 'selected' : ''}} class="option-control">نقاش</option>
-                                                                                    <option value="سباك" {{$worker->craft === 'سباك' ? 'selected' : ''}} class="option-control">سباك</option>
-                                                                                    <option value="كهربائي" {{$worker->craft === 'كهربائي' ? 'selected' : ''}} class="option-control">كهربائي</option>
-                                                                                    <option value="أخرى" {{$worker->craft === 'أخرى' ? 'selected' : ''}} class="option-control">أخرى</option>
+                                                                                    <option value="نجار" {{ $worker->craft === 'نجار' ? 'selected' : '' }} class="option-control">نجار</option>
+                                                                                    <option value="نقاش" {{ $worker->craft === 'نقاش' ? 'selected' : '' }} class="option-control">نقاش</option>
+                                                                                    <option value="سباك" {{ $worker->craft === 'سباك' ? 'selected' : '' }} class="option-control">سباك</option>
+                                                                                    <option value="كهربائي" {{ $worker->craft === 'كهربائي' ? 'selected' : '' }} class="option-control">كهربائي</option>
+                                                                                    <option value="فني" {{ $worker->craft === 'فني' ? 'selected' : '' }} class="option-control">فني</option>
+                                                                                    <option value="أخرى" {{ $worker->craft === 'أخرى' ? 'selected' : '' }} class="option-control">أخرى</option>
                                                                                 </select>
-                                                                                @if ($worker->craft === 'أخرى')
-                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" value="{{$worker->other_craft}}">
-                                                                                @else
-                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" data-worker-id="{{$worker->id}}" disabled>
-                                                                                @endif
+                                                                                <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" data-worker-id="{{ $worker->id }}" value="{{ $worker->other_craft }}">
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label class="text-muted">المنطقة</label>
-                                                                                <input type="text" name="location" placeholder="منطقة السكن" value="{{$worker->location}}" class="form-control text-muted">
+                                                                                <label for="worker_address" class="text-muted">المنطقة</label>
+                                                                                <input type="text" id="worker_address" name="location" placeholder="منطقة السكن" value="{{ $worker->location }}" class="form-control text-muted">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>

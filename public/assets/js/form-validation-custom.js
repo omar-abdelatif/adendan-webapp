@@ -350,8 +350,7 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters =
-            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
@@ -595,7 +594,7 @@ if (workers) {
     const nameMsg = document.getElementById("nameMsg");
     const nameReq = document.getElementById("nameReq");
     workerName.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             nameReq.classList.remove("d-none");
             nameMsg.classList.add("d-none");
@@ -1719,28 +1718,50 @@ if (categorySelect) {
     });
 }
 //! updateCraft Worker Page
-let selectElements = document.querySelectorAll("[data-worker-id]");
-if (selectElements) {
-    selectElements.forEach((selectElement) => {
-        let otherCraftInput = document.querySelector(
-            `input[name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`
-        );
-        function handleUpdateCraft() {
-            let selectedOption =
-                selectElement.options[selectElement.selectedIndex].value;
-            if (selectedOption === "أخرى") {
-                otherCraftInput.disabled = false;
-            } else {
-                otherCraftInput.value = "";
-                otherCraftInput.disabled = true;
-                otherCraftInput.removeAttribute("value");
+const UpdateWorkerForm = document.querySelectorAll("[data-worker-id]");
+if (UpdateWorkerForm) {
+    UpdateWorkerForm.forEach((workerForm) => {
+        const selectElement = workerForm.querySelectorAll("[data-worker-id]");
+        const otherCraftInput = workerForm.querySelector(`input[id="updating_craft"][name="other_craft"][data-worker-id="${workerForm.dataset.workerId}"]`);
+        selectElement.forEach((item) => {
+            const SelectInput = workerForm.querySelector(`select[id="updateCraft"][name="craft"][data-worker-id="${item.dataset.workerId}"]`);
+            function handleUpdateCraft() {
+                const selectedOption = SelectInput.value;
+                if (selectedOption === "أخرى" || selectedOption === "فني") {
+                    otherCraftInput.classList.remove("d-none");
+                } else {
+                    otherCraftInput.classList.add("d-none");
+                }
             }
-        }
-        selectElement.addEventListener("change", function () {
-            handleUpdateCraft();
+            SelectInput.addEventListener("change", function () {
+                handleUpdateCraft();
+            });
         });
     });
 }
+// let selectElements = document.querySelectorAll("[data-worker-id]");
+// if (selectElements) {
+//     selectElements.forEach((selectElement) => {
+//         let otherCraftInput = document.querySelector(`input[id="updaing_craft"][name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+//         let otherCraftInput2 = document.querySelector(`input[id="updatingOtherCategory2"][name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
+//         function handleUpdateCraft() {
+//             let selectedOption = selectElement.options[selectElement.selectedIndex].value;
+//             if (selectedOption === "أخرى") {
+//                 otherCraftInput.classList.remove("d-none");
+//                 otherCraftInput2.classList.add("d-none");
+//             } else if (selectedOption === "فني") {
+//                 otherCraftInput2.classList.remove("d-none");
+//                 otherCraftInput.classList.add("d-none");
+//             } else {
+//                 otherCraftInput2.classList.add("d-none");
+//                 otherCraftInput.classList.add("d-none");
+//             }
+//         }
+//         selectElement.addEventListener("change", function () {
+//             handleUpdateCraft();
+//         });
+//     });
+// }
 //! Insert Donation
 let allDonations = document.querySelectorAll("[data-donation-id]");
 if (allDonations) {

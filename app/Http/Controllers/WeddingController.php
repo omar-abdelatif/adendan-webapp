@@ -59,7 +59,19 @@ class WeddingController extends Controller
         $id = $request->id;
         $removeWedding = Wedding::findOrFail($id);
         if ($removeWedding) {
-            $update = $removeWedding->update($request->all());
+            $fromTime = $request['from_time'];
+            $toTime = $request['to_time'];
+            $fromTime12 = date("g:i A", strtotime($fromTime));
+            $toTime12 = date("g:i A", strtotime($toTime));
+            $update = $removeWedding->update([
+                'day' => $request['day'],
+                'date' => $request['date'],
+                'groom_name' => $request['groom_name'],
+                'pride_father_name' => $request['pride_father_name'],
+                'address' => $request['address'],
+                'from_time' => $fromTime12,
+                'to_time' => $toTime12,
+            ]);
             if ($update) {
                 $notificationSuccess = [
                     'message' => 'تم التحديث بنجاح',
