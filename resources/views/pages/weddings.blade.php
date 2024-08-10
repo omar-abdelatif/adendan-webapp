@@ -198,13 +198,13 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group mb-3">
                                                                                         <label for="from_time" class="text-muted">من الساعة</label>
-                                                                                        <input type="time" id="from_time" name="from_time" value="{{$wedding->from_time}}" class="form-control text-muted">
+                                                                                        <input type="time" id="from_time" name="from_time" value="{{ \Carbon\Carbon::parse($wedding->from_time)->format('H:i') }}" class="form-control text-muted">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group mb-3">
                                                                                         <label for="to_time" class="text-muted">الى الساعة</label>
-                                                                                        <input type="time" id="to_time" name="to_time" value="{{$wedding->to_time}}" class="form-control text-muted">
+                                                                                        <input type="time" id="to_time" name="to_time" value="{{ \Carbon\Carbon::parse($wedding->to_time)->format('H:i') }}" class="form-control text-muted">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
