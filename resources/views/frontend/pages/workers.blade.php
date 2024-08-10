@@ -117,7 +117,7 @@
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
                                                                 <h5 class="mb-0">رقم التلفون:
-                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$cn->phone_number}}</span>
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">20{{$cn->phone_number}}</span>
                                                                 </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
@@ -155,7 +155,7 @@
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
                                                                 <h5 class="mb-0">رقم التلفون:
-                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$dn->phone_number}}</span>
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">20{{$dn->phone_number}}</span>
                                                                 </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">

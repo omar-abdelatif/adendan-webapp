@@ -149,7 +149,13 @@
                                                                                     <option value="فني" {{ $worker->craft === 'فني' ? 'selected' : '' }} class="option-control">فني</option>
                                                                                     <option value="أخرى" {{ $worker->craft === 'أخرى' ? 'selected' : '' }} class="option-control">أخرى</option>
                                                                                 </select>
-                                                                                <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" data-worker-id="{{ $worker->id }}" value="{{ $worker->other_craft }}">
+                                                                                @if ($worker->craft === 'فني')
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" data-worker-id="{{ $worker->id }}" value="{{ $worker->other_craft }}">
+                                                                                @elseif ($worker->craft === 'أخرى')
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted" placeholder="المهنة الأخرى" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" data-worker-id="{{ $worker->id }}" value="{{ $worker->other_craft }}">
+                                                                                @else
+                                                                                    <input type="text" name="other_craft" id="updaing_craft" class="form-control mt-3 text-muted d-none" placeholder="المهنة الأخرى" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" data-worker-id="{{ $worker->id }}" value="{{ $worker->other_craft }}">
+                                                                                @endif
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="worker_address" class="text-muted">المنطقة</label>

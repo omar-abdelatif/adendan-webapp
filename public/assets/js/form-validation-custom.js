@@ -645,7 +645,6 @@ if (workers) {
     const craft = document.getElementById("craftSelect");
     const craftReq = document.getElementById("craftReq");
     const otherCraft = document.getElementById("otherCategory");
-    const otherCraft2 = document.getElementById("otherCategory2");
     const otherReq = document.getElementById("otherReq");
     craft.addEventListener("change", function () {
         const SelectedOption = this.options[this.selectedIndex].value;
@@ -702,27 +701,6 @@ if (workers) {
             } else {
                 otherCraft.classList.remove("good");
                 otherCraft.classList.add("error");
-                otherReq.classList.add("d-none");
-                otherMsg.classList.remove("d-none");
-            }
-        }
-    });
-    otherCraft2.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
-        if (this.value.trim() === "") {
-            otherReq.classList.remove("d-none");
-            otherMsg.classList.remove("d-none");
-            otherCraft2.classList.remove("good");
-            otherCraft2.classList.add("error");
-        } else {
-            if (letters.test(this.value)) {
-                otherCraft2.classList.add("good");
-                otherCraft2.classList.remove("error");
-                otherReq.classList.add("d-none");
-                otherMsg.classList.add("d-none");
-            } else {
-                otherCraft2.classList.remove("good");
-                otherCraft2.classList.add("error");
                 otherReq.classList.add("d-none");
                 otherMsg.classList.remove("d-none");
             }
@@ -1724,13 +1702,9 @@ const UpdateWorkerForm = document.querySelectorAll("[data-worker-id]");
 if (UpdateWorkerForm) {
     UpdateWorkerForm.forEach((workerForm) => {
         const selectElement = workerForm.querySelectorAll("[data-worker-id]");
-        const otherCraftInput = workerForm.querySelector(
-            `input[id="updating_craft"][name="other_craft"][data-worker-id="${workerForm.dataset.workerId}"]`
-        );
+        const otherCraftInput = workerForm.querySelector(`input[name="other_craft"][data-worker-id="${workerForm.dataset.workerId}"]`);
         selectElement.forEach((item) => {
-            const SelectInput = workerForm.querySelector(
-                `select[id="updateCraft"][name="craft"][data-worker-id="${item.dataset.workerId}"]`
-            );
+            const SelectInput = workerForm.querySelector(`select[name="craft"][data-worker-id="${item.dataset.workerId}"]`);
             function handleUpdateCraft() {
                 const selectedOption = SelectInput.value;
                 if (selectedOption === "أخرى" || selectedOption === "فني") {
