@@ -176,7 +176,7 @@
                                                 <a href="{{route('site.single_news', $dn->id)}}" class="nav-link text-center">
                                                     <h5 class="mb-0">{{$dn->title}}</h5>
                                                 </a>
-                                                <div class="meta d-flex align-items-center justify-content-around">
+                                                <div class="meta d-flex mt-3 align-items-center justify-content-around">
                                                     <div class="date">
                                                         <span class="fw-bold">تاريخ النشر: </span>
                                                         {{$dn->created_at->format('Y-m-d')}}
