@@ -73,13 +73,19 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 d-flex align-items-center justify-content-center">
-                                                                <h4 class="mb-0">الإسم: {{$gn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$gn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: 20{{$gn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">20{{$gn->phone_number}}</span>
+                                                                </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
-                                                                <h4 class="mb-0">السكن: {{$gn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$gn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,13 +111,19 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 d-flex align-items-center justify-content-center">
-                                                                <h4 class="mb-0">الإسم: {{$cn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$cn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: 20{{$cn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$cn->phone_number}}</span>
+                                                                </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
-                                                                <h4 class="mb-0">السكن: {{$cn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$cn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -137,13 +149,19 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 d-flex align-items-center justify-content-center">
-                                                                <h4 class="mb-0">الإسم: {{$dn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$dn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: 20{{$dn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$dn->phone_number}}</span>
+                                                                </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
-                                                                <h4 class="mb-0">السكن: {{$dn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$dn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,13 +187,19 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 d-flex align-items-center justify-content-center">
-                                                                <h4 class="mb-0">الإسم: {{$wn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$wn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile d-flex align-items-center justify-content-center">
-                                                                <h5 class="mb-0">رقم التلفون: 20{{$wn->phone_number}}</h5>
+                                                                <h5 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$wn->phone_number}}</span>
+                                                                </h5>
                                                             </div>
                                                             <div class="location mt-3 text-center">
-                                                                <h4 class="mb-0">السكن: {{$wn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$wn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -201,16 +225,24 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
-                                                                <h4 class="mb-0">الإسم: {{$tn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$tn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile mb-3 text-center">
-                                                                <h4 class="mb-0">رقم التلفون: 20{{$tn->phone_number}}</h4>
+                                                                <h4 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">20{{$tn->phone_number}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="craft mb-3 text-center">
-                                                                <h4 class="mb-0">المهنة: {{$tn->other_craft}}</h4>
+                                                                <h4 class="mb-0">المهنة:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$tn->other_craft}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="location text-center">
-                                                                <h4 class="mb-0">السكن: {{$tn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$tn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -236,16 +268,24 @@
                                                         </div>
                                                         <div class="text-details p-3 w-100">
                                                             <div class="title mb-3 text-center">
-                                                                <h4 class="mb-0">الإسم: {{$sn->name}}</h4>
+                                                                <h4 class="mb-0">الإسم:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$sn->name}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="mobile mb-3 text-center">
-                                                                <h4 class="mb-0">رقم التلفون: 20{{$sn->phone_number}}</h4>
+                                                                <h4 class="mb-0">رقم التلفون:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">20{{$sn->phone_number}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="craft mb-3 text-center">
-                                                                <h4 class="mb-0">المهنة: {{$sn->other_craft}}</h4>
+                                                                <h4 class="mb-0">المهنة:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$sn->other_craft}}</span>
+                                                                </h4>
                                                             </div>
                                                             <div class="location text-center">
-                                                                <h4 class="mb-0">السكن: {{$sn->location}}</h4>
+                                                                <h4 class="mb-0">السكن:
+                                                                    <span class="fs-5 bg-success-subtle rounded-pill text-success px-3 py-1">{{$sn->location}}</span>
+                                                                </h4>
                                                             </div>
                                                         </div>
                                                     </div>
