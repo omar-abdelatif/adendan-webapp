@@ -21,7 +21,7 @@ class DelayController extends Controller
             'year' => 'required',
             'yearly_cost' => 'required'
         ]);
-        $subscribers = Subscribers::get();
+        $subscribers = Subscribers::where('status', 1)->get();
         $existingDelay = Delay::where('year', $request->year)->first();
         if ($existingDelay) {
             return back()->withErrors('هذه السنة تم إصدار اشتراكاتها بالفعل');
