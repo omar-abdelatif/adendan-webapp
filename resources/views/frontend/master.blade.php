@@ -125,7 +125,7 @@
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($culturenewscount > 0)
                             @foreach ($culturenews as $cn)
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <div style="width: 100%; height:250px; background-image:url({{ $cn->img ? asset('assets/images/news-imgs/'.$cn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
@@ -168,7 +168,7 @@
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($deathnewscount > 0)
                             @foreach ($deathnews as $dn)
-                                <div class="col-lg-3 col-md-6">
+                                <div class="col-lg-4 col-md-6">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <img src="{{asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg')}}" alt="{{$dn->title}}">
@@ -211,7 +211,7 @@
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($weddingnewscount > 0)
                             @foreach ($weddingnews as $wn)
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
@@ -254,7 +254,7 @@
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($sportnewscount > 0)
                             @foreach ($sportnews as $sn)
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <div style="width: 100%; height:250px; background-image:url({{ $sn->img ? asset('assets/images/news-imgs/'.$sn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
