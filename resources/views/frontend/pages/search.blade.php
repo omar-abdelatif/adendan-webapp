@@ -466,7 +466,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($weddings as $wed)
+                                                                @foreach ($weddings->filter(function($wed){return \Carbon\Carbon::parse($wed->date)->isAfter(\Carbon\Carbon::today());})->sortBy('date') as $wed)
                                                                     <tr>
                                                                         <td>{{$wed->day}}</td>
                                                                         <td>{{$wed->date}}</td>
