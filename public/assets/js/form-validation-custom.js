@@ -350,8 +350,7 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters =
-            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
@@ -1570,9 +1569,7 @@ if (PayDonationDebtForm) {
     });
 }
 //! Validation For Paying Old Donation
-const PayOldDonationDebt = document.querySelectorAll(
-    "[data-payolddonation-id]"
-);
+const PayOldDonationDebt = document.querySelectorAll("[data-payolddonation-id]");
 if (PayOldDonationDebt) {
     const oldDonationInvoice = document.querySelectorAll("[data-oldinv-id]");
     const oldDonationAmount = document.querySelectorAll("[data-oldamount-id]");
@@ -1675,10 +1672,10 @@ if (SelectedOption) {
 }
 //! category News Select
 const categorySelect = document.getElementById("categorySelect");
-const inputsDiv = document.getElementById("inputs");
-const img = document.getElementById("img");
-const thumbs = document.getElementById("thumbs");
 if (categorySelect) {
+    const inputsDiv = document.getElementById("inputs");
+    const img = document.getElementById("img");
+    const thumbs = document.getElementById("thumbs");
     categorySelect.addEventListener("change", function () {
         if (this.value === "عزاء") {
             inputsDiv.classList.add("hidden");
@@ -1719,29 +1716,6 @@ if (UpdateWorkerForm) {
         });
     });
 }
-// let selectElements = document.querySelectorAll("[data-worker-id]");
-// if (selectElements) {
-//     selectElements.forEach((selectElement) => {
-//         let otherCraftInput = document.querySelector(`input[id="updaing_craft"][name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
-//         let otherCraftInput2 = document.querySelector(`input[id="updatingOtherCategory2"][name="other_craft"][data-worker-id="${selectElement.dataset.workerId}"]`);
-//         function handleUpdateCraft() {
-//             let selectedOption = selectElement.options[selectElement.selectedIndex].value;
-//             if (selectedOption === "أخرى") {
-//                 otherCraftInput.classList.remove("d-none");
-//                 otherCraftInput2.classList.add("d-none");
-//             } else if (selectedOption === "فني") {
-//                 otherCraftInput2.classList.remove("d-none");
-//                 otherCraftInput.classList.add("d-none");
-//             } else {
-//                 otherCraftInput2.classList.add("d-none");
-//                 otherCraftInput.classList.add("d-none");
-//             }
-//         }
-//         selectElement.addEventListener("change", function () {
-//             handleUpdateCraft();
-//         });
-//     });
-// }
 //! Insert Donation
 let allDonations = document.querySelectorAll("[data-donation-id]");
 if (allDonations) {
@@ -1868,18 +1842,3 @@ if (paymentTypes) {
         });
     });
 }
-//!
-//!
-//!
-//!
-//!
-//!
-//!
-//!
-//!
-
-
-
-
-
-
