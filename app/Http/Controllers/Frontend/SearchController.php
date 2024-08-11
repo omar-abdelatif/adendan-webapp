@@ -10,10 +10,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DonationDelay;
 use App\Models\Olddelays;
-use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
+use App\Models\SearchedData;
 
 class SearchController extends Controller
 {
+    public $count;
     public function index()
     {
         $weddingsByMonth = $this->getWeddingsByMonth();
@@ -46,8 +47,11 @@ class SearchController extends Controller
     {
         $ssn = $request->input('ssn');
         $member = Subscribers::where('ssn', $ssn)->first();
-        if (empty($ssn) || !$member) {
+        if (empty($ssn)) {
             return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح');
+        } elseif (!$member) {
+            SearchedData::create(['searched_data' => $ssn]);
+            return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح او رقم المحمول');
         } else {
             if ($member) {
                 $noDelays = 'لا توجد مديونية إشتراكات';
