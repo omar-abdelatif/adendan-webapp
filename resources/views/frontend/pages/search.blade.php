@@ -49,7 +49,9 @@
                                     $member = session('member');
                                     $searched = session('searched');
                                     $emptyMessage = session('empty_message');
-                                    $validSsn = session('valid_message');
+                                    $emptyMessage2 = session('empty_message2');
+                                    $link_title = session('link_title');
+                                    $link = session('link');
                                     $delays = session('delays');
                                     $oldDelays = session('oldDelays');
                                     $noOldDelays = session('noOldDelays');
@@ -240,6 +242,67 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 mb-3">
+                                                            <div class="delay-donaion">
+                                                                <div class="delay-donaiton-content">
+                                                                    <div class="row justify-content-center g-0">
+                                                                        @if (count($donationDelays) > 0)
+                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
+                                                                                        مديونية التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        @foreach ($donationDelays as $delay)
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ الكلي</span>
+                                                                                                        {{$delay->delay_amount}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المدفوع</span>
+                                                                                                        {{$delay->amount_paied}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-lg-4 p-1 py-2">
+                                                                                                <div class="text-center">
+                                                                                                    <h4 role="presentation">
+                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        {{$delay->amount_remaining}}
+                                                                                                        ج.م
+                                                                                                    </h4>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @else
+                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
+                                                                                        مديونية التبرعات
+                                                                                    </h4>
+                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                        <h3 class="text-center mb-0">لا توجد مديونية تبرعات</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 mb-3">
                                                             <div class="old-donations">
                                                                 <div class="old-donation-content">
                                                                     <div class="row justify-content-center g-0">
@@ -316,78 +379,17 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-6 mb-3">
-                                                            <div class="delay-donaion">
-                                                                <div class="delay-donaiton-content">
-                                                                    <div class="row justify-content-center g-0">
-                                                                        @if (count($donationDelays) > 0)
-                                                                            <div class="w-100 border border-1 border-dark rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                                                        مديونية التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                        @foreach ($donationDelays as $delay)
-                                                                                            <div class="col-lg-4 p-1 py-2">
-                                                                                                <div class="text-center">
-                                                                                                    <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ الكلي</span>
-                                                                                                        {{$delay->delay_amount}}
-                                                                                                        ج.م
-                                                                                                    </h4>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4 p-1 py-2">
-                                                                                                <div class="text-center">
-                                                                                                    <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المدفوع</span>
-                                                                                                        {{$delay->amount_paied}}
-                                                                                                        ج.م
-                                                                                                    </h4>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-lg-4 p-1 py-2">
-                                                                                                <div class="text-center">
-                                                                                                    <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
-                                                                                                        {{$delay->amount_remaining}}
-                                                                                                        ج.م
-                                                                                                    </h4>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        @endforeach
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                                                        مديونية التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
-                                                                                        <h3 class="text-center mb-0">لا توجد مديونية تبرعات</h3>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @else
-                                        @if ($validSsn)
-                                            <h1 class="text-center my-3">{{ $validSsn }}</h1>
-                                        @endif
                                     @endif
                                 @else
-                                    <h1 class="text-center my-3">{{$emptyMessage}}</h1>
+                                    <div class="message-data text-center">
+                                        <h1 class="text-center my-3">{{$emptyMessage}}</h1>
+                                        <p class="mb-3 fs-6 fw-bold text-center">{{$emptyMessage2}}</p>
+                                        <a class="fw-bold" href="{{$link}}" target="blank">{{$link_title}}</a>
+                                    </div>
                                 @endif
                             </div>
                         </div>
