@@ -89,12 +89,12 @@ class SubscribersController extends Controller
                 'subscription_cost' => $totalNewSubCost,
                 'invoice_no' => $request->invoice_no,
                 'period' => $year,
-                'payment_type' => 'إشتراك',
+                'payment_type' => 'إشتراك جديد',
                 'subscribers_id' => $subscriberId
             ]);
             SafeReports::create([
                 'member_id' => $request->member_id,
-                'transaction_type' => 'إشتراك',
+                'transaction_type' => 'إشتراك جديد',
                 'amount' => $totalNewSubCost,
                 'invoice_no' => $request->invoice_no,
             ]);

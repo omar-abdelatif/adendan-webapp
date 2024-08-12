@@ -21,18 +21,13 @@ class ReportController extends Controller
         $subscribers = Subscribers::with('subscriptions')->get();
         $subscriptions = $this->subscriptionFilter();
         $count = $subscribers->count();
-        $activeSubscribers = $subscribers->where('status', 1)->count();
-        $nonActiveSubscribers = $subscribers->where('status', 0)->count();
-        $pendingSubscribers = $subscribers->where('status', 2)->count();
         $TotalOldDelays = Olddelays::get();
         $sumTotalOldDelaysSubscriptions = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('amount');
-        $sumDelayAmount = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('delay_amount');
-        $sumDelayRemaining = $TotalOldDelays->where('old_delay_type', 'إشتراكات')->sum('delay_remaining');
+        $sumDelayAmount = SafeReports::where('transaction_type', 'متأخرات')->sum('amount');
         $totalDelay = Delay::get();
         $sumTotalDelays = $totalDelay->sum('yearly_cost');
-        $sumDelayPaied = $totalDelay->sum('paied');
-        $sumDelayRemaing = $totalDelay->sum('remaing');
-        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'activeSubscribers', 'nonActiveSubscribers', 'pendingSubscribers', 'sumTotalOldDelaysSubscriptions', 'sumDelayAmount', 'sumDelayRemaining', 'sumTotalDelays', 'sumDelayPaied', 'sumDelayRemaing'));
+        $sumDelayPaied = SafeReports::where('transaction_type', 'إشتراكات')->sum('amount');
+        return view('pages.reports.subscriptions', compact('subscribers', 'subscriptions', 'count', 'sumTotalOldDelaysSubscriptions', 'sumDelayAmount', 'sumTotalDelays', 'sumDelayPaied'));
     }
     public function subscriptionFilter()
     {
@@ -150,7 +145,7 @@ class ReportController extends Controller
         $totalSafe = TotalSafe::get();
         $donationsReports = SafeReports::whereIn('transaction_type', ['تبرعات', 'متأخرات التبرعات', 'تبرع جزئي', 'تبرع كلي'])->get();
         $sumDonations = $donationsReports->sum('amount');
-        $subscriptionsReports = SafeReports::whereIn('transaction_type', ['إشتراكات', 'إشتراك'])->get();
+        $subscriptionsReports = SafeReports::whereIn('transaction_type', ['إشتراكات', 'إشتراك جديد'])->get();
         $sumSubscriptions = $subscriptionsReports->sum('amount');
         $safeAmounts = [];
         foreach ($totalSafe as $safe) {
