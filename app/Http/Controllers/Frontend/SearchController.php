@@ -50,8 +50,12 @@ class SearchController extends Controller
         if (empty($ssn)) {
             return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح');
         } elseif (!$member) {
-            SearchedData::create(['searched_data' => $ssn]);
-            return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح او رقم المحمول');
+            return redirect()->route('site.search')->with([
+                'empty_message' => 'الرقم القومي غير موجود',
+                'empty_message2' => 'برجاء ادخال البيانات لتحديثها من خلال الرابط التالي,',
+                'link_title' => 'تحديث البيانات',
+                'link' => 'https://form.jotform.com/adendany2024/--'
+            ]);
         } else {
             if ($member) {
                 $noDelays = 'لا توجد مديونية إشتراكات';
