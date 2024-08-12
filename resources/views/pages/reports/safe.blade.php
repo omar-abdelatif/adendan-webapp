@@ -68,7 +68,7 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/70/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
                             </div>
-                            <h5>إجمالي التبـرعات</h5>
+                            <h5>إجمالي التبـرعات المحصلة</h5>
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{ number_format($sumDonations) }} ج.م</h5>
@@ -83,7 +83,7 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/bubbles/70/money-bag.png" alt="money-bag" />
                             </div>
-                            <h5>إجمالي الإشـتـراكات</h5>
+                            <h5>إجمالي الإشـتـراكات المحصلة</h5>
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{number_format($sumSubscriptions)}} ج.م</h5>

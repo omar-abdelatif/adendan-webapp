@@ -16,7 +16,7 @@
                     تـقرير الإشـتراكـات
                 </h3>
             </div>
-            <div class="col-xl-4 box-col-4">
+            <div class="col-xl-12 box-col-12">
                 <div class="card widget-1">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -29,40 +29,6 @@
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{$count}}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-4">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="60" height="60" src="https://img.icons8.com/color/60/ok--v1.png" alt="ok--v1" />
-                            </div>
-                            <div>
-                                <h5>الإشتراكات المفعلة</h5>
-                            </div>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$activeSubscribers}}</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 box-col-4">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="60" height="60" src="https://img.icons8.com/color/60/cancel--v1.png" alt="cancel--v1" />
-                            </div>
-                            <div>
-                                <h5>الغير مفعلة</h5>
-                            </div>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-1">{{$nonActiveSubscribers}}</h5>
                         </div>
                     </div>
                 </div>
