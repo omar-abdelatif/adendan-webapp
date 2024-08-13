@@ -112,14 +112,6 @@
                                         <span>التبرعات الداخلية</span>
                                     </a>
                                 </li>
-                                {{-- <li>
-                                    <a href="{{route('subscriptionRole.reports.indebtedness')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
-                                        <span>مديونية الإشتراكات</span>
-                                    </a>
-                                </li> --}}
                                 <li>
                                     <a href="{{route('subscriptionRole.reports.search')}}">
                                         <svg class="stroke-icon">
@@ -190,7 +182,7 @@
                         <li class="sidebar-list">
                             <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
-                                <span>الأفراح</span>
+                                <span>مواعيد الأفراح</span>
                             </a>
                         </li>
                     @else
@@ -271,7 +263,7 @@
                         <li class="sidebar-list">
                             <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
-                                <span>الأفراح</span>
+                                <span>مواعيد الأفراح</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
@@ -330,14 +322,6 @@
                                         <span>التبرعات الداخلية</span>
                                     </a>
                                 </li>
-                                {{-- <li>
-                                    <a href="{{route('reports.indebtedness')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
-                                        <span>مديونية الإشتراكات</span>
-                                    </a>
-                                </li> --}}
                                 <li>
                                     <a href="{{route('reports.search')}}">
                                         <svg class="stroke-icon">
