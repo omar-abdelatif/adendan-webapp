@@ -96,7 +96,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                            <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 1, "asc" ]]' data-page-length='10'>
                                 <thead>
                                     <tr>
                                         <th class="text-white text-center">اليوم</th>
