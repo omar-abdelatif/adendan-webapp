@@ -6,14 +6,10 @@
 <link rel="stylesheet" href="{{asset('assets/css/vendors/icofont.css')}}">
 {{-- ! Themify icon ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/themify.css')}}">
-{{-- ! Flag icon ! --}}
-<link rel="stylesheet" href="{{asset('assets/css/vendors/flag-icon.css')}}">
 {{-- ! Feather icon ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/feather-icon.css')}}">
 {{-- ! Plugins css start ! --}}
 @yield('css')
-<link rel="stylesheet" href="{{asset('assets/css/vendors/slick.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/vendors/slick-theme.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/vendors/scrollbar.css')}}">
 {{-- ! Bootstrap css ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/bootstrap.css')}}">

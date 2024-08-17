@@ -48,7 +48,7 @@
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
                                 <div class="cart-options-content">
-                                    <h6 class="mb-0">الإشتراك الحالي</h6>
+                                    <h6 class="mb-0">قيمة الإشتراك الحالي</h6>
                                 </div>
                             </div>
                         </a>

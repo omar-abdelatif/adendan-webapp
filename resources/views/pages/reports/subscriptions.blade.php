@@ -174,7 +174,7 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th class="text-center">قيمة الإشتراك</th>
-                                                                                <th class="text-center">رقم الإيضال</th>
+                                                                                <th class="text-center">رقم الإيصال</th>
                                                                                 <th class="text-center">تاريخ الدفع</th>
                                                                                 <th class="text-center">فترة الإشتراك</th>
                                                                             </tr>
