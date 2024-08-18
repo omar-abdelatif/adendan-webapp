@@ -644,6 +644,7 @@ if (workers) {
     const craft = document.getElementById("workerCraftSelect");
     const craftReq = document.getElementById("craftReq");
     const otherCraft = document.getElementById("otherCategory");
+    const otherCraft2 = document.getElementById("otherCategory2");
     const otherReq = document.getElementById("otherReq");
     craft.addEventListener("change", function () {
         const SelectedOption = this.options[this.selectedIndex].value;
