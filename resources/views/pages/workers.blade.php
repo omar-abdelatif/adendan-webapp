@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="craftSelect" class="text-muted">الحرفة</label>
-                                    <select name="craft" class="form-select text-muted" id="craftSelect" required>
+                                    <select name="craft" class="form-select text-muted" id="workerCraftSelect" required>
                                         <option selected>الحرفة</option>
                                         <option value="نجار" class="option-control">نجار</option>
                                         <option value="نقاش" class="option-control">نقاش</option>

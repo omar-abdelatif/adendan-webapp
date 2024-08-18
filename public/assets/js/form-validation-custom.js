@@ -641,7 +641,7 @@ if (workers) {
         }
     });
     //! Validation For Worker Category
-    const craft = document.getElementById("craftSelect");
+    const craft = document.getElementById("workerCraftSelect");
     const craftReq = document.getElementById("craftReq");
     const otherCraft = document.getElementById("otherCategory");
     const otherReq = document.getElementById("otherReq");
