@@ -641,20 +641,20 @@ if (workers) {
         }
     });
     //! Validation For Worker Category
-    const craft = document.getElementById("workerCraftSelect");
+    const workerCraft = document.getElementById("workerCraftSelect");
     const craftReq = document.getElementById("craftReq");
     const otherCraft = document.getElementById("otherCategory");
     const otherCraft2 = document.getElementById("otherCategory2");
     const otherReq = document.getElementById("otherReq");
-    craft.addEventListener("change", function () {
+    workerCraft.addEventListener("change", function () {
         const SelectedOption = this.options[this.selectedIndex].value;
         if (SelectedOption === "الحرفة") {
-            craft.classList.add("error");
-            craft.classList.remove("good");
+            workerCraft.classList.add("error");
+            workerCraft.classList.remove("good");
             craftReq.classList.remove("d-none");
         } else {
-            craft.classList.remove("error");
-            craft.classList.add("good");
+            workerCraft.classList.remove("error");
+            workerCraft.classList.add("good");
             craftReq.classList.add("d-none");
         }
         if (SelectedOption === "أخرى") {
