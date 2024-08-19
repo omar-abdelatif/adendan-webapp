@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="form-group mt-3">
                                                 <div class="id-img mb-3 text-center">
-                                                    <img src={{asset('assets/images/subscribers/'.$subscriber->id_img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="idImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
+                                                    <img src={{asset('assets/images/subscribers/id/'.$subscriber->id_img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="idImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
                                                 </div>
                                                 <label class="form-label fw-bold text-white" for="id_img">
                                                     صورة البطاقة الشخصية
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="form-group mt-3">
                                                 <div class="p-img mb-3 text-center">
-                                                    <img src={{asset('assets/images/subscribers/'.$subscriber->img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="showImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
+                                                    <img src={{asset('assets/images/subscribers/avatar/'.$subscriber->img)}} width="120" data-member-id="{{ $subscriber->id }}" class="rounded img-fluid" id="showImage_{{ $subscriber->id }}" alt="{{$subscriber->img}}">
                                                 </div>
                                                 <label class="form-label fw-bold text-white" for="image">
                                                     الصورة الشخصية
