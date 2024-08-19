@@ -59,7 +59,6 @@ class SubscribersController extends Controller
             $filename->move($destinationPath, $pImg);
         }
         $totalSafe = TotalSafe::where('id', 1)->first();
-
         //! Insert The Subscriber
         $store = Subscribers::create([
             'member_id' => $request['member_id'],
