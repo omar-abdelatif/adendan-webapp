@@ -167,37 +167,42 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($deathnewscount > 0)
-                            @foreach ($deathnews as $dn)
+                            @php
+                                $filteredDeathNews = $deathnews->filter(function($item) {
+                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 30;
+                                });
+                            @endphp
+                            @foreach ($filteredDeathNews as $dn)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
-                                            <img src="{{asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg')}}" alt="{{$dn->title}}">
+                                            <img src="{{ asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg') }}" alt="{{ $dn->title }}">
                                             <div class="text-details p-3 w-100">
-                                                <a href="{{route('site.single_news', $dn->id)}}" class="nav-link text-center">
-                                                    <h5 class="mb-0">{{$dn->title}}</h5>
+                                                <a href="{{ route('site.single_news', $dn->id) }}" class="nav-link text-center">
+                                                    <h5 class="mb-0">{{ $dn->title }}</h5>
                                                 </a>
                                                 <div class="meta d-flex mt-3 align-items-center justify-content-around">
                                                     <div class="date">
                                                         <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{$dn->created_at->format('Y-m-d')}}
+                                                        {{ $dn->created_at->format('Y-m-d') }}
                                                     </div>
-                                                    <div class="category ">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$dn->category}}</span>
+                                                    <div class="category">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $dn->category }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body p-0 w-100">
                                             <div class="more">
-                                                <a href={{route('site.single_news', $dn->id)}} class="btn w-100 btn-success">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $dn->id) }}" class="btn w-100 btn-success">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($deathnewscount >= 8)
+                            @if ($filteredDeathNews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
-                                    <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
+                                    <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{ route('site.news') }}">المزيد</a>
                                 </div>
                             @endif
                         @else
@@ -210,37 +215,42 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($weddingnewscount > 0)
-                            @foreach ($weddingnews as $wn)
+                            @php
+                                $filteredWeddingNews = $weddingnews->filter(function($wn) {
+                                    return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 30;
+                                });
+                            @endphp
+                            @foreach ($filteredWeddingNews as $wn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
                                             <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                             <div class="text-details p-3 w-100">
                                                 <div class="title mb-3 text-center">
-                                                    <h5 class="mb-0">{{$wn->title}}</h5>
+                                                    <h5 class="mb-0">{{ $wn->title }}</h5>
                                                 </div>
                                                 <div class="meta d-flex align-items-center justify-content-around">
                                                     <div class="date">
                                                         <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{$wn->created_at->format('Y-m-d')}}
+                                                        {{ $wn->created_at->format('Y-m-d') }}
                                                     </div>
-                                                    <div class="category ">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$wn->category}}</span>
+                                                    <div class="category">
+                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $wn->category }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $wn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $wn->id) }}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($weddingnewscount >= 8)
+                            @if ($filteredWeddingNews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
-                                    <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
+                                    <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{ route('site.news') }}">المزيد</a>
                                 </div>
                             @endif
                         @else
