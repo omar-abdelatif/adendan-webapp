@@ -1,6 +1,6 @@
 //! Current Year
-const currentYear = new Date().getFullYear();
-document.getElementById("year").innerHTML = currentYear;
+// const currentYear = new Date().getFullYear();
+// document.getElementById("year").innerHTML = currentYear;
 //! Fixed Navbar
 window.addEventListener("scroll", () => {
     if (window.scrollY > 150) {
