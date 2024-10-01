@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($filteredDeathNews->count() >= 8)
+                            @if ($deathnews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{ route('site.news') }}">المزيد</a>
                                 </div>
@@ -248,7 +248,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($filteredWeddingNews->count() >= 8)
+                            @if ($weddingnews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{ route('site.news') }}">المزيد</a>
                                 </div>
