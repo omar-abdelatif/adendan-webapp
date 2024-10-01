@@ -167,12 +167,12 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($deathnewscount > 0)
-                            @php
+                            {{-- @php
                                 $filteredDeathNews = $deathnews->filter(function($item) {
                                     return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
                                 });
-                            @endphp
-                            @foreach ($filteredDeathNews as $dn)
+                            @endphp --}}
+                            @foreach ($deathnews as $dn)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
@@ -215,12 +215,12 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($weddingnewscount > 0)
-                            @php
+                            {{-- @php
                                 $filteredWeddingNews = $weddingnews->filter(function($wn) {
                                     return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
                                 });
-                            @endphp
-                            @foreach ($filteredWeddingNews as $wn)
+                            @endphp --}}
+                            @foreach ($weddingnews as $wn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
