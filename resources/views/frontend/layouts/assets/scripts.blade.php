@@ -1,4 +1,5 @@
-<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+{{-- <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script> --}}
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 @yield('site_scripts')
 <script src={{asset('assets/frontend/js/lib/breaking-news-ticker.min.js')}}></script>
 <script src="{{asset('js/share.js')}}"></script>
