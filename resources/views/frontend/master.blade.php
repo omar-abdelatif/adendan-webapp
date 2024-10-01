@@ -217,7 +217,7 @@
                         @if ($weddingnewscount > 0)
                             @php
                                 $filteredWeddingNews = $weddingnews->filter(function($wn) {
-                                    return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 30;
+                                    return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
                                 });
                             @endphp
                             @foreach ($filteredWeddingNews as $wn)

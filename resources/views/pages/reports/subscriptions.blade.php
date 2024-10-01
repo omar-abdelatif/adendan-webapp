@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12 box-col-12">
+            <div class="col-xl-6 box-col-6">
                 <div class="card widget-1">
                     <div class="card-body align-items-center">
                         <div class="widget-content">
@@ -114,6 +114,23 @@
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1">{{$sumDelayPaied}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 box-col-6">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
+                            </div>
+                            <div>
+                                <h5>المتبقي ( قيمة الإشتراك )</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1">{{$sumTotalDelays - $sumDelayPaied}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -180,8 +197,11 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            @if ($subscriber->subscriptions->count())
-                                                                                @foreach ($subscriber->subscriptions as $subscription)
+                                                                            @php
+                                                                                $subscriptionDelay = $subscriber->subscriptions()->whereIn('payment_type', ['إشتراك جديد', 'إشتراك جزئي', 'إشتراك كلي'])->get();
+                                                                            @endphp
+                                                                            @if ($subscriptionDelay->count())
+                                                                                @foreach ($subscriptionDelay as $subscription)
                                                                                     <tr>
                                                                                         <td>{{$subscription->subscription_cost}}</td>
                                                                                         <td>{{$subscription->invoice_no}}</td>
@@ -190,13 +210,13 @@
                                                                                     </tr>
                                                                                 @endforeach
                                                                             @else
-                                                                            <tr>
-                                                                                <div class="col-lg-12">
-                                                                                    <td colspan="4">
-                                                                                        <h1 class="text-center text-white">لا توجد إشتراكات سابقة لهذا المشترك</h1>
-                                                                                    </td>
-                                                                                </div>
-                                                                            </tr>
+                                                                                <tr>
+                                                                                    <div class="col-lg-12">
+                                                                                        <td colspan="4">
+                                                                                            <h1 class="text-center text-white">لا توجد إشتراكات مدفوعه لهذا المشترك</h1>
+                                                                                        </td>
+                                                                                    </div>
+                                                                                </tr>
                                                                             @endif
                                                                         </tbody>
                                                                     </table>

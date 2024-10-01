@@ -32,17 +32,20 @@ $(document).ready(function () {
         deferRender: true,
     });
     //! Multi Datatables in Same Page
-    for (let i = 0; i < 500; i++) {
-        $("#table" + i).DataTable({
-            paging: true,
-            scrollY: table[i],
-            ordering: true,
-            autoWidth: true,
-            searching: true,
-            pagingTag: "button",
-            pagingType: "simple_numbers",
-            deferRender: true,
-        });
+    let table = $("#table");
+    if (table) {
+        for (let i = 0; i < 500; i++) {
+            $("#table" + i).DataTable({
+                paging: true,
+                scrollY: table[i],
+                ordering: true,
+                autoWidth: true,
+                searching: true,
+                pagingTag: "button",
+                pagingType: "simple_numbers",
+                deferRender: true,
+            });
+        }
     }
     //! Add new row
     $(".addRow").click(function () {
