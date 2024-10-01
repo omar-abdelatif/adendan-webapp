@@ -59,8 +59,10 @@
             <div class="container">
                 <div class="d-flex align-items-center justify-content-center flex-wrap flex-md-nowrap" role="contentinfo">
                     <span class="order-2 order-md-0 fs-16px">
-                        جميع الحقوق محفوظة لجمعية أدندان الخيرية
-                        1908 - <span id="year"></span>
+                        تم التطوير بواسطة
+                        <span class="mb-0">
+                            <a href="https://wa.me/+201062760141" class="text-white">عمر عبد اللطيف حسن</a>
+                        </span>
                     </span>
                 </div>
             </div>

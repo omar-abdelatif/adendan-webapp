@@ -48,6 +48,7 @@ Route::prefix('admin/subscriptions')->group(function () {
             Route::post('subscriber/update', 'update')->name('subscriptionRole.subscribe.update');
             Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriptionRole.subscriber.details');
             Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriptionRole.subscriber.bulk');
+            Route::get('subscribers/ajax/data/subscribers', 'getSubscribersData')->name('subscriptionRole.ajax.subscribers');
         });
         //! Subscriptions Routes
         Route::controller(SubscriptionsController::class)->group(function () {

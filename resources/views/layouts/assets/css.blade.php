@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
 {{-- ! Datatables ! --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.css">
 {{-- ! Date Picker ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/date-picker.css')}}">
 {{-- ! Include Css Files ! --}}

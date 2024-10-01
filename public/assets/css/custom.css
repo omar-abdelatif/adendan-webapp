@@ -229,3 +229,9 @@ html[dir=rtl] .page-wrapper.compact-wrapper .page-body-wrapper .sidebar-wrapper 
     display: inline-flex;
     /* flex-direction: column; */
 }
+thead tr th, tbody tr td {
+    text-align: center !important;
+}
+table.dataTable tr.dt-hasChild td.dt-control:before{
+    content: "";
+}

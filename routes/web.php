@@ -24,8 +24,8 @@ use App\Http\Controllers\AssociationCommittesController;
 Auth::routes();
 
 Route::view('login', 'auth.login');
-Route::prefix('admin')->group(function () {
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::prefix('dashboard')->group(function () {
             Route::controller(HomeController::class)->group(function () {
                 Route::get('main', 'index')->name('home');
@@ -108,6 +108,7 @@ Route::prefix('admin')->group(function () {
             Route::post('subscriber/update', 'update')->name('subscribe.update');
             Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriber.details');
             Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriber.bulk');
+            Route::get('subscribers/ajax/data/subscribers', 'getSubscribersData')->name('ajax.subscribers');
         });
         Route::controller(SubscriptionsController::class)->group(function () {
             Route::get('subscription/history/{id}', 'index')->name('subscription.history');
