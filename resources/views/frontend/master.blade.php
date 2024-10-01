@@ -169,7 +169,7 @@
                         @if ($deathnewscount > 0)
                             @php
                                 $filteredDeathNews = $deathnews->filter(function($item) {
-                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 30;
+                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
                                 });
                             @endphp
                             @foreach ($filteredDeathNews as $dn)
