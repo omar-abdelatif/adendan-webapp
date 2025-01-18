@@ -31,7 +31,7 @@
                                         @foreach($activities as $activity)
                                             <tr>
                                                 <td>{{$activity->description}}</td>
-                                                <td>{{ $activity->customCauser->name }}</td>
+                                                <td>{{ $activity->customCauser->name ?? "-" }}</td>
                                                 <td>{{$activity->created_at->format('Y-m-d H:i:s')}}</td>
                                                 <td>{{$activity->updated_at->format('Y-m-d H:i:s')}}</td>
                                                 <td>
