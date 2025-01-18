@@ -126,7 +126,7 @@ class DonationsController extends Controller
         $memberId = $request->member_id;
         $validated = $request->validate([
             'member_id' => 'required',
-            'invoice_no' => 'required|unique:donations,invoice_no',
+            'invoice_no' => 'required',
             'amount' => 'required'
         ]);
         if ($validated) {
@@ -264,7 +264,7 @@ class DonationsController extends Controller
         $memberId = $request->member_id;
         $validated = $request->validate([
             'amount' => 'required',
-            'invoice_no' => 'required|unique:donations,invoice_no'
+            'invoice_no' => 'required'
         ]);
         $subscribers = Subscribers::where('member_id', $memberId)->first();
         $donationDelay = DonationDelay::where('member_id', $memberId)->where('id', $request->id)->first();

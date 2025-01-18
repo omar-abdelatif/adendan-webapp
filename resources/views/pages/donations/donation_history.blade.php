@@ -266,7 +266,7 @@
                                                                                         <div class="row">
                                                                                             <div class="col-lg-12">
                                                                                                 <div class="form-group">
-                                                                                                    <label for="member_id" class="text-muted">ؤقم العضوية</label>
+                                                                                                    <label for="member_id" class="text-muted">رقم العضوية</label>
                                                                                                     <input type="text" class="form-control text-muted" name="member_id" value="{{$delay->member_id}}" placeholder="نوع التبرع" id="member_id" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mt-3">
