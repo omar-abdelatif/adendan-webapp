@@ -7,6 +7,7 @@ use App\Models\NewsVideos;
 use Illuminate\Http\Request;
 use App\Models\NewsThumbnail;
 use App\Http\Requests\NewsRequest;
+use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 
 class NewsController extends Controller
 {
@@ -28,6 +29,7 @@ class NewsController extends Controller
             $news = News::create([
                 "title" => $request['title'],
                 "description" => $request['description'],
+                "slug" => uniqid(),
                 "category" => $request['category'],
                 "img" => $imagename,
             ]);
@@ -35,6 +37,7 @@ class NewsController extends Controller
             $news = News::create([
                 "title" => $request['title'],
                 "description" => $request['description'],
+                "slug" => uniqid(),
                 "category" => $request['category'],
             ]);
         }
@@ -138,9 +141,14 @@ class NewsController extends Controller
                     ]);
                 }
             }
+            $slug = $news->slug;
+            if (empty($slug)) {
+                $slug = uniqid();
+            }
             $update = $news->update([
                 'title' => $request['title'],
                 'description' => $request['description'],
+                'slug' => $slug,
                 'category' => $request['category'],
             ]);
             if ($update) {

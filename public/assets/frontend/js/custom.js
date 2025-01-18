@@ -37,6 +37,6 @@ function copyToClipboard() {
     tempInput.select();
     document.execCommand("copy");
     document.body.removeChild(tempInput);
-    alert("Copied the URL: " + tempInput.value);
+    alert("تم نسخ الرابط: " + tempInput.value);
 }
 

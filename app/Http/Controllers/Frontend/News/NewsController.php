@@ -44,13 +44,14 @@ class NewsController extends Controller
         }
         return null;
     }
-    public function newsDetails($id)
+    public function newsDetails($slug)
     {
-        $news = News::find($id);
+        $news = News::where('slug', $slug)->first();
+        $newsId = $news->id;
         if ($news) {
-            $thumbsImgs = NewsThumbnail::where('news_id', $id)->get();
+            $thumbsImgs = NewsThumbnail::where('news_id', $newsId)->get();
             $countThumbsImgs = $thumbsImgs->count();
-            $thumbVideos = NewsVideos::where('news_id', $id)->get();
+            $thumbVideos = NewsVideos::where('news_id', $newsId)->get();
             $countVideos = $thumbVideos->count();
             $socialShare = $this->socialWidget();
             $videoLinks = [];

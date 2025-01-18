@@ -35,7 +35,7 @@
         }
     @endif
     @if (Route::currentRouteName() == 'home')
-        new WOW().init();
+        
     @endif
 </script>
 <!-- Plugins JS Ends-->

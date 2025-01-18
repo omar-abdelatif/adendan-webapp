@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -158,6 +159,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(WithdrawController::class)->group(function () {
             Route::post('withdraw', 'withdraw')->name('withdraw');
             Route::post('withdraw/bank', 'bankWithdraw')->name('bank.withdraw');
+        });
+        Route::controller(ActivityController::class)->group(function () {
+            Route::get('activity', 'index')->name('activity.index');
         });
     });
 });

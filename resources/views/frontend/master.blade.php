@@ -22,7 +22,7 @@
                 <ul class="navbar-nav">
                     @foreach ($latest as $item)
                         <li>
-                            <a href="{{route('site.single_news', $item->id)}}" class="text-white">{{$item->title}}</a>
+                            <a href="{{route('site.single_news', $item->slug)}}" class="text-white">{{$item->title}}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $gn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $gn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $cn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $cn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +178,7 @@
                                         <div class="card-image">
                                             <img src="{{ asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg') }}" alt="{{ $dn->title }}">
                                             <div class="text-details p-3 w-100">
-                                                <a href="{{ route('site.single_news', $dn->id) }}" class="nav-link text-center">
+                                                <a href="{{ route('site.single_news', $dn->slug) }}" class="nav-link text-center">
                                                     <h5 class="mb-0">{{ $dn->title }}</h5>
                                                 </a>
                                                 <div class="meta d-flex mt-3 align-items-center justify-content-around">
@@ -194,7 +194,7 @@
                                         </div>
                                         <div class="card-body p-0 w-100">
                                             <div class="more">
-                                                <a href="{{ route('site.single_news', $dn->id) }}" class="btn w-100 btn-success">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $dn->slug) }}" class="btn w-100 btn-success">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{ route('site.single_news', $wn->id) }}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $wn->slug) }}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $sn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $sn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>

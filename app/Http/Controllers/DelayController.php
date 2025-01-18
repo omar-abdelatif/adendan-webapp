@@ -63,7 +63,7 @@ class DelayController extends Controller
         $id = $request->id;
         $validated = $request->validate([
             'paied' => 'required',
-            'invoice_no' => 'required|unique:subscriptions,invoice_no'
+            'invoice_no' => 'required'
         ]);
         $delay = Delay::where('year', $request->year)->where('id', $id)->first();
         $subscribers = Subscribers::where('member_id', $request->member_id)->first();
@@ -202,8 +202,7 @@ class DelayController extends Controller
     }
     public function payOldDelay(Request $request) //! Pay Single Old Delay For Single Subscriber
     {
-        $validated = $request->validate([
-            'invoice_no' => 'required|unique:subscriptions,invoice_no',
+        $validated = $request->validate(['invoice_no' => 'required',
             'olddelay' => 'required',
         ]);
         $oldDelay = Olddelays::where('member_id', $request->member_id)->where('id', $request->id)->first();
