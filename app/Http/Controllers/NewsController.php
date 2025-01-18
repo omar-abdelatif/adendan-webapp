@@ -7,7 +7,6 @@ use App\Models\NewsVideos;
 use Illuminate\Http\Request;
 use App\Models\NewsThumbnail;
 use App\Http\Requests\NewsRequest;
-use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
 
 class NewsController extends Controller
 {

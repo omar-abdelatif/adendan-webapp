@@ -92,7 +92,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <table id="table" class="table display align-middle text-center table-hover" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                <table id="table" class="table display align-middle text-center table-hover" data-order='[[ 4, "desc" ]]' data-page-length='10'>
                     <thead>
                         <tr>
                             <th class="text-center text-white">#</th>
