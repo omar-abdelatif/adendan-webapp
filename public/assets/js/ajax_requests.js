@@ -25,7 +25,20 @@ $(function () {
                     if (row.img === null) {
                         return `غير موجودة`;
                     } else {
-                        return `<img src="${imageBaseUrl}/${row.img}" class="img-fluid rounded" style="width: 80px;" alt="صورة شخصية"/>`;
+                        return `
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subscriberImg_${row.id}">
+                                <img src="${imageBaseUrl}/${row.img}" class="img-fluid rounded" style="width: 80px;" alt="صورة شخصية"/>
+                            </button>
+                            <div class="modal fade" id="subscriberImg_${row.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="${imageBaseUrl}/${row.img}" class="img-fluid rounded" style="width: 80px;" alt="صورة شخصية"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                     }
                 },
             },
@@ -37,7 +50,20 @@ $(function () {
                     if (row.id_img === null) {
                         return `غير موجودة`;
                     } else {
-                        return `<img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>`;
+                        return `
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subscriberImg_${row.id}">
+                                <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>
+                            </button>
+                            <div class="modal fade" id="subscriberImg_${row.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                     }
                 },
             },
@@ -125,3 +151,24 @@ $(function () {
         searching: true,
     });
 });
+/*
+
+`
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#subscriberImg_${row.id}">
+        <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>
+    </button>
+    <div class="modal fade" id="subscriberImg_${row.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>
+                </div>
+            </div>
+        </div>
+    </div>
+`
+
+
+
+
+*/
