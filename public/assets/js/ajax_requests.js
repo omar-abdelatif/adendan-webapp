@@ -33,7 +33,7 @@ $(function () {
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-body">
-                                            <img src="${imageBaseUrl}/${row.img}" class="img-fluid rounded" style="width: 80px;" alt="صورة شخصية"/>
+                                            <img src="${imageBaseUrl}/${row.img}" class="img-fluid rounded" alt="صورة شخصية"/>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ $(function () {
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-body">
-                                            <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" style="width: 80px;" alt="صورة البطاقة الشخصية"/>
+                                            <img src="${idImageBaseUrl}/${row.id_img}" class="img-fluid rounded" alt="صورة البطاقة الشخصية"/>
                                         </div>
                                     </div>
                                 </div>
