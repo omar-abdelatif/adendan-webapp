@@ -227,7 +227,7 @@ html[dir=rtl] .page-wrapper.compact-wrapper .page-body-wrapper .sidebar-wrapper 
 }
 .dropdown-menu.show {
     display: inline-flex;
-    /* flex-direction: column; */
+    z-index: 10;
 }
 thead tr th, tbody tr td {
     text-align: center !important;

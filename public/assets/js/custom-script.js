@@ -68,6 +68,19 @@ $(document).ready(function () {
     $(".datepicker-here").datepicker({
         dateFormat: "yyyy-mm-dd",
     });
+    //! Copy News Address
+    $(".copy").click(function () {
+        let newsId = $(this).data("news-id");
+        let baseUrl = window.location.origin;
+        let publicUrl = `${baseUrl}/all_news/single_news/${newsId}`;
+        let tempInput = document.createElement("input");
+        tempInput.value = publicUrl;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("تم نسخ رابط الخبر");
+    });
 });
 //! Remove Alert After  5 Seconds
 const errors = document.querySelectorAll("#error");

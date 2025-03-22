@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fontawesome-6-pro@6.4.0/css/all.min.css"/>
+{{-- ! Bootstrap ! --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+{{-- ! Font Awesome ! --}}
 {{-- ! ico-font ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/icofont.css')}}">
 {{-- ! Themify icon ! --}}
