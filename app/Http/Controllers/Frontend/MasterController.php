@@ -36,4 +36,7 @@ class MasterController extends Controller
             'sportnewscount',
         ]));
     }
+    public function errorPage(){
+        return view('frontend.pages.error.error');
+    }
 }

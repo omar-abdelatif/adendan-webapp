@@ -14,7 +14,6 @@ class Worker extends Model
         'phone_number',
         'craft',
         'other_craft',
-        'workers',
         'location'
     ];
 }

@@ -1,5 +1,4 @@
 $(function () {
-    //! Get Subscribers With Ajax
     //! Get Subscribers Via Ajax
     let imageBaseUrl = $("#subscribers_table").data("image-url");
     let idImageBaseUrl = $("#subscribers_table").data("id-image-url");
@@ -120,5 +119,9 @@ $(function () {
         } else {
             row.child(details(row.data())).show();
         }
+    });
+    $("#activity-table").DataTable({
+        paging: true,
+        searching: true,
     });
 });

@@ -155,6 +155,10 @@
                                             <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#editing_{{$new->id}}">
                                                 <i class="fa-solid fa-pen"></i>
                                             </button>
+                                            {{-- ! Copy News Link ! --}}
+                                            <button class="copy text-dark btn btn-info px-2 py-1" data-news-id="{{$new->id}}">
+                                                <i class="fa-solid fa-copy"></i>
+                                            </button>
                                             {{-- ! Show Thumbnail ! --}}
                                             <a class="text-white btn btn-success px-2 py-1" href={{route('show.thumbs',$new->id)}}>
                                                 <i class="fa-solid fa-image"></i>

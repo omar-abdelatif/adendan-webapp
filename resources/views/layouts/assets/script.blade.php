@@ -1,5 +1,5 @@
 <!-- latest jquery-->
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script src="{{asset('assets/js/jquery.ui.min.js')}}"></script>
@@ -35,7 +35,7 @@
         }
     @endif
     @if (Route::currentRouteName() == 'home')
-        new WOW().init();
+
     @endif
 </script>
 <!-- Plugins JS Ends-->

@@ -10,6 +10,7 @@ use App\Http\Controllers\TombsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DonatorsController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\CostYearsController;
@@ -159,6 +160,8 @@ Route::middleware('auth')->group(function () {
             Route::post('withdraw', 'withdraw')->name('withdraw');
             Route::post('withdraw/bank', 'bankWithdraw')->name('bank.withdraw');
         });
+        Route::controller(ActivityController::class)->group(function () {
+            Route::get('activity', 'index')->name('activity.index');
+        });
     });
 });
-

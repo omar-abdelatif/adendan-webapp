@@ -251,7 +251,7 @@
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
                                 </svg>
-                                <span>التبرعات</span>
+                                <span>التبرعات الخارجية</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
@@ -370,12 +370,12 @@
                                 <span>المستخدمين</span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-list">
-                            <a href="" class="sidebar-link sidebar-title">
+                        <li class="sidebar-list">
+                            <a href="{{route('activity.index')}}" class="sidebar-link sidebar-title">
                                 <i data-feather="log-in" class="text-white"></i>
-                                <span>سجل تسجيل الدخول</span>
+                                <span>سجل النشاطات</span>
                             </a>
-                        </li> --}}
+                        </li>
                     @endif
                 </ul>
             </div>

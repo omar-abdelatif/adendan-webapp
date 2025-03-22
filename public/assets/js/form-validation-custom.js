@@ -1718,39 +1718,41 @@ if (UpdateWorkerForm) {
     });
 }
 //! Insert Donation
-let allDonations = document.querySelectorAll("[data-donation-id]");
-if (allDonations) {
-    allDonations.forEach((donation) => {
-        let otherDonation = document.querySelector(
-            `input[name="other_donation"][data-donation-id="${donation.dataset.donationId}"]`
-        );
-        let categoryType = document.querySelector(
-            `select[name="donation_category"][data-donation-id="${donation.dataset.donationId}"]`
-        );
-        let Amount = document.querySelector(
-            `input[name="amount"][data-donation-id="${donation.dataset.donationId}"]`
-        );
-        function donationUpdate() {
-            let donationValue = donation.options[donation.selectedIndex].value;
-            if (donationValue == "أخرى") {
+let donationForms = document.querySelectorAll('[id^="donation_form_"]');
+if (donationForms) {
+    document.addEventListener("change", function (e) {
+        if (e.target.matches("select[data-donation-id]")) {
+            const donation = e.target;
+            const donationId = donation.dataset.donationId;
+            const otherDonation = document.querySelector(
+                `input[name="other_donation"][data-donation-id="${donationId}"]`
+            );
+            const categoryType = document.querySelector(
+                `select[name="donation_category"][data-donation-id="${donationId}"]`
+            );
+            const Amount = document.querySelector(
+                `input[name="amount"][data-donation-id="${donationId}"]`
+            );
+            const donationValue = donation.value;
+            if (donationValue === "أخرى") {
                 Amount.classList.remove("d-none");
                 Amount.disabled = false;
                 categoryType.classList.add("d-none");
                 categoryType.disabled = true;
                 otherDonation.classList.remove("d-none");
                 otherDonation.disabled = false;
-            } else if (donationValue == "مادي") {
+            } else if (donationValue === "مادي") {
                 Amount.classList.remove("d-none");
                 Amount.disabled = false;
+
                 categoryType.classList.remove("d-none");
                 categoryType.disabled = false;
+
                 otherDonation.classList.add("d-none");
                 otherDonation.disabled = true;
             }
+            // console.log(donationValue);
         }
-        donation.addEventListener("change", function () {
-            donationUpdate();
-        });
     });
 }
 //! Outer Donators Period

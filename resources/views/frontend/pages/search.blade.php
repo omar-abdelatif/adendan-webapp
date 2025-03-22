@@ -8,7 +8,50 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">الإستعلامات</li>
 @endsection
+@section('site_styles')
+    <style>
+        .form-label {
+            padding: 10px 20px;
+            border: 2px solid #004080;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            min-width: 80px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .form-label:hover{
+            background-color: #004080;
+            color: white;
+            transition: all 0.3s;
+        }
+        input[type="radio"]:checked + .form-label {
+            background-color: #004080;
+            color: white;
+        }
+
+        input[type="radio"]:checked:disabled + .form-label, input[type="radio"]:disabled + .form-label {
+            background-color: #004080;
+            color: white;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        input[type="number"]:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    </style>
+@endsection
 @section('site')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            @php
+                toastrError($error);
+            @endphp
+        @endforeach
+    @endif
     <section class="inquiries">
         <div class="tabs">
             <ul class="nav nav-pills justify-content-center w-100" id="unique-donation-tabs" role="tablist" aria-label="أنواع فرص التبرع" data-a11y="parent">
@@ -96,7 +139,7 @@
                                                                                         <div class="col-lg-3 p-1 py-2">
                                                                                             <div class="text-center">
                                                                                                 <h4 role="presentation">
-                                                                                                    <span class="h6 text-green fw-light d-block">المبلغ السنوي</span>
+                                                                                                    <span class="h6 text-green total-current-subscription-amount fw-light d-block" data-total-current-subscription-amount="{{$delay->yearly_cost}}">المبلغ السنوي</span>
                                                                                                     {{$delay->yearly_cost}}
                                                                                                     ج.م
                                                                                                 </h4>
@@ -139,7 +182,7 @@
                                                                                             <div class="col-lg-3 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h3 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        <span class="h6 text-green fw-light d-block current-subscription-remaining-amount" data-current-subscription-remaining-amount="{{$delay->remaing}}">المتبقي</span>
                                                                                                         {{$delay->remaing}} ج.م
                                                                                                     </h3>
                                                                                                 </div>
@@ -153,7 +196,8 @@
                                                                         <div class="w-100 border border-1 border-dark ms-1 rounded-3">
                                                                             <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                 <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                    <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>                                                                                مديونية الإشتراك السنوي
+                                                                                    <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
+                                                                                    مديونية الإشتراك السنوي
                                                                                 </h4>
                                                                                 <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
                                                                                     <p class="mb-0 text-center empty-msg fw-bold fs-3">{{$noDelays}}</p>
@@ -180,7 +224,7 @@
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
+                                                                                                        <span class="h6 text-green total-subscription-oldDelay-amount fw-light d-block" data-total-subscription-olddelay-amount="{{$delay->amount}}">المبلغ المطلوب</span>
                                                                                                         {{$delay->amount}} ج.م
                                                                                                     </h4>
                                                                                                 </div>
@@ -214,7 +258,7 @@
                                                                                                 <div class="col-lg-4 p-1 py-2">
                                                                                                     <div class="text-center">
                                                                                                         <h3 role="presentation">
-                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            <span class="h6 text-green oldDelay-remaining-subscription-amount fw-light d-block" data-olddelay-subscription-remaining-amount="{{$delay->delay_remaining}}">المتبقي</span>
                                                                                                             {{$delay->delay_remaining}} ج.م
                                                                                                         </h3>
                                                                                                     </div>
@@ -257,7 +301,7 @@
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ الكلي</span>
+                                                                                                        <span class="h6 text-green fw-light total-current-donation-amount d-block" data-total-current-donation-amount="{{$delay->delay_amount}}">المبلغ المطلوب</span>
                                                                                                         {{$delay->delay_amount}}
                                                                                                         ج.م
                                                                                                     </h4>
@@ -275,7 +319,7 @@
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                        <span class="h6 text-green fw-light current-donations-remaining-amount d-block" data-current-donations-remaining-amount="{{$delay->amount_remaining}}">المتبقي</span>
                                                                                                         {{$delay->amount_remaining}}
                                                                                                         ج.م
                                                                                                     </h4>
@@ -318,7 +362,7 @@
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
                                                                                                     <h4 role="presentation">
-                                                                                                        <span class="h6 text-green fw-light d-block">المبلغ المطلوب</span>
+                                                                                                        <span class="h6 text-green total-donation-oldDelay-amount fw-light d-block" data-total-donation-olddelay-amount="{{$delay->amount}}">المبلغ المطلوب</span>
                                                                                                         {{$delay->amount}} ج.م
                                                                                                     </h4>
                                                                                                 </div>
@@ -352,7 +396,7 @@
                                                                                                 <div class="col-lg-4 p-1 py-2">
                                                                                                     <div class="text-center">
                                                                                                         <h3 role="presentation">
-                                                                                                            <span class="h6 text-green fw-light d-block">المتبقي</span>
+                                                                                                            <span class="h6 text-green oldDelay-donations-remaining-amount fw-light d-block" data-olddelay-donations-remaining-amount="{{$delay->delay_remaining}}">المتبقي</span>
                                                                                                             {{$delay->delay_remaining}} ج.م
                                                                                                         </h3>
                                                                                                     </div>
@@ -382,6 +426,108 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="card-footer">
+                                                <div class="col-lg-12">
+                                                    <div class="pay-button text-center">
+                                                        <button type="button" class="btn btn-success rounded-pill fw-bold w-100" data-bs-toggle="modal" data-bs-target="#pay_{{$member->id}}" data-member-id="{{$member->member_id}}">إدفع هنا</button>
+                                                        <div class="modal fade" id="pay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header justify-content-between bg-secondary text-white">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">دفع الإشتراك او المتأخرات للعضو {{$member->name}}</h1>
+                                                                        <button type="button" class="btn text-danger fs-4" data-bs-dismiss="modal" aria-label="Close">
+                                                                            <i class="fa-regular fa-circle-xmark"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="caution-title">
+                                                                            <h1 class="text-center text-danger text-decoration-underline my-2">المدفعوعات في طور التجربة</h1>
+                                                                        </div>
+                                                                        <form action="{{route('payment.checkout')}}" method="post" id="payment-form" data-payment-id="{{$member->id}}">
+                                                                            @csrf
+                                                                            <input type="hidden" name="member_name" value="{{$member->name}}">
+                                                                            <input type="hidden" name="year" value="{{$member->delays->first()->year}}">
+                                                                            <input type="hidden" name="phone_number" value="{{$member->mobile_no}}">
+                                                                            <input type="hidden" name="member_id" value="{{$member->member_id}}">
+                                                                            <div class="input-group flex-column">
+                                                                                <h4 class="text-center my-3 fw-bold">اختر نوع الدفع</h4>
+                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
+                                                                                    <div class="form-group">
+                                                                                        <input type="radio" name="pay_type" value="subscription" data-payment-id={{$member->id}} id="subscription" class="d-none">
+                                                                                        <label for="subscription" class="form-label fw-bold">الإشتراك الحالي</label>
+                                                                                    </div>
+                                                                                    <div class="form-group me-2">
+                                                                                        <input type="radio" name="pay_type" value="subscription_delay" data-payment-id={{$member->id}} id="subscription_delay" class="d-none">
+                                                                                        <label for="subscription_delay" class="form-label fw-bold">متأخرات الإشتراكات</label>
+                                                                                    </div>
+                                                                                    <div class="form-group me-2">
+                                                                                        <input type="radio" name="pay_type" value="donation_delay" data-payment-id={{$member->id}} id="donation_delay" class="d-none">
+                                                                                        <label for="donation_delay" class="form-label fw-bold">متأخرات التبرعات</label>
+                                                                                    </div>
+                                                                                    <div class="form-group me-2">
+                                                                                        <input type="radio" name="pay_type" value="donation_debt" data-payment-id={{$member->id}} id="donation_debt" class="d-none">
+                                                                                        <label for="donation_debt" class="form-label fw-bold">مديونية التبرعات</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="view-data d-flex align-items-center justify-content-evenly my-3 d-none">
+                                                                                <p class="mb-0">
+                                                                                    المبلغ المطلوب:
+                                                                                    <span class="fw-bold" id="totalAmount"></span>
+                                                                                </p>
+                                                                                <p class="mb-0">
+                                                                                    المبلغ المتبقي:
+                                                                                    <span class="fw-bold" id="remainingAmount"></span>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="input-group flex-column">
+                                                                                <h4 class="text-center my-3 fw-bold">طريقة الدفع</h4>
+                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
+                                                                                    <div class="form-group me-2">
+                                                                                        <input type="radio" name="payment_method" value="all" data-payment-id={{$member->id}} id="all" class="d-none">
+                                                                                        <label for="all" class="form-label fw-bold">كلي</label>
+                                                                                    </div>
+                                                                                    <div class="form-group me-2">
+                                                                                        <input type="radio" name="payment_method" value="donation_debt" data-payment-id={{$member->id}} id="partial" class="d-none">
+                                                                                        <label for="partial" class="form-label fw-bold">جزئي</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group mt-2">
+                                                                                <label class="fw-bold" for="amount">المبلغ</label>
+                                                                                <input type="number" name="amount" id="amount" value="0" class="form-control" placeholder="ادخل المبلغ" data-payment-id="{{$member->id}}">
+                                                                            </div>
+                                                                            <div class="input-group mt-4 flex-column align-items-evenly justify-content-center">
+                                                                                <h4 class="text-center my-3">طريقة الدفع</h4>
+                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
+                                                                                    <div class="form-group">
+                                                                                        <input type="radio" name="online_payment" id="online-card" value="online-card" class="d-none" data-payment-id="{{$member->id}}">
+                                                                                        <label for="online-card" class="form-label fw-bold">
+                                                                                            <i class="fa-solid fa-credit-card fs-3"></i>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <input type="radio" name="online_payment" id="e-wallet" value="e-wallet" class="d-none" data-payment-id="{{$member->id}}">
+                                                                                        <label for="e-wallet" class="form-label fw-bold">
+                                                                                            <img src="https://img.icons8.com/office/50/wallet.png" alt="e-wallet">
+                                                                                        </label>
+                                                                                        <div class="requested_phone-number d-none">
+                                                                                            <input type="number" name="phone_number" data-payment-id="{{$member->id}}" class="form-control" placeholder="رقم المحمول">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer mt-3 pb-0 px-0">
+                                                                                <button type="submit" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill" data-payment-id="{{$member->id}}">دفع</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
                                 @else
@@ -399,6 +545,7 @@
                     <div class="container">
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
+                                @if(count($tombsByRegion) > 0)
                                 @foreach ($tombsByRegion as $region => $tombs)
                                     <div class="card position-relative border border-secondary border-2 p-4 w-100 mb-5">
                                         <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
@@ -434,6 +581,11 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @else
+                                    <div class="message-data text-center">
+                                        <h1 class="text-center my-3">لا توجد مقابر مسجلة حاليا</h1>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
     $user = Auth::user();
 @endphp
 @extends('layouts.master')
-@section('title', 'كل التبرعات')
+@section('title', 'كل المتبرعين')
 @section('breadcrumb-title')
     <h3>كل المتبرعين</h3>
 @endsection
