@@ -441,7 +441,7 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="caution-title">
-                                                                            <h1 class="text-center text-danger text-decoration-underline my-2">المدفعوعات في طور التجربة</h1>
+                                                                            <h1 class="text-center text-danger text-decoration-underline my-2">المدفوعات في طور التجربة</h1>
                                                                         </div>
                                                                         <form action="{{route('payment.checkout')}}" method="post" id="payment-form" data-payment-id="{{$member->id}}">
                                                                             @csrf
