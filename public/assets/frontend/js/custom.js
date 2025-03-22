@@ -1,4 +1,3 @@
-console.log('Hello From The Other Side');
 //! Fixed Navbar
 window.addEventListener("scroll", () => {
     if (window.scrollY > 150) {
