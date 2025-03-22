@@ -446,7 +446,7 @@
                                                                         <form action="{{route('payment.checkout')}}" method="post" id="payment-form" data-payment-id="{{$member->id}}">
                                                                             @csrf
                                                                             <input type="hidden" name="member_name" value="{{$member->name}}">
-                                                                            <input type="hidden" name="year" value="{{$member->delays->first()->year}} ?? 0">
+                                                                            <input type="hidden" name="year" value="{{$member->delays->first()->year ?? 0}}">
                                                                             <input type="hidden" name="phone_number" value="{{$member->mobile_no}}">
                                                                             <input type="hidden" name="member_id" value="{{$member->member_id}}">
                                                                             <div class="input-group flex-column">
