@@ -1,6 +1,4 @@
-//! Current Year
-const currentYear = new Date().getFullYear();
-document.getElementById("year").innerHTML = currentYear;
+console.log('Hello From The Other Side');
 //! Fixed Navbar
 window.addEventListener("scroll", () => {
     if (window.scrollY > 150) {
