@@ -1,6 +1,6 @@
 //! Current Year
-// const currentYear = new Date().getFullYear();
-// document.getElementById("year").innerHTML = currentYear;
+const currentYear = new Date().getFullYear();
+document.getElementById("year").innerHTML = currentYear;
 //! Fixed Navbar
 window.addEventListener("scroll", () => {
     if (window.scrollY > 150) {
@@ -10,19 +10,19 @@ window.addEventListener("scroll", () => {
     }
 });
 //! Play Music On Page Load
-// document.addEventListener("DOMContentLoaded", function () {
-//     var audio = document.getElementById("audio-player");
-//     function playAudioAfterDelay() {
-//         setTimeout(function () {
-//             audio.play();
-//         }, 3000);
-//     }
-//     window.addEventListener("scroll", function () {
-//         if (window.scrollY > 10) {
-//             playAudioAfterDelay();
-//         }
-//     });
-// });
+document.addEventListener("DOMContentLoaded", function () {
+    var audio = document.getElementById("audio-player");
+    function playAudioAfterDelay() {
+        setTimeout(function () {
+            audio.play();
+        }, 3000);
+    }
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 10) {
+            playAudioAfterDelay();
+        }
+    });
+});
 //! Arabic Direction To The News Bar
 $(document).ready(function () {
     $("#newsTicker2").breakingNews({
