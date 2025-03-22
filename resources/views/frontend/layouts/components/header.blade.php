@@ -1,7 +1,7 @@
 <header class="position-relative">
     <div class="nav align-items-center justify-content-center">
         <a href={{route('site.index')}} class="py-3">
-            <h1 class="mx-3">جمعية أدندان الخيرية</h1>
+            <h1 class="mx-3">جمعية أدندانننن الخيرية</h1>
             <p class="slogan mb-0 text-center">
                 <small>تأسست عام 1908م، و المشهرة برقم 568</small>
             </p>
