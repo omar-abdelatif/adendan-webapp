@@ -502,13 +502,13 @@
                                                                                 <div class="radio-group d-flex align-items-center justify-content-evenly">
                                                                                     <div class="form-group">
                                                                                         <input type="radio" name="online_payment" id="online-card" value="online-card" class="d-none" data-payment-id="{{$member->id}}">
-                                                                                        <label for="online-card" class="form-label fw-bold">
-                                                                                            <i class="fa-solid fa-credit-card fs-3"></i>
+                                                                                        <label for="online-card" class="form-label mb-0 fw-bold">
+                                                                                            <img width="50" height="50" src="https://img.icons8.com/emoji/50/credit-card-emoji.png" alt="credit-card-emoji"/>
                                                                                         </label>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <input type="radio" name="online_payment" id="e-wallet" value="e-wallet" class="d-none" data-payment-id="{{$member->id}}">
-                                                                                        <label for="e-wallet" class="form-label fw-bold">
+                                                                                        <label for="e-wallet" class="form-label mb-0 fw-bold">
                                                                                             <img src="https://img.icons8.com/office/50/wallet.png" alt="e-wallet">
                                                                                         </label>
                                                                                         <div class="requested_phone-number d-none">
