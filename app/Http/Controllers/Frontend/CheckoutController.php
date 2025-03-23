@@ -10,27 +10,27 @@ class CheckoutController extends Controller
     public function checkingOut(Request $request){
         if ($request->pay_type === "subscription") {
             if ($request->online_payment === "e-wallet") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, $request->phone_number, 'e-wallet', env('PAYMOB_INTEGRATION_WALLET_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'e-wallet', $request->phone_number);
             } else if ($request->online_payment === "online-card") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, env('PAYMOB_INTEGRATION_CARD_IFRAME'), 'online-card', env('PAYMOB_INTEGRATION_CARD_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'online-card', $request->phone_number);
             }
         } else if ($request->pay_type === "subscription_delay") {
             if ($request->online_payment === "e-wallet") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, $request->phone_number, 'e-wallet', env('PAYMOB_INTEGRATION_WALLET_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'e-wallet', $request->phone_number);
             } else if ($request->online_payment === "online-card") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, env('PAYMOB_INTEGRATION_CARD_IFRAME'), 'online-card', env('PAYMOB_INTEGRATION_CARD_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'online-card', $request->phone_number);
             }
         } else if ($request->pay_type === "donation_delay") {
             if ($request->online_payment === "e-wallet") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, $request->phone_number, 'e-wallet', env('PAYMOB_INTEGRATION_WALLET_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'e-wallet', $request->phone_number);
             } else if ($request->online_payment === "online-card") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, env('PAYMOB_INTEGRATION_CARD_IFRAME'), 'online-card', env('PAYMOB_INTEGRATION_CARD_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'online-card', $request->phone_number);
             }
         } else if ($request->pay_type === "donation_debt") {
             if ($request->online_payment === "e-wallet") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, $request->phone_number, 'e-wallet', env('PAYMOB_INTEGRATION_WALLET_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'e-wallet', $request->phone_number);
             } else if ($request->online_payment === "online-card") {
-                return (new PaymentController)->sendPayment($request->amount, $request->member_name, env('PAYMOB_INTEGRATION_CARD_IFRAME'), 'online-card', env('PAYMOB_INTEGRATION_CARD_ID'));
+                return app(PaymentController::class)->sendPayment($request->amount, $request->member_name, 'online-card', $request->phone_number);
             }
         }
     }
