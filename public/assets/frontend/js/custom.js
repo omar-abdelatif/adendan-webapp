@@ -9,14 +9,14 @@ window.addEventListener("scroll", () => {
 //! Play Music On Page Load
 document.addEventListener("DOMContentLoaded", function () {
     var audio = document.getElementById("audio-player");
-    function playAudioAfterDelay() {
-        setTimeout(function () {
-            audio.play();
-        }, 3000);
-    }
+    var hasPlayed = false; // Flag to track playback status
+
     window.addEventListener("scroll", function () {
-        if (window.scrollY > 10) {
-            playAudioAfterDelay();
+        if (window.scrollY > 10 && !hasPlayed) {
+            hasPlayed = true; // Immediately mark as played
+            setTimeout(function () {
+                audio.play();
+            }, 3000);
         }
     });
 });
