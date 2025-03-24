@@ -19,7 +19,7 @@ class PaymentController extends Controller
     }
 
     // public function sendPayment($amount, $member_name, $iframe_id_or_wallet_no, $payment_type, $integration_id): RedirectResponse {
-    //     $response = Http::withoutVerifying()->withHeaders([
+    //     $response = Http::withHeaders([
     //         'content-type' => 'application/json',
     //     ])->post("https://accept.paymobsolutions.com/api/auth/tokens", [
     //         "api_key" => env('PAYMOB_API_KEY'),
@@ -123,8 +123,7 @@ class PaymentController extends Controller
         $nameParts = explode(" ", trim($member_name));
         $first_name = $nameParts[0] ?? "N/A";
         $last_name = isset($nameParts[1]) ? $nameParts[1] : "N/A";
-
-        $response = Http::withoutVerifying()->withHeaders([
+        $response = Http::withHeaders([
             "Authorization" => env('PAYMOB_SK'), // ✅ هنا بنستخدم التوكين
         ])->post("https://accept.paymob.com/v1/intention/", [
             "amount" => $amount * 100,
@@ -138,13 +137,9 @@ class PaymentController extends Controller
             ],
             "integration_id" => ($payment_type === "e-wallet") ? env('PAYMOB_INTEGRATION_WALLET_ID') : env('PAYMOB_INTEGRATION_CARD_ID'),
         ])->json();
-
-        // dd($response);
-
         if (isset($response['client_secret'])) {
             return redirect('https://accept.paymob.com/unifiedcheckout/?publicKey=' . env('PAYMOB_PK') . '&clientSecret=' . $response['client_secret']); // 🔄 تحويل المستخدم إلى صفحة الدفع
         }
-
         return redirect()->back()->with([
             'message' => 'فشل في إنشاء الدفع، حاول مرة أخرى',
             'alert-type' => 'error'
