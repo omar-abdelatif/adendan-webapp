@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 class WithdrawController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:التقارير');
+    }
     public function withdraw(Request $request)
     {
         $totalSafe = TotalSafe::findOrFail(1);

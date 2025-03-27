@@ -12,6 +12,9 @@ use App\Http\Requests\SubscriptionRequest;
 
 class SubscriptionsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:الاشتراكات');
+    }
     public function index($subscriberId)
     {
         $subscriber = Subscribers::find($subscriberId);

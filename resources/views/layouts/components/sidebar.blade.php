@@ -186,6 +186,7 @@
                             </a>
                         </li>
                     @else
+                    @can('لوحة التحكم')
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title" href="{{ route('home') }}">
                                 <svg class="stroke-icon">
@@ -194,6 +195,8 @@
                                 <span>لوحة التحكم</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('الاخبار')
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title" href="{{route('news.all')}}">
                                 <svg class="stroke-icon">
@@ -202,6 +205,8 @@
                                 <span>الأخبار</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('المشتركين')
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title" href="{{route('subscriber.all')}}">
                                 <svg class="stroke-icon">
@@ -210,18 +215,24 @@
                                 <span>المشتركين</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('الإشتراك السنوي')
                         <li class="sidebar-list">
                             <a href="{{route('costyears.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
                                 <span>الإشتراك السنوي</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('النثريات')
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title" href="{{route('miscellaneous.all')}}">
                                 <i class="fa-solid fa-file-invoice fs-5 text-muted"></i>
                                 <span>النثريات</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('مجلس الادارة')
                         <li class="sidebar-list">
                             <a href="{{route('board.all')}}" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
@@ -230,6 +241,8 @@
                                 <span>مجلس الإدارة</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('اللجان')
                         <li class="sidebar-list">
                             <a href="{{route('association.all')}}" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
@@ -238,6 +251,8 @@
                                 <span>لجان الجمعية</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('حرفيين')
                         <li class="sidebar-list">
                             <a href="{{route('workers.all')}}" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
@@ -246,6 +261,8 @@
                                 <span>حرفيين</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('التبرعات الخارجية')
                         <li class="sidebar-list">
                             <a href="{{route('donators.all')}}" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
@@ -254,18 +271,24 @@
                                 <span>التبرعات الخارجية</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('المقابر')
                         <li class="sidebar-list">
                             <a href="{{route('tomb.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-solid fa-tombstone-blank text-muted fs-5"></i>
                                 <span>المقابر</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('الافراح')
                         <li class="sidebar-list">
                             <a href="{{route('weddings.all')}}" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
                                 <span>مواعيد الأفراح</span>
                             </a>
                         </li>
+                    @endcan
+                    @can('التقارير')
                         <li class="sidebar-list">
                             <a href="#" class="sidebar-link sidebar-title">
                                 <svg class="stroke-icon">
@@ -276,99 +299,85 @@
                             <ul class="sidebar-submenu">
                                 <li>
                                     <a href="{{route('reports.subscriptions')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>الإشتراكات</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.location')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                        </svg>
                                         <span>السكن</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.age')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
-                                        </svg>
                                         <span>السن</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.jobs')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#fill-job-search') }}"></use>
-                                        </svg>
                                         <span>الوظائف</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.donations')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>التبرعات الخارجية</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.innerDonations')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>التبرعات الداخلية</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.search')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>متأخرات الإشتراكات</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.associates')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>المنتسبين</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.incompete')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>البيانات الغير مكتمله</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('reports.safe')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>الخزنة</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{route('bankTransactios')}}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('assets/svg/icon-sprite.svg#profit') }}"></use>
-                                        </svg>
                                         <span>البنك</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                    @endcan
+                    @if(auth()->user()->hasRole('master'))
                         <li class="sidebar-list">
-                            <a href="{{route('user.index')}}" class="sidebar-link sidebar-title">
+                            <a href="#" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
                                 <span>المستخدمين</span>
                             </a>
+                            <ul class="sidebar-submenu">
+                                <li>
+                                    <a href="{{route('user.index')}}">
+                                        <span>المستخدمين</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('roles.index')}}">
+                                        <span>الأدوار</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('permissions.index')}}">
+                                        <span>الصلاحيات</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-list">
                             <a href="{{route('activity.index')}}" class="sidebar-link sidebar-title">
@@ -376,6 +385,7 @@
                                 <span>سجل النشاطات</span>
                             </a>
                         </li>
+                    @endif
                     @endif
                 </ul>
             </div>

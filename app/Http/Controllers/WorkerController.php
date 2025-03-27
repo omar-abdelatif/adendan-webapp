@@ -8,6 +8,9 @@ use App\Http\Requests\WorkersRequest;
 
 class WorkerController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:الحرفيين');
+    }
     public function index()
     {
         $workers = Worker::all();

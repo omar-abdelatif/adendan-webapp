@@ -34,55 +34,45 @@
 @endsection
 @section('modals')
     <div class="btn-group" role="group">
-        <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
+        <button class="btn btn-success rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i data-feather="menu" class="text-white"></i>
         </button>
-        <div class="dropdown-menu text-center py-2 px-3 {{$user->role === 'admin' ? 'flex-column' : ''}}" style="left: 0px;top: 40px;" aria-labelledby="btnGroupVerticalDrop1">
-            @if ($user->role === 'subscriptions')
-                {{-- ! Insert Single Subscriber ! --}}
-                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#add_subscriber">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مشترك جديد</span>
-                </button>
-                {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
-                <button type="button" class="btn btn-success px-2 py-1 ms-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة إشتراك على الأعضاء</span>
-                </button>
-                {{-- ! Insert Bulk Donations On Subscribers ! --}}
-                <button type="button" class="btn btn-success px-2 py-1 ms-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مدينوية التبرعات على كل المشتركين</span>
-                </button>
-            @elseif ($user->role === 'admin')
+        <div class="dropdown-menu text-center py-3 px-3 flex-column" style="left: 0px;top: 40px;" aria-labelledby="btnGroupVerticalDrop1">
+            @can('مشترك جديد')
                 {{-- ! Insert Single Subscriber ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#add_subscriber">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة مشترك جديد</span>
                 </button>
+            @endcan
+            @can('مديونية الاشتراك')
                 {{-- ! Insert Bulk Subscription Delays Per Year ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_delay_subscribers">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة إشتراك على الأعضاء</span>
                 </button>
+            @endcan
+            @can('مديونية التبرعات')
+                {{-- ! Insert Bulk Donations On Subscribers ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
+                    <i class="icofont icofont-plus fw-bold"></i>
+                    <span>إضافة مدينوية التبرعات على كل المشتركين</span>
+                </button>
+            @endcan
+            @if (Auth::user()->hasRole('master'))
                 {{-- ! Insert Bulk Subscribers && Insert Bulk Delay ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#bulk_upload">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة مشتركين بالجملة</span>
-                </button>
-                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات بالجملة</span>
                 </button>
                 {{-- ! Insert Bulk Donations ! --}}
                 <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة متأخرات التبرعات بالجملة</span>
                 </button>
-                {{-- ! Insert Bulk Donations On Subscribers ! --}}
-                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_donation">
+                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة مدينوية التبرعات على كل المشتركين</span>
+                    <span>إضافة متأخرات بالجملة</span>
                 </button>
             @endif
         </div>

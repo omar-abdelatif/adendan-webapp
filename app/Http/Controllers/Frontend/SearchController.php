@@ -90,4 +90,8 @@ class SearchController extends Controller
         $shareComponent = \Share::currentPage()->facebook()->whatsapp()->telegram();
         return $shareComponent;
     }
+    public function searechDetails($slug){
+        $member = Subscribers::where('slug', $slug)->first();
+        return view('frontend.pages.search_details.search-details', compact('member'));
+    }
 }

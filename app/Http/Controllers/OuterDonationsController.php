@@ -11,6 +11,9 @@ use App\Http\Requests\OuterDonationsRequest;
 
 class OuterDonationsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:التبرعات الخارجية');
+    }
     public function index($id)
     {
         $donators = Donators::find($id);

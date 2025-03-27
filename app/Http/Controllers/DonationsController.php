@@ -13,6 +13,9 @@ use App\Http\Requests\RequestDonations;
 
 class DonationsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:التبرعات');
+    }
     public function index($id)
     {
         $subscriber = Subscribers::find($id);

@@ -525,6 +525,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <a href="{{route('site.searchDetails', $member->slug)}}" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill">تفاصيل الدفع</a>
                                                     </div>
                                                 </div>
                                             </div>

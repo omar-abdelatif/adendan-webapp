@@ -10,6 +10,9 @@ use App\Http\Requests\NewsRequest;
 
 class NewsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:الاخبار');
+    }
     public function index()
     {
         $news = News::all();

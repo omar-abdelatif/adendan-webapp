@@ -15,6 +15,9 @@ use App\Imports\ImportSubscribersDelays;
 
 class DelayController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:المديونيات');
+    }
     public function uploadDelays(Request $request) //! Upload Yearly Delays on Subscribers
     {
         $request->validate([

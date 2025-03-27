@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class CostYearsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:الاشتراك السنوي');
+    }
     public function index()
     {
         $years = CostYears::all();

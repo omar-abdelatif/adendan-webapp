@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:سجل النشاطات');
+    }
     public function index()
     {
         $activities = Activity::latest()->get();

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class BoardMembersController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:مجلس الادارة');
+    }
     public function index()
     {
         $members = BoardMembers::all();

@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class DonatorsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:المتبرعين');
+    }
     public function index()
     {
         $subscribers = Subscribers::all();

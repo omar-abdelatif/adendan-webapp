@@ -25,6 +25,7 @@ Route::post('checkout', [CheckoutController::class, 'checkingOut'])->name('payme
 Route::get('/paymob/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 Route::post('paymob/send-payment', [PaymentController::class, 'sendPayment'])->name('payment.send');
 Route::get('all_news/single_news/{id}', [NewsController::class, 'newsDetails'])->name('site.single_news');
+Route::get('search-details/{name}', [SearchController::class, 'searechDetails'])->name('site.searchDetails');
 Route::get('/payments/verify/{payment?}', [PaymentController::class, 'payment_verify'])->name('verify-payment');
 Route::get('search/wedding_details/{id}', [SearchController::class, 'weddingDetails'])->name('site.weddingDetails');
 Route::get('assossiation_committees', [AssociationsCommittesController::class, 'index'])->name('site.assossiation');

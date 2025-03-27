@@ -15,6 +15,9 @@ use App\Models\OuterDonations;
 
 class ReportController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:التقارير');
+    }
     //! Subscriptions Reports
     public function index(Request $request)
     {
