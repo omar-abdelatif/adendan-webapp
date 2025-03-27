@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class UserController extends Controller
@@ -17,8 +19,10 @@ class UserController extends Controller
     {
         $users = User::all();
         $roles = Role::all();
-        return view('pages.users.profile', compact('users', 'roles'));
+
+        return view('pages.users.profile', compact('users', 'roles', 'permissions'));
     }
+
     public function update(Request $request)
     {
         $id = $request->id;
@@ -67,7 +71,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
-            'role' => 'required'
+            'role' => 'required|exists:roles,name',
+            'permission' => 'array'
         ]);
         try {
             $user = User::create([
@@ -76,6 +81,9 @@ class UserController extends Controller
                 'password' => bcrypt($validator['password']),
             ]);
             $user->assignRole([$request->input('role')]);
+            if ($request->has('permission')) {
+                $user->givePermissionTo($request->input('permission'));
+            }
             if ($user) {
                 $notificationSuccess = [
                     'message' => 'تم إضافة المستخدم بنجاح',
@@ -97,12 +105,20 @@ class UserController extends Controller
     {
         $users = User::all();
         $roles = Role::all();
-        return view('pages.users.index', compact('users', 'roles'));
+        $permissions = Permission::all();
+
+        $usersPermissions = DB::table("model_has_permissions")->where("model_type", User::class)->select('model_id', 'permission_id')->get()->groupBy('model_id')->map(function ($permissions) {
+            return $permissions->pluck('permission_id')->toArray();
+        })->toArray();
+
+        return view('pages.users.index', compact('users', 'roles', 'permissions', 'usersPermissions'));
     }
     public function destroy($id)
     {
         $user = User::find($id);
         if ($user) {
+            $user->syncPermissions([]);
+            $user->syncRoles([]);
             $delete = $user->delete();
             if ($delete) {
                 $notificationSuccess = [
@@ -126,6 +142,11 @@ class UserController extends Controller
                 'email' => $request->email,
             ]);
             $user->syncRoles($request->input('role'));
+            if ($request->has('permission')) {
+                $user->syncPermissions($request->input('permission'));
+            } else {
+                $user->syncPermissions([]); // لو الصلاحيات فاضية، نزيل القديمة
+            }
             if ($update) {
                 $notificationSuccess = [
                     'message' => 'تم التعديل بنجاح',
@@ -135,5 +156,4 @@ class UserController extends Controller
             }
         }
     }
-     
 }

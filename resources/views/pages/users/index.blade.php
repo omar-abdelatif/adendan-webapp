@@ -6,13 +6,20 @@
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">كل المستخدمين</li>
 @endsection
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/select2.css')}}">
+@endsection
+@section('script')
+    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/js/select2/select2-custom.js')}}"></script>
+@endsection
 @section('modals')
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_cat">إضافة مستخدم جديد</button>
     <div class="modal fade" id="add_cat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة لجنة جديدة</h1>
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة مستخدم جديد</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -42,12 +49,20 @@
                                     <label for="title" class="text-muted">دور المستخدم</label>
                                     <select name="role" class="form-select text-muted" id="role">
                                         <option selected disabled>الدور</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="subscriptions">Subscriptions</option>
-                                        <option value="media">Media</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{$role->name}}">{{$role->name}}</option>
+                                            @endforeach
                                     </select>
                                     <p class="required d-none text-danger mb-0" id="roleReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0" id="roleMsg">يجب ان يكتب الاسم باللغة العربية ولا يقل عن 3 احرف</p>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="permissions" class="form-label">صلاحيات المستخدم</label>
+                                    <select name="permission" id="pemissions" class="form-select text-muted js-example-rtl" multiple data-placeholder="-- صلاحيات المستخدم --">
+                                        @foreach ($permissions as $permission)
+                                            <option value="{{$permission->name}}">{{$permission->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -98,7 +113,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">إضافة لجنة جديدة</h1>
+                                                                <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تعديل لجنة {{$user->name}}</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
@@ -125,6 +140,17 @@
                                                                                     <option selected disabled>-- دور المستخدم --</option>
                                                                                     @foreach($roles as $role)
                                                                                         <option value="{{$role->name}}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{$role->name}}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group mt-3">
+                                                                                <label for="permissions" class="form-label">صلاحيات المستخدم</label>
+                                                                                <select name="permission[]" id="permissions" class="form-select text-muted js-example-rtl" multiple data-placeholder="-- صلاحيات المستخدم --">
+                                                                                    @foreach ($permissions as $permission)
+                                                                                        <option value="{{$permission->name}}" 
+                                                                                            {{ isset($usersPermissions[$user->id]) && in_array($permission->id, $usersPermissions[$user->id]) ? 'selected' : '' }}>
+                                                                                            {{$permission->name}}
+                                                                                        </option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
