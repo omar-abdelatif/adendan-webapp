@@ -10,6 +10,9 @@ use App\Http\Requests\MiscellaneousRequest;
 
 class MiscellaneousController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:النثريات');
+    }
     public function index()
     {
         $miscellaneous = Miscellaneous::all();

@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:المستخدمين');
+    }
     public function index()
     {
         $users = User::all();
-        return view('pages.users.profile', compact('users'));
+        $roles = Role::all();
+        return view('pages.users.profile', compact('users', 'roles'));
     }
     public function update(Request $request)
     {
@@ -41,6 +46,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
+            $user->syncRoles($request->input('role'));
             if ($update) {
                 $notificationSuccess = [
                     'message' => 'تم تحديث البيانات بنجاح',
@@ -68,8 +74,8 @@ class UserController extends Controller
                 'name' => $validator['name'],
                 'email' => $validator['email'],
                 'password' => bcrypt($validator['password']),
-                'role' => $validator['role']
             ]);
+            $user->assignRole([$request->input('role')]);
             if ($user) {
                 $notificationSuccess = [
                     'message' => 'تم إضافة المستخدم بنجاح',
@@ -90,7 +96,8 @@ class UserController extends Controller
     public function AllUsers()
     {
         $users = User::all();
-        return view('pages.users.index', compact('users'));
+        $roles = Role::all();
+        return view('pages.users.index', compact('users', 'roles'));
     }
     public function destroy($id)
     {
@@ -111,14 +118,22 @@ class UserController extends Controller
         $id = $request->id;
         $user = User::find($id);
         if ($user) {
-            $user = $user->update($request->all());
-            if ($user) {
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+            $update = $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $user->syncRoles($request->input('role'));
+            if ($update) {
                 $notificationSuccess = [
-                    'message' => 'تم تعديل المستخدم بنجاح',
+                    'message' => 'تم التعديل بنجاح',
                     'alert-type' => 'success',
                 ];
                 return redirect()->back()->with($notificationSuccess);
             }
         }
     }
+     
 }

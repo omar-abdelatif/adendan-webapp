@@ -90,3 +90,17 @@ errors.forEach((error) => {
     }, 5000);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    let dropdownToggle = document.getElementById("btnGroupVerticalDrop1");
+
+    dropdownToggle.addEventListener("click", function () {
+        let dropdownMenu = this.nextElementSibling;
+        let bsDropdown = new bootstrap.Dropdown(this);
+
+        if (dropdownMenu.classList.contains("show")) {
+            bsDropdown.hide();
+        } else {
+            bsDropdown.show();
+        }
+    });
+});

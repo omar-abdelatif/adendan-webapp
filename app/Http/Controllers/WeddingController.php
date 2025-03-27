@@ -8,6 +8,9 @@ use App\Http\Requests\WeddingRequest;
 
 class WeddingController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:الافراح');
+    }
     public function index()
     {
         $weddings = Wedding::all();

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DelayController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\TombsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\WorkerController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\DonatorsController;
 use App\Http\Controllers\WithdrawController;
 use App\Http\Controllers\CostYearsController;
 use App\Http\Controllers\DonationsController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\SubscribersController;
 use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\MiscellaneousController;
@@ -162,6 +164,22 @@ Route::middleware('auth')->group(function () {
         });
         Route::controller(ActivityController::class)->group(function () {
             Route::get('activity', 'index')->name('activity.index');
+        });
+        Route::prefix('roles')->group(function () {
+            Route::controller(RolesController::class)->group(function () {
+                Route::get('roles', 'index')->name('roles.index');
+                Route::post('store', 'store')->name('roles.store');
+                Route::post('update', 'update')->name('roles.update');
+                Route::get('delete/{id}', 'destroy')->name('roles.destroy');
+            });
+        });
+        Route::prefix('permissions')->group(function () {
+            Route::controller(PermissionsController::class)->group(function () {
+                Route::get('permissions', 'index')->name('permissions.index');
+                Route::post('store', 'store')->name('permissions.store');
+                Route::post('update', 'update')->name('permissions.update');
+                Route::get('delete/{id}', 'destroy')->name('permission.destroy');
+            });
         });
     });
 });

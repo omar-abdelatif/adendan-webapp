@@ -8,6 +8,7 @@ use App\Models\CostYears;
 use App\Models\TotalSafe;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Subscriptions;
 use App\Imports\SubscribersImport;
@@ -17,6 +18,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SubscribersController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:المشتركين');
+    }
     public function index()
     {
         $years = CostYears::all();
@@ -41,6 +45,7 @@ class SubscribersController extends Controller
             'mobile_no.required' => 'حقل رقم الهاتف مطلوب.',
             'mobile_no.digits' => 'يجب ألا يزيد رقم الهاتف عن :digits رقم.',
         ]);
+        $slug = Str::slug($request->name, '-');
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $year = $value[1];
@@ -65,6 +70,7 @@ class SubscribersController extends Controller
             'member_id' => $request['member_id'],
             'nickname' => $request['nickname'],
             'name' => $request['name'],
+            'slug' => $slug,
             'ssn' => $request['ssn'],
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class TombsController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:المقابر');
+    }
     public function index()
     {
         $tombs = Tombs::all();

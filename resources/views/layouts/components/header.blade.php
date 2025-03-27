@@ -31,7 +31,9 @@
                         <div class="media-body">
                             <span>{{$user->name}}</span>
                             <p class="mb-0 font-roboto">
-                                Admin
+                                @foreach ($user->roles as $role)
+                                    {{$role->name}}
+                                @endforeach
                                 <i class="middle fa fa-angle-down"></i>
                             </p>
                         </div>

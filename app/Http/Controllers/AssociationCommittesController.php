@@ -8,6 +8,9 @@ use App\Http\Requests\RequestsAssociationCommittes;
 
 class AssociationCommittesController extends Controller
 {
+    function __construct(){
+        $this->middleware('permission:اللجان');
+    }
     public function index()
     {
         $associations = AssociationCommittes::all();

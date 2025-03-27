@@ -84,7 +84,11 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ $user->name }}</td>
                                             <td class="text-center">{{ $user->email }}</td>
-                                            <td class="text-center">{{ $user->role }}</td>
+                                            <td class="text-center">
+                                                @foreach ($user->roles as $role)
+                                                    {{$role->name}}
+                                                @endforeach
+                                            </td>
                                             <td class="text-center">
                                                 {{-- ! Update ! --}}
                                                 <button type="button" class="btn btn-warning px-2 py-1" data-bs-toggle="modal" data-bs-target="#editing_{{$user->id}}">
@@ -113,15 +117,15 @@
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="title" class="text-muted">كلمة السر</label>
-                                                                                <input type="password" class="form-control text-muted" value="{{$user->password}}" name="password" id="password" placeholder="كلمة السر">
+                                                                                <input type="password" class="form-control text-muted" name="password" id="password" placeholder="كلمة السر">
                                                                             </div>
                                                                             <div class="form-group mt-3">
                                                                                 <label for="title" class="text-muted">دور المستخدم</label>
-                                                                                <select name="role" class="form-select text-muted" id="role">
-                                                                                    <option selected disabled>الدور</option>
-                                                                                    <option value="admin" {{$user->role === 'admin' ? 'selected' : ''}}>Admin</option>
-                                                                                    <option value="subscription" {{$user->role === 'subscription' ? 'selected' : ''}}>Subscription</option>
-                                                                                    <option value="media" {{$user->role === 'media' ? 'selected' : ''}}>Media</option>
+                                                                                <select name="role" class="form-select" id="role">
+                                                                                    <option selected disabled>-- دور المستخدم --</option>
+                                                                                    @foreach($roles as $role)
+                                                                                        <option value="{{$role->name}}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{$role->name}}</option>
+                                                                                    @endforeach
                                                                                 </select>
                                                                             </div>
                                                                             <div class="modal-footer">
