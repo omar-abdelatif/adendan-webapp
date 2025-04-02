@@ -108,7 +108,7 @@ class NewsController extends Controller
             }
         }
     }
-    public function updateNews(NewsRequest $request)
+    public function updateNews(Request $request)
     {
         $id = $request->id;
         $news = News::find($id);

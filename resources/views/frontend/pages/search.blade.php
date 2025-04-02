@@ -426,7 +426,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer">
+                                            {{-- <div class="card-footer">
                                                 <div class="col-lg-12">
                                                     <div class="pay-button text-center">
                                                         <button type="button" class="btn btn-success rounded-pill fw-bold w-100" data-bs-toggle="modal" data-bs-target="#pay_{{$member->id}}" data-member-id="{{$member->member_id}}">إدفع هنا</button>
@@ -525,10 +525,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- <a href="{{route('site.searchDetails', $member->slug)}}" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill">تفاصيل الدفع</a> --}}
+                                                        <a href="{{route('site.searchDetails', $member->slug)}}" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill">تفاصيل الدفع</a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     @endif
                                 @else
