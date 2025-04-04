@@ -106,11 +106,12 @@ Route::middleware('auth')->group(function () {
         });
         Route::controller(SubscribersController::class)->group(function () {
             Route::get('subscribers/all', 'index')->name('subscriber.all');
+            Route::post('subscriber/update', 'update')->name('subscribe.update');
             Route::post('subscribers/store', 'storeSubs')->name('subscribe.store');
             Route::get('subscriber/delete/{id}', 'destroy')->name('subscribe.destroy');
-            Route::post('subscriber/update', 'update')->name('subscribe.update');
-            Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriber.details');
             Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriber.bulk');
+            Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriber.details');
+            Route::get('subscribers/get-year-cost/{year}', 'getYearlyCostByAjax')->name('get.year.cost');
             Route::get('subscribers/ajax/data/subscribers', 'getSubscribersData')->name('ajax.subscribers');
         });
         Route::controller(SubscriptionsController::class)->group(function () {

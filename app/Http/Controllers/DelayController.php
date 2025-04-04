@@ -18,32 +18,56 @@ class DelayController extends Controller
     function __construct(){
         $this->middleware('permission:المديونيات');
     }
-    public function uploadDelays(Request $request) //! Upload Yearly Delays on Subscribers
+    public function uploadDelays(Request $request)  //! Upload Yearly Delays on Subscribers
     {
         $request->validate([
             'year' => 'required',
             'yearly_cost' => 'required'
         ]);
-        $subscribers = Subscribers::where('status', 1)->get();
         $existingDelay = Delay::where('year', $request->year)->first();
         if ($existingDelay) {
             return back()->withErrors('هذه السنة تم إصدار اشتراكاتها بالفعل');
+        } else {
+            $subscribers = Subscribers::get();
+            foreach ($subscribers as $subscriber) {
+                $currentDelay = Delay::where('member_id', $subscriber->member_id)->where('payment_type', 'إشتراك')->where('year', '<', $request->year)->orderBy('year', 'desc')->first();
+                if ($currentDelay) {
+                    $oldDelay = Olddelays::where('member_id', $subscriber->member_id)->first();
+                    if ($oldDelay) {
+                        if ($oldDelay->delay_remaining == NULL) {
+                            $oldDelay->update([
+                                'amount' => $oldDelay->amount + ($currentDelay->remaing ?? $request->yearly_cost)
+                            ]);
+                        } else {
+                            $oldDelay->update([
+                                'delay_remaining' => $oldDelay->delay_remaining + ($currentDelay->remaing ?? $request->yearly_cost)
+                            ]);
+                        }
+                    } else {
+                        Olddelays::create([
+                            'amount' => $currentDelay->remaing ?? $request->yearly_cost,
+                            'member_id' => $subscriber->member_id,
+                            'old_delay_type' => 'إشتراكات'
+                        ]);
+                    }
+                    $currentDelay->delete();
+                }
+                Delay::create([
+                    'member_id' => $subscriber->member_id,
+                    'year' => $request->year,
+                    'yearly_cost' => $request->yearly_cost,
+                    'payment_type' => 'إشتراك',
+                    'subscribers_id' => $subscriber->id,
+                ]);
+            }
+            $notificationSuccess = [
+                "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
+                "alert-type" => "success",
+            ];
+            return redirect()->back()->with($notificationSuccess);
         }
-        foreach ($subscribers as $subscriber) {
-            Delay::create([
-                'member_id' => $subscriber->member_id,
-                'year' => $request->year,
-                'yearly_cost' => $request->yearly_cost,
-                'payment_type' => 'إشتراك',
-                'subscribers_id' => $subscriber->id
-            ]);
-        }
-        $notificationSuccess = [
-            "message" => "تم أضافة السنة المالية للمشتركين بنجاح",
-            "alert-type" => "success",
-        ];
-        return redirect()->back()->with($notificationSuccess);
     }
+    //! Upload Yearly Delays on Subscribers
     public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {
         $validated = $request->validate([

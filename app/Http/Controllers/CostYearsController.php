@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CostYearsController extends Controller
 {
     function __construct(){
-        $this->middleware('permission:الاشتراك السنوي');
+        $this->middleware('permission:الإشتراك السنوي');
     }
     public function index()
     {

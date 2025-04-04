@@ -363,4 +363,10 @@ class SubscribersController extends Controller
             return $actions . $donationModal;
         })->rawColumns(['Actions'])->make(true);
     }
+    public function getYearlyCostByAjax($year) {
+        $cost = CostYears::where('year', $year)->value('cost');
+        return response()->json([
+            'cost' => $cost
+        ]);
+    }
 }

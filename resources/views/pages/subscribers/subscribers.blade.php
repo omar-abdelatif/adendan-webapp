@@ -362,7 +362,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="costYear" class="text-muted">السنة</label>
-                                    <select name="year" id="costYear" class="form-select text-muted" required>
+                                    <select name="year" id="costYear" class="form-select text-muted" required data-base-url="http://127.0.0.1:8000/admin/subscribers">
                                         <option selected disabled>السنة</option>
                                         @foreach ($years as $year)
                                             <option value="{{$year->year}}">{{$year->year}}</option>
@@ -372,7 +372,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="yearly_cost" class="text-muted">المبلغ</label>
-                                    <input type="text" name="yearly_cost" maxlength="4" minlength="2" id="yearly_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control" placeholder="المبلغ" required>
+                                    <input type="text" name="yearly_cost" maxlength="4" minlength="2" id="yearly_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control" placeholder="المبلغ" required readonly>
                                     <p class="required d-none text-danger mb-0 fw-bold" id="costReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0 fw-bold" id="costMsg">يجب ان يكون اقصى رقم هو 4 ارقام</p>
                                 </div>

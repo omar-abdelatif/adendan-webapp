@@ -124,4 +124,25 @@ $(function () {
         paging: true,
         searching: true,
     });
+    //! Cost Year DropDown
+    let BaseUrl = $("#costYear").data("base-url");
+    $("#costYear").on("change", function () {
+        let selectedYear = $(this).val();
+        if (selectedYear) {
+            $.ajax({
+                url: BaseUrl + "/get-year-cost/" + selectedYear,
+                method: "GET",
+                success: function (data) {
+                    if (data.cost !== null) {
+                        $("#yearly_cost").val(data.cost);
+                    } else {
+                        $("#yearly_cost").val(0);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                },
+            });
+        }
+    });
 });
