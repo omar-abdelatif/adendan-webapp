@@ -49,6 +49,7 @@ Route::prefix('admin/subscriptions')->group(function () {
             Route::get('subscriber/update/{id}', 'subscriberDetails')->name('subscriptionRole.subscriber.details');
             Route::post('subscriber/bulk_upload', 'bulkUpload')->name('subscriptionRole.subscriber.bulk');
             Route::get('subscribers/ajax/data/subscribers', 'getSubscribersData')->name('subscriptionRole.ajax.subscribers');
+            Route::get('subscribers/get-year-cost/{year}', 'getYearlyCostByAjax');
         });
         //! Subscriptions Routes
         Route::controller(SubscriptionsController::class)->group(function () {
