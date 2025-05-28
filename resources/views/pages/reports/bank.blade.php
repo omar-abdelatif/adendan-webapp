@@ -33,6 +33,10 @@
                                     <p class="required d-none fw-bold text-danger mb-0" id="bankImgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
                                     <p class="required d-none fw-bold text-danger mb-0" id="bankImgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                    <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer mt-3">
@@ -62,12 +66,12 @@
                                     <img width="70" height="70" src="https://img.icons8.com/color/70/money-transfer.png" alt="money-transfer" />
                                 </div>
                                 <div>
-                                    <h5>المبلغ الحالي</h5>
+                                    <h5 class="text-muted">المبلغ الحالي</h5>
                                 </div>
                             </div>
                             <div class="font-Info">
                                 @foreach ($bankAmount as $safe)
-                                    <h5 class="mb-1">{{number_format($safe)}} ج.م</h5>
+                                    <h5 class="mb-1 text-muted">{{number_format($safe)}} ج.م</h5>
                                 @endforeach
                             </div>
                         </div>
@@ -107,7 +111,7 @@
                                     <tbody>
                                         @foreach ($transactions as $item)
                                             <tr>
-                                                <td class="text-center">{{$item->created_at->format('Y-m-d')}}</td>
+                                                <td class="text-center">{{$item->transaction_date}}</td>
                                                 <td class="text-center">
                                                     @if ($item->transaction_type === 'بنك/ايداع' || $item->transaction_type === 'ايداع')
                                                         <span class="badge badge-success rounded-pill">إيداع</span>

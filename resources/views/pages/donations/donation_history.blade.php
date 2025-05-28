@@ -8,13 +8,7 @@
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
-        @if ($user->role === 'subscriptions')
-            <a href="{{route('subscriptionRole.donators.all')}}">كل المتبرعين</a>
-        @elseif ($user->role === 'media')
-            <a class="d-none" href="{{route('subscriber.all')}}">كل المتبرعين</a>
-        @else
-            <a href="{{route('donators.all')}}">كل المتبرعين</a>
-        @endif
+        <a href="{{route('subscriber.all')}}">كل المشتركين</a>
     </li>
 @endsection
 @section('content')
@@ -105,7 +99,7 @@
                                                                             <span class="fw-bold">-</span>
                                                                         @endif
                                                                     </td>
-                                                                    <td>{{$donation->created_at->format('Y-m-d')}}</td>
+                                                                    <td>{{$donation->payment_date}}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -189,7 +183,7 @@
                                                                                                 </div>
                                                                                                 <div class="form-group mt-3">
                                                                                                     <label for="donation_category" class="text-muted">التصنيف الأخر</label>
-                                                                                                    <input type="text" class="form-control text-muted" name="donation_category" value="{{$delay->delay_other_amount}}" placeholder="التصنيف الاخر" id="otherDonationAmount" readonly>
+                                                                                                    <input type="text" class="form-control text-muted" name="other_donation" value="{{$delay->delay_other_amount}}" placeholder="التصنيف الاخر" id="otherDonationAmount" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mt-3">
                                                                                                     <label for="invoice_no" class="text-muted">رقم الإيصال</label>
@@ -202,6 +196,10 @@
                                                                                                     <input type="text" name="amount" id="amount" class="form-control text-muted" placeholder="المبلغ المدفوع" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" data-donationamount-id={{$delay->id}} required>
                                                                                                     <p class="required d-none text-danger mb-0 fw-bold donationAmountReq" data-donationamount-id="{{$delay->id}}">هذا الحقل مطلوب</p>
                                                                                                     <p class="required d-none text-danger mb-0 fw-bold donationAmountMsg" data-donationamount-id="{{$delay->id}}">يجب ان يكون المبلغ مكون من 5 ارقام</p>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                                                                                    <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -234,7 +232,6 @@
                                                 <table id="table35" class="table display align-middle table-hover text-center text-muted" data-order='[[0,"asc"]]' data-page-length="10">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-center">#</th>
                                                             <th class="text-center">المبلغ الإجمالي</th>
                                                             <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
@@ -242,10 +239,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php $i = 1 ?>
                                                         @foreach ($oldDelayDonations as $delay)
                                                             <tr>
-                                                                <td class="text-center">{{$i++}}</td>
                                                                 <td class="text-center">{{$delay->amount}}</td>
                                                                 <td class="text-center">{{$delay->delay_amount}}</td>
                                                                 <td class="text-center">{{$delay->delay_remaining}}</td>
@@ -280,6 +275,10 @@
                                                                                                     <input type="text" name="amount" id="amount" class="form-control text-muted" placeholder="المبلغ المدفوع" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" data-oldamount-id="{{$delay->id}}" required>
                                                                                                     <p class="required d-none text-danger fw-bold mb-0 oldDonationAmountReq" data-oldamount-id="{{$delay->id}}">هذا الحقل مطلوب</p>
                                                                                                     <p class="required d-none text-danger fw-bold mb-0 oldDonationAmountMsg" data-oldamount-id="{{$delay->id}}">يجب ان يكون المبلغ من 2 الى 5 رقم</p>
+                                                                                                </div>
+                                                                                                <div class="form-group mt-3">
+                                                                                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                                                                                    <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>

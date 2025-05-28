@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\TotalBank;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TotalSafe;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SafeSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class SafeSeeder extends Seeder
      */
     public function run(): void
     {
-        TotalBank::create([
+        TotalSafe::create([
             'amount' => 0,
         ]);
     }
