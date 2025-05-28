@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Subscribers;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -27,6 +28,7 @@ class SubscribersImport implements ToCollection, WithHeadingRow, WithBatchInsert
             Subscribers::create([
                 'member_id'                 => $row['member_id'],
                 'name'                      => $row['name'],
+                'slug'                      => Str::slug(strtolower($row['name'])),
                 'nickname'                  => $row['nickname'],
                 'ssn'                       => $row['ssn'],
                 'address'                   => $row['address'],

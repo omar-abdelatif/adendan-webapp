@@ -14,6 +14,7 @@ class Subscribers extends Model
     protected $fillable = [
         'member_id',
         'name',
+        'slug',
         'nickname',
         'ssn',
         'address',

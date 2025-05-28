@@ -27,6 +27,7 @@ class SubscriptionRequest extends FormRequest
             'member_id' => 'required',
             'invoice_no' => 'required',
             'payment_type' => 'required',
+            'payment_date' => 'nullable',
             'delays_period' => 'nullable',
             'subscription_cost' => 'nullable|numeric',
         ];

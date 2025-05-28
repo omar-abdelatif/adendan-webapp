@@ -14,7 +14,8 @@ class Bank extends Model
     protected $fillable = [
         'amount',
         'proof_img',
-        'transaction_type'
+        'transaction_type',
+        'transaction_date',
     ];
     protected function getDynamicLogName(): string {
         return 'Bank Reports';

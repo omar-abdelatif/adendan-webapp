@@ -103,7 +103,7 @@
                                                                         @endif
                                                                     </td>
                                                                     <td class="text-muted text-center">{{$item->payment_type}}</td>
-                                                                    <td class="text-muted text-center">{{$item->created_at->format('Y-m-d')}}</td>
+                                                                    <td class="text-muted text-center">{{$item->payment_date}}</td>
                                                                     <td class="text-muted text-center">{{$item->invoice_no}}</td>
                                                                     <td class="text-muted text-center">
                                                                         @if ($item->delays)
@@ -184,6 +184,10 @@
                                                                                                     <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="paied" minlength="2" maxlength="5" id="paied" data-delay-id="{{$delay->id}}" placeholder="المبلغ المدفوع" required>
                                                                                                     <p class="required d-none text-danger mb-0 payReq" data-delay-id="{{$delay->id}}" id="payReq">هذا الحقل مطلوب</p>
                                                                                                     <p class="required d-none text-danger mb-0 payMsg" data-delay-id="{{$delay->id}}" id="payMsg">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                                                                                    <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -338,6 +342,10 @@
                                                                                                         <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
                                                                                                         <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
                                                                                                         <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
+                                                                                                    </div>
+                                                                                                    <div class="form-group mb-3">
+                                                                                                        <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                                                                                        <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="modal-footer">

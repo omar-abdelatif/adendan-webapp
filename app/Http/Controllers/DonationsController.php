@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\DonationDelay;
 use App\Http\Requests\RequestDonations;
 
-class DonationsController extends Controller
-{
+class DonationsController extends Controller {
     function __construct(){
         $this->middleware('permission:التبرعات');
     }
@@ -83,7 +82,7 @@ class DonationsController extends Controller
         $id = $request->id;
         $donations = Donations::find($id);
         if ($donations) {
-            $update = $donations->update($request->all());
+            $update = $donations->update($request);
             if ($update) {
                 $notificationSuccess = [
                     'message' => 'تم تحديث الإشتراك',
@@ -147,6 +146,7 @@ class DonationsController extends Controller
                     'invoice_no' => $request->invoice_no,
                     'amount' => $amount,
                     'donation_type' => 'مادي',
+                    'payment_date' => $request->payment_date,
                     'donation_category' => 'متأخرات التبرعات',
                     'subscribers_id' => $subscribers->id
                 ]);
@@ -154,6 +154,7 @@ class DonationsController extends Controller
                     SafeReports::create([
                         'member_id' => $subscribers->member_id,
                         'transaction_type' => 'متأخرات التبرعات',
+                        'payment_date' => $request->payment_date,
                         'amount' => $requestAmount,
                     ]);
                     $sumAmount = $totalSafe->amount + $requestAmount;
@@ -180,11 +181,13 @@ class DonationsController extends Controller
                             'amount' => $requestAmount,
                             'donation_type' => 'مادي',
                             'donation_category' => 'متأخرات التبرعات',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'متأخرات التبرعات',
+                            'payment_date' => $request->payment_date,
                             'amount' => $requestAmount,
                         ]);
                         $sumAmount = $totalSafe->amount + $requestAmount;
@@ -206,12 +209,14 @@ class DonationsController extends Controller
                             'amount' => $remainingAmount,
                             'donation_type' => 'مادي',
                             'donation_category' => 'متأخرات التبرعات',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($pay) {
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات التبرعات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $requestAmount,
                             ]);
                             $sumAmount = $totalSafe->amount + $requestAmount;
@@ -235,6 +240,7 @@ class DonationsController extends Controller
                             'amount' => $requestAmount,
                             'donation_type' => 'مادي',
                             'donation_category' => 'متأخرات التبرعات',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($remainingAmount === 0) {
@@ -244,6 +250,7 @@ class DonationsController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات التبرعات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $requestAmount,
                             ]);
                             $sumAmount = $totalSafe->amount + $requestAmount;
@@ -283,6 +290,7 @@ class DonationsController extends Controller
                     'donation_type' => $request->donation_type,
                     'other_donation' => null,
                     'donation_category' => $request->donation_category,
+                    'payment_date' => $request->payment_date,
                     'amount' => $amountPaied,
                     'subscribers_id' => $subscribers->id
                 ]);
@@ -290,6 +298,7 @@ class DonationsController extends Controller
                     SafeReports::create([
                         'member_id' => $memberId,
                         'transaction_type' => 'تبرع كلي',
+                        'payment_date' => $request->payment_date,
                         'amount' => $amountPaied,
                     ]);
                     $sumAmount = $totalSafe->amount + $amountPaied;
@@ -310,6 +319,7 @@ class DonationsController extends Controller
                     'donation_type' => $request->donation_type,
                     'other_donation' => null,
                     'donation_category' => $request->donation_category,
+                    'payment_date' => $request->payment_date,
                     'amount' => $totalAmount,
                     'subscribers_id' => $subscribers->id
                 ]);
@@ -317,6 +327,7 @@ class DonationsController extends Controller
                     SafeReports::create([
                         'member_id' => $memberId,
                         'transaction_type' => 'تبرع كلي',
+                        'payment_date' => $request->payment_date,
                         'amount' => $totalAmount,
                     ]);
                     $sumAmount = $totalSafe->amount + $totalAmount;
@@ -346,11 +357,13 @@ class DonationsController extends Controller
                             'donation_type' => $request->donation_type,
                             'other_donation' => null,
                             'donation_category' => $request->donation_category,
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'تبرع جزئي',
+                            'payment_date' => $request->payment_date,
                             'amount' => $amountPaied,
                         ]);
                         $sumAmount = $totalSafe->amount + $amountPaied;
@@ -372,6 +385,7 @@ class DonationsController extends Controller
                             'donation_type' => $request->donation_type,
                             'other_donation' => null,
                             'donation_category' => $request->donation_category,
+                            'payment_date' => $request->payment_date,
                             'amount' => $amountPaied,
                             'subscribers_id' => $subscribers->id
                         ]);
@@ -379,6 +393,7 @@ class DonationsController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'تبرع كلي',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $amountPaied,
                             ]);
                             $sumAmount = $totalSafe->amount + $amountPaied;
@@ -399,6 +414,7 @@ class DonationsController extends Controller
                             'donation_type' => $request->donation_type,
                             'other_donation' => null,
                             'donation_category' => $request->donation_category,
+                            'payment_date' => $request->payment_date,
                             'amount' => $remainingAmount,
                             'subscribers_id' => $subscribers->id
                         ]);
@@ -406,6 +422,7 @@ class DonationsController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'تبرع كلي',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $remainingAmount,
                             ]);
                             $sumAmount = $totalSafe->amount + $remainingAmount;
@@ -429,6 +446,7 @@ class DonationsController extends Controller
                             'donation_type' => $request->donation_type,
                             'other_donation' => null,
                             'donation_category' => $request->donation_category,
+                            'payment_date' => $request->payment_date,
                             'amount' => $amountPaied,
                             'subscribers_id' => $subscribers->id
                         ]);
@@ -439,6 +457,7 @@ class DonationsController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'تبرع كلي',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $amountPaied,
                             ]);
                             $sumAmount = $totalSafe->amount + $amountPaied;

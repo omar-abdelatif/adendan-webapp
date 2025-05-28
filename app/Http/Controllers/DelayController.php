@@ -90,7 +90,7 @@ class DelayController extends Controller
         $id = $request->id;
         $validated = $request->validate([
             'paied' => 'required',
-            'invoice_no' => 'required|unique:subscriptions,invoice_no'
+            'invoice_no' => 'required|unique:subscriptions,invoice_no',
         ]);
         $delay = Delay::where('year', $request->year)->where('id', $id)->first();
         $subscribers = Subscribers::where('member_id', $request->member_id)->first();
@@ -107,12 +107,14 @@ class DelayController extends Controller
                     'period' => $request->year,
                     'invoice_no' => $request->invoice_no,
                     'payment_type' => 'إشتراك كلي',
+                    'payment_date' => $request->payment_date,
                     'subscribers_id' => $subscribers->id
                 ]);
                 if ($pay) {
                     SafeReports::create([
                         'member_id' => $subscribers->member_id,
                         'transaction_type' => 'إشتراكات',
+                        'payment_date' => $request->payment_date,
                         'amount' => $paied,
                     ]);
                     $sumAmount = $totalSafe->amount + $paied;
@@ -134,6 +136,7 @@ class DelayController extends Controller
                     $update = $delay->update([
                         'paied' => $paied,
                         'remaing' => $remainingAmount,
+                        'payment_date' => $request->payment_date,
                     ]);
                     if ($update) {
                         $subscribers->update(['status' => 3]);
@@ -143,12 +146,14 @@ class DelayController extends Controller
                             'period' => $request->year,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'إشتراك جزئي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'إشتراكات',
                             'amount' => $request['paied'],
+                            'payment_date' => $request->payment_date,
                         ]);
                         $sumAmount = $totalSafe->amount + $request['paied'];
                         $totalSafe->update([
@@ -169,6 +174,7 @@ class DelayController extends Controller
                             'period' => $request->year,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'إشتراك كلي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($pay) {
@@ -176,6 +182,7 @@ class DelayController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'إشتراكات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $paied,
                             ]);
                             $sumAmount = $totalSafe->amount + $paied;
@@ -192,6 +199,7 @@ class DelayController extends Controller
                         $delay->update([
                             'paied' => $paied + $delay->paied,
                             'remaing' => $baky - $paied,
+                            'payment_date' => $request->payment_date,
                         ]);
                         $pay = Subscriptions::create([
                             'member_id' => $request->member_id,
@@ -199,6 +207,7 @@ class DelayController extends Controller
                             'period' => $request->year,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'إشتراك جزئي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($remain === 0) {
@@ -209,6 +218,7 @@ class DelayController extends Controller
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'إشتراكات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $request['paied'],
                             ]);
                             $sumAmount = $totalSafe->amount + $request['paied'];
@@ -245,12 +255,14 @@ class DelayController extends Controller
                     'invoice_no' => $request->invoice_no,
                     'delays' => $amount,
                     'payment_type' => 'متأخرات كلية',
+                    'payment_date' => $request->payment_date,
                     'subscribers_id' => $subscribers->id
                 ]);
                 if ($store) {
                     SafeReports::create([
                         'member_id' => $subscribers->member_id,
                         'transaction_type' => 'متأخرات',
+                        'payment_date' => $request->payment_date,
                         'amount' => $amount,
                     ]);
                     $sumAmount = $totalSafe->amount + $amount;
@@ -281,11 +293,13 @@ class DelayController extends Controller
                             'delays' => $requestAmount,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'متأخرات جزئي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         SafeReports::create([
                             'member_id' => $subscribers->member_id,
                             'transaction_type' => 'متأخرات',
+                            'payment_date' => $request->payment_date,
                             'amount' => $requestAmount,
                         ]);
                         $sumAmount = $totalSafe->amount + $requestAmount;
@@ -305,12 +319,14 @@ class DelayController extends Controller
                             'delays' => $oldDelayRemaining,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'متأخرات كلي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($pay) {
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $requestAmount,
                             ]);
                             $sumAmount = $totalSafe->amount + $requestAmount;
@@ -336,12 +352,14 @@ class DelayController extends Controller
                             'delays' => $requestAmount,
                             'invoice_no' => $request->invoice_no,
                             'payment_type' => 'متأخرات جزئي',
+                            'payment_date' => $request->payment_date,
                             'subscribers_id' => $subscribers->id
                         ]);
                         if ($pay) {
                             SafeReports::create([
                                 'member_id' => $subscribers->member_id,
                                 'transaction_type' => 'متأخرات',
+                                'payment_date' => $request->payment_date,
                                 'amount' => $requestAmount,
                             ]);
                             $sumAmount = $totalSafe->amount + $requestAmount;

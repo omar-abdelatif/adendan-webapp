@@ -40,6 +40,7 @@ class SubscriptionsController extends Controller
                     'period' => $oldDelays->year,
                     'delays' => $request['delays'],
                     'payment_type' => $request['payment_type'],
+                    'payment_date' => $request['payment_date'],
                     'delays_period' => $request['delays_period'],
                     'subscribers_id' => $subscriber->id,
                 ]);
@@ -75,7 +76,7 @@ class SubscriptionsController extends Controller
         ];
         return redirect()->back()->with($notificationErrors);
     }
-    public function updatingSubscription(SubscriptionRequest $request)
+    public function updatingSubscription(Request $request)
     {
         $id = $request->id;
         $subscription = Subscriptions::find($id);

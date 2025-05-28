@@ -43,6 +43,7 @@ class WithdrawController extends Controller
                     'member_id' => '-',
                     'proof_img' => $imagename,
                     'amount' => $validated['amount'],
+                    'payment_date' => $request->transaction_date,
                     'transaction_type' => 'خزنة/سحب',
                 ]);
                 if ($store) {
@@ -53,6 +54,7 @@ class WithdrawController extends Controller
                     Bank::create([
                         'amount' => $validated['amount'],
                         'transaction_type' => 'بنك/ايداع',
+                        'transaction_date' => $request->transaction_date,
                         'proof_img' => $imagename,
                     ]);
                     $notificationSuccess = [
@@ -96,6 +98,7 @@ class WithdrawController extends Controller
                 $store = Bank::create([
                     'proof_img' => $extention,
                     'amount' =>  $validated['amount'],
+                    'transaction_date' => $request->payment_date,
                     'transaction_type' => 'بنك/سحب',
                 ]);
                 if ($store) {
@@ -107,6 +110,7 @@ class WithdrawController extends Controller
                         'member_id' => '-',
                         'amount' => $validated['amount'],
                         'proof_img' => $extention,
+                        'payment_date' => $request->payment_date,
                         'transaction_type' => 'خزنة/إيداع'
                     ]);
                     $notificationSuccess = [

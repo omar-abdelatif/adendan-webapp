@@ -26,12 +26,16 @@
                                     <p class="required d-none text-danger fw-bold" id="withdrawReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger fw-bold" id="withdrawMsg">يجب ان لا يكون الرقم المسحوب بالسالب و مكون من 2 رقم على الأقل</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <label for="proof_withdraw" class="text-muted">إثبات السحب</label>
                                     <input type="file" name="proof_img" id="proof_withdraw" class="form-control text-muted" accept="image/*" required>
                                     <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
                                     <p class="required d-none fw-bold text-danger mb-0" id="withdrawimgSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                    <input type="date" class="form-control text-muted" name="transaction_date" id="payment_date">
                                 </div>
                                 <div class="modal-footer mt-3">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -68,10 +72,10 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/70/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
                             </div>
-                            <h5>إجمالي التبـرعات المحصلة</h5>
+                            <h5 class="text-muted">إجمالي التبـرعات المحصلة</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{ number_format($sumDonations) }} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{ number_format($sumDonations) }} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -83,10 +87,10 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/bubbles/70/money-bag.png" alt="money-bag" />
                             </div>
-                            <h5>إجمالي الإشـتـراكات المحصلة</h5>
+                            <h5 class="text-muted">إجمالي الإشـتـراكات المحصلة</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{number_format($sumSubscriptions)}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{number_format($sumSubscriptions)}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -98,11 +102,11 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/plasticine/70/bank.png" alt="bank" />
                             </div>
-                            <h5>إجمالـي الخـزنه الحـالي</h5>
+                            <h5 class="text-muted">إجمالـي الخـزنه الحـالي</h5>
                         </div>
                         <div class="font-Info">
                             @foreach ($safeAmounts as $safe)
-                                <h5 class="mb-1">{{number_format($safe)}} ج.م</h5>
+                                <h5 class="mb-1 text-muted">{{number_format($safe)}} ج.م</h5>
                             @endforeach
                         </div>
                     </div>
@@ -153,7 +157,7 @@
                                     @foreach ($safes as $safe)
                                         <tr>
                                             <td class="text-center">{{$safe->member_id}}</td>
-                                            <td class="text-center">{{$safe->created_at->format('Y-m-d')}}</td>
+                                            <td class="text-center">{{$safe->payment_date}}</td>
                                             <td class="text-center">{{$safe->transaction_type}}</td>
                                             <td class="text-center">
                                                 @if ($safe->transaction_type === 'تبرعات' || $safe->transaction_type === 'إشتراكات' || $safe->transaction_type === 'متأخرات' || $safe->transaction_type === 'بنك/سحب' || $safe->transaction_type === 'متأخرات التبرعات' || $safe->transaction_type === 'تبرع كلي' || $safe->transaction_type === 'تبرع جزئي'|| $safe->transaction_type === 'خزنة/إيداع' || $safe->transaction_type === 'إشتراك جديد')

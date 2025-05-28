@@ -201,7 +201,7 @@
                                     <div class="row">
                                         <div class="col-12 col-md-4">
                                             <input type="checkbox" class="checkbox_animated" name="status" id="deathOrNot" {{ $subscriber->status === 2 ? 'checked' : '' }}>
-                                            <label for="deathOrNot" class="text-center mb-0">هل الشخص متوفي ؟</label>
+                                            <label for="deathOrNot" class="text-center text-muted ms-2 mb-0">هل الشخص متوفي ؟</label>
                                         </div>
                                     </div>
                                 </div>

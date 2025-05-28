@@ -16,7 +16,8 @@ class SafeReports extends Model
         'transaction_type',
         'amount',
         'proof_img',
-        'invoice_no'
+        'invoice_no',
+        'payment_date'
     ];
     protected function getDynamicLogName(): string {
         return 'Safe Reports';

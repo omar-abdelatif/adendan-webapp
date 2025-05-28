@@ -69,7 +69,6 @@
                             <table id="table" class="table display align-middle text-muted text-center" data-order='[[1,"asc"]]' data-page-length=10>
                                 <thead>
                                     <tr>
-                                        <th class="text-center">#</th>
                                         <th class="text-center">إسم المتبرع</th>
                                         <th class="text-center">رقم المحمول</th>
                                         <th class="text-center">مدة التبرع</th>
@@ -79,10 +78,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1 ?>
                                     @foreach ($allDonators as $donator)
                                         <tr>
-                                            <td class="text-center">{{$i++}}</td>
                                             <td class="text-center">{{$donator->name}}</td>
                                             <td class="text-center">{{$donator->mobile_number}}</td>
                                             <td class="text-center">
