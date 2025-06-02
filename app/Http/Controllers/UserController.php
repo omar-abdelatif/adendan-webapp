@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $users = User::all();
         $roles = Role::all();
-
+        $permissions = Permission::all();
         return view('pages.users.profile', compact('users', 'roles', 'permissions'));
     }
 
