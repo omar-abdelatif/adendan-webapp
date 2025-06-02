@@ -22,13 +22,13 @@ class WeddingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => 'required',
-            'date' => 'required|date',
-            'groom_name' => 'required',
-            'pride_father_name' => 'required',
-            'address' => 'required',
-            'from_time' => 'required',
-            'to_time' => 'required',
+            'day' => 'nullable',
+            'date' => 'nullable|date',
+            'groom_name' => 'nullable',
+            'pride_father_name' => 'nullable',
+            'address' => 'nullable',
+            'from_time' => 'nullable',
+            'to_time' => 'nullable',
         ];
     }
 }
