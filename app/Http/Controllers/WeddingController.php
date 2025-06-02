@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Wedding;
 use Illuminate\Http\Request;
+use App\Imports\WeddingImport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\WeddingRequest;
 
 class WeddingController extends Controller
@@ -56,9 +58,8 @@ class WeddingController extends Controller
         }
         return redirect()->back()->withErrors('خطأ أثناء الحذف');
     }
-    public function weddingUpdate(WeddingRequest $request)
+    public function weddingUpdate(Request $request)
     {
-        $validated = $request->validated();
         $id = $request->id;
         $removeWedding = Wedding::findOrFail($id);
         if ($removeWedding) {
@@ -83,6 +84,19 @@ class WeddingController extends Controller
                 return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->back()->withErrors($validated);
+    }
+    public function uploadBulkWedding(Request $request)
+    {
+        $request->validate([
+            'import' => 'required|file|mimes:xlsx,xls',
+        ]);
+        $import = Excel::import(new WeddingImport, $request['import'], null, \Maatwebsite\Excel\Excel::XLSX);
+        if ($import) {
+            $notificationSuccess = [
+                'message' => 'تم رفع البيانات بنجاح',
+                'alert-type' => 'success'
+            ];
+        }
+        return redirect()->back()->with($notificationSuccess);
     }
 }

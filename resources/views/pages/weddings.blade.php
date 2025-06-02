@@ -10,8 +10,8 @@
     <li class="breadcrumb-item active">كل الأفراح</li>
 @endsection
 @section('modals')
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_cat">إضافة فرح جديد</button>
-    <div class="modal fade" id="add_cat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_wedding">إضافة فرح جديد</button>
+    <div class="modal fade" id="add_wedding" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,6 +81,27 @@
             </div>
         </div>
     </div>
+    {{-- <button type="button" class="btn btn-success ms-3" data-bs-toggle="modal" data-bs-target="#add_wedding_bulk">إضافة أفراح بالجملة</button> --}}
+    <div class="modal fade" id="add_wedding_bulk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة فرح جديد</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('weddings.bulk')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="excel_file" class="form-label text-center">ملف الإكسل</label>
+                            <input type="file" name="import" class="form-control" id="excel_file" accept=".xlsx, .xls">
+                        </div>
+                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('content')
     @if($errors->any())
@@ -115,7 +136,7 @@
                                             <td class="text-white text-center">{{$wedding->day}}</td>
                                             <td class="text-white text-center">{{$wedding->date}}</td>
                                             <td class="text-white text-center">{{$wedding->groom_name}}</td>
-                                            <td class="text-white text-center">كريمة/{{$wedding->pride_father_name}}</td>
+                                            <td class="text-white text-center">{{$wedding->pride_father_name ? 'كريمة/'.$wedding->pride_father_name : '-'}}</td>
                                             <td class="text-white text-center">{{$wedding->address}}</td>
                                             <td class="text-white text-center" dir="ltr">{{$wedding->from_time}}</td>
                                             <td class="text-white text-center" dir="ltr">{{$wedding->to_time}}</td>
@@ -197,14 +218,14 @@
                                                                             <div class="row">
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group mb-3">
-                                                                                        <label for="from_time" class="text-muted">من الساعة</label>
-                                                                                        <input type="time" id="from_time" name="from_time" value="{{ \Carbon\Carbon::parse($wedding->from_time)->format('H:i') }}" class="form-control text-muted">
+                                                                                        <label for="to_time" class="text-muted">الى الساعة</label>
+                                                                                        <input type="time" name="to_time" value="{{ $wedding->to_time }}" class="form-control text-muted">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group mb-3">
-                                                                                        <label for="to_time" class="text-muted">الى الساعة</label>
-                                                                                        <input type="time" id="to_time" name="to_time" value="{{ \Carbon\Carbon::parse($wedding->to_time)->format('H:i') }}" class="form-control text-muted">
+                                                                                        <label for="from_time" class="text-muted">من الساعة</label>
+                                                                                        <input type="time" name="from_time" value="{{ $wedding->from_time }}" class="form-control text-muted">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
