@@ -17,12 +17,13 @@ class WeddingImport implements ToCollection, WithHeadingRow, WithBatchInserts
     public function collection(Collection $collection)
     {
         foreach($collection as $row){
+            $weddingDate = $this->parseExcelDate($row['date']);
             Wedding::create([
-                'day' => $row['day'] ?? null,
-                'date' => $row['date'] ?? null,
+                'day' => $row['day'],
+                'date' => $weddingDate,
                 'groom_name' => $row['groom_name'] ?? null,
                 'pride_father_name' => $row['pride_father_name'] ?? null,
-                'address' => $row['address'] ?? null,
+                'address' => $row['address'],
                 'from_time' => $this->parseExcelTime($row['from_time'] ?? null),
                 'to_time' => $this->parseExcelTime($row['to_time'] ?? null),
             ]);
@@ -44,6 +45,18 @@ class WeddingImport implements ToCollection, WithHeadingRow, WithBatchInserts
             return \Carbon\Carbon::parse($value)->format('g:i A');
         } catch (\Exception $e) {
             return null; // فشل التحويل
+        }
+    }
+
+    private function parseExcelDate($value) {
+        if (!$value) return null;
+        try {
+            if (is_numeric($value)) {
+                return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value))->format('Y-m-d');
+            }
+            return \Carbon\Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
         }
     }
 
