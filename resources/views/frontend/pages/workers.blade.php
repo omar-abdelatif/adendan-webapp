@@ -66,7 +66,7 @@
                                     @if ($carpenterCount >= 1)
                                         @foreach ($carpenter as $gn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border-rounded border border-2 border-primary mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-rounded border-2 border-primary mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/external-microdots-premium-microdot-graphic/80/external-carpenter-interior-homedecor-vol4-microdots-premium-microdot-graphic.png" alt="external-carpenter-interior-homedecor-vol4-microdots-premium-microdot-graphic"/>
@@ -104,7 +104,7 @@
                                     @if ($painterCount >= 1)
                                         @foreach ($painter as $cn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-2 border-primary border-rounded mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/external-filled-outline-design-circle/80/external-Roll-Brush-real-estate-filled-outline-design-circle.png" alt="external-Roll-Brush-real-estate-filled-outline-design-circle"/>
@@ -142,7 +142,7 @@
                                     @if ($electricCount >= 1)
                                         @foreach ($electric as $dn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-2 border-primary border-rounded mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/external-others-phat-plus/80/external-electric-electric-vehicles-color-line-others-phat-plus-11.png" alt="external-electric-electric-vehicles-color-line-others-phat-plus-11"/>
@@ -180,7 +180,7 @@
                                     @if ($plumberCount >= 1)
                                         @foreach ($plumber as $wn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-2 border-primary border-rounded mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/80/external-wrench-plumbing-icongeek26-linear-colour-icongeek26-1.png" alt="external-wrench-plumbing-icongeek26-linear-colour-icongeek26-1"/>
@@ -218,7 +218,7 @@
                                     @if ($techCount >= 1)
                                         @foreach ($tech as $tn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-2 border-primary border-rounded mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/cotton/80/worker-male--v3.png" alt="worker-male--v3"/>
@@ -261,7 +261,7 @@
                                     @if ($otherCount >= 1)
                                         @foreach ($other as $sn)
                                             <div class="col-md-6 col-lg-4">
-                                                <div class="card card-shadow overflow-hidden border border-2 border-primary border-rounded mb-4 mt-5">
+                                                <div class="card card-shadow overflow-hidden border-2 border-primary border-rounded mb-4 mt-5">
                                                     <div class="card-body">
                                                         <div class="card-image text-center">
                                                             <img width="80" height="80" src="https://img.icons8.com/bubbles/80/question-mark.png" alt="question-mark"/>

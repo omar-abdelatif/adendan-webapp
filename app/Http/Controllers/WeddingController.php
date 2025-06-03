@@ -67,14 +67,19 @@ class WeddingController extends Controller
             $toTime = $request['to_time'];
             $fromTime12 = date("g:i A", strtotime($fromTime));
             $toTime12 = date("g:i A", strtotime($toTime));
+            if ($request->filled('from_time')) {
+                $removeWedding->from_time = $fromTime12;
+            }
+
+            if ($request->filled('to_time')) {
+                $removeWedding->to_time = $toTime12;
+            }
             $update = $removeWedding->update([
                 'day' => $request['day'],
                 'date' => $request['date'],
                 'groom_name' => $request['groom_name'],
                 'pride_father_name' => $request['pride_father_name'],
                 'address' => $request['address'],
-                'from_time' => $fromTime12,
-                'to_time' => $toTime12,
             ]);
             if ($update) {
                 $notificationSuccess = [

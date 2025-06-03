@@ -84,7 +84,7 @@
                                 <div class="search-form">
                                     <form action="{{route('site.result')}}" method="post" class="my-5 w-50 mx-auto">
                                         @csrf
-                                        <input type="number" name="ssn" id="ssn" class="form-control border border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
+                                        <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
                                         <button type="submit" class="btn btn-secondary rounded-pill w-100 mt-3 fw-bold fs-5">بحث</button>
                                     </form>
                                 </div>
@@ -129,7 +129,7 @@
                                                                 <div class="delays-content d-flex justify-content-center flex-column align-items-center">
                                                                     @if (count($member->delays) >= 1)
                                                                         @foreach ($delays as $delay)
-                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
@@ -193,7 +193,7 @@
                                                                             </div>
                                                                         @endforeach
                                                                     @else
-                                                                        <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                        <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                                                             <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                 <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                     <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
@@ -213,7 +213,7 @@
                                                                 <div class="old-content">
                                                                     <div class="row justify-content-center g-0">
                                                                         @if (count($oldDelays) >= 1)
-                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                            <div class="w-100 border-1 border-dark rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
@@ -269,7 +269,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
@@ -290,7 +290,7 @@
                                                                 <div class="delay-donaiton-content">
                                                                     <div class="row justify-content-center g-0">
                                                                         @if (count($donationDelays) > 0)
-                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                            <div class="w-100 border-1 border-dark rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
@@ -330,7 +330,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
@@ -351,7 +351,7 @@
                                                                 <div class="old-donation-content">
                                                                     <div class="row justify-content-center g-0">
                                                                         @if (count($donationOlddelays) > 0)
-                                                                            <div class="w-100 border border-1 border-dark rounded-3">
+                                                                            <div class="w-100 border-1 border-dark rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
@@ -407,7 +407,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         @else
-                                                                            <div class="w-100 border border-1 border-dark ms-1 rounded-3">
+                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                                                                 <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                                                     <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                                                         <img width="65" height="65" src="https://img.icons8.com/fluency/65/add-dollar.png" alt="add-dollar"/>
@@ -426,109 +426,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="card-footer">
-                                                <div class="col-lg-12">
-                                                    <div class="pay-button text-center">
-                                                        <button type="button" class="btn btn-success rounded-pill fw-bold w-100" data-bs-toggle="modal" data-bs-target="#pay_{{$member->id}}" data-member-id="{{$member->member_id}}">إدفع هنا</button>
-                                                        <div class="modal fade" id="pay_{{$member->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header justify-content-between bg-secondary text-white">
-                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">دفع الإشتراك او المتأخرات للعضو {{$member->name}}</h1>
-                                                                        <button type="button" class="btn text-danger fs-4" data-bs-dismiss="modal" aria-label="Close">
-                                                                            <i class="fa-regular fa-circle-xmark"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="caution-title">
-                                                                            <h1 class="text-center text-danger text-decoration-underline my-2">المدفوعات في طور التجربة</h1>
-                                                                        </div>
-                                                                        <form action="{{route('payment.checkout')}}" method="post" id="payment-form" data-payment-id="{{$member->id}}">
-                                                                            @csrf
-                                                                            <input type="hidden" name="member_name" value="{{$member->name}}">
-                                                                            <input type="hidden" name="year" value="{{$member->delays->first()->year ?? 0}}">
-                                                                            <input type="hidden" name="phone_number" value="{{$member->mobile_no}}">
-                                                                            <input type="hidden" name="member_id" value="{{$member->member_id}}">
-                                                                            <div class="input-group flex-column">
-                                                                                <h4 class="text-center my-3 fw-bold">اختر نوع الدفع</h4>
-                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
-                                                                                    <div class="form-group">
-                                                                                        <input type="radio" name="pay_type" value="subscription" data-payment-id={{$member->id}} id="subscription" class="d-none">
-                                                                                        <label for="subscription" class="form-label fw-bold">الإشتراك الحالي</label>
-                                                                                    </div>
-                                                                                    <div class="form-group me-2">
-                                                                                        <input type="radio" name="pay_type" value="subscription_delay" data-payment-id={{$member->id}} id="subscription_delay" class="d-none">
-                                                                                        <label for="subscription_delay" class="form-label fw-bold">متأخرات الإشتراكات</label>
-                                                                                    </div>
-                                                                                    <div class="form-group me-2">
-                                                                                        <input type="radio" name="pay_type" value="donation_delay" data-payment-id={{$member->id}} id="donation_delay" class="d-none">
-                                                                                        <label for="donation_delay" class="form-label fw-bold">متأخرات التبرعات</label>
-                                                                                    </div>
-                                                                                    <div class="form-group me-2">
-                                                                                        <input type="radio" name="pay_type" value="donation_debt" data-payment-id={{$member->id}} id="donation_debt" class="d-none">
-                                                                                        <label for="donation_debt" class="form-label fw-bold">مديونية التبرعات</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="view-data d-flex align-items-center justify-content-evenly my-3 d-none">
-                                                                                <p class="mb-0">
-                                                                                    المبلغ المطلوب:
-                                                                                    <span class="fw-bold" id="totalAmount"></span>
-                                                                                </p>
-                                                                                <p class="mb-0">
-                                                                                    المبلغ المتبقي:
-                                                                                    <span class="fw-bold" id="remainingAmount"></span>
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="input-group flex-column">
-                                                                                <h4 class="text-center my-3 fw-bold">طريقة الدفع</h4>
-                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
-                                                                                    <div class="form-group me-2">
-                                                                                        <input type="radio" name="payment_method" value="all" data-payment-id={{$member->id}} id="all" class="d-none">
-                                                                                        <label for="all" class="form-label fw-bold">كلي</label>
-                                                                                    </div>
-                                                                                    <div class="form-group me-2">
-                                                                                        <input type="radio" name="payment_method" value="donation_debt" data-payment-id={{$member->id}} id="partial" class="d-none">
-                                                                                        <label for="partial" class="form-label fw-bold">جزئي</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group mt-2">
-                                                                                <label class="fw-bold" for="amount">المبلغ</label>
-                                                                                <input type="number" name="amount" id="amount" value="0" class="form-control" placeholder="ادخل المبلغ" data-payment-id="{{$member->id}}">
-                                                                            </div>
-                                                                            <div class="input-group mt-4 flex-column align-items-evenly justify-content-center">
-                                                                                <h4 class="text-center my-3">طريقة الدفع</h4>
-                                                                                <div class="radio-group d-flex align-items-center justify-content-evenly">
-                                                                                    <div class="form-group">
-                                                                                        <input type="radio" name="online_payment" id="online-card" value="online-card" class="d-none" data-payment-id="{{$member->id}}">
-                                                                                        <label for="online-card" class="form-label mb-0 fw-bold">
-                                                                                            <img width="50" height="50" src="https://img.icons8.com/emoji/50/credit-card-emoji.png" alt="credit-card-emoji"/>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <input type="radio" name="online_payment" id="e-wallet" value="e-wallet" class="d-none" data-payment-id="{{$member->id}}">
-                                                                                        <label for="e-wallet" class="form-label mb-0 fw-bold">
-                                                                                            <img src="https://img.icons8.com/office/50/wallet.png" alt="e-wallet">
-                                                                                        </label>
-                                                                                        <div class="requested_phone-number d-none">
-                                                                                            <input type="number" name="phone_number" data-payment-id="{{$member->id}}" class="form-control" placeholder="رقم المحمول">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer mt-3 pb-0 px-0">
-                                                                                <button type="submit" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill" data-payment-id="{{$member->id}}">دفع</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <a href="{{route('site.searchDetails', $member->slug)}}" class="btn border-0 btn-secondary fw-bold fs-5 w-100 rounded-pill">تفاصيل الدفع</a>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     @endif
                                 @else
@@ -548,7 +445,7 @@
                             <div class="col-lg-12">
                                 @if(count($tombsByRegion) > 0)
                                 @foreach ($tombsByRegion as $region => $tombs)
-                                    <div class="card position-relative border border-secondary border-2 p-4 w-100 mb-5">
+                                    <div class="card position-relative border-secondary border-2 p-4 w-100 mb-5">
                                         <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
                                             <h3 class="mb-0 font-weight-bold text-center text-white">مقابر {{$region}}</h3>
                                         </div>
@@ -597,18 +494,14 @@
                             <div class="col-lg-12">
                                 <div class="wedding-cards">
                                     @if (count($weddingsByMonth) > 0)
-                                        @foreach ($weddingsByMonth->filter(function ($weddings) {
-                                            return $weddings->some(function ($wed) {
-                                                return \Carbon\Carbon::parse($wed->date)->isAfter(\Carbon\Carbon::today());
-                                            });
-                                        }) as $month => $weddings)
-                                            <div class="card card-shadow position-relative border border-2 border-secondary rounded mt-5 p-4 w-100">
+                                        @foreach ($weddingsByMonth as $month => $weddings)
+                                            <div class="card card-shadow position-relative border-2 border-secondary rounded mt-5 p-4 w-100">
                                                 <div class="card-header bg-secondary position-absolute rounded-pill w-25 top--20px">
                                                     <h4 class="text-center text-white">أفراح شهر {{ $month }}</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table-responsive">
-                                                        <table class="table table-striped align-middle table-borderless rounded table-hover text-right mt-3 text-center">
+                                                        <table class="table table-striped align-middle table-borderless rounded table-hover mt-3 text-center">
                                                             <thead class="table-primary">
                                                                 <tr>
                                                                     <th>اليوم</th>
@@ -628,8 +521,8 @@
                                                                         <td>{{$wed->groom_name}}</td>
                                                                         <td>كريمة/{{$wed->pride_father_name}}</td>
                                                                         <td>{{$wed->address}}</td>
-                                                                        <td dir="ltr">{{ $wed->from_time }}</td>
-                                                                        <td dir="ltr">{{ $wed->to_time }}</td>
+                                                                        <td dir="ltr">{{ $wed->from_time ? $wed->from_time : 'لم يحدد بعد' }}</td>
+                                                                        <td dir="ltr">{{ $wed->to_time ? $wed->to_time : 'لم يحدد بعد' }}</td>
                                                                     </tr>
                                                                 @endforeach
                                                             </tbody>

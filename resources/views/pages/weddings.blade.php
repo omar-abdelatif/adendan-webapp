@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    {{-- <button type="button" class="btn btn-success ms-3" data-bs-toggle="modal" data-bs-target="#add_wedding_bulk">إضافة أفراح بالجملة</button> --}}
+    <button type="button" class="btn btn-success ms-3" data-bs-toggle="modal" data-bs-target="#add_wedding_bulk">إضافة أفراح بالجملة</button>
     <div class="modal fade" id="add_wedding_bulk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -138,8 +138,13 @@
                                             <td class="text-white text-center">{{$wedding->groom_name}}</td>
                                             <td class="text-white text-center">{{$wedding->pride_father_name ? 'كريمة/'.$wedding->pride_father_name : '-'}}</td>
                                             <td class="text-white text-center">{{$wedding->address}}</td>
-                                            <td class="text-white text-center" dir="ltr">{{$wedding->from_time}}</td>
-                                            <td class="text-white text-center" dir="ltr">{{$wedding->to_time}}</td>
+                                            @if ($wedding->from_time === $wedding->to_time)
+                                                <td class="text-white text-center" dir="ltr">لم يحدد الميعاد بعد</td>
+                                                <td class="text-white text-center" dir="ltr">لم يحدد الميعاد بعد</td>
+                                            @else
+                                                <td class="text-white text-center" dir="ltr">{{$wedding->from_time}}</td>
+                                                <td class="text-white text-center" dir="ltr">{{$wedding->to_time}}</td>
+                                            @endif
                                             <td class="text-white text-center" dir="ltr">
                                                 {{-- ! Delete Wedding ! --}}
                                                 <button type="button" class="btn btn-outline-danger text-muted px-2 py-1" data-bs-toggle="modal" data-bs-target="#deleting_{{$wedding->id}}">
@@ -183,10 +188,34 @@
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="{{$wedding->id}}">
                                                                     <div class="row">
+                                                                        <div class="col-lg-6 text-center">
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-muted text-center fw-bold">تاريخ المناسبة</label>
+                                                                                <input type="date" id="date" class="form-control text-muted text-center" value="{{$wedding->date}}" name="date">
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="address" class="text-muted text-center">العنوان</label>
+                                                                                <input type="text" class="form-control text-muted text-center" id="address" value="{{$wedding->address}}" name="address" placeholder="العنوان">
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="form-group mb-3">
+                                                                                        <label for="to_time" class="text-muted text-center">الى الساعة</label>
+                                                                                        <input type="time" name="to_time" value="{{ $wedding->to_time ? \Carbon\Carbon::parse($wedding->to_time)->format('H:i') : '' }}" class="form-control text-muted text-center">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="form-group mb-3">
+                                                                                        <label for="from_time" class="text-muted text-center">من الساعة</label>
+                                                                                        <input type="time" name="from_time" value="{{ $wedding->from_time ? \Carbon\Carbon::parse($wedding->from_time)->format('H:i') : '' }}" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="col-lg-6">
                                                                             <div class="form-group mb-3">
-                                                                                <label for="day" class="text-muted fw-bold">اليوم</label>
-                                                                                <select name="day" class="form-select text-muted" id="day">
+                                                                                <label for="day" class="text-muted text-center fw-bold">اليوم</label>
+                                                                                <select name="day" class="form-select text-muted text-center" id="day">
                                                                                     <option selected disabled>إختار اليوم</option>
                                                                                     <option value="السبت" {{$wedding->day === 'السبت' ? 'selected' : ''}}>السبت</option>
                                                                                     <option value="الأحد" {{$wedding->day === 'الأحد' ? 'selected' : ''}}>الأحد</option>
@@ -198,36 +227,12 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="groom_name" class="text-muted">إسم العريس</label>
-                                                                                <input type="text" name="groom_name" id="groom_name" value="{{$wedding->groom_name}}" placeholder="إسم العريس" class="form-control text-muted">
+                                                                                <label for="groom_name" class="text-muted text-center">إسم العريس</label>
+                                                                                <input type="text" name="groom_name" id="groom_name" value="{{$wedding->groom_name}}" placeholder="إسم العريس" class="form-control text-muted text-center">
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="pride_father_name" class="text-muted fw-bold">والد العروس</label>
-                                                                                <input type="text" name="pride_father_name" id="pride_father_name" value="{{$wedding->pride_father_name}}" placeholder="والد العروس" class="form-control text-muted">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted fw-bold">تاريخ المناسبة</label>
-                                                                                <input type="date" id="date" class="form-control text-muted" value="{{$wedding->date}}" name="date">
-                                                                            </div>
-                                                                            <div class="form-group mb-3">
-                                                                                <label for="address" class="text-muted">العنوان</label>
-                                                                                <input type="text" class="form-control text-muted" id="address" value="{{$wedding->address}}" name="address" placeholder="العنوان">
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-lg-6">
-                                                                                    <div class="form-group mb-3">
-                                                                                        <label for="to_time" class="text-muted">الى الساعة</label>
-                                                                                        <input type="time" name="to_time" value="{{ $wedding->to_time }}" class="form-control text-muted">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-lg-6">
-                                                                                    <div class="form-group mb-3">
-                                                                                        <label for="from_time" class="text-muted">من الساعة</label>
-                                                                                        <input type="time" name="from_time" value="{{ $wedding->from_time }}" class="form-control text-muted">
-                                                                                    </div>
-                                                                                </div>
+                                                                                <label for="pride_father_name" class="text-muted text-center fw-bold">والد العروس</label>
+                                                                                <input type="text" name="pride_father_name" id="pride_father_name" value="{{$wedding->pride_father_name}}" placeholder="والد العروس" class="form-control text-muted text-center">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">

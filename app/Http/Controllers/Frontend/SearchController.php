@@ -31,18 +31,22 @@ class SearchController extends Controller
         }
         return $tombsByRegion;
     }
-    public function getWeddingsByMonth()
-    {
-        $weddings = Wedding::all();
+    public function getWeddingsByMonth() {
         $months = include(base_path('lang/ar/months.php'));
+        $weddings = Wedding::whereDate('date', '>', now())->get();
         $weddingsByMonth = $weddings->groupBy(function ($wedding) use ($months) {
-            $englishMonth = Carbon::parse($wedding->date)->format('F');
+            $englishMonth = \Carbon\Carbon::parse($wedding->date)->format('F');
             $arabicMonth = $months[$englishMonth]['name'];
-            return $arabicMonth . ' ' . Carbon::parse($wedding->date)->format('Y');
+            $year = \Carbon\Carbon::parse($wedding->date)->format('Y');
+            return $arabicMonth . ' ' . $year;
         });
-        $sortedMonths = $weddingsByMonth->sortKeys();
+        $sortedMonths = $weddingsByMonth->sortBy(function ($weds, $monthName) {
+            $firstDate = $weds->first()->date;
+            return \Carbon\Carbon::parse($firstDate)->timestamp;
+        });
         return $sortedMonths;
     }
+
     public function result(Request $request)
     {
         $ssn = $request->input('ssn');
