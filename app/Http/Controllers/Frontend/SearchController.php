@@ -33,7 +33,7 @@ class SearchController extends Controller
     }
     public function getWeddingsByMonth() {
         $months = include(base_path('lang/ar/months.php'));
-        $weddings = Wedding::whereDate('date', '>', now())->get();
+        $weddings = Wedding::whereDate('date', '>=', now())->get();
         $weddingsByMonth = $weddings->groupBy(function ($wedding) use ($months) {
             $englishMonth = \Carbon\Carbon::parse($wedding->date)->format('F');
             $arabicMonth = $months[$englishMonth]['name'];
