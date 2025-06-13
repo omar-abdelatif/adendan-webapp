@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+    $today = Carbon::today();
+@endphp
 @extends('frontend.layouts.master')
 @section('title')
     الإستعلامات
@@ -514,7 +518,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($weddings->filter(function($wed){return \Carbon\Carbon::parse($wed->date)->isAfter(\Carbon\Carbon::today());})->sortBy('date') as $wed)
+                                                                @foreach ($weddings->filter(function($wed) use ($today) { return Carbon::parse($wed->date)->startOfDay()->gte($today); })->sortBy('date') as $wed)
                                                                     <tr>
                                                                         <td>{{$wed->day}}</td>
                                                                         <td>{{$wed->date}}</td>
