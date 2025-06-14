@@ -81,7 +81,12 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($generalnewscount > 0)
-                            @foreach ($generalnews as $gn)
+                            @php
+                                $filteredGeneralnews = $generalnews->filter(function($item) {
+                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                                });
+                            @endphp
+                            @foreach ($filteredGeneralnews as $gn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
@@ -124,7 +129,12 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($culturenewscount > 0)
-                            @foreach ($culturenews as $cn)
+                            @php
+                                $filteredCulturenews = $culturenews->filter(function($item) {
+                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                                });
+                            @endphp
+                            @foreach ($filteredCulturenews as $cn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
@@ -263,7 +273,12 @@
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                         @if ($sportnewscount > 0)
-                            @foreach ($sportnews as $sn)
+                            @php
+                                $filteredSportnews = $sportnews->filter(function($item) {
+                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                                });
+                            @endphp
+                            @foreach ($filteredSportnews as $sn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image">
