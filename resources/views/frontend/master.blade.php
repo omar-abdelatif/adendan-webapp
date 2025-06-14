@@ -80,12 +80,12 @@
             <div class="tab-pane fade show active" id="general-tab" role="tabpanel" aria-labelledby="pills-general-tab">
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
-                        @if ($generalnewscount > 0)
-                            @php
-                                $filteredGeneralnews = $generalnews->filter(function($item) {
-                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
-                                });
-                            @endphp
+                        @php
+                            $filteredGeneralnews = $generalnews->filter(function($item) {
+                                return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                            });
+                        @endphp
+                        @if ($filteredGeneralnews->count() > 0)
                             @foreach ($filteredGeneralnews as $gn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($generalnewscount >= 8)
+                            @if ($filteredGeneralnews >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>
@@ -128,12 +128,12 @@
             <div class="tab-pane fade" id="culture-news" role="tabpanel" aria-labelledby="pills-culture-news">
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
-                        @if ($culturenewscount > 0)
-                            @php
-                                $filteredCulturenews = $culturenews->filter(function($item) {
-                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
-                                });
-                            @endphp
+                        @php
+                            $filteredCulturenews = $culturenews->filter(function($item) {
+                                return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                            });
+                        @endphp
+                        @if ($filteredCulturenews->count() > 0)
                             @foreach ($filteredCulturenews as $cn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($culturenewscount >= 8)
+                            @if ($filteredCulturenews >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>
@@ -176,12 +176,12 @@
             <div class="tab-pane fade" id="funeral-tab" role="tabpanel" aria-labelledby="pills-funeral-tab">
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
-                        @if ($deathnewscount > 0)
-                            @php
-                                $filteredDeathNews = $deathnews->filter(function($item) {
-                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
-                                });
-                            @endphp
+                        @php
+                            $filteredDeathNews = $deathnews->filter(function($item) {
+                                return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                            });
+                        @endphp
+                        @if ($filteredDeathNews->count() > 0)
                             @foreach ($filteredDeathNews as $dn)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
@@ -224,12 +224,12 @@
             <div class="tab-pane fade" id="wedding-tab" role="tabpanel" aria-labelledby="pills-wedding-tab">
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
-                        @if ($weddingnewscount > 0)
-                            @php
-                                $filteredWeddingNews = $weddingnews->filter(function($wn) {
-                                    return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
-                                });
-                            @endphp
+                        @php
+                            $filteredWeddingNews = $weddingnews->filter(function($wn) {
+                                return \Carbon\Carbon::parse($wn->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                            });
+                        @endphp
+                        @if ($filteredWeddingNews->count() > 0)
                             @foreach ($filteredWeddingNews as $wn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
@@ -272,12 +272,12 @@
             <div class="tab-pane fade" id="sports-tab" role="tabpanel" aria-labelledby="pills-sports-tab">
                 <div class="container">
                     <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
-                        @if ($sportnewscount > 0)
-                            @php
-                                $filteredSportnews = $sportnews->filter(function($item) {
-                                    return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
-                                });
-                            @endphp
+                        @php
+                            $filteredSportnews = $sportnews->filter(function($item) {
+                                return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                            });
+                        @endphp
+                        @if ($filteredSportnews->count() > 0)
                             @foreach ($filteredSportnews as $sn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
@@ -306,7 +306,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($sportnewscount >= 8)
+                            @if ($filteredSportnews >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>
