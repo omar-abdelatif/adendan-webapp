@@ -120,7 +120,7 @@
                                 </div>
                             @endif
                         @else
-                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا القسم حاليا</h1>
+                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا الشهر حاليا</h1>
                         @endif
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                                 </div>
                             @endif
                         @else
-                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا القسم حاليا</h1>
+                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا الشهر حاليا</h1>
                         @endif
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                                 </div>
                             @endif
                         @else
-                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا القسم حاليا</h1>
+                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا الشهر حاليا</h1>
                         @endif
                     </div>
                 </div>
@@ -264,7 +264,7 @@
                                 </div>
                             @endif
                         @else
-                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا القسم حاليا</h1>
+                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا الشهر حاليا</h1>
                         @endif
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                                 </div>
                             @endif
                         @else
-                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا القسم حاليا</h1>
+                            <h1 class="text-center mb-0 my-3">لا توجد أخبار في هذا الشهر حاليا</h1>
                         @endif
                     </div>
                 </div>
