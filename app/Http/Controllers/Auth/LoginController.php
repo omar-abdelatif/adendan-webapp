@@ -42,19 +42,11 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request)
     {
-        $url = '';
-        if ($request->user()->role === 'subscriptions') {
-            $url = 'admin/subscriptions/dashboard';
-        } elseif ($request->user()->role === 'media') {
-            $url = 'media/dashboard/main';
-        } else {
-            $url = 'admin/dashboard/main';
-        }
         $notification = [
             'message' => "تم تسجيل الدخول",
             'alert-type' => 'success',
         ];
-        return redirect()->intended($url)->with($notification);
+        return redirect()->route('home')->with($notification);
     }
 
     protected function getTranslatedLoginDescription(string $eventName): string
