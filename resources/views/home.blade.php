@@ -1,3 +1,6 @@
+@php
+    $user = auth()->user();
+@endphp
 @extends('layouts.master')
 @section('title', 'لوحة التحكم')
 @section('breadcrumb-title')
@@ -15,7 +18,11 @@
                         <div class="media media-wrapper justify-content-between">
                             <div class="media-body">
                                 <div class="greeting-user">
-                                    <h5 class="f-w-600">مرحباً بكم في جمعية أدندان الخيرية</h5>
+                                    <h5 class="f-w-600">
+                                        مرحباً
+                                        <span class="text-decoration-underline fw-bold mx-2">{{$user->name}}</span>
+                                        في جمعية أدندان الخيرية
+                                    </h5>
                                     <p>تأسست عام 1908م</p>
                                 </div>
                             </div>
