@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'تقارير متأخرات الإشتراك')
 @section('breadcrumb-title')
+    <h3>تقارير متأخرات الإشتراك</h3>
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item">التقارير</li>

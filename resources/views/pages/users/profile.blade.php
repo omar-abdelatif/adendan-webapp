@@ -71,50 +71,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-xl-8 col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title mb-0">تعديل الملف الشخصي</h4>
-                        <div class="card-options">
-                            <a class="card-options-collapse" href="#" data-bs-toggle="card-collapse">
-                                <i class="fe fe-chevron-up"></i>
-                            </a>
-                            <a class="card-options-remove" href="#" data-bs-toggle="card-remove">
-                                <i class="fe fe-x"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{route('user.update')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="id" value={{Auth::user()->id}}>
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label">الإسم بالكامل:</label>
-                                        <input class="form-control text-secondary" type="text" name="name" placeholder="Full Name" value="{{Auth::user()->name}}">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label">البريد الإلكتروني:</label>
-                                        <input type="email" class="form-control text-secondary" name="email" value={{Auth::user()->email}}>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label">الصورة:</label>
-                                        <input type="file" name="avatar"  class="form-control" value="{{Auth::user()->avatar}}">
-                                    </div>
-                                </div>
-                                <div class="card-footer text-end pb-0 ">
-                                    <button class="btn btn-primary" type="submit">حفظ التعديل</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 @endsection

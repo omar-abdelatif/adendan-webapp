@@ -19,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action={{$user->role === 'admin' ? route('worker.store') : route('mediaRole.worker.store')}} method="post" id="workers">
+                    <form action={{route('worker.store'))}} method="post" id="workers">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -125,7 +125,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ $user->role === 'admin' ? route('worker.update') : route('mediaRole.worker.update') }}" method="post" data-worker-id="{{ $worker->id }}">
+                                                                <form action="{{ route('worker.update') }}" method="post" data-worker-id="{{ $worker->id }}">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="{{ $worker->id }}">
                                                                     <div class="row">
@@ -184,7 +184,7 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{$user->role === 'admin' ? route('worker.delete', $worker->id) : route('mediaRole.worker.delete', $worker->id)}} method="get">
+                                                                <form action={{route('worker.delete', $worker->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h1 class="text-muted">هل أنت متأكد من الحذف</h1>

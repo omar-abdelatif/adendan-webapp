@@ -8,11 +8,7 @@
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item active">
-        @if ($user->role === 'subscriptions')
-            <a href="{{route('subscriptionRole.subscriber.all')}}">كل المشتركين</a>
-        @else
-            <a href="{{route('subscriber.all')}}">كل المشتركين</a>
-        @endif
+        <a href="{{route('subscriber.all')}}">كل المشتركين</a>
     </li>
     <li class="breadcrumb-item active">كل الإشتراكات</li>
 @endsection
