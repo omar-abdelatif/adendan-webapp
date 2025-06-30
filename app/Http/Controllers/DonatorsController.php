@@ -18,7 +18,7 @@ class DonatorsController extends Controller
         $allDonators = Donators::all();
         return view('pages.donations.donators', compact('allDonators', 'subscribers'));
     }
-    public function storeDonator(RequestDonators $request)
+    public function storeDonator(Request $request)
     {
         $validated = $request->validated();
         if ($validated) {
@@ -62,7 +62,7 @@ class DonatorsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function donatorUpdate(RequestDonators $request)
+    public function donatorUpdate(Request $request)
     {
         $id = $request->id;
         $donator = Donators::find($id);

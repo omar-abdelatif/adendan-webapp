@@ -50,7 +50,7 @@ class TombsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function updateTomb(TombRequest $request)
+    public function updateTomb(Request $request)
     {
         $validated = $request->validated();
         if ($validated) {

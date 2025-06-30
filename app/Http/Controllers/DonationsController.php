@@ -77,7 +77,7 @@ class DonationsController extends Controller {
             return redirect()->back()->with($notificationErrors);
         }
     }
-    public function updateDonation(RequestDonations $request)
+    public function updateDonation(Request $request)
     {
         $id = $request->id;
         $donations = Donations::find($id);

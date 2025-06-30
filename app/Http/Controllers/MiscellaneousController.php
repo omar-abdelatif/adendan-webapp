@@ -18,7 +18,7 @@ class MiscellaneousController extends Controller
         $miscellaneous = Miscellaneous::all();
         return view('pages.miscellaneous', compact('miscellaneous'));
     }
-    public function storeMiscellaneous(MiscellaneousRequest $request)
+    public function storeMiscellaneous(Request $request)
     {
         $validated = $request->validated();
         $totalSafe = TotalSafe::where('id', 1)->first();
@@ -79,7 +79,7 @@ class MiscellaneousController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ');
     }
-    public function updateMiscellaneous(MiscellaneousRequest $request)
+    public function updateMiscellaneous(Request $request)
     {
         $id = $request->id;
         $misc = Miscellaneous::find($id);

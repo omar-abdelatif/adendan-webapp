@@ -16,7 +16,7 @@ class BoardMembersController extends Controller
         $members = BoardMembers::all();
         return view('pages.board_members', compact('members'));
     }
-    public function storeMember(BoardMembersRequest $request)
+    public function storeMember(Request $request)
     {
         $validated = $request->validated();
         if ($validated) {
@@ -68,7 +68,7 @@ class BoardMembersController extends Controller
         }
         return redirect()->back()->withErrors('خطأ أثناء الحذف');
     }
-    public function updateMember(BoardMembersRequest $request)
+    public function updateMember(Request $request)
     {
         $validated = $request->validated();
         if ($validated) {

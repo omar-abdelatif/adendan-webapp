@@ -34,7 +34,7 @@ class SubscribersController extends Controller
         $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
     }
-    public function storeSubs(SubscriberRequest $request)
+    public function storeSubs(Request $request)
     {
         $validatedData = $request->validate([
             'ssn' => 'required|digits:14',
@@ -150,7 +150,7 @@ class SubscribersController extends Controller
             return view('pages.subscribers.update_subscriber', compact('subscriber'));
         }
     }
-    public function update(SubscriberRequest $request)
+    public function update(Request $request)
     {
         $validatedData = $request->validated();
         $id = $request->id;
