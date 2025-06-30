@@ -92,24 +92,24 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <table id="table" class="table display align-middle text-center table-hover" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                <table id="table" class="table align-middle text-center table-hover" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                     <thead>
                         <tr>
-                            <th class="text-center text-white">#</th>
-                            <th class="text-center text-white">العنوان</th>
-                            <th class="text-center text-white">التصنيف</th>
-                            <th class="text-center text-white">صورة الخبر</th>
-                            <th class="text-center text-white">تاريخ النشر</th>
-                            <th class="text-center text-white">Action</th>
+                            <th class="text-center text-muted">#</th>
+                            <th class="text-center text-muted">العنوان</th>
+                            <th class="text-center text-muted">التصنيف</th>
+                            <th class="text-center text-muted">صورة الخبر</th>
+                            <th class="text-center text-muted">تاريخ النشر</th>
+                            <th class="text-center text-muted">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i =1 ?>
                         @foreach ($news as $new)
                             <tr>
-                                <td class="text-center text-white">{{$i++}}</td>
-                                <td class="text-center text-white">{{$new->title}}</td>
-                                <td class="text-center text-white">
+                                <td class="text-center text-muted">{{$loop->iteration}}</td>
+                                <td class="text-center text-muted">{{$new->title}}</td>
+                                <td class="text-center text-muted">
                                     @if ($new->category === 'عزاء')
                                         <span class="badge rounded-pill py-2 px-3 bg-dark">
                                             <b>{{$new->category}}</b>
@@ -132,15 +132,15 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="text-center text-white">
+                                <td class="text-center text-muted">
                                     @if ($new->category === 'عزاء')
                                         <img src={{ asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg')}} class="img-fluid rounded" width="50" alt={{$new->img}}>
                                     @else
                                         <img src={{ $new->img ? asset('assets/images/news-imgs/'.$new->img) : asset('assets/frontend/images/icons/default/download.jpeg')}} class="img-fluid rounded" width="50" alt={{$new->img}}>
                                     @endif
                                 </td>
-                                <td class="text-center text-white">{{ $new->created_at->format('Y-m-d') }}</td>
-                                <td class="text-center text-white">
+                                <td class="text-center text-muted">{{ $new->created_at->format('Y-m-d') }}</td>
+                                <td class="text-center text-muted">
                                     <div class="btn-group" role="group">
                                         {{-- ! Button Menu ! --}}
                                         <button class="btn btn-success rounded" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
