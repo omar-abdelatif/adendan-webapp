@@ -71,7 +71,7 @@ class OuterDonationsController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ أثناء الحذف');
     }
-    public function updateOuterDonations(OuterDonationsRequest $request)
+    public function updateOuterDonations(Request $request)
     {
         $validated = $request->validated();
         $id = $request->id;

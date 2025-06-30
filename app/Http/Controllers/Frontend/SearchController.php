@@ -46,7 +46,6 @@ class SearchController extends Controller
         });
         return $sortedMonths;
     }
-
     public function result(Request $request)
     {
         $ssn = $request->input('ssn');
@@ -88,11 +87,6 @@ class SearchController extends Controller
             $socialShare = $this->socialWidget();
             return view('frontend.pages.wedding.details', compact('page', 'socialShare'));
         }
-    }
-    public function socialWidget()
-    {
-        $shareComponent = \Share::currentPage()->facebook()->whatsapp()->telegram();
-        return $shareComponent;
     }
     public function searechDetails($slug){
         $member = Subscribers::where('slug', $slug)->first();

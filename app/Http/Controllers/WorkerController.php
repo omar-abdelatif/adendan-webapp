@@ -45,7 +45,7 @@ class WorkerController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ ما');
     }
-    public function update(WorkersRequest $request)
+    public function update(Request $request)
     {
         $validated = $request->validated();
         $workerId = $request->id;

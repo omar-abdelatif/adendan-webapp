@@ -52,7 +52,7 @@ class AssociationCommittesController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function update(RequestsAssociationCommittes $request)
+    public function update(Request $request)
     {
         $validated = $request->validated();
         $id = $request->id;

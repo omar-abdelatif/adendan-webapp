@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\News;
 
 use App\Models\News;
+use Jorenvh\Share\Share;
 use App\Models\NewsVideos;
 use Illuminate\Http\Request;
 use App\Models\NewsThumbnail;
@@ -65,7 +66,7 @@ class NewsController extends Controller
     }
     public function socialWidget()
     {
-        $shareComponent = \Share::currentPage()->facebook()->whatsapp()->telegram();
+        $shareComponent = app(Share::class)->currentPage()->facebook()->whatsapp()->telegram();
         return $shareComponent;
     }
 }
