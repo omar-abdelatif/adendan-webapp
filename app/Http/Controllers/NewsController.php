@@ -27,15 +27,15 @@ class NewsController extends Controller
             $imagename = time() . '.' . $imageFile->getClientOriginalExtension();
             $destinationPath = public_path('assets/images/news-imgs/');
             $imageFile->move($destinationPath, $imagename);
-            //! Store News
-            $news = News::create([
-                "title" => $request['title'],
-                "description" => $request['description'],
-                "category" => $request['category'],
-                "img" => $imagename ?? null,
-                "slug" => uniqid()
-            ]);
         }
+        //! Store News
+        $news = News::create([
+            "title" => $request['title'],
+            "description" => $request['description'],
+            "category" => $request['category'],
+            "img" => $imagename ?? null,
+            "slug" => uniqid()
+        ]);
         //! Get image Id
         $newsId = $news->id;
         //! Insert Single or Multi Urls
