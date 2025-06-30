@@ -188,7 +188,7 @@
                             </ul>
                         </li>
                     @endcan
-                    @if(auth()->user()->hasRole('master'))
+                    @if($user->hasRole('master'))
                         <li class="sidebar-list">
                             <a href="#" class="sidebar-link sidebar-title">
                                 <i class="fa-duotone fa-rings-wedding text-muted fs-5"></i>
