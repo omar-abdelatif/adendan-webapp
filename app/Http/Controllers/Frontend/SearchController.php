@@ -80,14 +80,6 @@ class SearchController extends Controller
             }
         }
     }
-    public function weddingDetails($id)
-    {
-        $page = Wedding::findOrFail($id);
-        if ($page) {
-            $socialShare = $this->socialWidget();
-            return view('frontend.pages.wedding.details', compact('page', 'socialShare'));
-        }
-    }
     public function searechDetails($slug){
         $member = Subscribers::where('slug', $slug)->first();
         return view('frontend.pages.search_details.search-details', compact('member'));
