@@ -19,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{$user->role === 'admin' ? route('weddings.store') : route('mediaRole.weddings.store')}}" method="post">
+                    <form action="{{route('weddings.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">
@@ -158,7 +158,7 @@
                                                                 <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">جار حذف اللجنة {{$wedding->name}}</h1>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action={{$user->role === 'admin' ? route('wedding.delete', $wedding->id) : route('mediaRole.weddings.delete', $wedding->id)}} method="get">
+                                                                <form action={{route('wedding.delete', $wedding->id)}} method="get">
                                                                     @csrf
                                                                     <div class="form-title text-center">
                                                                         <h3 class="text-muted my-2">هل أنت متأكد من الحذف</h3>
@@ -184,7 +184,7 @@
                                                                 <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تعديل المناسبة</h1>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{$user->role === 'admin' ? route('weddings.update') : route('mediaRole.weddings.update')}}" method="post">
+                                                                <form action="{{route('weddings.update')}}" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="{{$wedding->id}}">
                                                                     <div class="row">

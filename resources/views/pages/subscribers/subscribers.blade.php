@@ -432,7 +432,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{$user->role === 'admin' ? route('delays.uploadDonations') : route('subscriptionRole.delays.uploadDonations')}}" method="post" id="DonationDebtForm">
+                    <form action="{{route('delays.uploadDonations')}}" method="post" id="DonationDebtForm">
                         @csrf
                         <div class="row align-items-center">
                             <div class="col-lg-12">

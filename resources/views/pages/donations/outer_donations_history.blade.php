@@ -7,15 +7,9 @@
     <h3>كل التبرعات الخاصة بالمتبرع {{$donators->name}}</h3>
 @endsection
 @section('breadcrumb-items')
-    @if ($user->role === 'subscriptions')
-        <li class="breadcrumb-item">
-            <a href="{{route('subscriptionRole.donators.all')}}">كل المتبرعين</a>
-        </li>
-    @else
-        <li class="breadcrumb-item">
-            <a href="{{route('donators.all')}}">كل المتبرعين</a>
-        </li>
-    @endif
+    <li class="breadcrumb-item">
+        <a href="{{route('donators.all')}}">كل المتبرعين</a>
+    </li>
     <li class="breadcrumb-item active">التبرعات السابقة</li>
 @endsection
 @section('content')

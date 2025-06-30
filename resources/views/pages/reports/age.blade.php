@@ -7,10 +7,6 @@
     <li class="breadcrumb-item">التقارير</li>
     <li class="breadcrumb-item active">تقارير السن</li>
 @endsection
-{{-- @section('script')
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
-@endsection --}}
 @section('content')
     <div class="container-fluid">
         <div class="row">
