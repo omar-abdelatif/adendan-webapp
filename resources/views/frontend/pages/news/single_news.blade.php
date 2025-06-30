@@ -1,6 +1,7 @@
+{{-- @dd($news); --}}
 @extends('frontend.layouts.master')
 @section('title')
-    تفاصيل الخبر
+    تفاصيل خبر {{$news->title}}
 @endsection
 @section('breadcrumb-items')
     <li class="breadcrumb-item">

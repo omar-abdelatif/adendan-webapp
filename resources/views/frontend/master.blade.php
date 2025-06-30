@@ -20,9 +20,14 @@
             </div>
             <div class="bn-news bg-primary">
                 <ul class="navbar-nav">
-                    @foreach ($latest as $item)
+                    @php
+                        $filteredGeneralLatestnews = $latest->filter(function($item) {
+                            return \Carbon\Carbon::parse($item->created_at)->diffInDays(\Carbon\Carbon::today()) <= 31;
+                        });
+                    @endphp
+                    @foreach ($filteredGeneralLatestnews as $item)
                         <li>
-                            <a href="{{route('site.single_news', $item->id)}}" class="text-white">{{$item->title}}</a>
+                            <a href="{{route('site.single_news', $item->slug)}}" class="text-white">{{$item->title}}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -108,13 +113,13 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $gn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $gn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($filteredGeneralnews >= 8)
+                            @if ($filteredGeneralnews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>
@@ -156,13 +161,13 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $cn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $cn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($filteredCulturenews >= 8)
+                            @if ($filteredCulturenews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>
@@ -204,7 +209,7 @@
                                         </div>
                                         <div class="card-body p-0 w-100">
                                             <div class="more">
-                                                <a href="{{ route('site.single_news', $dn->id) }}" class="btn w-100 btn-success">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $dn->slug) }}" class="btn w-100 btn-success">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
@@ -300,13 +305,13 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{route('site.single_news', $sn->id)}}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{route('site.single_news', $sn->slug)}}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            @if ($filteredSportnews >= 8)
+                            @if ($filteredSportnews->count() >= 8)
                                 <div class="text-center mb-sm-5 mt-5 MobileBtn">
                                     <a class="btn btn-primary-green rounded-pill px-5" aria-label="المزيد" href="{{route('site.news')}}">المزيد</a>
                                 </div>

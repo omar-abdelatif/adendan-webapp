@@ -32,13 +32,8 @@ class NewsController extends Controller
                 "title" => $request['title'],
                 "description" => $request['description'],
                 "category" => $request['category'],
-                "img" => $imagename,
-            ]);
-        } else {
-            $news = News::create([
-                "title" => $request['title'],
-                "description" => $request['description'],
-                "category" => $request['category'],
+                "img" => $imagename ?? null,
+                "slug" => uniqid()
             ]);
         }
         //! Get image Id

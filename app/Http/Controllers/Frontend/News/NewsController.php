@@ -44,13 +44,14 @@ class NewsController extends Controller
         }
         return null;
     }
-    public function newsDetails($id)
+    public function newsDetails($slug)
     {
-        $news = News::find($id);
+        $news = News::where('slug', $slug)->first();
+        $newsID = $news->id;
         if ($news) {
-            $thumbsImgs = NewsThumbnail::where('news_id', $id)->get();
+            $thumbsImgs = NewsThumbnail::where('news_id', $newsID)->get();
             $countThumbsImgs = $thumbsImgs->count();
-            $thumbVideos = NewsVideos::where('news_id', $id)->get();
+            $thumbVideos = NewsVideos::where('news_id', $newsID)->get();
             $countVideos = $thumbVideos->count();
             $socialShare = $this->socialWidget();
             $videoLinks = [];
@@ -59,14 +60,7 @@ class NewsController extends Controller
                 $videoCode = $this->extractVideoCode($videoUrl);
                 $videoLinks[] = $videoCode;
             }
-            return view('frontend.pages.news.single_news', compact(
-                'news',
-                'thumbsImgs',
-                'countThumbsImgs',
-                'countVideos',
-                'videoLinks',
-                'socialShare'
-            ));
+            return view('frontend.pages.news.single_news', compact('news', 'thumbsImgs', 'countThumbsImgs', 'countVideos', 'videoLinks', 'socialShare'));
         }
     }
     public function socialWidget()

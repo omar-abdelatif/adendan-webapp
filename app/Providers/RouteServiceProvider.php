@@ -18,8 +18,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/admin/dashboard/main';
-    public const MEDIA = '/media/dashboard/main';
-    public const SUBSCRIPTIONS = '/subscriptions/dashboard/main';
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -33,8 +31,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')->prefix('api')->group(base_path('routes/api.php'));
             Route::middleware('web')->group(base_path('routes/web.php'));
             Route::middleware('web')->group(base_path('routes/frontend.php'));
-            Route::middleware('web')->group(base_path('routes/subscriptions_role.php'));
-            Route::middleware('web')->group(base_path('routes/media_role.php'));
         });
     }
 
