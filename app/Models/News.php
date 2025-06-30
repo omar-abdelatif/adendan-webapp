@@ -15,7 +15,8 @@ class News extends Model
         'category',
         'img',
         'shortlink',
-        'thumbnail'
+        'thumbnail',
+        'slug'
     ];
     public function thumbnails()
     {
