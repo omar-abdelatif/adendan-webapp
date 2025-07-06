@@ -156,7 +156,7 @@
                                                 <i class="fa-solid fa-pen"></i>
                                             </button>
                                             {{-- ! Copy News Link ! --}}
-                                            <button class="copy text-dark btn btn-info px-2 py-1" data-news-id="{{$new->id}}">
+                                            <button class="copy text-dark btn btn-info px-2 py-1" data-news-id="{{$new->slug}}">
                                                 <i class="fa-solid fa-copy"></i>
                                             </button>
                                             {{-- ! Show Thumbnail ! --}}
