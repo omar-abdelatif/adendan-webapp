@@ -18,9 +18,14 @@ class NewsController extends Controller
         $news = News::all();
         return view('pages.news.all', compact('news'));
     }
-    public function storeNews(Request $request)
+    public function storeNews(News $request)
     {
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'img' => 'image|max:2048|mimes:png,jpg,jpeg,webp',
+        ]);
         if ($request->hasFile('img')) {
             //! Single Image
             $imageFile = $request->file('img');
