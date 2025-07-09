@@ -257,7 +257,7 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="more">
-                                                <a href="{{ route('site.single_news', $wn->id) }}" class="btn btn-success w-100">التفاصيل</a>
+                                                <a href="{{ route('site.single_news', $wn->slug) }}" class="btn btn-success w-100">التفاصيل</a>
                                             </div>
                                         </div>
                                     </div>
