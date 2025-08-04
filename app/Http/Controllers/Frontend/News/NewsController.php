@@ -64,8 +64,7 @@ class NewsController extends Controller
             return view('frontend.pages.news.single_news', compact('news', 'thumbsImgs', 'countThumbsImgs', 'countVideos', 'videoLinks', 'socialShare'));
         }
     }
-    public function socialWidget()
-    {
+    public function socialWidget() {
         $shareComponent = app(Share::class)->currentPage()->facebook()->whatsapp()->telegram();
         return $shareComponent;
     }
