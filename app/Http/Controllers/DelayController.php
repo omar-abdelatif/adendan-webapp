@@ -28,7 +28,7 @@ class DelayController extends Controller
         if ($existingDelay) {
             return back()->withErrors('هذه السنة تم إصدار اشتراكاتها بالفعل');
         } else {
-            $subscribers = Subscribers::get();
+            $subscribers = Subscribers::where('status', '!=', 2)->get();
             foreach ($subscribers as $subscriber) {
                 $currentDelay = Delay::where('member_id', $subscriber->member_id)->where('payment_type', 'إشتراك')->where('year', '<', $request->year)->orderBy('year', 'desc')->first();
                 if ($currentDelay) {
