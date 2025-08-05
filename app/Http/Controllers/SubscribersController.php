@@ -150,7 +150,7 @@ class SubscribersController extends Controller
             return view('pages.subscribers.update_subscriber', compact('subscriber'));
         }
     }
-    public function update(Request $request)
+    public function update(SubscriberRequest $request)
     {
         $validatedData = $request->validated();
         $id = $request->id;
