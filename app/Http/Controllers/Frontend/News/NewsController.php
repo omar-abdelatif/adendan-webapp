@@ -48,6 +48,9 @@ class NewsController extends Controller
     public function newsDetails($slug)
     {
         $news = News::where('slug', $slug)->first();
+        if (!$news) {
+            abort(404);
+        }
         $newsID = $news->id;
         if ($news) {
             $thumbsImgs = NewsThumbnail::where('news_id', $newsID)->get();
