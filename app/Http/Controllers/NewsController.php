@@ -7,6 +7,7 @@ use App\Models\NewsVideos;
 use Illuminate\Http\Request;
 use App\Models\NewsThumbnail;
 use App\Http\Requests\NewsRequest;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -39,7 +40,8 @@ class NewsController extends Controller
             "description" => $request['description'],
             "category" => $request['category'],
             "img" => $imagename ?? null,
-            "slug" => uniqid()
+            "slug" => uniqid(),
+            "posted_by" => Auth::user()->name
         ]);
         //! Get image Id
         $newsId = $news->id;

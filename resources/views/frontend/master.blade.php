@@ -94,20 +94,24 @@
                             @foreach ($filteredGeneralnews as $gn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
-                                        <div class="card-image">
+                                        <div class="card-image position-relative">
                                             <div style="width: 100%; height:250px; background-image:url({{ $gn->img ? asset('assets/images/news-imgs/'.$gn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
-                                            <div class="text-details p-3 w-100">
-                                                <div class="title mb-3 text-center">
-                                                    <h5 class="mb-0">{{$gn->title}}</h5>
+                                            <div class="category position-absolute top-0 start-0 rounded-pill bg-success text-white w-100 text-center fw-bold px-3 py-1 fs-6">
+                                                <span >{{$gn->category}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-details p-3 w-100">
+                                            <div class="title mb-3 text-center">
+                                                <h5 class="mb-0">{{$gn->title}}</h5>
+                                            </div>
+                                            <div class="meta d-flex align-items-center justify-content-around">
+                                                <div class="date">
+                                                    <span class="fw-bold fs-6">تاريخ النشر: </span>
+                                                    {{$gn->created_at->format('Y-m-d')}}
                                                 </div>
-                                                <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">
-                                                        <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{$gn->created_at->format('Y-m-d')}}
-                                                    </div>
-                                                    <div class="category ">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$gn->category}}</span>
-                                                    </div>
+                                                <div class="posted_by">
+                                                    <span class="fw-bold fs-6">نشر بواسطة:</span>
+                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,20 +146,24 @@
                             @foreach ($filteredCulturenews as $cn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
-                                        <div class="card-image">
+                                        <div class="card-image position-relative">
                                             <div style="width: 100%; height:250px; background-image:url({{ $cn->img ? asset('assets/images/news-imgs/'.$cn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
-                                            <div class="text-details p-3 w-100">
-                                                <div class="title mb-3 text-center">
-                                                    <h5 class="mb-0">{{$cn->title}}</h5>
+                                            <div class="category position-absolute top-0 left-0">
+                                                <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$cn->category}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-details p-3 w-100">
+                                            <div class="title mb-3 text-center">
+                                                <h5 class="mb-0">{{$cn->title}}</h5>
+                                            </div>
+                                            <div class="meta d-flex align-items-center justify-content-around">
+                                                <div class="date">
+                                                    <span class="fw-bold fs-6">تاريخ النشر: </span>
+                                                    {{$cn->created_at->format('Y-m-d')}}
                                                 </div>
-                                                <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">
-                                                        <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{$cn->created_at->format('Y-m-d')}}
-                                                    </div>
-                                                    <div class="category ">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$cn->category}}</span>
-                                                    </div>
+                                                <div class="posted_by">
+                                                    <span class="fw-bold fs-6">نشر بواسطة:</span>
+                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,20 +198,24 @@
                             @foreach ($filteredDeathNews as $dn)
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
-                                        <div class="card-image">
+                                        <div class="card-image position-relative">
                                             <img src="{{ asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg') }}" alt="{{ $dn->title }}">
-                                            <div class="text-details p-3 w-100">
-                                                <a href="{{ route('site.single_news', $dn->id) }}" class="nav-link text-center">
-                                                    <h5 class="mb-0">{{ $dn->title }}</h5>
-                                                </a>
-                                                <div class="meta d-flex mt-3 align-items-center justify-content-around">
-                                                    <div class="date">
-                                                        <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{ $dn->created_at->format('Y-m-d') }}
-                                                    </div>
-                                                    <div class="category">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $dn->category }}</span>
-                                                    </div>
+                                            <div class="category position-absolute top-0 left-0">
+                                                <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $dn->category }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-details p-3 w-100">
+                                            <a href="{{ route('site.single_news', $dn->id) }}" class="nav-link text-center">
+                                                <h5 class="mb-0">{{ $dn->title }}</h5>
+                                            </a>
+                                            <div class="meta d-flex mt-3 align-items-center justify-content-around">
+                                                <div class="date">
+                                                    <span class="fw-bold fs-6">تاريخ النشر: </span>
+                                                    {{ $dn->created_at->format('Y-m-d') }}
+                                                </div>
+                                                <div class="posted_by">
+                                                    <span class="fw-bold fs-6">نشر بواسطة:</span>
+                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,20 +250,24 @@
                             @foreach ($filteredWeddingNews as $wn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
-                                        <div class="card-image">
+                                        <div class="card-image position-relative">
                                             <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
-                                            <div class="text-details p-3 w-100">
-                                                <div class="title mb-3 text-center">
-                                                    <h5 class="mb-0">{{ $wn->title }}</h5>
+                                            <div class="category position-absolute top-0 left-0">
+                                                <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $wn->category }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-details p-3 w-100">
+                                            <div class="title mb-3 text-center">
+                                                <h5 class="mb-0">{{ $wn->title }}</h5>
+                                            </div>
+                                            <div class="meta d-flex align-items-center justify-content-around">
+                                                <div class="date">
+                                                    <span class="fw-bold fs-6">تاريخ النشر: </span>
+                                                    {{ $wn->created_at->format('Y-m-d') }}
                                                 </div>
-                                                <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">
-                                                        <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{ $wn->created_at->format('Y-m-d') }}
-                                                    </div>
-                                                    <div class="category">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{ $wn->category }}</span>
-                                                    </div>
+                                                <div class="posted_by">
+                                                    <span class="fw-bold fs-6">نشر بواسطة:</span>
+                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,20 +302,24 @@
                             @foreach ($filteredSportnews as $sn)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
-                                        <div class="card-image">
+                                        <div class="card-image position-relative">
                                             <div style="width: 100%; height:250px; background-image:url({{ $sn->img ? asset('assets/images/news-imgs/'.$sn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
-                                            <div class="text-details p-3 w-100">
-                                                <div class="title mb-3 text-center">
-                                                    <h5 class="mb-0">{{$sn->title}}</h5>
+                                            <div class="category position-absolute top-0 left-0">
+                                                <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$sn->category}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-details p-3 w-100">
+                                            <div class="title mb-3 text-center">
+                                                <h5 class="mb-0">{{$sn->title}}</h5>
+                                            </div>
+                                            <div class="meta d-flex align-items-center justify-content-around">
+                                                <div class="date">
+                                                    <span class="fw-bold fs-6">تاريخ النشر: </span>
+                                                    {{$sn->created_at->format('Y-m-d')}}
                                                 </div>
-                                                <div class="meta d-flex align-items-center justify-content-around">
-                                                    <div class="date">
-                                                        <span class="fw-bold">تاريخ النشر: </span>
-                                                        {{$sn->created_at->format('Y-m-d')}}
-                                                    </div>
-                                                    <div class="category ">
-                                                        <span class="rounded-pill bg-success text-white fw-bold px-3 py-1 fs-6">{{$sn->category}}</span>
-                                                    </div>
+                                                <div class="posted_by">
+                                                    <span class="fw-bold fs-6">نشر بواسطة:</span>
+                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
