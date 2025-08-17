@@ -28,17 +28,25 @@
     <section class="news-details my-5">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card card-shadow border-rounded mb-5">
-                        <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%">
-                            @if ($news->category === 'عزاء')
-                                <img loading="lazy" class="rounded-5 w-100" src={{asset('assets/frontend/images/bg/news/death/download.jpeg')}} alt="{{$news->title}}">
-                            @else
-                                <img loading="lazy" class="rounded-5 w-100" src="{{$news->img ? asset('assets/images/news-imgs/'.$news->img ) : asset('assets/images/1708715916.png')}}" alt="{{$news->title}}">
-                            @endif
+                @if ($news->is_landscape)
+                    <div class="col-lg-12">
+                        <div class="mb-5">
+                            <img loading="lazy" class="rounded-5 w-100" height="500" src="{{asset('assets/images/news-imgs/'.$news->img)}}" alt="{{$news->title}}">
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card card-shadow border-rounded mb-5">
+                            <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%; height:500px">
+                                @if ($news->category === 'عزاء')
+                                    <img loading="lazy" class="rounded-5 w-100" src={{asset('assets/frontend/images/bg/news/death/download.jpeg')}} alt="{{$news->title}}">
+                                @else
+                                    <img loading="lazy" class="rounded-5 w-100 h-100 object-cover" src="{{$news->img ? asset('assets/images/news-imgs/'.$news->img ) : asset('assets/images/1708715916.png')}}" alt="{{$news->title}}">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="col-lg-9 col-md-6">
                     <div class="details">
                         <div class="title">
