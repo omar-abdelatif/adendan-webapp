@@ -45,7 +45,7 @@
                             <h3 class="title">{{$news->title}}</h3>
                         </div>
                         <div class="description mt-3">
-                            <p class="mb-0">{{$news->description}}</p>
+                            {!! $news->description !!}
                         </div>
                         <div class="meta mt-5">
                             <div class="social-sharing d-flex align-items-center justify-content-center">

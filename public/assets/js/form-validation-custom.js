@@ -5,9 +5,7 @@ let f4 = 0;
 // ! Validation Function Stamp
 function validateForm(form) {
     let isValid = true;
-    let inputs = form.querySelectorAll(
-        "input[type='number'][required],input[type='text'][required]"
-    );
+    let inputs = form.querySelectorAll("input[type='number'][required],input[type='text'][required]");
     inputs.forEach(function (input) {
         let inputError = input.nextElementSibling;
         if (input.value.trim() === "") {
@@ -47,19 +45,6 @@ function validateForm(form) {
             img.classList.add("error");
             imgError.classList.remove("d-none");
             isValid = false;
-        }
-    });
-    const textareas = form.querySelectorAll("textarea[required]");
-    textareas.forEach(function (text) {
-        let textareaErrorMsg = text.nextElementSibling;
-        if (text.value.trim() === "") {
-            text.classList.add("error");
-            textareaErrorMsg.classList.remove("d-none");
-            isValid = false;
-        } else {
-            text.classList.remove("error");
-            text.classList.add("good");
-            textareaErrorMsg.classList.add("d-none");
         }
     });
     return isValid;
@@ -350,7 +335,8 @@ if (newsform) {
     const title = document.getElementById("newsTitle");
     const newsReq = document.getElementById("newsReq");
     title.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
+        let letters =
+            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
         if (this.value.trim() === "") {
             newsReq.classList.remove("d-none");
             newsMsg.classList.add("d-none");
@@ -367,27 +353,6 @@ if (newsform) {
                 title.classList.add("error");
                 newsMsg.classList.remove("d-none");
                 newsReq.classList.add("d-none");
-            }
-        }
-    });
-    //! Validation For Input News TextArea
-    const details = document.getElementById("details");
-    const newsDetailsReq = document.getElementById("detailsReq");
-    details.addEventListener("input", function () {
-        let letters =
-            /^[\u0600-\u06FF\s\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]{7,}$/;
-        if (this.value.trim() === "") {
-            newsDetailsReq.classList.remove("d-none");
-            details.classList.remove("good");
-            details.classList.add("error");
-        } else {
-            if (letters.test(this.value)) {
-                details.classList.add("good");
-                newsDetailsReq.classList.add("d-none");
-            } else {
-                details.classList.remove("good");
-                details.classList.add("error");
-                newsDetailsReq.classList.remove("d-none");
             }
         }
     });
@@ -422,6 +387,36 @@ if (newsform) {
             NewsimgExt.classList.add("d-none");
         }
     });
+    //! CKEditor
+    ClassicEditor.create(details).then((editor) => {
+        ckEditorInstance = editor;
+        editor.model.document.on("change:data", () => {
+            const rawText = editor.getData().replace(/<[^>]*>/g, "").trim();
+            if (rawText.length > 0) {
+                const firstChar = rawText.charAt(0);
+                const isArabic = /[\u0600-\u06FF]/.test(firstChar);
+
+                editor.editing.view.change((writer) => {
+                    writer.setAttribute( "direction", isArabic ? "rtl" : "ltr", editor.editing.view.document.getRoot() );
+                });
+            }
+        });
+        editor.model.document.registerPostFixer((writer) => {
+            const root = editor.model.document.getRoot();
+            for (const range of root.getChildren()) {
+                for (const item of range.getChildren()) {
+                    if (item.is("textProxy")) {
+                        const urlMatch = item.data.match(/https?:\/\/[^\s<]+/);
+                        if (urlMatch) {
+                            writer.setAttribute("linkHref", urlMatch[0], item);
+                        }
+                    }
+                }
+            }
+
+            return false;
+        });
+    }).catch(err => console.error(err));
     //! Validation ON Submit
     const submit = document.getElementById("newsSubmit");
     submit.addEventListener("click", function (event) {

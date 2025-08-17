@@ -235,3 +235,12 @@ thead tr th, tbody tr td {
 table.dataTable tr.dt-hasChild td.dt-control:before{
     content: "";
 }
+.ck-placeholder{
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    text-align: right !important;
+    padding-right: 30px !important;
+}
+.ck.ck-editor__editable_inline{
+    padding-right: 30px !important;
+}
