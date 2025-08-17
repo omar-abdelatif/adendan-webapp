@@ -1,8 +1,8 @@
 {{-- ! Google font ! --}}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css"/>
 {{-- ! Font Awesome ! --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css"/>
 {{-- ! ico-font ! --}}
 <link rel="stylesheet" href="{{asset('assets/css/vendors/icofont.css')}}">
 {{-- ! Themify icon ! --}}
