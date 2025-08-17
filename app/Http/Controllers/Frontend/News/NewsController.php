@@ -52,6 +52,9 @@ class NewsController extends Controller
             abort(404);
         }
         $newsID = $news->id;
+        $imagePath = public_path('assets/images/news-imgs/' . $news->img);
+        [$width, $height] = getimagesize($imagePath);
+        $news->is_landscape = $width > $height;
         if ($news) {
             $thumbsImgs = NewsThumbnail::where('news_id', $newsID)->get();
             $countThumbsImgs = $thumbsImgs->count();
