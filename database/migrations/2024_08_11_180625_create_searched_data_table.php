@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('searched_data', function (Blueprint $table) {
             $table->id();
-            $table->integer('searched_data');
+            $table->string('name');
+            $table->string('ssn');
+            $table->string('mobile_number');
+            $table->string('address');
+            $table->string('birthdate');
+            $table->integer('member_id');
             $table->timestamps();
         });
     }

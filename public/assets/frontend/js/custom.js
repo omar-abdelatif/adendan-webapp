@@ -6,24 +6,92 @@ window.addEventListener("scroll", () => {
         document.querySelector(".navbar").classList.remove("fixed");
     }
 });
-//! Play Music On Page Load
-// document.addEventListener("DOMContentLoaded", function () {
-//     var audio = document.getElementById("audio-player");
-//     var hasPlayed = false; // Flag to track playback status
-
-//     window.addEventListener("scroll", function () {
-//         if (window.scrollY > 10 && !hasPlayed) {
-//             hasPlayed = true;
-//             setTimeout(function () {
-//                 audio.play();
-//             }, 3000);
-//         }
-//     });
-// });
-//! Arabic Direction To The News Bar
-$(document).ready(function () {
-    $("#newsTicker2").breakingNews({
-        direction: "rtl",
+//! Auto Calculate BirthDate With SSN
+let requestedSSN = document.getElementById("requested_ssn");
+if (requestedSSN) {
+    requestedSSN.addEventListener("input", function () {
+        let ssn = this.value;
+        let birthdateInput = document.getElementById("birthdate");
+        if (ssn.length === 14) {
+            let century = ssn[0] === "2" ? 1900 : 2000;
+            let year = century + parseInt(ssn.substr(1, 2));
+            let month = parseInt(ssn.substr(3, 2));
+            let day = parseInt(ssn.substr(5, 2));
+            birthdateInput.value = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+        } else {
+            birthdateInput.value = "";
+        }
+    });
+}
+let ssnError = document.getElementById("ssnError");
+let submitBtn = document.getElementById("submitForm");
+if (requestedSSN) {
+    requestedSSN.addEventListener("input", function () {
+        let ssn = requestedSSN.value.trim();
+        let ssnRegex = /^(2|3)\d{13}$/;
+        if (!ssnRegex.test(ssn)) {
+            ssnError.textContent = "الرقم القومي لازم يكون 14 رقم ويبدأ بـ 2 أو 3";
+            requestedSSN.classList.add("is-invalid");
+            ssnError.classList.remove("d-none");
+            submitBtn.setAttribute("disabled", "true");
+        } else {
+            ssnError.textContent = "";
+            requestedSSN.classList.remove("is-invalid");
+            ssnError.classList.add("d-none");
+            submitBtn.removeAttribute("disabled");
+        }
+    });
+}
+$(document).on("submit", "#searchedData", function (e) {
+    e.preventDefault();
+    let form = $("#searchedData");
+    let formData = new FormData(form[0]);
+    let storeUrl = $(this).data("store-url");
+    $.ajax({
+        url: storeUrl,
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (res) {
+            let modalEl = document.getElementById("searchModal");
+            let modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.hide();
+            modalEl.addEventListener(
+                "hidden.bs.modal",
+                function () {
+                    modalEl.classList.remove("fade");
+                    let backdrop = document.querySelector(".modal-backdrop");
+                    if (backdrop) backdrop.remove();
+                },
+                { once: true }
+            );
+            Swal.fire({
+                icon: "success",
+                title: "تم تسجيل البيانات",
+                text: res.message,
+                showConfirmButton: true,
+            });
+        },
+        error: function (xhr) {
+            let modalEl = document.getElementById("searchModal");
+            let modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.hide();
+            modalEl.addEventListener(
+                "hidden.bs.modal",
+                function () {
+                    modalEl.classList.remove("fade");
+                    let backdrop = document.querySelector(".modal-backdrop");
+                    if (backdrop) backdrop.remove();
+                },
+                { once: true }
+            );
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: xhr.responseJSON?.message,
+            });
+        },
     });
 });
 //! Copy To Clipboard
@@ -38,6 +106,11 @@ function copyToClipboard() {
 }
 
 $(function () {
+    //! Arabic Direction To The News Bar
+    $("#newsTicker2").breakingNews({
+        direction: "rtl",
+    });
+    //! Payment Form
     let paymentForms = document.querySelectorAll("form[data-payment-id]");
     if (paymentForms) {
         paymentForms.forEach((payment) => {

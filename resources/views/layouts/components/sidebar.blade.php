@@ -171,6 +171,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="{{route('reports.subscribersData')}}">
+                                        <span>بيانات الاعضاء المحدثة</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{route('reports.incompete')}}">
                                         <span>البيانات الغير مكتمله</span>
                                     </a>

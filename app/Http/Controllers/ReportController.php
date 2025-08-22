@@ -10,6 +10,7 @@ use App\Models\TotalBank;
 use App\Models\TotalSafe;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
+use App\Models\SearchedData;
 use Illuminate\Http\Request;
 use App\Models\OuterDonations;
 
@@ -200,12 +201,19 @@ class ReportController extends Controller
     //! Incomplete Data Reports
     public function incomplete()
     {
-        $incompleteSSN = Subscribers::where('ssn', NULL)->get();
+        $incompleteSSN = Subscribers::where('ssn', 0)->get();
         $incompleteSSNCount = $incompleteSSN->count();
-        $incompleteMobile = Subscribers::where('mobile_no', NULL)->get();
+        $incompleteMobile = Subscribers::where('mobile_no', 0)->get();
         $incompleteMobileCount = $incompleteMobile->count();
-        $incompleteAddress = Subscribers::where('address', NULL)->get();
+        $incompleteAddress = Subscribers::where('address', NULL)->orWhere('address', '')->get();
         $incompleteAddressCount = $incompleteAddress->count();
+        // dd($incompleteAddressCount);
         return view('pages.reports.incomplete', compact('incompleteSSN', 'incompleteSSNCount', 'incompleteMobile', 'incompleteMobileCount', 'incompleteAddress', 'incompleteAddressCount'));
+    }
+    //! Subscribers Data
+    public function searchedData()
+    {
+        $data = SearchedData::all();
+        return view('pages.reports.subscribers_data_update', compact('data'));
     }
 }
