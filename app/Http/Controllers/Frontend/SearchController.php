@@ -51,10 +51,10 @@ class SearchController extends Controller
         if (empty($ssn)) {
             return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال بيانات صحيحة');
         }
-        $member = Subscribers::where('mobile_no', $ssn)->orWhere('ssn', $ssn)->first();
+        $member = Subscribers::where('ssn', $ssn)->first();
         if (!$member) {
             return redirect()->route('site.search')->with([
-                'empty_message' => 'الرقم القومي او رقم المحمول غير موجودين',
+                'empty_message' => 'الرقم القومي غير صحيح',
                 'empty_message2' => 'برجاء ادخال البيانات لتحديثها من خلال الرابط التالي,',
                 'link_title' => 'تحديث البيانات',
             ]);

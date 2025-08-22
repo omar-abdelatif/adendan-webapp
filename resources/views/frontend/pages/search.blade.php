@@ -52,9 +52,9 @@
                                 <div class="search-form">
                                     <form action="{{route('site.result')}}" method="post" class="my-5 w-50 mx-auto">
                                         @csrf
-                                        <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي او رقم المحمول">
+                                        <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
                                         <small class="form-text text-danger text-center w-100">
-                                            برجاء إدخال <strong>رقم التليفون</strong> أو <strong>الرقم القومي</strong> لإتمام عملية البحث.
+                                            برجاء إدخال <strong>الرقم القومي</strong> لإتمام عملية البحث.
                                         </small>
                                         <button type="submit" class="btn btn-secondary rounded-pill w-100 mt-3 fw-bold fs-5">بحث</button>
                                     </form>
