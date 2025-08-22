@@ -12,48 +12,12 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">الإستعلامات</li>
 @endsection
-@section('site_styles')
-    <style>
-        .form-label {
-            padding: 10px 20px;
-            border: 2px solid #004080;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-            min-width: 80px;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-
-        .form-label:hover{
-            background-color: #004080;
-            color: white;
-            transition: all 0.3s;
-        }
-        input[type="radio"]:checked + .form-label {
-            background-color: #004080;
-            color: white;
-        }
-
-        input[type="radio"]:checked:disabled + .form-label, input[type="radio"]:disabled + .form-label {
-            background-color: #004080;
-            color: white;
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        input[type="number"]:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-    </style>
-@endsection
 @section('site')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            @php
-                toastrError($error);
-            @endphp
+            <div class="alert alert-danger text-center w-50 mx-auto rounded" id="error">
+                <p class="mb-0">{{$error}}</p>
+            </div>
         @endforeach
     @endif
     <section class="inquiries">
@@ -88,7 +52,10 @@
                                 <div class="search-form">
                                     <form action="{{route('site.result')}}" method="post" class="my-5 w-50 mx-auto">
                                         @csrf
-                                        <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
+                                        <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي او رقم المحمول">
+                                        <small class="form-text text-danger text-center w-100">
+                                            برجاء إدخال <strong>رقم التليفون</strong> أو <strong>الرقم القومي</strong> لإتمام عملية البحث.
+                                        </small>
                                         <button type="submit" class="btn btn-secondary rounded-pill w-100 mt-3 fw-bold fs-5">بحث</button>
                                     </form>
                                 </div>
@@ -427,6 +394,50 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @if (session('missingFields'))
+                                                            <span class="fw-bold">
+                                                                يوجد بيانات غير مكتملة،
+                                                                <br>
+                                                                <small class="fw-bold text-primary">رجاءا تكملة البيانات</small>
+                                                                <br>
+                                                                <small class="fw-bold text-primary">عبر الرابط التالي</small>
+                                                                <br>
+                                                                <a class="fw-bold btn btn-primary text-white px-3 py-1 rounded-pill mt-3" href="#searchModal" data-bs-toggle="modal" target="blank">اضغط هنا</a>
+                                                                <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header justify-content-center bg-primary text-white">
+                                                                                <h1 class="text-center">البيانات المطلوب تحديثها</h1>
+                                                                            </div>
+                                                                            <div class="modal-body bg-light">
+                                                                                <form data-store-url="{{route('site.storeMemberMainData')}}" method="post" id="searchedData">
+                                                                                    @csrf
+                                                                                    @foreach(session('missingFields') as $key => $label)
+                                                                                        <input type="hidden" name="name" value="{{$member->name}}">
+                                                                                        <input type="hidden" name="member_id" value="{{$member->member_id}}">
+                                                                                        <div class="form-group mb-3">
+                                                                                            <label for="{{$key}}" class="form-label fw-bold">{{ $label }}:</label>
+                                                                                            @if($key === 'birthdate')
+                                                                                                <input type="date" id="{{$key}}" name="{{$key}}" class="form-control">
+                                                                                            @else
+                                                                                                <input type="text" class="form-control" id="{{$key === 'ssn' ? 'requested_ssn' : $key}}" name="{{$key}}" placeholder="{{$label}}">
+                                                                                                @if ($key === 'ssn')
+                                                                                                    <span id="ssnError" class="d-none text-danger fw-bold"></span>
+                                                                                                @endif
+                                                                                            @endif
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
+                                                                                        <button type="submit" id="submitForm" class="btn btn-primary">تأكيد</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -436,7 +447,47 @@
                                     <div class="message-data text-center">
                                         <h1 class="text-center my-3">{{$emptyMessage}}</h1>
                                         <p class="mb-3 fs-6 fw-bold text-center">{{$emptyMessage2}}</p>
-                                        <a class="fw-bold" href="{{$link}}" target="blank">{{$link_title}}</a>
+
+                                        <a class="fw-bold" href="#searchModal" data-bs-toggle="modal" target="blank">{{$link_title}}</a>
+                                        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header justify-content-center bg-primary text-white">
+                                                        <h1 class="text-center">البيانات المطلوب تحديثها</h1>
+                                                    </div>
+                                                    <div class="modal-body bg-light">
+                                                        <form data-store-url="{{route('site.storeMemberMainData')}}" method="post" id="searchedData">
+                                                            @csrf
+                                                            <div class="form-group mb-3">
+                                                                <label for="member_name" class="form-label text-right text-primary fw-bold">الإسم كامل</label>
+                                                                <input type="text" class="form-control border-2 border-primary" id="member_name" placeholder="الإسم بالكامل" name="name" autocomplete="name" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="mob_number" class="form-label text-right text-primary fw-bold">رقم المحمول</label>
+                                                                <input type="number" class="form-control border-2 border-primary" id="mob_number" placeholder="رقم المحمول" name="mobile_number" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="ssn" class="form-label text-right text-primary fw-bold">الرقم القومي</label>
+                                                                <input type="number" class="form-control border-2 border-primary" id="requested_ssn" placeholder="الرقم القومي" name="ssn" required>
+                                                                <span id="ssnError" class="d-none text-danger fw-bold"></span>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="address" class="form-label text-right text-primary fw-bold">العنوان</label>
+                                                                <input type="text" class="form-control border-2 border-primary" id="address" placeholder="العنوان" name="address" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="birthdate" class="form-label text-right text-primary fw-bold">تاريخ الميلاد</label>
+                                                                <input type="date" class="form-control border-2 border-primary" id="birthdate" name="birthdate" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
+                                                                <button type="submit" id="submitForm" class="btn btn-primary">تأكيد</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
                             </div>

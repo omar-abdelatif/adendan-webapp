@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SearchedData extends Model
 {
     use HasFactory;
-    protected $table = 'searched_data';
-    protected $fillable = ['searched_data'];
+    protected $fillable = [
+        'name',
+        'mobile_number',
+        'ssn',
+        'address',
+        'birthdate',
+        'member_id'
+    ];
 }

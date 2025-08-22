@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Frontend;
 use Carbon\Carbon;
 use App\Models\Tombs;
 use App\Models\Wedding;
-use App\Models\Subscribers;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\DonationDelay;
 use App\Models\Olddelays;
+use App\Models\Subscribers;
 use App\Models\SearchedData;
+use Illuminate\Http\Request;
+use App\Models\DonationDelay;
+use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
 {
@@ -46,42 +46,67 @@ class SearchController extends Controller
         });
         return $sortedMonths;
     }
-    public function result(Request $request)
-    {
+    public function result(Request $request) {
         $ssn = $request->input('ssn');
-        $member = Subscribers::where('ssn', $ssn)->first();
         if (empty($ssn)) {
-            return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال رقم قومي صحيح');
-        } elseif (!$member) {
+            return redirect()->route('site.search')->with('empty_message', 'برجاء إدخال بيانات صحيحة');
+        }
+        $member = Subscribers::where('mobile_no', $ssn)->orWhere('ssn', $ssn)->first();
+        if (!$member) {
             return redirect()->route('site.search')->with([
-                'empty_message' => 'الرقم القومي غير موجود',
+                'empty_message' => 'الرقم القومي او رقم المحمول غير موجودين',
                 'empty_message2' => 'برجاء ادخال البيانات لتحديثها من خلال الرابط التالي,',
                 'link_title' => 'تحديث البيانات',
-                'link' => 'https://form.jotform.com/adendany2024/--'
             ]);
-        } else {
-            if ($member) {
-                $noDelays = 'لا توجد مديونية إشتراكات';
-                $noOldDelays = 'لا توجد متأخرات إشتراكات';
-                $delays = $member->delays;
-                $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
-                $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();
-                $donationDelays = DonationDelay::where('member_id', $member->member_id)->get();
-                return redirect()->route('site.search')->with([
-                    'member' => $member,
-                    'searched' => true,
-                    'delays' => $delays,
-                    'oldDelays' => $oldDelays,
-                    'noDelays' => $noDelays,
-                    'noOldDelays' => $noOldDelays,
-                    'donationOlddelays' => $donationOlddelays,
-                    'donationDelays' => $donationDelays
-                ]);
+        }
+        $fields = [
+            'name' => 'الاسم',
+            'mobile_number' => 'رقم المحمول',
+            'ssn' => 'الرقم القومي',
+            'address' => 'العنوان',
+            'birthdate' => 'تاريخ الميلاد'
+        ];
+        $missingFields = [];
+        foreach ($fields as $key => $label) {
+            if (is_null($member->$key) || $member->$key === 0) {
+                $missingFields[$key] = $label;
             }
         }
+        $noDelays = 'لا توجد مديونية إشتراكات';
+        $noOldDelays = 'لا توجد متأخرات إشتراكات';
+        $delays = $member->delays;
+        $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
+        $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();
+        $donationDelays = DonationDelay::where('member_id', $member->member_id)->get();
+        return redirect()->route('site.search')->with([
+            'member' => $member,
+            'searched' => true,
+            'delays' => $delays,
+            'oldDelays' => $oldDelays,
+            'noDelays' => $noDelays,
+            'noOldDelays' => $noOldDelays,
+            'donationOlddelays' => $donationOlddelays,
+            'donationDelays' => $donationDelays,
+            'missingFields' => $missingFields,
+        ]);
     }
     public function searechDetails($slug){
         $member = Subscribers::where('slug', $slug)->first();
         return view('frontend.pages.search_details.search-details', compact('member'));
+    }
+    public function storeMainMemberData(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'ssn' => ['nullable', 'regex:/^(2|3)[0-9]{13}$/'],
+            'address' => 'nullable',
+            'mobile_number' => 'nullable|numeric|digits:11',
+            'birthdate' => 'nullable|date'
+        ]);
+        $store = SearchedData::create($validated);
+        if ($store) {
+            return response()->json(['status' => true, 'message' => 'سيقوم المختص بتحديث البيانات']);
+        }
+        return response()->json(['status' => false, 'message' => 'حدث خطأ ما'], 500);
     }
 }

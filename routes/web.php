@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SearchedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\BoardMembersController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\OuterDonationsController;
+use App\Http\Controllers\SubscriberDataController;
 use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
@@ -96,6 +98,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('indebtedness', 'indebtedness')->name('reports.indebtedness');
                 Route::get('inner_donations', 'innerDonations')->name('reports.innerDonations');
                 Route::get('subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
+                Route::get('subscribers_data', 'searchedData')->name('reports.subscribersData');
             });
         });
         Route::controller(WeddingController::class)->group(function () {
@@ -182,6 +185,10 @@ Route::middleware('auth')->group(function () {
                 Route::get('permissions', 'index')->name('permissions.index');
                 Route::get('delete/{id}', 'destroy')->name('permission.destroy');
             });
+        });
+        Route::prefix('searched_data')->controller(SubscriberDataController::class)->group(function () {
+            Route::post('approve', 'approve')->name('search.approve');
+            Route::get('delete/{id}', 'delete')->name('search.delete');
         });
     });
 });

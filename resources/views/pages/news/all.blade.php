@@ -33,9 +33,6 @@
                         <div class="form-group mb-lg-3 mb-md-2">
                             <label for="details" class="text-muted">تفاصيل الخبر</label>
                             <textarea name="description" id="details" class="form-control text-light text-center" rows="10" placeholder="تفاصيل الخبر" required></textarea>
-                            {{-- <div id="editor">
-                                <p>This is the editor content.</p>
-                            </div> --}}
                             <p class="required d-none text-danger fw-bold mb-0" id="detailsReq">حقل التفاصيل مطلوب</p>
                         </div>
                         <div class="form-group mb-lg-3 mb-md-2">

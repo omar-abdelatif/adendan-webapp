@@ -17,8 +17,8 @@
                             <img width="100" height="100" src="https://img.icons8.com/fluency/100/identity-theft.png" alt="identity-theft"/>
                         </div>
                         <div class="card-content text-center">
-                            <h3 class="text-center text-decoration-underline mb-4">الرقم القومي</h3>
-                            <p class="mb-3 fw-bold">17</p>
+                            <h3 class="text-center text-muted text-decoration-underline mb-4">الرقم القومي</h3>
+                            <p class="mb-3 fw-bold text-muted">{{$incompleteSSNCount}}</p>
                             <button class="btn btn-primary fw-bold w-100 fs-5" type="button" data-bs-toggle="modal" data-bs-target="#ssn">المزيد</button>
                             <div class="fade modal" id="ssn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-centered-dialog modal-fullscreen">
@@ -65,8 +65,8 @@
                             <img width="100" height="100" src="https://img.icons8.com/fluency/100/google-pixel6.png" alt="google-pixel6"/>
                         </div>
                         <div class="card-content text-center">
-                            <h3 class="text-center text-decoration-underline mb-4">رقم المحمول</h3>
-                            <p class="mb-3 fw-bold">12</p>
+                            <h3 class="text-center text-muted text-decoration-underline mb-4">رقم المحمول</h3>
+                            <p class="mb-3 fw-bold text-muted">{{$incompleteMobileCount}}</p>
                             <button class="btn btn-primary fw-bold w-100 fs-5" type="button" data-bs-toggle="modal" data-bs-target="#mobile">المزيد</button>
                             <div class="fade modal" id="mobile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-centered-dialog modal-fullscreen">
@@ -113,8 +113,8 @@
                             <img width="100" height="100" src="https://img.icons8.com/fluency/100/address-book-2.png" alt="address-book-2"/>
                         </div>
                         <div class="card-content text-center">
-                            <h3 class="text-center text-decoration-underline mb-4">العنوان</h3>
-                            <p class="mb-3 fw-bold">10</p>
+                            <h3 class="text-center text-muted text-decoration-underline mb-4">العنوان</h3>
+                            <p class="mb-3 fw-bold text-muted">{{$incompleteAddressCount}}</p>
                             <button class="btn btn-primary fw-bold w-100 fs-5" type="button" data-bs-toggle="modal" data-bs-target="#address">المزيد</button>
                             <div class="fade modal" id="address" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-centered-dialog modal-fullscreen">
