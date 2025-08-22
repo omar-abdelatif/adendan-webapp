@@ -57,25 +57,11 @@
                                         @yield('modals')
                                         <ol class="ms-3 breadcrumb">
                                             <li class="breadcrumb-item">
-                                                @if (Auth::user()->role === 'subscriptions')
-                                                    <a href="{{ route('subscriptionRole.index') }}">
-                                                        <svg class="stroke-icon">
-                                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                                        </svg>
-                                                    </a>
-                                                @elseif(Auth::user()->role === 'media')
-                                                    <a href="{{ route('home') }}">
-                                                        <svg class="stroke-icon">
-                                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                                        </svg>
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('home') }}">
-                                                        <svg class="stroke-icon">
-                                                            <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                                                        </svg>
-                                                    </a>
-                                                @endif
+                                                <a href="{{ route('home') }}">
+                                                    <svg class="stroke-icon">
+                                                        <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
+                                                    </svg>
+                                                </a>
                                             </li>
                                             @yield('breadcrumb-items')
                                         </ol>
