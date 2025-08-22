@@ -25,13 +25,13 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 // Check the role of the authenticated user
                 $user = Auth::user();
-                if ($user->role === 'admin') {
-                    return redirect()->route('home');
-                } elseif ($user->role === 'subscriptions') {
-                    return redirect()->route('subscriptionRole.index');
-                } else {
-                    return redirect(RouteServiceProvider::HOME);
-                }
+                return redirect(RouteServiceProvider::HOME);
+                // if ($user->role === 'admin') {
+                //     return redirect()->route('home');
+                // } elseif ($user->role === 'subscriptions') {
+                //     return redirect()->route('subscriptionRole.index');
+                // } else {
+                // }
             }
         }
 

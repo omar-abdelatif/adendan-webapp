@@ -207,12 +207,10 @@ class ReportController extends Controller
         $incompleteMobileCount = $incompleteMobile->count();
         $incompleteAddress = Subscribers::where('address', NULL)->orWhere('address', '')->get();
         $incompleteAddressCount = $incompleteAddress->count();
-        // dd($incompleteAddressCount);
         return view('pages.reports.incomplete', compact('incompleteSSN', 'incompleteSSNCount', 'incompleteMobile', 'incompleteMobileCount', 'incompleteAddress', 'incompleteAddressCount'));
     }
     //! Subscribers Data
-    public function searchedData()
-    {
+    public function searchedData() {
         $data = SearchedData::all();
         return view('pages.reports.subscribers_data_update', compact('data'));
     }
