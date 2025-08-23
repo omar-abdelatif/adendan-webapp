@@ -319,7 +319,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{Auth::user()->name}}</span>
+                                                    <span class="text-primary fw-bold">Admin</span>
                                                 </div>
                                             </div>
                                         </div>

@@ -97,8 +97,8 @@ Route::middleware('auth')->group(function () {
                 Route::get('donations', 'outerdonations')->name('reports.donations');
                 Route::get('indebtedness', 'indebtedness')->name('reports.indebtedness');
                 Route::get('inner_donations', 'innerDonations')->name('reports.innerDonations');
-                Route::get('subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
                 Route::get('subscribers_data', 'searchedData')->name('reports.subscribersData');
+                Route::get('subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
             });
         });
         Route::controller(WeddingController::class)->group(function () {

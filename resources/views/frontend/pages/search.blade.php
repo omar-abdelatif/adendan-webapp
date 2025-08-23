@@ -418,12 +418,9 @@
                                                                                         <div class="form-group mb-3">
                                                                                             <label for="{{$key}}" class="form-label fw-bold">{{ $label }}:</label>
                                                                                             @if($key === 'birthdate')
-                                                                                                <input type="date" id="{{$key}}" name="{{$key}}" class="form-control">
+                                                                                                <input type="date" id="{{$key}}" name="{{$key}}" class="form-control" required>
                                                                                             @else
-                                                                                                <input type="text" class="form-control" id="{{$key === 'ssn' ? 'requested_ssn' : $key}}" name="{{$key}}" placeholder="{{$label}}">
-                                                                                                @if ($key === 'ssn')
-                                                                                                    <span id="ssnError" class="d-none text-danger fw-bold"></span>
-                                                                                                @endif
+                                                                                                <input type="text" class="form-control" id="{{$key}}" name="{{$key}}" placeholder="{{$label}}" required>
                                                                                             @endif
                                                                                         </div>
                                                                                     @endforeach

@@ -8,6 +8,7 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="جمعية أدندان الخيرية">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta property="og:url" content="https://adendan.com/">
         <meta property="og:title" content="جمعية أدندان الخيرية">
         <meta property="og:description" content="جمعية أدندان الخيرية">
@@ -79,6 +80,13 @@
         </div>
         {{-- ! Scripts ! --}}
         @include('layouts.assets.script')
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                }
+            });
+        </script>
     </body>
 
 </html>

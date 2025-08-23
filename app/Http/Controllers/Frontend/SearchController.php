@@ -61,17 +61,19 @@ class SearchController extends Controller
         }
         $fields = [
             'name' => 'الاسم',
-            'mobile_number' => 'رقم المحمول',
+            'mobile_no' => 'رقم المحمول',
             'ssn' => 'الرقم القومي',
             'address' => 'العنوان',
             'birthdate' => 'تاريخ الميلاد'
         ];
         $missingFields = [];
         foreach ($fields as $key => $label) {
-            if (is_null($member->$key) || $member->$key === 0) {
+            // dump($key, $member->$key);
+            if (is_null($member->$key) || $member->$key === 0 || $member->$key === '' || trim($member->$key) === '' || $member->$key === "0") {
                 $missingFields[$key] = $label;
             }
         }
+        // dd($missingFields);
         $noDelays = 'لا توجد مديونية إشتراكات';
         $noOldDelays = 'لا توجد متأخرات إشتراكات';
         $delays = $member->delays;
@@ -100,12 +102,13 @@ class SearchController extends Controller
             'name' => 'nullable',
             'ssn' => ['nullable', 'regex:/^(2|3)[0-9]{13}$/'],
             'address' => 'nullable',
-            'mobile_number' => 'nullable|numeric|digits:11',
-            'birthdate' => 'nullable|date'
+            'mobile_no' => 'nullable|numeric|digits:11',
+            'birthdate' => 'nullable|date',
+            'member_id' => 'nullable',
         ]);
         $store = SearchedData::create($validated);
         if ($store) {
-            return response()->json(['status' => true, 'message' => 'سيقوم المختص بتحديث البيانات']);
+            return response()->json(['status' => true, 'message' => 'سيقوم المختص بالتحديث']);
         }
         return response()->json(['status' => false, 'message' => 'حدث خطأ ما'], 500);
     }
