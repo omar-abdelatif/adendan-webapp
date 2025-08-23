@@ -63,7 +63,7 @@
                                             <form action="{{ route('search.approve') }}" method="POST" id="searchedForm_{{$item->id}}" data-form-id="{{$item->id}}">
                                                 @csrf
                                                 <input type="hidden" name="member_id" value="{{$item->member_id}}">
-                                                <input type="hidden" name="mobile_number" value="{{$item->mobile_number}}">
+                                                <input type="hidden" name="mobile_no" value="{{$item->mobile_no}}">
                                                 <input type="hidden" name="ssn" value="{{$item->ssn}}">
                                                 <input type="hidden" name="address" value="{{$item->address}}">
                                                 <input type="hidden" name="birthdate" value="{{$item->birthdate}}">

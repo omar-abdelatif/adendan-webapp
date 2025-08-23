@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class SubscriberDataController extends Controller {
     public function approve(Request $request){
-        dd($request->all());
         $member = Subscribers::where('member_id', $request->member_id)->first();
         if ($member) {
             $data = [];
