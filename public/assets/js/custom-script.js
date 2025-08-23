@@ -68,29 +68,17 @@ $(document).ready(function () {
     $(".datepicker-here").datepicker({
         dateFormat: "yyyy-mm-dd",
     });
-
-    // $(document).on("click", ".copy", function () {
-    //     let newsId = $(this).data("news-id");
-    //     let baseUrl = window.location.origin;
-    //     let publicUrl = `${baseUrl}/all_news/single_news/${newsId}`;
-    //     let tempInput = document.createElement("input");
-    //     tempInput.value = publicUrl;
-    //     document.body.appendChild(tempInput);
-    //     tempInput.select();
-    //     document.execCommand("copy");
-    //     document.body.removeChild(tempInput);
-    //     alert("تم نسخ رابط الخبر");
-    // });
 });
-//! Remove Alert After  5 Seconds
-const errors = document.querySelectorAll("#error");
-errors.forEach((error) => {
-    setTimeout(function () {
-        error.style.display = "none";
-    }, 5000);
-});
-//! Copy News Address
+//! JavaScript
 document.addEventListener("DOMContentLoaded", function () {
+    //! Remove Alert After 5 Seconds
+    const errors = document.querySelectorAll("#error");
+    errors.forEach((error) => {
+        setTimeout(function () {
+            error.style.display = "none";
+        }, 5000);
+    });
+    //! Copy News Address
     document.querySelectorAll(".copy").forEach(function (btn) {
         btn.addEventListener("click", function () {
             let newsId = this.dataset.newsId;

@@ -13,7 +13,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                        <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 1, "desc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
                                     <th class="text-center">إسم العضو</th>
@@ -27,10 +27,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $item)
-                                    <tr>
+                                    <tr id="row_{{ $item->id }}">
                                         <td class="text-center">{{$item->name}}</td>
                                         <td class="text-center">{{$item->member_id}}</td>
-                                        <td class="text-center">{{$item->mobile_number ?? '-'}}</td>
+                                        <td class="text-center">{{$item->mobile_no ?? '-'}}</td>
                                         <td class="text-center">{{$item->ssn ?? '-'}}</td>
                                         <td class="text-center">{{$item->address ?? '-'}}</td>
                                         <td class="text-center">{{$item->birthdate ?? '-'}}</td>
@@ -60,9 +60,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a class="border-0 bg-transparent text-success approve-request" data-approve-id="{{$item->id}}" title="موافقة">
-                                                <i class="fa-solid fa-check fs-5"></i>
-                                            </a>
+                                            <form action="{{ route('search.approve') }}" method="POST" id="searchedForm_{{$item->id}}" data-form-id="{{$item->id}}">
+                                                @csrf
+                                                <input type="hidden" name="member_id" value="{{$item->member_id}}">
+                                                <input type="hidden" name="mobile_number" value="{{$item->mobile_number}}">
+                                                <input type="hidden" name="ssn" value="{{$item->ssn}}">
+                                                <input type="hidden" name="address" value="{{$item->address}}">
+                                                <input type="hidden" name="birthdate" value="{{$item->birthdate}}">
+                                                <button type="submit" class="border-0 bg-transparent text-success approve-request" data-approve-id="{{$item->id}}" title="موافقة">
+                                                    <i class="fa-solid fa-check fs-5"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

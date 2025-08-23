@@ -57,9 +57,7 @@ $(document).on("submit", "#searchedData", function (e) {
             let modalEl = document.getElementById("searchModal");
             let modal = bootstrap.Modal.getOrCreateInstance(modalEl);
             modal.hide();
-            modalEl.addEventListener(
-                "hidden.bs.modal",
-                function () {
+            modalEl.addEventListener( "hidden.bs.modal", function () {
                     modalEl.classList.remove("fade");
                     let backdrop = document.querySelector(".modal-backdrop");
                     if (backdrop) backdrop.remove();

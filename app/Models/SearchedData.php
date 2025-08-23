@@ -10,7 +10,7 @@ class SearchedData extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'mobile_number',
+        'mobile_no',
         'ssn',
         'address',
         'birthdate',
