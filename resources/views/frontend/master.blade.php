@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{$gn->posted_by}}</span>
+                                                    <span class="text-primary fw-bold">{{$gn->posted_by ?? "Admin"}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{$cn->posted_by}}</span>
+                                                    <span class="text-primary fw-bold">{{$cn->posted_by ?? "Admin"}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{$dn->posted_by}}</span>
+                                                    <span class="text-primary fw-bold">{{$dn->posted_by ?? "Admin"}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -267,7 +267,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{$wn->posted_by}}</span>
+                                                    <span class="text-primary fw-bold">{{$wn->posted_by ?? "Admin"}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -319,7 +319,7 @@
                                                 </div>
                                                 <div class="posted_by">
                                                     <span class="fw-bold fs-6">نشر بواسطة:</span>
-                                                    <span class="text-primary fw-bold">{{$sn->posted_by}}</span>
+                                                    <span class="text-primary fw-bold">{{$sn->posted_by ?? "Admin"}}</span>
                                                 </div>
                                             </div>
                                         </div>
