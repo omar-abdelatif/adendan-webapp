@@ -36,9 +36,6 @@
                 break;
         }
     @endif
-    @if (Route::currentRouteName() == 'home')
-
-    @endif
 </script>
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
