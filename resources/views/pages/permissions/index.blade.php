@@ -92,7 +92,7 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="{{route('permission.destroy', $permission->id)}}" method="get">
+                                                                    <form action="{{route('permissions.destroy', $permission->id)}}" method="get">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <h1 class="text-center">هل انت متأكد ؟</h1>

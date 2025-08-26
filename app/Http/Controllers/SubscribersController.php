@@ -150,7 +150,7 @@ class SubscribersController extends Controller
             return view('pages.subscribers.update_subscriber', compact('subscriber'));
         }
     }
-    public function update(SubscriberRequest $request)
+    public function update(Request $request)
     {
         $validatedData = $request->validated();
         $id = $request->id;
@@ -288,25 +288,15 @@ class SubscribersController extends Controller
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
             <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">';
-            if (auth()->user()->role === 'subscriptions') {
-                $actions .= '<a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href="' . route('subscriptionRole.subscription.history', $row->id) . '"><i class="icofont icofont-eye"></i></a>
-                    <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href="' . route('subscriptionRole.subscriber.details', $row->id) . '">
-                        <i class="icofont icofont-ui-edit text-dark"></i>
-                    </a>
-                    <a href="' . route('subscriptionRole.donations.showAll', $row->id) . '" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
-                        <i class="fa-solid fa-book-heart"></i>
-                    </a>';
-            } elseif (auth()->user()->role === 'admin') {
-                $actions .= '<a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href="' . route('subscription.history', $row->id) . '">
-                                <i class="icofont icofont-eye"></i>
-                            </a>
-                    <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href="' . route('subscriber.details', $row->id) . '">
-                        <i class="icofont icofont-ui-edit text-dark"></i>
-                    </a>
-                    <a href="' . route('donations.showAll', $row->id) . '" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
-                        <i class="fa-solid fa-book-heart"></i>
-                    </a>';
-            }
+            $actions .= '<a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href="' . route('subscription.history', $row->id) . '">
+                            <i class="icofont icofont-eye"></i>
+                        </a>
+                <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href="' . route('subscriber.details', $row->id) . '">
+                    <i class="icofont icofont-ui-edit text-dark"></i>
+                </a>
+                <a href="' . route('donations.showAll', $row->id) . '" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
+                    <i class="fa-solid fa-book-heart"></i>
+                </a>';
             $actions .= '<button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_' . $row->id . '">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
                         </button>';

@@ -68,19 +68,17 @@ class SearchController extends Controller
         ];
         $missingFields = [];
         foreach ($fields as $key => $label) {
-            // dump($key, $member->$key);
             if (is_null($member->$key) || $member->$key === 0 || $member->$key === '' || trim($member->$key) === '' || $member->$key === "0") {
                 $missingFields[$key] = $label;
             }
         }
-        // dd($missingFields);
         $noDelays = 'لا توجد مديونية إشتراكات';
         $noOldDelays = 'لا توجد متأخرات إشتراكات';
         $delays = $member->delays;
         $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
         $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();
         $donationDelays = DonationDelay::where('member_id', $member->member_id)->get();
-        return redirect()->route('site.search')->with([
+        return response()->json(['status' => true, 'data' => [
             'member' => $member,
             'searched' => true,
             'delays' => $delays,
@@ -90,7 +88,7 @@ class SearchController extends Controller
             'donationOlddelays' => $donationOlddelays,
             'donationDelays' => $donationDelays,
             'missingFields' => $missingFields,
-        ]);
+        ]]);
     }
     public function searechDetails($slug){
         $member = Subscribers::where('slug', $slug)->first();

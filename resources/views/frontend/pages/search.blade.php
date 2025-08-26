@@ -50,7 +50,7 @@
                         <div class="row mb-0 mb-sm-4 justify-content-center tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 <div class="search-form">
-                                    <form action="{{route('site.result')}}" method="post" class="my-5 w-50 mx-auto">
+                                    <form id="searchBySsnForm" method="post" class="my-5 w-50 mx-auto">
                                         @csrf
                                         <input type="number" name="ssn" id="ssn" class="form-control border-3 border-primary text-center fw-bold" placeholder="البحث بالرقم القومي">
                                         <small class="form-text text-danger text-center w-100">
@@ -59,7 +59,8 @@
                                         <button type="submit" class="btn btn-secondary rounded-pill w-100 mt-3 fw-bold fs-5">بحث</button>
                                     </form>
                                 </div>
-                                @php
+                                <div id="searchResult"></div>
+                                {{-- @php
                                     $member = session('member');
                                     $searched = session('searched');
                                     $emptyMessage = session('empty_message');
@@ -98,15 +99,15 @@
                                                         <div class="col-lg-6 mb-3">
                                                             <div class="delays justify-content-center">
                                                                 <div class="delays-content d-flex justify-content-center flex-column align-items-center">
-                                                                    @if (count($member->delays) >= 1)
-                                                                        @foreach ($delays as $delay)
-                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
-                                                                                        م.إشتراك السنة الحالية
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                    <div class="w-100 border-1 border-dark ms-1 rounded-3">
+                                                                        <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                            <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
+                                                                                مديونية الإشتراك السنوي
+                                                                            </h4>
+                                                                            <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                @if (count($member->delays) >= 1)
+                                                                                    @foreach ($delays as $delay)
                                                                                         <div class="col-lg-3 p-1 py-2">
                                                                                             <div class="text-center">
                                                                                                 <h4 role="presentation">
@@ -159,23 +160,13 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         @endif
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endforeach
-                                                                    @else
-                                                                        <div class="w-100 border-1 border-dark ms-1 rounded-3">
-                                                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                    <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
-                                                                                    مديونية الإشتراك السنوي
-                                                                                </h4>
-                                                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @endforeach
+                                                                                @else
                                                                                     <p class="mb-0 text-center empty-msg fw-bold fs-3">{{$noDelays}}</p>
-                                                                                </div>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
-                                                                    @endif
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -183,14 +174,14 @@
                                                             <div class="old-delays">
                                                                 <div class="old-content">
                                                                     <div class="row justify-content-center g-0">
-                                                                        @if (count($oldDelays) >= 1)
-                                                                            <div class="w-100 border-1 border-dark rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
-                                                                                        متأخرات الإشتراكات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                        <div class="w-100 border-1 border-dark rounded-3">
+                                                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                    <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
+                                                                                    متأخرات الإشتراكات
+                                                                                </h4>
+                                                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @if (count($oldDelays) >= 1)
                                                                                         @foreach ($oldDelays as $delay)
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
@@ -236,22 +227,12 @@
                                                                                                 </div>
                                                                                             @endif
                                                                                         @endforeach
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
-                                                                                        متأخرات الإشتراكات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @else
                                                                                         <p class="mb-0 text-center fs-3 fw-bold empty-msg">{{$noOldDelays}}</p>
-                                                                                    </div>
+                                                                                    @endif
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -260,14 +241,14 @@
                                                             <div class="delay-donaion">
                                                                 <div class="delay-donaiton-content">
                                                                     <div class="row justify-content-center g-0">
-                                                                        @if (count($donationDelays) > 0)
-                                                                            <div class="w-100 border-1 border-dark rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                                                        مديونية التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                        <div class="w-100 border-1 border-dark rounded-3">
+                                                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                    <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
+                                                                                    مديونية التبرعات
+                                                                                </h4>
+                                                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @if (count($donationDelays) > 0)
                                                                                         @foreach ($donationDelays as $delay)
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
@@ -297,22 +278,12 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         @endforeach
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                                                        مديونية التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @else
                                                                                         <h3 class="text-center mb-0">لا توجد مديونية تبرعات</h3>
-                                                                                    </div>
+                                                                                    @endif
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -321,14 +292,14 @@
                                                             <div class="old-donations">
                                                                 <div class="old-donation-content">
                                                                     <div class="row justify-content-center g-0">
-                                                                        @if (count($donationOlddelays) > 0)
-                                                                            <div class="w-100 border-1 border-dark rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
-                                                                                        متأخرات التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                        <div class="w-100 border-1 border-dark rounded-3">
+                                                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
+                                                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
+                                                                                    <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
+                                                                                    متأخرات التبرعات
+                                                                                </h4>
+                                                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @if (count($donationOlddelays) > 0)
                                                                                         @foreach ($donationOlddelays as $delay)
                                                                                             <div class="col-lg-4 p-1 py-2">
                                                                                                 <div class="text-center">
@@ -374,22 +345,12 @@
                                                                                                 </div>
                                                                                             @endif
                                                                                         @endforeach
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="w-100 border-1 border-dark ms-1 rounded-3">
-                                                                                <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                                                    <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                                                        <img width="65" height="65" src="https://img.icons8.com/fluency/65/add-dollar.png" alt="add-dollar"/>
-                                                                                        متأخرات التبرعات
-                                                                                    </h4>
-                                                                                    <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">
+                                                                                    @else
                                                                                         <p class="mb-0 text-center fs-3 fw-bold empty-msg">لا توجد متأخرات تبرعات</p>
-                                                                                    </div>
+                                                                                    @endif
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -486,7 +447,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </div>
@@ -496,19 +457,19 @@
                         <div class="row mb-0 mb-sm-4 tanfeeth-cards cards-wrapper" role="region">
                             <div class="col-lg-12">
                                 @if(count($tombsByRegion) > 0)
-                                @foreach ($tombsByRegion as $region => $tombs)
-                                    <div class="card position-relative border-secondary border-2 p-4 w-100 mb-5">
-                                        <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
-                                            <h3 class="mb-0 font-weight-bold text-center text-white">مقابر {{$region}}</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row justify-content-center align-items-center">
-                                                @foreach ($tombs as $tomb)
-                                                    <div class="col-lg-4 div col-md-6">
-                                                        <div class="tomb-item p-3 rounded bg-secondary mb-3">
-                                                            <div class="tomb-item-title">
-                                                                <h4 class="text-center text-white">{{$tomb->title}}</h4>
-                                                            </div>
+                                    @foreach ($tombsByRegion as $region => $tombs)
+                                        <div class="card position-relative border-secondary border-2 p-4 w-100 mb-5">
+                                            <div class="card-header text-center bg-secondary py-2 px-4 rounded-pill w-25 ms-5 position-absolute top--20px">
+                                                <h3 class="mb-0 font-weight-bold text-center text-white">مقابر {{$region}}</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row justify-content-center align-items-center">
+                                                    @foreach ($tombs as $tomb)
+                                                        <div class="col-lg-4 div col-md-6">
+                                                            <div class="tomb-item p-3 rounded bg-secondary mb-3">
+                                                                <div class="tomb-item-title">
+                                                                    <h4 class="text-center text-white">{{$tomb->title}}</h4>
+                                                                </div>
                                                                 <div class="guard-tomb-data mb-3 mt-3 text-center text-white">
                                                                     <p class="fw-bold">
                                                                         إسم التربي:
@@ -519,18 +480,18 @@
                                                                         <span class="ms-1">{{$tomb->tomb_guard_number}}</span>
                                                                     </p>
                                                                 </div>
-                                                            <div class="tomb-item-body mt-3 w-100 text-center">
-                                                                <a href="{{$tomb->location}}" class="rounded-pill bg-smoke-white text-secondary px-4 fs-5 py-1" target="blank">
-                                                                    <b>الموقع</b>
-                                                                </a>
+                                                                <div class="tomb-item-body mt-3 w-100 text-center">
+                                                                    <a href="{{$tomb->location}}" class="rounded-pill bg-smoke-white text-secondary px-4 fs-5 py-1" target="blank">
+                                                                        <b>الموقع</b>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
                                 @else
                                     <div class="message-data text-center">
                                         <h1 class="text-center my-3">لا توجد مقابر مسجلة حاليا</h1>
