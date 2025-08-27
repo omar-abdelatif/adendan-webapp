@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
             ClassicEditor.create(item).then((editor) => {
+                item.ckEditorInitialized = true;
                 ckEditorInstance = editor;
                 editor.editing.view.change((writer) => {
                     const root = editor.editing.view.document.getRoot();
