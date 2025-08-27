@@ -124,16 +124,16 @@ document.addEventListener("DOMContentLoaded", function () {
         textAreas.forEach(function (item) {
             ClassicEditor.create(item).then((editor) => {
                 ckEditorInstance = editor;
-                editor.model.document.on("change:data", () => {
-                    const rawText = editor.getData().replace(/<[^>]*>/g, "").trim();
-                    if (rawText.length > 0) {
-                        const firstChar = rawText.charAt(0);
-                        const isArabic = /[\u0600-\u06FF]/.test(firstChar);
-                        editor.editing.view.change((writer) => {
-                            writer.setAttribute( "direction", isArabic ? "rtl" : "ltr", editor.editing.view.document.getRoot() );
-                        });
-                    }
-                });
+                // editor.model.document.on("change:data", () => {
+                //     const rawText = editor.getData().replace(/<[^>]*>/g, "").trim();
+                //     if (rawText.length > 0) {
+                //         const firstChar = rawText.charAt(0);
+                //         const isArabic = /[\u0600-\u06FF]/.test(firstChar);
+                //         editor.editing.view.change((writer) => {
+                //             writer.setAttribute( "direction", isArabic ? "rtl" : "ltr", editor.editing.view.document.getRoot() );
+                //         });
+                //     }
+                // });
                 editor.model.document.registerPostFixer((writer) => {
                     const root = editor.model.document.getRoot();
                     for (const range of root.getChildren()) {
