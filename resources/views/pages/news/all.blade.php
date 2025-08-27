@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group mb-lg-3 mb-md-2">
                             <label for="details" class="text-muted">تفاصيل الخبر</label>
-                            <textarea name="description" id="details" class="form-control text-light text-right text-center" rows="10" placeholder="تفاصيل الخبر" required></textarea>
+                            <textarea name="description" id="details" dir="rtl" class="form-control text-light text-right text-center" rows="10" placeholder="تفاصيل الخبر" required></textarea>
                             <p class="required d-none text-danger fw-bold mb-0" id="detailsReq">حقل التفاصيل مطلوب</p>
                         </div>
                         <div class="form-group mb-lg-3 mb-md-2">
@@ -199,7 +199,7 @@
                                                                 </div>
                                                                 <div class="form-group mt-3">
                                                                     <label for="description" class="text-white">تفاصيل الخبر</label>
-                                                                    <textarea name="description" id="desc_{{$new->id}}" data-news-id="{{$new->id}}" class="form-control text-light text-center pt-2">{{$new->description}}</textarea>
+                                                                    <textarea name="description" id="desc_{{$new->id}}" data-news-id="{{$new->id}}" dir="rtl" class="form-control text-light text-right text-center pt-2">{{$new->description}}</textarea>
                                                                 </div>
                                                                 <div class="form-group mt-3">
                                                                     <label for="" class="text-white">إختر التصنيف</label>
