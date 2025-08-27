@@ -22,7 +22,7 @@ function postByAjax(url, method, formData, message, rowId = null) {
     });
 }
 //! Jquery
-$(document).ready(function () {
+$(function () {
     //! Image Upload Preview
     $(document).on("change", "#image", function (e) {
         let memberId = $(this).data("member-id");
@@ -120,99 +120,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     //! Use CK EDITOR
     let textAreas = document.querySelectorAll("textarea[data-news-id]");
-    if (textAreas.length > 0) {
+    if (textAreas) {
         textAreas.forEach(function (item) {
-            if (item.ckEditorInitialized) {
-                console.warn("CKEditor already created on this textarea. Skipping...");
-                return;
-            }
             ClassicEditor.create(item).then((editor) => {
-                item.ckEditorInitialized = true;
                 ckEditorInstance = editor;
-                editor.editing.view.change((writer) => {
-                    const root = editor.editing.view.document.getRoot();
-                    writer.setAttribute("dir", "rtl", root);
-                    writer.setStyle("text-align", "right", root);
-                });
                 editor.model.document.on("change:data", () => {
-                    editor.editing.view.change((writer) => {
-                        const root = editor.editing.view.document.getRoot();
-                        writer.setAttribute("dir", "rtl", root);
-                        writer.setStyle("text-align", "right", root);
-                    });
-                });
-                editor.editing.view.document.on("clipboardInput",(evt, data) => {
+                    const rawText = editor.getData().replace(/<[^>]*>/g, "").trim();
+                    if (rawText.length > 0) {
+                        const firstChar = rawText.charAt(0);
+                        const isArabic = /[\u0600-\u06FF]/.test(firstChar);
                         editor.editing.view.change((writer) => {
-                            const root =
-                                editor.editing.view.document.getRoot();
-                            writer.setAttribute("dir", "rtl", root);
-                            writer.setStyle("text-align", "right", root);
+                            writer.setAttribute( "direction", isArabic ? "rtl" : "ltr", editor.editing.view.document.getRoot() );
                         });
-                        if (data.content) {
-                            editor.model.change((writer) => {
-                                for (const child of data.content.getChildren()) {
-                                    if (child.is("element")) {
-                                        writer.setAttribute(
-                                            "direction",
-                                            "rtl",
-                                            child
-                                        );
-                                        writer.setAttribute(
-                                            "textAlignment",
-                                            "right",
-                                            child
-                                        );
-                                    }
-                                }
-                            });
-                        }
-                    },{ priority: "high" }
-                );
-                editor.model.document.registerPostFixer(() => {
+                    }
+                });
+                editor.model.document.registerPostFixer((writer) => {
                     const root = editor.model.document.getRoot();
-                    let changed = false;
-                    for (const child of root.getChildren()) {
-                        if (child.is("element")) {
-                            for (const node of child.getChildren()) {
-                                if (
-                                    node.is("text") &&
-                                    !node.hasAttribute("linkHref")
-                                ) {
-                                    const text = node.data;
-                                    const urlRegex =
-                                        /https?:\/\/[^\s<>"{}|\\^`\[\]]+/g;
-                                    let match;
-                                    while (
-                                        (match = urlRegex.exec(text)) !==
-                                        null
-                                    ) {
-                                        const start = match.index;
-                                        const end = start + match[0].length;
-                                        const range =
-                                            editor.model.createRange(
-                                                editor.model.createPositionAt(
-                                                    child,
-                                                    start
-                                                ),
-                                                editor.model.createPositionAt(
-                                                    child,
-                                                    end
-                                                )
-                                            );
-                                        editor.model.change((writer) => {
-                                            writer.setAttribute(
-                                                "linkHref",
-                                                match[0],
-                                                range
-                                            );
-                                        });
-                                        changed = true;
-                                    }
+                    for (const range of root.getChildren()) {
+                        for (const item of range.getChildren()) {
+                            if (item.is("textProxy")) {
+                                const urlMatch = item.data.match(/https?:\/\/[^\s<]+/);
+                                if (urlMatch) {
+                                    writer.setAttribute( "linkHref", urlMatch[0], item );
                                 }
                             }
                         }
                     }
-                    return changed;
+                    return false;
                 });
             }).catch((err) => console.error(err));
         });
