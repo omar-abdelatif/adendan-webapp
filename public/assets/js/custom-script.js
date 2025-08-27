@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let textAreas = document.querySelectorAll("textarea[data-news-id]");
     if (textAreas.length > 0) {
         textAreas.forEach(function (item) {
-            if (textarea.ckEditorInitialized) {
+            if (item.ckEditorInitialized) {
                 console.warn("CKEditor already created on this textarea. Skipping...");
                 return;
             }
