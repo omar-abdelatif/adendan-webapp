@@ -71,7 +71,7 @@
                 </div>
                 @if ($news->category !== 'عزاء')
                     <div class="col-12">
-                        <div class="media">
+                        <div class="media mt-5">
                             <div class="separator position-relative">
                                 <p class="mb-0 fs-3 p-3 mx-auto text-center text-primary position-absolute rounded fw-bold bg-light w-50">ميديا الخبر</p>
                                 <hr />
