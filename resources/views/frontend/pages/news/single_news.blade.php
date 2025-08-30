@@ -22,7 +22,7 @@
         <meta property="og:image" content="{{ asset('assets/images/favicon.png') }}">
     @endif
     <meta property="og:title" content="{{ $news->title }}">
-    <meta property="og:description" content="{!! $news->description !!}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($news->description), 160) }}">
 @endsection
 @section('site')
     <section class="news-details my-5">
