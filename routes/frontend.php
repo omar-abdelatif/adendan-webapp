@@ -9,25 +9,38 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\News\NewsController;
 use App\Http\Controllers\Frontend\BoardMembersController;
+use App\Http\Controllers\Frontend\FrontDonationController;
 use App\Http\Controllers\Frontend\AssociationsCommittesController;
 
 Auth::routes();
 
-Route::view('about', 'frontend.pages.about')->name('site.about');
-Route::get('/', [MasterController::class, 'index'])->name('site.index');
-Route::view('contact_us', 'frontend.pages.contact')->name('site.contact');
-Route::get('all_news', [NewsController::class, 'index'])->name('site.news');
-Route::get('search', [SearchController::class, 'index'])->name('site.search');
-Route::post('result', [SearchController::class, 'result'])->name('site.result');
-Route::get('workers/all', [WorkerController::class, 'index'])->name('workers.index');
-Route::get('board_members', [BoardMembersController::class, 'index'])->name('site.borders');
-Route::post('checkout', [CheckoutController::class, 'checkingOut'])->name('payment.checkout');
-Route::get('/paymob/callback', [PaymentController::class, 'callback'])->name('payment.callback');
-Route::post('paymob/send-payment', [PaymentController::class, 'sendPayment'])->name('payment.send');
-Route::get('all_news/single_news/{id}', [NewsController::class, 'newsDetails'])->name('site.single_news');
-Route::get('search-details/{name}', [SearchController::class, 'searechDetails'])->name('site.searchDetails');
-Route::get('/payments/verify/{payment?}', [PaymentController::class, 'payment_verify'])->name('verify-payment');
-Route::get('search/wedding_details/{id}', [SearchController::class, 'weddingDetails'])->name('site.weddingDetails');
-Route::get('assossiation_committees', [AssociationsCommittesController::class, 'index'])->name('site.assossiation');
-Route::post('store-member-main-data', [SearchController::class, 'storeMainMemberData'])->name('site.storeMemberMainData');
-Route::get('assossiation_committees/assossiation_details/{id}', [AssociationsCommittesController::class, 'associationDetails'])->name('site.assossiation_details');
+Route::name('site.')->group(function () {
+    Route::view('about', 'frontend.pages.about')->name('about');
+    Route::view('contact_us', 'frontend.pages.contact')->name('contact');
+    Route::get('/', [MasterController::class, 'index'])->name('index');
+    Route::controller(NewsController::class)->group(function () {
+        Route::get('all_news', 'index')->name('news');
+        Route::get('all_news/single_news/{id}', 'newsDetails')->name('single_news');
+    });
+    Route::controller(SearchController::class)->group(function () {
+        Route::get('search', 'index')->name('search');
+        Route::post('result', 'result')->name('result');
+        Route::get('search-details/{name}', 'searechDetails')->name('searchDetails');
+        Route::post('store-member-main-data', 'storeMainMemberData')->name('storeMemberMainData');
+    });
+    Route::controller(AssociationsCommittesController::class)->group(function () {
+        Route::get('assossiation_committees', 'index')->name('assossiation');
+        Route::get('assossiation_committees/assossiation_details/{id}', 'associationDetails')->name('assossiation_details');
+    });
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/paymob/callback', 'callback')->name('payment.callback');
+        Route::post('paymob/send-payment', 'sendPayment')->name('payment.send');
+    });
+    Route::controller(FrontDonationController::class)->group(function () {
+        Route::get('donate_page', 'index')->name('donate');
+        Route::post('make_donation', 'store')->name('store');
+    });
+    Route::get('board_members', [BoardMembersController::class, 'index'])->name('borders');
+    Route::post('checkout', [CheckoutController::class, 'checkingOut'])->name('paymentCheckout');
+    Route::get('workers/all', [WorkerController::class, 'index'])->name('workers');
+});

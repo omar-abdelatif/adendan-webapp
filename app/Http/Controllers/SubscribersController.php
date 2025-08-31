@@ -152,7 +152,6 @@ class SubscribersController extends Controller
     }
     public function update(Request $request)
     {
-        $validatedData = $request->validated();
         $id = $request->id;
         $member = Subscribers::findOrFail($id);
         if ($member) {
@@ -218,7 +217,7 @@ class SubscribersController extends Controller
                 return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->back()->withErrors($validatedData);
+        return redirect()->back()->withErrors('حدث خطأ برجاء ابلاغ المسؤول');
     }
     public function bulkUpload(Request $request)
     {
