@@ -18,8 +18,8 @@
                     الإستعلامات
                 </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('workers.index') ? 'active' : ''}}">
-                <a class="nav-link rounded-pill bg-primary" href="{{route('workers.index')}}">حرف و خدمات</a>
+            <li class="nav-item {{ request()->routeIs('site.workers') ? 'active' : ''}}">
+                <a class="nav-link rounded-pill bg-primary" href="{{route('site.workers')}}">حرف و خدمات</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link bg-primary rounded-pill" href="#" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
@@ -40,6 +40,9 @@
                         </li>
                     </div>
                 </ul>
+            </li>
+            <li class="nav-item {{ request()->routeIs('site.donate') ? 'active' : ''}}">
+                <a class="nav-link rounded-pill bg-primary" href="{{route('site.donate')}}">تبرع الاّن</a>
             </li>
             @if (Auth::user())
                 <li class="nav-item">
