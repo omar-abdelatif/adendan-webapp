@@ -41,9 +41,9 @@
                     </div>
                 </ul>
             </li>
-            <li class="nav-item {{ request()->routeIs('site.donate') ? 'active' : ''}}">
+            {{-- <li class="nav-item {{ request()->routeIs('site.donate') ? 'active' : ''}}">
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.donate')}}">تبرع الاّن</a>
-            </li>
+            </li> --}}
             @if (Auth::user())
                 <li class="nav-item">
                     <a href={{route('home')}} class="nav-link rounded-pill bg-primary rounded" target="_blank">لوحة التحكم</a>
