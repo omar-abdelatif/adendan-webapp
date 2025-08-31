@@ -22,18 +22,18 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">إضافة دور جديد</h1>
+                    <h1 class="modal-title text-muted fs-5" id="exampleModalLabel">إضافة دور جديد</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{route('roles.store')}}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="name" class="form-label">إسم الدور</label>
+                            <label for="name" class="form-label text-muted">إسم الدور</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="إسم الدور">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="permissions" class="form-label">الصلاحيات</label>
+                            <label for="permissions" class="form-label text-muted">الصلاحيات</label>
                             <select name="permissions[]" id="permissions" class="form-select js-example-rtl" multiple data-placeholder="-- الصلاحيات --">
                                 @foreach($permissions as $permission)
                                     <option value="{{$permission->name}}">{{$permission->name}}</option>
@@ -85,7 +85,7 @@
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">حذف الدور {{$role->name}}</h1>
+                                                                    <h1 class="modal-title text-muted fs-5" id="exampleModalLabel">حذف الدور {{$role->name}}</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -93,11 +93,11 @@
                                                                         @csrf
                                                                         <input type="hidden" name="id" value="{{$role->id}}">
                                                                         <div class="form-group mb-3">
-                                                                            <label for="name" class="form-label">إسم الدور</label>
+                                                                            <label for="name" class="form-label text-muted">إسم الدور</label>
                                                                             <input type="text" name="name" id="name" value="{{$role->name}}" class="form-control">
                                                                         </div>
                                                                         <div class="form-group mb-3">
-                                                                            <label for="permission" class="form-label">صلاحيات الدور</label>
+                                                                            <label for="permission" class="form-label text-muted">صلاحيات الدور</label>
                                                                             <select name="permissions[]" id="permissions_{{$role->id}}" class="form-control js-example-rtl" multiple data-placeholder="-- صلاحيات الدور --">
                                                                                 @foreach($permissions as $permission)
                                                                                     <option value="{{ $permission->name }}" 
