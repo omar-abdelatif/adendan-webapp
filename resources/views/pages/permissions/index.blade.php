@@ -15,14 +15,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">إضافة صلاحية جديدة</h1>
+                    <h1 class="modal-title text-muted fs-5" id="exampleModalLabel">إضافة صلاحية جديدة</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{route('permissions.store')}}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="name" class="form-label">إسم الصلاحية</label>
+                            <label for="name" class="form-label text-muted">إسم الصلاحية</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="إسم الصلاحية">
                         </div>
                         <div class="modal-footer">
@@ -62,7 +62,7 @@
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">تعديل صلاحية {{$permission->name}}</h1>
+                                                                    <h1 class="modal-title text-muted fs-5" id="exampleModalLabel">تعديل صلاحية {{$permission->name}}</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -70,7 +70,7 @@
                                                                         @csrf
                                                                         <input type="hidden" name="id" value="{{$permission->id}}">
                                                                         <div class="form-group">
-                                                                            <label for="permission" class="form-label">إسم الصلاحية</label>
+                                                                            <label for="permission" class="form-label text-muted">إسم الصلاحية</label>
                                                                             <input type="text" id="permission" class="form-control" name="name" value="{{$permission->name}}">
                                                                         </div>
                                                                         <div class="form-group mt-3">

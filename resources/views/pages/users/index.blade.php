@@ -57,7 +57,7 @@
                                     <p class="required d-none text-danger mb-0" id="roleMsg">يجب ان يكتب الاسم باللغة العربية ولا يقل عن 3 احرف</p>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="permissions" class="form-label">صلاحيات المستخدم</label>
+                                    <label for="permissions" class="form-label text-muted">صلاحيات المستخدم</label>
                                     <select name="permission" id="pemissions" class="form-select text-muted js-example-rtl" multiple data-placeholder="-- صلاحيات المستخدم --">
                                         @foreach ($permissions as $permission)
                                             <option value="{{$permission->name}}">{{$permission->name}}</option>
@@ -144,7 +144,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mt-3">
-                                                                                <label for="permissions" class="form-label">صلاحيات المستخدم</label>
+                                                                                <label for="permissions" class="form-label text-muted">صلاحيات المستخدم</label>
                                                                                 <select name="permission[]" id="permissions" class="form-select text-muted js-example-rtl" multiple data-placeholder="-- صلاحيات المستخدم --">
                                                                                     @foreach ($permissions as $permission)
                                                                                         <option value="{{$permission->name}}" 
