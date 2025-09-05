@@ -52,7 +52,9 @@ class NewsController extends Controller
             abort(404);
         }
         $newsID = $news->id;
-        $imagePath = public_path('assets/images/news-imgs/' . $news->img);
+        $imageName = $news->img ?: 'https://adendan.com/assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg';
+        $imagePath = public_path('assets/images/news-imgs/' . $imageName);
+
         [$width, $height] = getimagesize($imagePath);
         $news->is_landscape = $width > $height;
         if ($news) {
