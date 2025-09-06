@@ -1,4 +1,3 @@
-{{-- @dd($news); --}}
 @extends('frontend.layouts.master')
 @section('title')
     تفاصيل خبر {{$news->title}}

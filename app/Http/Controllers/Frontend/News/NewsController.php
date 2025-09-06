@@ -55,7 +55,7 @@ class NewsController extends Controller
         if ($news->img && is_file(public_path('assets/images/news-imgs/' . $news->img))) {
             $imagePath = public_path('assets/images/news-imgs/' . $news->img);
             [$width, $height] = getimagesize($imagePath);
-            $news->is_landscape = $width > $height;
+            $news->is_landscape = $width < $height;
             $imageUrl = asset('assets/images/news-imgs/' . $news->img);
         } else {
             $news->is_landscape = null;
