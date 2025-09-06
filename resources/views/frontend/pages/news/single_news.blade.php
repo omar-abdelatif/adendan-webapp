@@ -48,7 +48,7 @@
                 @endif
                 <div class="col-lg-9 col-md-6">
                     <div class="details">
-                        <div class="title">
+                        <div class="title mb-5">
                             <h3 class="title">{{$news->title}}</h3>
                         </div>
                         <div class="description mt-3">
