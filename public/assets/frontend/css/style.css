@@ -354,13 +354,3 @@ hr{
 .category {
     transform: rotate(-45deg) translate(-33%, -250%) !important;
 }
-/* input[type="radio"]:checked + label {
-    background-color: #004080 !important;
-    color: white;
-}
-
-input[type="radio"] + label {
-    background-color: #F0F0F0 !important;
-    color: #000;
-    border: 1px solid #004080;
-} */

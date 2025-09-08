@@ -36,11 +36,15 @@
                 @else
                     <div class="col-lg-3 col-md-6">
                         <div class="card card-shadow border-rounded mb-5">
-                            <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%; height:500px">
+                            <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%; height:600px">
                                 @if ($news->category === 'عزاء')
                                     <img loading="lazy" class="rounded-5 w-100" src={{asset('assets/frontend/images/bg/news/death/download.jpeg')}} alt="{{$news->title}}">
                                 @else
-                                    <img loading="lazy" class="rounded-5 w-100 h-100 object-cover" src="{{$news->img ? asset('assets/images/news-imgs/'.$news->img ) : asset('assets/images/1708715916.png')}}" alt="{{$news->title}}">
+                                    @if ($news->is_small_width)
+                                        <img loading="lazy" class="rounded-5 w-100 h-100" src="{{ asset('assets/images/news-imgs/' . $news->img) }}" alt="{{ $news->title }}">
+                                    @else
+                                        <div class="rounded-5" style="width: 100%; height: 100%; background-image: url({{ asset('assets/images/news-imgs/' . $news->img) }}); background-size: cover; background-position: top; background-repeat: no-repeat;"></div>
+                                    @endif
                                 @endif
                             </div>
                         </div>
