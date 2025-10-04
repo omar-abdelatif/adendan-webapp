@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="map overflow-hidden rounded">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215.86814938664767!2d31.246650203376216!3d30.04000230844055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840b0bd0e4da7%3A0x43d5514857e5b2d0!2z2KzZhdi52YrYqSDYo9iv2YbYr9in2YYg2KfZhNiu2YrYsdmK2Kk!5e0!3m2!1sen!2seg!4v1704356713991!5m2!1sen!2seg" class="border border-2 border-primary mt-5 rounded" width="1330" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d215.86814938664767!2d31.246650203376216!3d30.04000230844055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840b0bd0e4da7%3A0x43d5514857e5b2d0!2z2KzZhdi52YrYqSDYo9iv2YbYr9in2YYg2KfZhNiu2YrYsdmK2Kk!5e0!3m2!1sen!2seg!4v1704356713991!5m2!1sen!2seg" class="border border-2 border-primary mt-5 rounded" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
