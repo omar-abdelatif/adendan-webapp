@@ -395,7 +395,6 @@ if (newsform) {
             if (rawText.length > 0) {
                 const firstChar = rawText.charAt(0);
                 const isArabic = /[\u0600-\u06FF]/.test(firstChar);
-
                 editor.editing.view.change((writer) => {
                     writer.setAttribute( "direction", isArabic ? "rtl" : "ltr", editor.editing.view.document.getRoot() );
                 });
