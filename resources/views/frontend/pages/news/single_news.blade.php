@@ -27,7 +27,7 @@
     <section class="news-details my-5">
         <div class="container-fluid">
             <div class="row">
-                @if ($news->is_small_width)
+                @if ($news->landscape)
                     <div class="col-lg-12">
                         <div class="mb-5">
                             <img loading="lazy" class="rounded-5 w-100" height="500" src="{{asset('assets/images/news-imgs/'.$news->img)}}" alt="{{$news->title}}">
@@ -38,7 +38,7 @@
                         <div class="card card-shadow border-rounded mb-5">
                             <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%; height:600px">
                                 @if ($news->category === 'عزاء')
-                                    <img loading="lazy" class="rounded-5 w-100" src={{asset('assets/frontend/images/bg/news/death/download.jpeg')}} alt="{{$news->title}}">
+                                    <img loading="lazy" class="rounded-5 w-100" src="{{asset('assets/frontend/images/bg/news/death/download.jpeg')}}" alt="{{$news->title}}">
                                 @else
                                     @if ($news->is_small_width)
                                         <img loading="lazy" class="rounded-5 w-100 h-100" src="{{ asset('assets/images/news-imgs/' . $news->img) }}" alt="{{ $news->title }}">
