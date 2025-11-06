@@ -30,7 +30,8 @@
                 @if ($news->is_landscape)
                     <div class="col-lg-12">
                         <div class="mb-5">
-                            <img loading="lazy" class="rounded-5 w-100" height="500" src="{{asset('assets/images/news-imgs/'.$news->img)}}" alt="{{$news->title}}">
+                            {{-- <img loading="lazy" class="rounded-5 w-100 h-auto" height="500" src="{{asset('assets/images/news-imgs/'.$news->img)}}" alt="{{$news->title}}"> --}}
+                            <div class="rounded-5" style="width: 100%; height: 500px; background-image: url({{ asset('assets/images/news-imgs/'.$news->img) }}); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                         </div>
                     </div>
                 @else
