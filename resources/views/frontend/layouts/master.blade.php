@@ -17,7 +17,7 @@
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
         @include('frontend.layouts.assets.css')
     </head>
-    <body oncontextmenu="return false;">
+    <body>
         <div id="fb-root"></div>
         <div class="wrapper layout-1">
             @include('frontend.layouts.components.header')
