@@ -39,7 +39,7 @@
                         <div class="card card-shadow border-rounded mb-5">
                             <div class="position-relative overflow-hidden center-items-vertically details-image" style="width: 100%; height: 500px">
                                 @if ($news->category === 'عزاء')
-                                    <img loading="lazy" class="rounded-5" src="{{asset('assets/frontend/images/bg/news/death/download.jpeg')}}" alt="{{$news->title}}">
+                                    <img loading="lazy" class="rounded-5 w-100" src="{{asset('assets/frontend/images/bg/news/death/download.jpeg')}}" alt="{{$news->title}}">
                                 @else
                                     @if ($news->is_portrait || $news->is_square)
                                         <div class="rounded-5" style="width: 100%; height: 550px; background-image: url({{ asset('assets/images/news-imgs/' . $news->img) }}); background-size: cover; background-position: top; background-repeat: no-repeat;"></div>
