@@ -27,7 +27,7 @@
     <section class="news-details my-5">
         <div class="container-fluid">
             <div class="row">
-                @if ($news->landscape)
+                @if ($news->is_landscape)
                     <div class="col-lg-12">
                         <div class="mb-5">
                             <img loading="lazy" class="rounded-5 w-100" height="500" src="{{asset('assets/images/news-imgs/'.$news->img)}}" alt="{{$news->title}}">
