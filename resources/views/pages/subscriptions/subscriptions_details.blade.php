@@ -226,7 +226,7 @@
                                                     <tbody>
                                                         @foreach ($oldelays as $delay)
                                                             @if ($delay->delay_remaining === 0)
-                                                                <tr class="d-none">
+                                                                <tr class="">
                                                                     <td>{{$delay->member_id}}</td>
                                                                     <td>{{$delay->amount}}</td>
                                                                     @if ($delay->delay_amount == null && $delay->delay_remaining == null)
@@ -286,11 +286,11 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td colspan="5">
+                                                                {{-- <tr>
+                                                                    <td colspan="4">
                                                                         <h1 class="text-center">تم تسديد متأخرات الإشتراكات</h1>
                                                                     </td>
-                                                                </tr>
+                                                                </tr> --}}
                                                             @else
                                                                 <tr>
                                                                     <td>{{$delay->member_id}}</td>
