@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\DelayRequest;
+use App\Imports\ImportSubscribersDelays;
 use App\Models\Delay;
 use App\Models\Olddelays;
-use App\Models\TotalSafe;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
-use Illuminate\Http\Request;
 use App\Models\Subscriptions;
-use App\Http\Requests\DelayRequest;
+use App\Models\TotalSafe;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\ImportSubscribersDelays;
 
 class DelayController extends Controller
 {
@@ -67,7 +68,6 @@ class DelayController extends Controller
             return redirect()->back()->with($notificationSuccess);
         }
     }
-    //! Upload Yearly Delays on Subscribers
     public function subscriberDelay(Request $request) //! Upload Bulk Delay For Subscriptions For Subscribers
     {
         $validated = $request->validate([

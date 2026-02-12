@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\BoardMembersRequest;
 use App\Models\BoardMembers;
 use Illuminate\Http\Request;

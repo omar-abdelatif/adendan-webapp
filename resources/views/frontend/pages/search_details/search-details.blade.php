@@ -149,7 +149,6 @@
                                                     .select2-container--default .select2-selection--single {
                                                         border-radius: .65rem 0 0 .65rem !important;
                                                     }
-
                                                     span.error {
                                                         color: #dc3545 !important;
                                                         font-size: 13px;
