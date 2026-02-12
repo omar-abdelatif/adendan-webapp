@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CostYearsRequest;
 use App\Models\CostYears;
 use Illuminate\Http\Request;

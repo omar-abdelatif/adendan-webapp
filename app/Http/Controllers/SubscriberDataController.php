@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\SearchedData;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;

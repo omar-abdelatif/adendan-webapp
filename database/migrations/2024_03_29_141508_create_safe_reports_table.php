@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('transaction_type');
             $table->date('transaction_date');
             $table->integer('amount')->unsigned()->default(0);
+            $table->string('payment_date')->nullable();
             $table->timestamps();
         });
     }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\AssociationCommittes;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestsAssociationCommittes;
+use App\Models\AssociationCommittes;
+use Illuminate\Http\Request;
 
 class AssociationCommittesController extends Controller
 {

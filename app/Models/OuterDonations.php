@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Donators;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class OuterDonations extends Model
 {
