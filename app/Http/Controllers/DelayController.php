@@ -90,7 +90,7 @@ class DelayController extends Controller
         $id = $request->id;
         $validated = $request->validate([
             'paied' => 'required',
-            'invoice_no' => 'required|unique:subscriptions,invoice_no',
+            'invoice_no' => 'required|numeric',
         ]);
         $delay = Delay::where('year', $request->year)->where('id', $id)->first();
         $subscribers = Subscribers::where('member_id', $request->member_id)->first();
@@ -240,7 +240,7 @@ class DelayController extends Controller
     public function payOldDelay(Request $request) //! Pay Single Old Delay For Single Subscriber
     {
         $validated = $request->validate([
-            'invoice_no' => 'required|unique:subscriptions,invoice_no',
+            'invoice_no' => 'required|numeric',
             'olddelay' => 'required',
         ]);
         $oldDelay = Olddelays::where('member_id', $request->member_id)->where('id', $request->id)->first();
@@ -272,6 +272,9 @@ class DelayController extends Controller
                         'delay_remaining' => $newAmount,
                         'delay_amount' => $requestAmount +  $oldDelay->delay_amount,
                     ]);
+                    if ($newAmount <= 0) {
+                        $oldDelay->delete();
+                    }
                     $notificationSuccess = [
                         'message' => 'تم دفع كل المبلغ',
                         'alert-type' => 'success'
@@ -287,6 +290,9 @@ class DelayController extends Controller
                         'delay_amount' => $requestAmount,
                         'delay_remaining' => $remainingDelays,
                     ]);
+                    if ($remainingDelays <= 0) {
+                        $oldDelay->delete();
+                    }
                     if ($update) {
                         Subscriptions::create([
                             'member_id' => $request->member_id,
@@ -336,6 +342,9 @@ class DelayController extends Controller
                                 'delay_remaining' => $newAmount,
                                 'delay_amount' => $requestAmount +  $oldDelayAmount,
                             ]);
+                            if ($newAmount <= 0) {
+                                $oldDelay->delete();
+                            }
                             $notificationSuccess = [
                                 'message' => 'تم دفع كل المبلغ',
                                 'alert-type' => 'success'
@@ -343,10 +352,14 @@ class DelayController extends Controller
                             return back()->with($notificationSuccess);
                         }
                     } else {
+                        $newAmount = $oldDelayRemaining - $requestAmount;
                         $oldDelay->update([
                             'delay_amount' => $requestAmount +  $oldDelayAmount,
-                            'delay_remaining' => $oldDelayRemaining - $requestAmount,
+                            'delay_remaining' => $newAmount,
                         ]);
+                        if ($newAmount <= 0) {
+                            $oldDelay->delete();
+                        }
                         $pay = Subscriptions::create([
                             'member_id' => $request->member_id,
                             'delays' => $requestAmount,
