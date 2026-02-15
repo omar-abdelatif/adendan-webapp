@@ -11,6 +11,10 @@ function postByAjax(url, method, formData, message, rowId = null) {
                 title: message,
                 text: data.message,
                 showConfirmButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
             });
             if (data.status && data.id) {
                 document.querySelector(`#row_${data.id}`)?.remove();
