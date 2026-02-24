@@ -59,8 +59,7 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
         statusClass = "text-dark bg-warning";
     }
     if (missingFields && Object.keys(missingFields).length > 0) {
-        missingHtml += `
-            <div class=""><div class="alert alert-warning mx-3 mt-2">`;
+        missingHtml += `<div class=""><div class="alert alert-warning mx-3 mt-2">`;
         missingHtml += `<span class="fw-bold">يوجد بيانات غير مكتملة:</span><br/>`;
         for (const [key, label] of Object.entries(missingFields)) {
             formInputs += `
@@ -781,17 +780,12 @@ $(function () {
                 let modalEl = document.getElementById("missingModal");
                 let modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 modal.hide();
-                modalEl.addEventListener(
-                    "hidden.bs.modal",
-                    function () {
-                        document.body.classList.remove("modal-open");
-                        document.body.style.overflow = "auto";
-                        let backdrop =
-                            document.querySelector(".modal-backdrop");
-                        if (backdrop) backdrop.remove();
-                    },
-                    { once: true }
-                );
+                modalEl.addEventListener("hidden.bs.modal", function () {
+                    document.body.classList.remove("modal-open");
+                    document.body.style.overflow = "auto";
+                    let backdrop = document.querySelector(".modal-backdrop");
+                    if (backdrop) backdrop.remove();
+                },{ once: true });
                 Swal.fire({
                     icon: "success",
                     title: "تم تسجيل البيانات",
@@ -803,20 +797,19 @@ $(function () {
                 let modalEl = document.getElementById("missingModal");
                 let modal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 modal.hide();
-                modalEl.addEventListener(
-                    "hidden.bs.modal",
-                    function () {
-                        modalEl.classList.remove("fade");
-                        let backdrop =
-                            document.querySelector(".modal-backdrop");
-                        if (backdrop) backdrop.remove();
-                    },
-                    { once: true }
-                );
+                modalEl.addEventListener("hidden.bs.modal",function () {
+                    modalEl.classList.remove("fade");
+                    let backdrop = document.querySelector(".modal-backdrop");
+                    if (backdrop) backdrop.remove();
+                }, { once: true },);
                 Swal.fire({
                     icon: "error",
                     title: "Error",
-                    text: xhr.responseJSON?.message,
+                    text: "تم تسجيل البيانات بالفعل، برجاء انتظار المسؤول لتحديث البيانات",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
                 });
             },
         });

@@ -98,11 +98,11 @@ class SearchController extends Controller
     {
         $validated = $request->validate([
             'name' => 'nullable',
-            'ssn' => ['nullable', 'regex:/^(2|3)[0-9]{13}$/'],
+            'ssn' => ['nullable', 'regex:/^(2|3)[0-9]{13}$/', 'unique:searched_data,ssn'],
             'address' => 'nullable',
-            'mobile_no' => 'nullable|numeric|digits:11',
+            'mobile_no' => 'nullable|numeric|digits:11|unique:searched_data,mobile_no',
             'birthdate' => 'nullable|date',
-            'member_id' => 'nullable',
+            'member_id' => 'nullable|unique:searched_data,member_id',
         ]);
         $store = SearchedData::create($validated);
         if ($store) {
