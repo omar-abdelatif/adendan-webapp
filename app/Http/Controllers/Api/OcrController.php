@@ -11,7 +11,7 @@ class OcrController extends Controller {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'nid' => 'required|string|digits:14|unique:ocr_data,nid',
+            'nid' => 'required|string|unique:ocr_data,nid',
             'birth_date' => 'required|string',
             'mobile' => 'nullable|string|max:20',
         ]);
