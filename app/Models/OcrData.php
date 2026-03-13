@@ -10,5 +10,6 @@ class OcrData extends Model {
         'address',
         'nid',
         'birth_date',
+        'mobile',
     ];
 }
