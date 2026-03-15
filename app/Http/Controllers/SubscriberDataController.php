@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\SearchedData;
-use App\Models\Subscribers;
 use Illuminate\Http\Request;
+use App\Models\Subscribers;
 
 class SubscriberDataController extends Controller {
     public function approve(Request $request){
         $member = Subscribers::where('member_id', $request->member_id)->first();
-        if (!$member) {
-            return response()->json(['status' => false, 'message' => 'العضو غير موجود'], 404);
-        }
         if ($member) {
             $data = [];
             if (!empty($request->ssn)) {
@@ -42,13 +39,7 @@ class SubscriberDataController extends Controller {
                     'id'      => $approvedMember->id ?? null
                 ]);
             }
-            return response()->json(['status' => false, 'message' => 'لا توجد بيانات لتحديثها'], 400);
         }
-        return response()->json(['status' => false, 'message' => 'العضو غير موجود'], 404);
-    }
-    public function insert(Request $request){
-        $lastMemberId = Subscribers::latest('id')->value('member_id');
-        dd($lastMemberId);
     }
     public function delete($id) {
         return SearchedData::findOrFail($id)->delete();

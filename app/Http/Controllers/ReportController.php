@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\Delay;
 use App\Models\Donations;
+use App\Models\OcrData;
 use App\Models\Olddelays;
+use App\Models\OuterDonations;
+use App\Models\SafeReports;
+use App\Models\SearchedData;
+use App\Models\Subscribers;
 use App\Models\TotalBank;
 use App\Models\TotalSafe;
-use App\Models\SafeReports;
-use App\Models\Subscribers;
-use App\Models\SearchedData;
 use Illuminate\Http\Request;
-use App\Models\OuterDonations;
 
 class ReportController extends Controller
 {
@@ -212,6 +213,50 @@ class ReportController extends Controller
     //! Subscribers Data
     public function searchedData() {
         $data = SearchedData::all();
-        return view('pages.reports.subscribers_data_update', compact('data'));
+        $ocr = OcrData::all();
+        return view('pages.reports.subscribers_data_update', compact('data', 'ocr'));
+    }
+    public function approveOcrData($ocr_id)
+    {
+        $ocrData = OcrData::findOrFail($ocr_id);
+        $member = Subscribers::where('ssn', $ocrData->nid)->first();
+
+        if ($member) {
+            $data = [
+                'ssn' => $ocrData->nid,
+                'birthdate' => $ocrData->birth_date,
+                'address' => $ocrData->address,
+                'mobile_no' => $ocrData->mobile
+            ];
+            $update = $member->update($data);
+            if ($update) {
+                $ocrData->delete();
+                $notificationSuccess = [
+                    'message' => "تم الحديث بنجاح",
+                    'alert-type' => 'success'
+                ];
+                return redirect()->back()->with($notificationSuccess);
+            }
+        }
+        $subscriber = Subscribers::where('mobile_no', $ocrData->mobile)->first();
+        if ($subscriber) {
+            $subscriber->update([
+                'name'        => $ocrData->name,
+                'ssn' => $ocrData->nid,
+                'address'     => $ocrData->address,
+                'birth_date'  => $ocrData->birth_date,
+                'mobile_no'   => $ocrData->mobile
+            ]);
+            $notification = [
+                'message' => "خطأ اثناء التحديث",
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+        $notification = [
+            'message' => "خطأ اثناء التحديث",
+            'alert-type' => 'error'
+        ];
+        return redirect()->back()->with($notification);
     }
 }
