@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\OcrData;
 use App\Models\SearchedData;
 use Illuminate\Http\Request;
 use App\Models\Subscribers;
@@ -43,5 +44,15 @@ class SubscriberDataController extends Controller {
     }
     public function delete($id) {
         return SearchedData::findOrFail($id)->delete();
+    }
+    public function deleteOcr($id)
+    {
+        $ocr = OcrData::findOrFail($id);
+        $ocr->delete();
+        $notificationSuccess = [
+            'message' => "تم الحذف بنجاح",
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notificationSuccess);
     }
 }

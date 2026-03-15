@@ -81,6 +81,7 @@
                                         <td class="text-center">{{$item->address ?? '-'}}</td>
                                         <td class="text-center">{{$item->birth_date ?? '-'}}</td>
                                         <td class="text-center">
+
                                             <form action="{{ route('reports.search.approve', $item->id) }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="name" value="{{$item->name}}">
@@ -92,6 +93,9 @@
                                                     <i class="fa-solid fa-check fs-5"></i>
                                                 </button>
                                             </form>
+                                            <a href="{{route('search.ocr.delete', $item->id)}}" class="btn btn-outline-danger d-flex align-items-center justify-content-center p-2">
+                                                <span data-feather="trash" class="m-0 p-0"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

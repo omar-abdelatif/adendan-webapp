@@ -178,6 +178,7 @@ Route::middleware('auth')->group(function () {
             Route::post('approve', 'approve')->name('approve');
             Route::get('delete/{id}', 'delete')->name('delete');
             Route::post('create_new', 'insert')->name('insert');
+            Route::get('delete_ocr/{id}', 'deleteOcr')->name('ocr.delete');
         });
     });
 });
