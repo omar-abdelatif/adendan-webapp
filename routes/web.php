@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\SearchedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -92,6 +91,7 @@ Route::middleware('auth')->group(function () {
             Route::get('inner_donations', 'innerDonations')->name('reports.innerDonations');
             Route::get('subscribers_data', 'searchedData')->name('reports.subscribersData');
             Route::get('subscriptions_old_delays', 'subOldDelay')->name('reports.subOlddelay');
+            Route::post('subscribers_data_ocr/approve/{ocr_id}', 'approveOcrData')->name('reports.search.approve');
         });
         Route::prefix('weddings')->controller(WeddingController::class)->group(function () {
             Route::get('weddings/all', 'index')->name('weddings.all');

@@ -5,14 +5,21 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="footer-item">
                         <div class="footer-item-title mb-3">
-                            <h1 class="text-center text-decoration-underline">للتبرعات</h1>
+                            <h1 class="text-center text-decoration-underline">للتبرع و الدفع</h1>
                         </div>
                         <div class="footer-item-body overflow-hidden mx-5">
-                            <div class="donate-acc-bank d-flex align-items-center justify-content-evenly rounded p-3" style="background-color: #ea4227">
-                                <img src="{{asset('assets/frontend/images/icons/cairo_bank.jpg')}}" width="65" class="img-fluid rounded-circle" alt="bank logo">
+                            <div class="donate-acc-bank mb-4 d-flex align-items-center justify-content-evenly rounded p-3" style="background-color: #ea4227">
+                                <img src="{{asset('assets/frontend/images/icons/cairo_bank.jpg')}}" width="80" class="img-fluid rounded-circle" alt="bank logo">
                                 <div class="texts-details">
                                     <h4 class="text-center text-white mb-3">حساب بنك القاهرة</h4>
                                     <p class="mb-0 text-center fw-bold fs-5 text-white">00405010000670</p>
+                                </div>
+                            </div>
+                            <div class="donate-acc-vc d-flex align-items-center justify-content-evenly rounded p-3" style="background-color: #E60000">
+                                <img src="{{asset('assets/frontend/images/icons/vodafone_cash.jpeg')}}" width="80" class="img-fluid rounded-circle" alt="vodafone cash">
+                                <div class="texts-details">
+                                    <h4 class="text-center text-white mb-3">رقم فودافون كاش</h4>
+                                    <p class="mb-0 text-center fw-bold fs-5 text-white">010xxxxxxxx</p>
                                 </div>
                             </div>
                         </div>
