@@ -12,11 +12,10 @@ function postByAjax(url, method, formData) {
                 let memberId = member.member_id;
                 let memberStatus = member.status;
                 let missingFields = data.data.missingFields;
-                let delays = data.data.delays;
-                let oldDelays = data.data.oldDelays;
-                let donationDelay = data.data.donationDelays;
-                let donationOldDelays = data.data.donationOlddelays;
-                let html = content( memberName, memberId, memberStatus, missingFields, delays, oldDelays, donationDelay, donationOldDelays);
+                let delays = data.data.subsDues;
+                let donationDelay = data.data.donDues;
+                console.log(delays, donationDelay);
+                let html = content( memberName, memberId, memberStatus, missingFields, delays, donationDelay, );
                 $("#searchResult").html(html);
             } else {
                 let nothing = noSearch();
@@ -34,7 +33,14 @@ function postByAjax(url, method, formData) {
         },
     });
 }
-function content(memberName, memberId, memberStatus, missingFields, delays, oldDelays, donationDelay, donationOldDelays) {
+function content(
+    memberName,
+    memberId,
+    memberStatus,
+    missingFields,
+    delays,
+    donationDelay,
+) {
     let statusText = "";
     let statusClass = "";
     let missingHtml = "";
@@ -42,9 +48,7 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
     let missingModal = "";
     let formInputs = "";
     let delaysArr = "";
-    let oldDelaysArr = "";
     let donationDelayArr = "";
-    let donationOldDelaysArr = "";
     if (memberStatus === 1) {
         statusText = "الإشتراك مفعل";
         statusClass = "text-white bg-primary";
@@ -54,9 +58,6 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
     } else if (memberStatus === 2) {
         statusText = "المشترك متوفي";
         statusClass = "text-white bg-dark";
-    } else {
-        statusText = "الإشتراك معلق";
-        statusClass = "text-dark bg-warning";
     }
     if (missingFields && Object.keys(missingFields).length > 0) {
         missingHtml += `<div class=""><div class="alert alert-warning mx-3 mt-2">`;
@@ -67,7 +68,7 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
                 <input type="hidden" class="form-control" name="member_id" value="${memberId}">
                 <div class="mb-3">
                     <label class="form-label">${label}</label>
-                    <input type="${ key === "birthdate" ? "date" : "text" }" class="form-control" name="${key}" placeholder="ادخل ${label}" autocomplete="${key}">
+                    <input type="${key === "birthdate" ? "date" : "text"}" class="form-control" name="${key}" placeholder="ادخل ${label}" autocomplete="${key}">
                 </div>
             `;
         }
@@ -95,21 +96,22 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
         missingHtml += `</div></div>`;
     }
     if (delays && delays.length > 0) {
-        delays.map(function (item) {
-            delaysArr += `
+        delays
+            .map(function (item) {
+                delaysArr += `
                 <div class="col-lg-3 p-1 py-2">
                     <div class="text-center">
                         <h4 role="presentation">
-                            <span class="h6 text-green total-current-subscription-amount fw-light d-block" data-total-current-subscription-amount="${item.yearly_cost}">المبلغ السنوي</span>
-                            ${item.yearly_cost + 'ج.م'}
+                            <span class="h6 text-green total-current-subscription-amount fw-light d-block" data-total-current-subscription-amount="${item.total_amount}">المبلغ المستحق</span>
+                            ${item.total_amount + "ج.م"}
                         </h4>
                     </div>
                 </div>
                 <div class="col-lg-3 p-1 py-2">
                     <div class="text-center">
                         <h4 role="presentation">
-                            <span class="h6 text-green fw-light d-block">السنة</span>
-                            ${item.year}
+                            <span class="h6 text-green fw-light d-block">البند</span>
+                            ${item.item}
                         </h4>
                     </div>
                 </div>
@@ -117,63 +119,33 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
                     <div class="text-center">
                         <h4 role="presentation">
                             <span class="h6 text-green fw-light d-block">المدفوع</span>
-                            ${item.paied === null ? 'لا يوجد' : item.paied + 'ج.م'}
+                            ${item.amount_paid === null ? "لا يوجد" : item.amount_paid + "ج.م"}
                         </h4>
                     </div>
                 </div>
                 <div class="col-lg-3 p-1 py-2">
                     <div class="text-center">
                         <h3 role="presentation">
-                            <span class="h6 text-green fw-light d-block current-subscription-remaining-amount" ${item.remaing ? `data-current-subscription-remaining-amount="${item.remaing}"` : ''}>المتبقي</span>
-                            ${item.remaing === null ? 'لا يوجد' : item.remaing + 'ج.م'}
+                            <span class="h6 text-green fw-light d-block current-subscription-remaining-amount" ${item.amount_remaining ? `data-current-subscription-remaining-amount="${item.amount_remaining}"` : ""}>المتبقي</span>
+                            ${item.amount_remaining === null ? "لا يوجد" : item.amount_remaining + "ج.م"}
                         </h3>
                     </div>
                 </div>
             `;
-        }).join("");
+            })
+            .join("");
     } else {
         delaysArr += `<p class="mb-0 text-center empty-msg fw-bold fs-3">لا توجد مبالغ مستحقة</p>`;
     }
-    if (oldDelays && oldDelays.length > 0) {
-        oldDelays.map(function (item) {
-            oldDelaysArr += `
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h4 role="presentation">
-                            <span class="h6 text-green total-subscription-oldDelay-amount fw-light d-block" data-total-subscription-olddelay-amount="${item.amount}">المبلغ المطلوب</span>
-                            ${item.amount + 'ج.م'}
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h4 role="presentation">
-                            <span class="h6 text-green fw-light d-block">المدفوع</span>
-                            ${item.delay_amount === null ? 'لا يوجد' : item.delay_amount + 'ج.م'}
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h3 role="presentation">
-                            <span class="h6 text-green oldDelay-remaining-subscription-amount fw-light d-block current-subscription-remaining-amount" ${item.delay_remaining ? `data-olddelay-subscription-remaining-amount="${item.delay_remaining}"` : ''}>المتبقي</span>
-                            ${item.delay_remaining === null ? 'لا يوجد' : item.delay_remaining + 'ج.م'}
-                        </h3>
-                    </div>
-                </div>
-            `;
-        }).join("");
-    } else {
-        oldDelaysArr += `<p class="mb-0 text-center empty-msg fw-bold fs-3">لا توجد مبالغ مستحقة</p>`;
-    }
     if (donationDelay && donationDelay.length > 0) {
-        donationDelay.map(function (item) {
-            donationDelayArr += `
+        donationDelay
+            .map(function (item) {
+                donationDelayArr += `
                 <div class="col-lg-4 p-1 py-2">
                     <div class="text-center">
                         <h4 role="presentation">
-                            <span class="h6 text-green fw-light total-current-donation-amount d-block" data-total-current-donation-amount="${item.delay_amount}">المبلغ المطلوب</span>
-                            ${item.delay_amount + 'ج.م'}
+                            <span class="h6 text-green fw-light total-current-donation-amount d-block" data-total-current-donation-amount="${item.total_amount}">المبلغ المطلوب</span>
+                            ${item.total_amount + "ج.م"}
                         </h4>
                     </div>
                 </div>
@@ -181,54 +153,23 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
                     <div class="text-center">
                         <h4 role="presentation">
                             <span class="h6 text-green fw-light d-block">المدفوع</span>
-                            ${item.amount_paied === null ? 'لا يوجد' : item.amount_paied + 'ج.م'} 
+                            ${item.amount_paid === null ? "لا يوجد" : item.amount_paid + "ج.م"}
                         </h4>
                     </div>
                 </div>
                 <div class="col-lg-4 p-1 py-2">
                     <div class="text-center">
                         <h4 role="presentation">
-                            <span class="h6 text-green fw-light current-donations-remaining-amount d-block" ${item.amount_remaining ? `data-current-donations-remaining-amount="${item.amount_remaining}"` : ''}>المتبقي</span>
-                            ${item.amount_remaining === null ? 'لا يوجد' : item.amount_remaining + 'ج.م'}
+                            <span class="h6 text-green fw-light current-donations-remaining-amount d-block" ${item.amount_remaining ? `data-current-donations-remaining-amount="${item.amount_remaining}"` : ""}>المتبقي</span>
+                            ${item.amount_remaining === null ? "لا يوجد" : item.amount_remaining + "ج.م"}
                         </h4>
                     </div>
                 </div>
             `;
-        }).join("");
+            })
+            .join("");
     } else {
         donationDelayArr += `<p class="mb-0 text-center empty-msg fw-bold fs-3">لا توجد مبالغ مستحقة</p>`;
-    }
-    if (donationOldDelays && donationOldDelays.length > 0) {
-        donationOldDelays.map(function (item) {
-            donationOldDelaysArr += `
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h4 role="presentation">
-                            <span class="h6 text-green total-donation-oldDelay-amount fw-light d-block" data-total-donation-olddelay-amount="${item.amount}">المبلغ المطلوب</span>
-                            ${item.amount + 'ج.م'}
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h4 role="presentation">
-                            <span class="h6 text-green fw-light d-block">المدفوع</span>
-                            ${item.delay_amount === null ? 'لا يوجد' : item.delay_amount + 'ج.م'}
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-lg-4 p-1 py-2">
-                    <div class="text-center">
-                        <h3 role="presentation">
-                            <span class="h6 text-green oldDelay-donations-remaining-amount fw-light d-block" data-olddelay-donations-remaining-amount="${item.delay_remaining === null ? 'لا يوجد' : item.delay_remaining + 'ج.م'}">المتبقي</span>
-                            ${item.delay_remaining === null ? 'لا يوجد' : item.delay_remaining + 'ج.م'}
-                        </h3>
-                    </div>
-                </div>
-            `;
-        }).join("");
-    } else {
-        donationOldDelaysArr += `<p class="mb-0 text-center empty-msg fw-bold fs-3">لا توجد مبالغ مستحقة</p>`;
     }
     let content = `
         <div class="card border-0 mx-auto">
@@ -250,26 +191,9 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
                                         <div class="w-100 border-1 border-dark ms-1 rounded-3">
                                             <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                 <img width="80" height="80" src="https://img.icons8.com/plasticine/80/cash--v2.png" alt="cash--v2"/>
-                                                مديونية الإشتراك السنوي
+                                                مستحقات الاشتراك
                                             </h4>
                                             <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">${delaysArr}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-3">
-                            <div class="old-delays">
-                                <div class="old-content">
-                                    <div class="row justify-content-center g-0">
-                                        <div class="w-100 border-1 border-dark rounded-3">
-                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                    <img width="80" height="80" src="https://img.icons8.com/external-kmg-design-outline-color-kmg-design/80/external-document-folder-and-document-kmg-design-outline-color-kmg-design.png" alt="external-document-folder-and-document-kmg-design-outline-color-kmg-design"/>
-                                                    متأخرات الإشتراكات
-                                                </h4>
-                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">${oldDelaysArr}</div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -283,26 +207,9 @@ function content(memberName, memberId, memberStatus, missingFields, delays, oldD
                                             <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
                                                 <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
                                                     <img width="64" height="64" src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/64/external-donate-money-currency-those-icons-lineal-color-those-icons.png" alt="external-donate-money-currency-those-icons-lineal-color-those-icons"/>
-                                                    مديونية التبرعات
+                                                    مستحقات التبرعات
                                                 </h4>
                                                 <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">${donationDelayArr}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-3">
-                            <div class="old-donations">
-                                <div class="old-donation-content">
-                                    <div class="row justify-content-center g-0">
-                                        <div class="w-100 border-1 border-dark rounded-3">
-                                            <div id="fieldInfo-0" class="card statistics-card-category justify-content-evenly statistics-card-grey card-shadow border-rounded-15 p-4">
-                                                <h4 class="text-green fw-bold pb-2 d-flex justify-content-evenly align-items-center" aria-level="3">
-                                                    <img width="64" height="64" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-donation-economy-and-currency-justicon-lineal-color-justicon.png" alt="external-donation-economy-and-currency-justicon-lineal-color-justicon"/>
-                                                    متأخرات التبرعات
-                                                </h4>
-                                                <div class="row statistics-card-grey-small border-rounded-15 statistics-card-border p-1 py-2">${donationOldDelaysArr}</div>
                                             </div>
                                         </div>
                                     </div>

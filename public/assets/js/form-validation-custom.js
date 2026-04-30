@@ -1082,15 +1082,9 @@ if (DelaysForm) {
     DelaysForm.forEach((form) => {
         //! Invoices Number Validation
         invoices.forEach((inv) => {
-            let invoiceNo = form.querySelector(
-                `input[name="invoice_no"][data-invoice-id="${inv.dataset.invoiceId}"]`
-            );
-            let invReq = form.querySelector(
-                `p.invReq[data-invoice-id="${inv.dataset.invoiceId}"]`
-            );
-            let invMsg = form.querySelector(
-                `p.invMsg[data-invoice-id="${inv.dataset.invoiceId}"]`
-            );
+            let invoiceNo = form.querySelector(`input[name="invoice_no"][data-invoice-id="${inv.dataset.invoiceId}"]`);
+            let invReq = form.querySelector(`p.invReq[data-invoice-id="${inv.dataset.invoiceId}"]`);
+            let invMsg = form.querySelector(`p.invMsg[data-invoice-id="${inv.dataset.invoiceId}"]`);
             if (invoiceNo) {
                 inv.addEventListener("input", function () {
                     let invoiceReg = /^\d{5}$/;
@@ -1117,15 +1111,9 @@ if (DelaysForm) {
         });
         //! Debt Amount Validation
         AllDebts.forEach((debt) => {
-            let debtAmount = form.querySelector(
-                `input[name="paied"][data-delay-id="${debt.dataset.delayId}"]`
-            );
-            let debtReq = form.querySelector(
-                `p.payReq[data-delay-id="${debt.dataset.delayId}"]`
-            );
-            let debtMsg = form.querySelector(
-                `p.payMsg[data-delay-id="${debt.dataset.delayId}"]`
-            );
+            let debtAmount = form.querySelector(`input[name="paied"][data-delay-id="${debt.dataset.delayId}"]`);
+            let debtReq = form.querySelector(`p.payReq[data-delay-id="${debt.dataset.delayId}"]`);
+            let debtMsg = form.querySelector(`p.payMsg[data-delay-id="${debt.dataset.delayId}"]`);
             if (debtAmount) {
                 debt.addEventListener("input", function () {
                     let debtReg = /(?=.{2,5})/;

@@ -9,50 +9,44 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class SubscribersImport implements ToCollection, WithHeadingRow, WithBatchInserts
-{
-    /**
-     * @param Collection $collection
-     */
-    public function collection(Collection $collection)
-    {
+class SubscribersImport implements ToCollection, WithHeadingRow, WithBatchInserts {
+    public function collection(Collection $collection) {
         foreach ($collection as $row) {
             $birthdate = null;
-            if ($row['birthdate'] instanceof \PhpOffice\PhpSpreadsheet\Shared\Date) {
-                $birthdate = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['birthdate'])->format('Y-m-d');
-            } elseif (is_numeric($row['birthdate'])) {
-                $birthdate = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['birthdate'])->format('Y-m-d');
-            } else {
-                $birthdate = date('Y-m-d', strtotime($row['birthdate']));
+            if (!empty($row['birthdate'])) {
+                if (is_numeric($row['birthdate'])) {
+                    $birthdate = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['birthdate'])->format('Y-m-d');
+                } else {
+                    $birthdate = date('Y-m-d', strtotime($row['birthdate']));
+                }
             }
-            Subscribers::create([
-                'member_id'                 => $row['member_id'],
-                'name'                      => $row['name'],
-                'slug'                      => Str::slug(strtolower($row['name'])),
-                'nickname'                  => $row['nickname'],
-                'ssn'                       => $row['ssn'],
-                'address'                   => $row['address'],
-                'educational_qualification' => $row['educational_qualification'],
-                'qualification_date'        => $row['qualification_date'],
-                'job'                       => $row['job'],
-                'job_destination'           => $row['job_destination'],
-                'job_tel'                   => $row['job_tel'],
-                'job_address'               => $row['job_address'],
-                'home_tel'                  => $row['home_tel'],
-                'martial_status'            => $row['martial_status'],
-                'birthdate'                 => $birthdate,
-                'mobile_no'                 => $row['mobile_no'],
-                'membership_type'           => $row['membership_type'],
-            ]);
+            Subscribers::updateOrCreate(
+                ['member_id' => $row['member_id']],
+                [
+                    'name' => $row['name'] ?? null,
+                    'slug' => isset($row['name']) ? Str::slug(strtolower($row['name'])) : null,
+                    'nickname' => $row['nickname'] ?? null,
+                    'ssn' => $row['ssn'] ?? null,
+                    'address' => $row['address'] ?? null,
+                    'educational_qualification' => $row['educational_qualification'] ?? null,
+                    'qualification_date' => $row['qualification_date'] ?? null,
+                    'job' => $row['job'] ?? null,
+                    'job_destination' => $row['job_destination'] ?? null,
+                    'job_tel' => $row['job_tel'] ?? null,
+                    'job_address' => $row['job_address'] ?? null,
+                    'home_tel' => $row['home_tel'] ?? null,
+                    'martial_status' => $row['martial_status'] ?? null,
+                    'birthdate' => $birthdate ?? null,
+                    'mobile_no' => $row['mobile_no'] ?? null,
+                    'membership_type' => $row['membership_type'] ?? null,
+                ]
+            );
         }
     }
-
-    function headingRow(): int
-    {
+    function headingRow(): int {
         return 1;
     }
-    function batchSize(): int
-    {
+    function batchSize(): int {
         return 100;
     }
 }

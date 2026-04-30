@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use Carbon\Carbon;
 use App\Models\Tombs;
 use App\Models\Wedding;
-use App\Models\Olddelays;
 use App\Models\Subscribers;
 use App\Models\SearchedData;
 use Illuminate\Http\Request;
-use App\Models\DonationDelay;
 use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
@@ -72,21 +70,15 @@ class SearchController extends Controller
                 $missingFields[$key] = $label;
             }
         }
-        $noDelays = 'لا توجد مديونية إشتراكات';
-        $noOldDelays = 'لا توجد متأخرات إشتراكات';
-        $delays = $member->delays;
-        $oldDelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'إشتراكات')->get();
-        $donationOlddelays = Olddelays::where('member_id', $member->member_id)->where('old_delay_type', 'تبرعات')->get();
-        $donationDelays = DonationDelay::where('member_id', $member->member_id)->get();
+        $noDelays = 'لا توجد مستحقات';
+        $subsDues = $member->dues()->where('transaction_type', 'إشتراك')->get();
+        $donDues = $member->dues()->where('transaction_type', 'تبرعات')->get();
         return response()->json(['status' => true, 'data' => [
             'member' => $member,
             'searched' => true,
-            'delays' => $delays,
-            'oldDelays' => $oldDelays,
+            'subsDues' => $subsDues,
             'noDelays' => $noDelays,
-            'noOldDelays' => $noOldDelays,
-            'donationOlddelays' => $donationOlddelays,
-            'donationDelays' => $donationDelays,
+            'donDues' => $donDues,
             'missingFields' => $missingFields,
         ]]);
     }

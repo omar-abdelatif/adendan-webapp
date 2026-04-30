@@ -145,4 +145,47 @@ $(function () {
             });
         }
     });
+    //! Generate Passwords For Subscribers
+    $("#generate_passwords").on("click", function () {
+        let generateUrl = $(this).data("generate-url");
+        Swal.fire({
+            title: "هل أنت متأكد ؟",
+            text: `سيتم إنشاء كلمات سر جديدة. هل ترغب في المتابعة؟`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "نعم!",
+            customClass: {
+                confirmButton: "text-white fw-bold",
+                cancelButton: "text-white fw-bold",
+            },
+            cancelButtonText: "إلغاء",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: generateUrl,
+                    method: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "تم إنشاء كلمات المرور بنجاح",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "خطأ",
+                            text:xhr.responseJSON?.message ||"لا يمكن اتمام العملية",
+                        });
+                    },
+                });
+            }
+        });
+    });
 });

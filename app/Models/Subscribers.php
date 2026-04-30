@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Subscribers extends Model
-{
-    use HasFactory, LogsActivity;
+class Subscribers extends Authenticatable {
+    use HasFactory, LogsActivity, HasApiTokens;
     protected $table = 'subscribers';
+    protected $hidden = ['password'];
     protected $fillable = [
         'member_id',
         'name',
@@ -28,25 +29,24 @@ class Subscribers extends Model
         'martial_status',
         'birthdate',
         'mobile_no',
+        'another_mobile_no',
         'membership_type',
         'id_img',
         'status',
         'img',
+        'tomb_name',
     ];
-    public function subscriptions(){
-        return $this->hasMany(Subscriptions::class);
+    public function dues(){
+        return $this->hasMany(Due::class, 'member_id', 'member_id');
     }
-    public function delays(){
-        return $this->hasMany(Delay::class);
+    public function paymentTransactions(){
+        return $this->hasMany(PaymentTransaction::class, 'member_id', 'member_id');
     }
     public function donations(){
         return $this->hasMany(Donations::class);
     }
-    public function olddelays(){
-        return $this->hasMany(Olddelays::class);
-    }
-    public function donationDelays(){
-        return $this->hasMany(DonationDelay::class);
+    public function tomb(){
+        return $this->belongsTo(Tombs::class, 'tomb_name', 'title');
     }
     protected function getDynamicLogName(): string{
         return 'Subscribers';
@@ -64,5 +64,8 @@ class Subscribers extends Model
         ];
         $arDescription = $descriptions[$eventName] ?? 'حدث غير معروف للعضو';
         return strtr($arDescription, [':name' => $this->name ?? 'اسم غير معروف']);
+    }
+    public function getAuthIdentifierName() {
+        return 'ssn';
     }
 }

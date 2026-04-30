@@ -251,7 +251,7 @@
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card card-shadow overflow-hidden border-rounded mb-4 mt-5">
                                         <div class="card-image position-relative">
-                                            <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/1708715916.png')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
+                                            <div style="width: 100%; height:250px; background-image:url({{ $wn->img ? asset('assets/images/news-imgs/'.$wn->img) : asset('assets/images/weddings/default.jpg')}}); background-size: cover; background-repeat: no-repeat; background-position: top;"></div>
                                             <div class="category position-absolute top-0 start-0 rounded-pill bg-success text-white w-100 text-center fw-bold px-3 py-1 fs-6">
                                                 <span>{{ $wn->category }}</span>
                                             </div>

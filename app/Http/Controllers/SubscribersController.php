@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Delay;
-use App\Models\CostYears;
+use App\Models\Tombs;
 use App\Models\TotalSafe;
+use App\Models\CostYears;
 use App\Models\SafeReports;
 use App\Models\Subscribers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Subscriptions;
 use App\Imports\SubscribersImport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Requests\SubscriberRequest;
+use Illuminate\Support\Facades\Artisan;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubscribersController extends Controller
@@ -30,7 +32,7 @@ class SubscribersController extends Controller
         $year = $value[1];
         $currentSubCost = $cost / 12 * $halfDelay;
         $subs = Subscribers::get();
-        $members = Subscribers::with('delays')->get();
+        $members = Subscribers::with('dues')->get();
         $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
     }
@@ -117,7 +119,7 @@ class SubscribersController extends Controller
             return redirect()->back()->withErrors($validatedData);
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $member = Subscribers::find($id);
         if ($member) {
@@ -143,11 +145,12 @@ class SubscribersController extends Controller
             }
         }
     }
-    public function subscriberDetails($id)
+    public function subscriberDetails(int $id)
     {
         $subscriber = Subscribers::find($id);
+        $tombs = Tombs::get();
         if ($subscriber) {
-            return view('pages.subscribers.update_subscriber', compact('subscriber'));
+            return view('pages.subscribers.update_subscriber', compact('subscriber', 'tombs'));
         }
     }
     public function update(Request $request)
@@ -194,6 +197,7 @@ class SubscribersController extends Controller
                 'address' => $request['address'],
                 'birthdate' => $request['birthdate'],
                 'mobile_no' => $request['mobile_no'],
+                'another_mobile_no' => $request['another_mobile_no'],
                 'job' => $request['job'],
                 'job_tel' => $request['job_tel'],
                 'home_tel' => $request['home_tel'],
@@ -203,12 +207,12 @@ class SubscribersController extends Controller
                 'membership_type' => $request['membership_type'],
                 'educational_qualification' => $request['educational_qualification'],
                 'qualification_date' => $request['qualification_date'],
+                'tomb_name' => $request['tomb_name'],
             ]);
-            if ($request->status) {
+            DB::transaction(function () use ($member) {
                 $member->update(['status' => 2]);
-            } else {
-                $member->update(['status' => 1]);
-            }
+                $member->dues()->delete();
+            });
             if ($update) {
                 $notificationSuccess = [
                     'message' => "تم التعديل بنجاح",
@@ -286,20 +290,17 @@ class SubscribersController extends Controller
                 <button class="btn btn-info rounded ms-0" id="btnGroupVerticalDrop1" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
-            <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">';
-            $actions .= '<a class="btn btn-primary px-2 py-1 me-2" title="الإشتراكات السابقة" role="button" href="' . route('subscription.history', $row->id) . '">
+                <div class="dropdown-menu text-center py-2 px-3" aria-labelledby="btnGroupVerticalDrop1">';
+            $actions .= '<a class="btn btn-primary px-2 py-1 me-2" title="المستحقات السابقة" role="button" href="' . route('subscription.history', $row->id) . '">
                             <i class="icofont icofont-eye"></i>
                         </a>
-                <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href="' . route('subscriber.details', $row->id) . '">
-                    <i class="icofont icofont-ui-edit text-dark"></i>
-                </a>
-                <a href="' . route('donations.showAll', $row->id) . '" title="التبرعات السابقة" class="btn btn-primary px-2 py-1 me-2">
-                    <i class="fa-solid fa-book-heart"></i>
-                </a>';
-            $actions .= '<button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_' . $row->id . '">
+                        <a class="btn btn-warning px-2 py-1 me-2" title="تعديل البيانات" role="button" href="' . route('subscriber.details', $row->id) . '">
+                            <i class="icofont icofont-ui-edit text-dark"></i>
+                        </a>
+                        <button type="button" class="btn btn-info px-2 py-1 ms-0" title="تبرع جديد" data-bs-toggle="modal" data-bs-target="#newdonating_' . $row->id . '">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
-                        </button>';
-            $actions .= '</div></div>';
+                        </button>
+                        </div></div>';
             $donationModal = '<div class="modal fade" id="newdonating_' . $row->id . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -352,10 +353,18 @@ class SubscribersController extends Controller
             return $actions . $donationModal;
         })->rawColumns(['Actions'])->make(true);
     }
-    public function getYearlyCostByAjax($year) {
+    public function getYearlyCostByAjax(string $year)
+    {
         $cost = CostYears::where('year', $year)->value('cost');
         return response()->json([
             'cost' => $cost
+        ]);
+    }
+    public function generatePasswords()
+    {
+        Artisan::call('users:generate-password');
+        return response()->json([
+            'message' => 'Passwords generated successfully'
         ]);
     }
 }

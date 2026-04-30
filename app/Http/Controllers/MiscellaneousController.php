@@ -8,18 +8,15 @@ use Illuminate\Http\Request;
 use App\Models\Miscellaneous;
 use App\Http\Requests\MiscellaneousRequest;
 
-class MiscellaneousController extends Controller
-{
+class MiscellaneousController extends Controller {
     function __construct(){
         $this->middleware('permission:النثريات');
     }
-    public function index()
-    {
+    public function index() {
         $miscellaneous = Miscellaneous::all();
         return view('pages.miscellaneous', compact('miscellaneous'));
     }
-    public function storeMiscellaneous(Request $request)
-    {
+    public function storeMiscellaneous(MiscellaneousRequest $request) {
         $validated = $request->validated();
         $totalSafe = TotalSafe::where('id', 1)->first();
         if ($request->hasFile('invoice_img')) {
@@ -58,8 +55,7 @@ class MiscellaneousController extends Controller
         }
         return redirect()->back()->with($validated);
     }
-    public function deleteMiscellaneous($id)
-    {
+    public function deleteMiscellaneous(int $id) {
         $misc = Miscellaneous::find($id);
         if ($misc) {
             if ($misc->invoice_img !== null) {
@@ -79,8 +75,7 @@ class MiscellaneousController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ');
     }
-    public function updateMiscellaneous(Request $request)
-    {
+    public function updateMiscellaneous(Request $request) {
         $id = $request->id;
         $misc = Miscellaneous::find($id);
         if ($misc) {
