@@ -52,10 +52,10 @@
                             <div class="bg-round">
                                 <img width="65" height="65" src="https://img.icons8.com/external-hidoc-kerismaker/65/external-Headstone-funeral-hidoc-kerismaker.png" alt="external-Headstone-funeral-hidoc-kerismaker" />
                             </div>
-                            <h5 class="mb-0">المقابر القديمة</h5>
+                            <h5 class="mb-0 text-muted">المقابر القديمة</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$donationTombsSum}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{$donationTombsSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -67,10 +67,10 @@
                             <div class="bg-round">
                                 <img width="64" height="64" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/external-condo-city-scape-xnimrodx-lineal-color-xnimrodx.png" alt="external-condo-city-scape-xnimrodx-lineal-color-xnimrodx"/>
                             </div>
-                            <h5 class="mb-0">ص.مقر</h5>
+                            <h5 class="mb-0 text-muted">ص.مقر</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$donationHeadquartersSum}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{$donationHeadquartersSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -82,10 +82,10 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/external-konkapp-outline-color-konkapp/70/external-van-transportation-konkapp-outline-color-konkapp.png" alt="external-van-transportation-konkapp-outline-color-konkapp"/>
                             </div>
-                            <h5 class="mb-0">ص.سيارة</h5>
+                            <h5 class="mb-0 text-muted">ص.سيارة</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$donationDeathCarSum}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{$donationDeathCarSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -97,10 +97,10 @@
                             <div class="bg-round">
                                 <img width="64" height="64" src="https://img.icons8.com/dusk/64/donate.png" alt="donate"/>
                             </div>
-                            <h5 class="mb-0">تبرع تنمية</h5>
+                            <h5 class="mb-0 text-muted">تبرع تنمية</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$donationDevSum}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{$donationDevSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -112,10 +112,10 @@
                             <div class="bg-round">
                                 <img width="64" height="64" src="https://img.icons8.com/external-anggara-filled-outline-anggara-putra/64/external-loan-economy-anggara-filled-outline-anggara-putra.png" alt="external-loan-economy-anggara-filled-outline-anggara-putra" />
                             </div>
-                            <h5 class="mb-0">تبرع إنتساب</h5>
+                            <h5 class="mb-0 text-muted">تبرع إنتساب</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$donationAffiliateSum}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{$donationAffiliateSum}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -127,25 +127,10 @@
                             <div class="bg-round">
                                 <img width="64" height="64" src="https://img.icons8.com/fluency/64/community-grants.png" alt="community-grants"/>
                             </div>
-                            <h5 class="mb-0">متأخرات التبرعات</h5>
+                            <h5 class="mb-0 text-muted">مستحقات التبرعات</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-0">{{$sumTotalOldDelaysDonations}} ج.م</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12 box-col-12">
-                <div class="card widget-1">
-                    <div class="card-body align-items-center">
-                        <div class="widget-content">
-                            <div class="bg-round">
-                                <img width="64" height="64" src="https://img.icons8.com/color/64/charity-donation.png" alt="charity-donation"/>
-                            </div>
-                            <h5 class="mb-0">مديونية التبرعات</h5>
-                        </div>
-                        <div class="font-Info">
-                            <h5 class="mb-0"> {{0}} ج.م</h5>
+                            <h5 class="mb-0 text-muted">{{$sumTotalDuesDonations}} ج.م</h5>
                         </div>
                     </div>
                 </div>

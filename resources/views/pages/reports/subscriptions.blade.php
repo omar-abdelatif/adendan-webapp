@@ -24,11 +24,11 @@
                                 <img width="60" height="60" src="https://img.icons8.com/external-filled-outline-perfect-kalash/60/external-Group-corporate-development-filled-outline-perfect-kalash.png" alt="external-Group-corporate-development-filled-outline-perfect-kalash" />
                             </div>
                             <div>
-                                <h5>عـدد الأعـضاء</h5>
+                                <h5 class="text-muted">عـدد الأعـضاء</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$count}}</h5>
+                            <h5 class="mb-1 text-muted">{{$count}}</h5>
                         </div>
                     </div>
                 </div>
@@ -41,11 +41,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/average-2.png" alt="average-2" />
                             </div>
                             <div>
-                                <h5>إجمالي متأخرات الإشتراكات السابقة</h5>
+                                <h5 class="text-muted">إجمالي مستحقات الإشتراكات</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumTotalOldDelaysSubscriptions}}  ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{$sumTotalSubscriptionDues}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/color/80/money-transfer.png" alt="money-transfer" />
                             </div>
                             <div>
-                                <h5>الـمحصـل ( المتأخرات )</h5>
+                                <h5 class="text-muted">الـمحصـل ( المستحقات )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumDelayAmount}} ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{$subscriptionSumDuePaied}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -75,11 +75,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>المتبقي ( المتأخرات )</h5>
+                                <h5 class="text-muted">المتبقي ( المستحقات )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumTotalOldDelaysSubscriptions - $sumDelayAmount}} ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{ $sumTotalSubscriptionDues - $subscriptionSumDuePaied }} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -92,11 +92,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>إجمالي قيمة الإشتراك الحالي</h5>
+                                <h5 class="text-muted">إجمالي قيمة الإشتراك الحالي {{ $currentSubscriptionYear }}</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumTotalDelays}} ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{$sumTotalCurrentSubscriptionDues}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -109,11 +109,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>المحصل ( قيمة الإشتراك )</h5>
+                                <h5 class="text-muted">المحصل ( قيمة الإشتراك )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumDelayPaied}} ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{$sumTotalCurrentSubscriptionDuesPaid}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -126,11 +126,11 @@
                                 <img width="80" height="80" src="https://img.icons8.com/dusk/80/question-mark.png" alt="question-mark" />
                             </div>
                             <div>
-                                <h5>المتبقي ( قيمة الإشتراك )</h5>
+                                <h5 class="text-muted">المتبقي ( قيمة الإشتراك )</h5>
                             </div>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1">{{$sumTotalDelays - $sumDelayPaied}} ج.م</h5>
+                            <h5 class="mb-1 text-muted"> {{$sumTotalCurrentSubscriptionDues - $sumTotalCurrentSubscriptionDuesPaid}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -198,22 +198,22 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             @php
-                                                                                $subscriptionDelay = $subscriber->subscriptions()->whereIn('payment_type', ['إشتراك جديد', 'إشتراك جزئي', 'إشتراك كلي'])->get();
+                                                                                $subscriptionDues = $subscriber->paymentTransactions()->where('transaction_type', 'اشتراك')->whereIn('payment_cat', ['جزئي', 'كلي'])->get();
                                                                             @endphp
-                                                                            @if ($subscriptionDelay->count())
-                                                                                @foreach ($subscriptionDelay as $subscription)
+                                                                            @if ($subscriptionDues->count() > 0)
+                                                                                @foreach ($subscriptionDues as $subscription)
                                                                                     <tr>
-                                                                                        <td>{{$subscription->subscription_cost}}</td>
-                                                                                        <td>{{$subscription->invoice_no}}</td>
+                                                                                        <td>{{$subscription->amount}}</td>
+                                                                                        <td>{{$subscription->inv_no}}</td>
                                                                                         <td>{{$subscription->created_at->format('Y-m-d')}}</td>
-                                                                                        <td>{{$subscription->period}}</td>
+                                                                                        <td>{{ $subscription->item }}</td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             @else
                                                                                 <tr>
                                                                                     <div class="col-lg-12">
                                                                                         <td colspan="4">
-                                                                                            <h1 class="text-center text-white">لا توجد إشتراكات مدفوعه لهذا المشترك</h1>
+                                                                                            <h1 class="text-center text-white">لا توجد مستحقات مدفوعه لهذا المشترك</h1>
                                                                                         </td>
                                                                                     </div>
                                                                                 </tr>

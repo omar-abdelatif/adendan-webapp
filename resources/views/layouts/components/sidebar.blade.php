@@ -162,7 +162,7 @@
                                 </li>
                                 <li>
                                     <a href="{{route('reports.search')}}">
-                                        <span>متأخرات الإشتراكات</span>
+                                        <span>مستحقات الإشتراكات</span>
                                     </a>
                                 </li>
                                 <li>
