@@ -65,14 +65,19 @@
                     <i class="icofont icofont-plus fw-bold"></i>
                     <span>إضافة مشتركين بالجملة</span>
                 </button>
-                {{-- ! Insert Bulk Donations ! --}}
-                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
+                {{-- ! Insert Bulk Dues ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mb-2" data-bs-toggle="modal" data-bs-target="#insert_bulk_dues">
                     <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات التبرعات بالجملة</span>
+                    <span>إضافة مستحقات بالجملة</span>
                 </button>
-                <button type="button" class="btn btn-success px-2 py-1" data-bs-toggle="modal" data-bs-target="#insert_bulk_delay">
-                    <i class="icofont icofont-plus fw-bold"></i>
-                    <span>إضافة متأخرات بالجملة</span>
+                <button type="button" class="btn btn-success px-2 py-1" id="generate_passwords" data-generate-url="{{route('generate-passwords')}}">
+                    <i class="icofont icofont-key fw-bold"></i>
+                    <span>توليد كلمات مرور جديدة لكل المشتركين</span>
+                </button>
+                {{-- ! Insert Bulk Payment Transactions ! --}}
+                <button type="button" class="btn btn-success px-2 py-1 mt-2" data-bs-toggle="modal" data-bs-target="#import_payment_transactions">
+                    <i class="icofont icofont-money-bag fw-bold"></i>
+                    <span>توليد معاملات دفع بالاكسل</span>
                 </button>
             @endif
         </div>
@@ -362,7 +367,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="costYear" class="text-muted">السنة</label>
-                                    <select name="year" id="costYear" class="form-select text-muted" required data-base-url="http://127.0.0.1:8000/admin/subscribers">
+                                    <select name="year" id="costYear" class="form-select text-muted" required data-base-url="https://adendan.com/admin/subscribers">
                                         <option selected disabled>السنة</option>
                                         @foreach ($years as $year)
                                             <option value="{{$year->year}}">{{$year->year}}</option>
@@ -387,36 +392,18 @@
             </div>
         </div>
     </div>
-    {{-- ! Insert Bulk Delay With Excel ! --}}
-    <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- ! Insert Bulk Dues With Excel ! --}}
+    <div class="modal fade" id="insert_bulk_dues" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة متأخرات بالجملة</h1>
+                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة مستحقات بالجملة</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('bulk_subscriber_delay')}}" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('bulk_subscriber_dues')}}" enctype="multipart/form-data" method="POST">
                         @csrf
-                        <input type="file" class="form-control" name="import-delay" accept=".xlsx, .xls">
-                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ! Insert Bulk Donations Modal ! --}}
-    <div class="modal fade" id="insert_bulk_delay" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">إضافة متأخرات التبرعات بالجملة</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{route('bulk_subscriber_delay')}}" enctype="multipart/form-data" method="POST">
-                        @csrf
-                        <input type="file" class="form-control" name="import-delay" accept=".xlsx, .xls">
+                        <input type="file" class="form-control" name="import-dues" accept=".xlsx, .xls">
                         <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
                     </form>
                 </div>
@@ -463,6 +450,26 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- ! Insert Bulk Payment Transactions ! --}}
+    <div class="modal fade" id="import_payment_transactions" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">توليد معاملات دفع بالاكسل</h1>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('payment_transactions.import')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="import-transactions" accept=".xlsx, .xls">
+                        </div>
+                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">حفظ البيانات</button>
                     </form>
                 </div>
             </div>

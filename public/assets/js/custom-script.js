@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     //! Form For Get The Incomplete Data From The Subscssriber
-    let searchedForms = document.querySelectorAll(".searchedForm[data-form-id]");
+    let searchedForms = document.querySelectorAll(".searchedForm[data-form-id]",);
     if (searchedForms) {
         searchedForms.forEach((form) => {
             let url = form.getAttribute("action");
@@ -134,5 +134,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 postByAjax(url, "POST", formData, "تم الموافقة على التعديلات ");
             });
         });
+    }
+    //! Show Death State Container If The Subscriber Is Dead
+    let deathOrNot = document.getElementById("deathOrNot");
+    let deathStateContainer = document.getElementById("deathStateContainer");
+    function toggleDeathState() {
+        if (deathOrNot.checked) {
+            deathStateContainer.classList.remove("d-none");
+        } else {
+            deathStateContainer.classList.add("d-none");
+        }
+    }
+    if (deathOrNot && deathStateContainer) {
+        deathOrNot.addEventListener("change", toggleDeathState);
+        toggleDeathState();
     }
 });

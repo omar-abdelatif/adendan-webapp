@@ -23,8 +23,69 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="subs-title mb-5">
-                    <h2 class="text-center text-decoration-underline">كل الإشتراكات و المديونيات السابقة للعضو {{$subscriber->name}}</h2>
+                <div class="row align-items-center">
+                    <div class="col-xl-8 box-col-8">
+                        <div class="card widget-1">
+                            <div class="card-body align-items-center">
+                                <div class="widget-content">
+                                    <div class="bg-round">
+                                        <img width="100" height="100" src="https://img.icons8.com/3d-fluent/100/user-2.png" alt="user-2"/>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted fs-4">إسم العضو: {{$subscriber->name}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 box-col-4">
+                        <div class="card widget-1">
+                            <div class="card-body align-items-center">
+                                <div class="widget-content">
+                                    <div class="bg-round">
+                                        <img width="100" height="100" src="https://img.icons8.com/3d-fluent/100/user-2.png" alt="user-2"/>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted fs-4">رقم العضوية: {{$subscriber->member_id}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 box-col-6">
+                        <div class="card widget-1">
+                            <div class="card-body align-items-center">
+                                <div class="widget-content">
+                                    <div class="bg-round">
+                                        <img width="100" height="100" src="https://img.icons8.com/color/80/money-transfer.png" alt="user-2"/>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted fs-4">أجمالي مستحقات الإشتراك: </h5>
+                                    </div>
+                                </div>
+                                <div class="font-Info">
+                                    <h5 class="mb-1 text-muted">{{number_format($totalSubscriptionAmount)}} ج.م</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 box-col-6">
+                        <div class="card widget-1">
+                            <div class="card-body align-items-center">
+                                <div class="widget-content">
+                                    <div class="bg-round">
+                                        <img width="100" height="100" src="https://img.icons8.com/color/80/money-transfer.png" alt="user-2"/>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted fs-4">قيمة مستحقات التبرعات: </h5>
+                                    </div>
+                                </div>
+                                <div class="font-Info">
+                                    <h5 class="mb-1 text-muted">{{number_format($totalDonationAmount)}} ج.م</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tabs mb-4">
                     <div class="nav nav-pills horizontal-options shipping-options justify-content-center" id="cart-options-tab" role="tablist" aria-orientation="vertical">
@@ -38,23 +99,23 @@
                                 </div>
                             </div>
                         </a>
-                        <a class="nav-link w-25 text-center rounded-pill py-3 btn btn-outline-primary mx-2" id="debts-tab" data-bs-toggle="pill" href="#debts" role="tab" aria-controls="debts" aria-selected="false" tabindex="-1">
+                        <a class="nav-link w-25 text-center rounded-pill py-3 btn btn-outline-primary mx-2" id="subscriptions-tab" data-bs-toggle="pill" href="#subscriptions" role="tab" aria-controls="subscriptions" aria-selected="false" tabindex="-1">
                             <div class="cart-options d-flex justify-content-center align-items-center h-100">
                                 <div class="stroke-icon-wizard me-2">
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
                                 <div class="cart-options-content">
-                                    <h6 class="mb-0">قيمة الإشتراك الحالي</h6>
+                                    <h6 class="mb-0">قيمة مستحقات الاشتراك</h6>
                                 </div>
                             </div>
                         </a>
-                        <a class="nav-link w-25 text-center rounded-pill py-3 btn btn-outline-primary" id="old-delays-tab" data-bs-toggle="pill" href="#old-delays" role="tab" aria-controls="old-delays" aria-selected="true">
+                        <a class="nav-link w-25 text-center rounded-pill py-3 btn btn-outline-primary mx-2" id="donations-tab" data-bs-toggle="pill" href="#donations" role="tab" aria-controls="donations" aria-selected="false" tabindex="-1">
                             <div class="cart-options d-flex justify-content-center align-items-center h-100">
                                 <div class="stroke-icon-wizard me-2">
                                     <i class="fa-solid fa-hand-holding-dollar"></i>
                                 </div>
                                 <div class="cart-options-content">
-                                    <h6 class="mb-0">متأخرات الإشتراك</h6>
+                                    <h6 class="mb-0">قيمة مستحقات التبرعات</h6>
                                 </div>
                             </div>
                         </a>
@@ -72,42 +133,31 @@
                                                     <table class="table display align-middle text-center table-hover" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-muted text-center">قيمة الإشتراك المدفوع</th>
-                                                                <th class="text-muted text-center">فترة الإشتراك</th>
+                                                                <th class="text-muted text-center">نوع المعاملة</th>
+                                                                <th class="text-muted text-center">البند</th>
+                                                                <th class="text-muted text-center">المبلغ المدفوع</th>
                                                                 <th class="text-muted text-center">نوع الدفع</th>
                                                                 <th class="text-muted text-center">تاريخ الدفع</th>
                                                                 <th class="text-muted text-center">رقم الإيصال</th>
-                                                                <th class="text-muted text-center">قيمة المتأخرات المدفوعة</th>
+                                                                <th class="text-muted text-center">طريقة الدفع</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php $i = 1 ?>
                                                             @foreach ($subscriptions as $item)
                                                                 <tr>
+                                                                    <td class="text-muted text-center">{{$item->transaction_type}}</td>
+                                                                    <td class="text-muted text-center">{{$item->item}}</td>
                                                                     <td class="text-muted text-center">
-                                                                        @if ($item->subscription_cost)
-                                                                            <span>{{$item->subscription_cost}}</span>
+                                                                        @if ($item->amount)
+                                                                            <span>{{$item->amount}}</span>
                                                                         @else
                                                                             <span class="fw-bold">-</span>
                                                                         @endif
                                                                     </td>
-                                                                    <td class="text-muted text-center">
-                                                                        @if ($item->period)
-                                                                            <span>{{$item->period}}</span>
-                                                                        @else
-                                                                        <span class="fw-bold">-</span>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td class="text-muted text-center">{{$item->payment_type}}</td>
+                                                                    <td class="text-muted text-center">{{$item->payment_cat}}</td>
                                                                     <td class="text-muted text-center">{{$item->payment_date}}</td>
-                                                                    <td class="text-muted text-center">{{$item->invoice_no}}</td>
-                                                                    <td class="text-muted text-center">
-                                                                        @if ($item->delays)
-                                                                            <span>{{$item->delays}}</span>
-                                                                        @else
-                                                                            <span class="fw-bold">-</span>
-                                                                        @endif
-                                                                    </td>
+                                                                    <td class="text-muted text-center">{{$item->inv_no}}</td>
+                                                                    <td class="text-muted text-center">{{$item->payment_method}}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -119,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="debts" role="tabpanel" aria-labelledby="debts-tab">
+                        <div class="tab-pane fade show" id="subscriptions" role="tabpanel" aria-labelledby="subscriptions-tab">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -128,24 +178,24 @@
                                                 <table id="table2" class="table display align-middle table-hover text-muted" data-order='[[0,"asc"]]' data-page-length="10">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-center">رقم العضوية</th>
-                                                            <th class="text-center">فترة الإشتراك</th>
-                                                            <th class="text-center">الإشتراك السنوي</th>
+                                                            <th class="text-center">#</th>
+                                                            <th class="text-center">البند</th>
+                                                            <th class="text-center">المبلغ المطلوب</th>
                                                             <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($delays as $delay)
+                                                        @foreach ($subDue as $delay)
                                                             <tr>
-                                                                <td class="text-center">{{$delay->member_id}}</td>
-                                                                <td class="text-center">{{$delay->year}}</td>
-                                                                <td class="text-center">{{$delay->yearly_cost}}</td>
-                                                                <td class="text-center">{{$delay->paied}}</td>
-                                                                <td class="text-center">{{$delay->remaing}}</td>
+                                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                                <td class="text-center">{{$delay->item}}</td>
+                                                                <td class="text-center">{{$delay->total_amount}}</td>
+                                                                <td class="text-center">{{$delay->amount_paid}}</td>
+                                                                <td class="text-center">{{$delay->amount_remaining}}</td>
                                                                 <td class="text-center">
-                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" title="دفع المديونية" data-bs-target="#payment_history_{{$delay->id}}">
+                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" title="دفع الاشتراكات" data-bs-target="#payment_history_{{$delay->id}}">
                                                                         <i class="fa-solid fa-money-bill"></i>
                                                                     </button>
                                                                     <div class="modal fade" id="payment_history_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -166,24 +216,33 @@
                                                                                                     <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$delay->member_id}}" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
-                                                                                                    <label for="year_cost" class="text-muted">سنة الدفع</label>
-                                                                                                    <input type="number" class="form-control text-muted" id="year_cost" name="year" value="{{$delay->year}}" readonly>
+                                                                                                    <label for="item" class="text-muted">البند</label>
+                                                                                                    <input type="text" class="form-control text-muted" id="item" name="item" value="{{$delay->item}}" readonly>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                     <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="invoice_no" id="invoice" maxlength="5" data-invoice-id="{{$delay->id}}" placeholder="رقم الإيصال" required>
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="inv_no" id="invoice" maxlength="5" data-invoice-id="{{$delay->id}}" placeholder="رقم الإيصال" required>
                                                                                                     <p class="required d-none text-danger mb-0 invReq" id="invReq" data-invoice-id="{{$delay->id}}">هذا الحقل مطلوب</p>
                                                                                                     <p class="required d-none text-danger mb-0 invMsg" id="invMsg" data-invoice-id="{{$delay->id}}">يجب ان يكون رقم الإيصال مكون من 5 ارقام</p>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                     <label for="paied" class="text-muted">المبلغ المدفوع</label>
-                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="paied" minlength="2" maxlength="5" id="paied" data-delay-id="{{$delay->id}}" placeholder="المبلغ المدفوع" required>
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="amount_paid" minlength="2" maxlength="5" id="paied" data-delay-id="{{$delay->id}}" placeholder="المبلغ المدفوع" required>
                                                                                                     <p class="required d-none text-danger mb-0 payReq" data-delay-id="{{$delay->id}}" id="payReq">هذا الحقل مطلوب</p>
                                                                                                     <p class="required d-none text-danger mb-0 payMsg" data-delay-id="{{$delay->id}}" id="payMsg">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                     <label for="payment_date" class="text-muted">تاريخ الدفع</label>
                                                                                                     <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="payment_date" class="text-muted">طريقة الدفع</label>
+                                                                                                    <select class="form-select text-muted" name="payment_method" id="payment_method">
+                                                                                                        <option selected disabled>اختر طريقة الدفع</option>
+                                                                                                        <option value="كاش">كاش</option>
+                                                                                                        <option value="فيزا">فيزا</option>
+                                                                                                        <option value="محفظة">محفظة</option>
+                                                                                                    </select>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -207,156 +266,90 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show" id="old-delays" role="tabpanel" aria-labelledby="old-delays-tab">
+                        <div class="tab-pane fade show" id="donations" role="tabpanel" aria-labelledby="donations-tab">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <table id="table3" class="table display align-middle table-hover text-center text-muted" data-order='[[0,"asc"]]' data-page-length="10">
+                                                <table id="table3" class="table display align-middle table-hover text-muted" data-order='[[0,"asc"]]' data-page-length="10">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-center">رقم العضوية</th>
-                                                            <th class="text-muted text-center">المبلغ الكلي</th>
-                                                            <th class="text-muted text-center">المبلغ المدفوع</th>
+                                                            <th class="text-center">#</th>
+                                                            <th class="text-center">البند</th>
+                                                            <th class="text-center">المبلغ المطلوب</th>
+                                                            <th class="text-center">المبلغ المدفوع</th>
                                                             <th class="text-center">المبلغ المتبقي</th>
                                                             <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($oldelays as $delay)
-                                                            @if ($delay->delay_remaining === 0)
-                                                                <tr class="">
-                                                                    <td>{{$delay->member_id}}</td>
-                                                                    <td>{{$delay->amount}}</td>
-                                                                    @if ($delay->delay_amount == null && $delay->delay_remaining == null)
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                    @else
-                                                                        <td>{{$delay->delay_amount}}</td>
-                                                                        <td>{{$delay->delay_remaining}}</td>
-                                                                    @endif
-                                                                    <td>
-                                                                        <button class="btn btn-secondary" title="دفع المتأخرات" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
-                                                                            <i class="fa-solid fa-money-bill"></i>
-                                                                        </button>
-                                                                        <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد متأخرات الإشتراك</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action="{{route('oldDelays.pay')}}" method="post" data-paymentForm-id="{{$delay->id}}">
-                                                                                            @csrf
-                                                                                            <div class="row">
-                                                                                                <input type="hidden" name="id" value="{{$delay->id}}"/>
-                                                                                                <div class="col-12">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="member_id" class="text-muted">رقم العضوية</label>
-                                                                                                        <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$delay->member_id}}" readonly>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                        <input type="text" class="text-muted form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="invoice" minlength="2" maxlength="5" placeholder="رقم الإيصال" data-inv-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentInvReq" data-inv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentInvMsg" data-inv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="olddelay" class="text-muted">المبلغ المدفوع</label>
-                                                                                                        <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
-                                                                                                    </div>
+                                                        @foreach ($donDue as $donation)
+                                                            <tr>
+                                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                                <td class="text-center">{{$donation->item}}</td>
+                                                                <td class="text-center">{{$donation->total_amount}}</td>
+                                                                <td class="text-center">{{$donation->amount_paid}}</td>
+                                                                <td class="text-center">{{$donation->amount_remaining}}</td>
+                                                                <td class="text-center">
+                                                                    <button class="btn btn-secondary" data-bs-toggle="modal" title="دفع التبرعات" data-bs-target="#payment_history_{{$donation->id}}">
+                                                                        <i class="fa-solid fa-money-bill"></i>
+                                                                    </button>
+                                                                    <div class="modal fade" id="payment_history_{{$donation->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد مديونية التبرعات</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form action="{{route('subscription.pay')}}" method="post">
+                                                                                        @csrf
+                                                                                        <div class="row">
+                                                                                            <input type="hidden" name="id" value="{{$donation->id}}"/>
+                                                                                            <div class="col-12">
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="member_id" class="text-muted">رقم العضوية</label>
+                                                                                                    <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$donation->member_id}}" readonly>
                                                                                                 </div>
-                                                                                                <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
-                                                                                                    <button type="submit" role="button" data-PaymentSubmit-id="{{$delay->id}}" class="btn btn-primary">تأكيد</button>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="item" class="text-muted">البند</label>
+                                                                                                    <input type="text" class="form-control text-muted" id="item" name="item" value="{{$donation->item}}" readonly>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="invoice" class="text-muted">رقم الإيصال</label>
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="inv_no" id="invoice" maxlength="5" data-invoice-id="{{$donation->id}}" placeholder="رقم الإيصال" required>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="amount_paid" class="text-muted">المبلغ المدفوع</label>
+                                                                                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="text-muted form-control" name="amount_paid" minlength="2" maxlength="5" id="amount_paid" data-delay-id="{{$donation->id}}" placeholder="المبلغ المدفوع" required>
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="payment_date" class="text-muted">تاريخ الدفع</label>
+                                                                                                    <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                    <label for="payment_date" class="text-muted">طريقة الدفع</label>
+                                                                                                    <select class="form-select text-muted" name="payment_method" id="payment_method">
+                                                                                                        <option selected disabled>اختر طريقة الدفع</option>
+                                                                                                        <option value="كاش">كاش</option>
+                                                                                                        <option value="فيزا">فيزا</option>
+                                                                                                        <option value="محفظة">محفظة</option>
+                                                                                                    </select>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </form>
-                                                                                    </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
+                                                                                            <button type="submit" id="delaySubmit" role="button" data-DelaysForm-id = "{{$donation->id}}" class="btn btn-primary">تأكيد</button>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </td>
-                                                                </tr>
-                                                                {{-- <tr>
-                                                                    <td colspan="4">
-                                                                        <h1 class="text-center">تم تسديد متأخرات الإشتراكات</h1>
-                                                                    </td>
-                                                                </tr> --}}
-                                                            @else
-                                                                <tr>
-                                                                    <td>{{$delay->member_id}}</td>
-                                                                    <td>{{$delay->amount}}</td>
-                                                                    @if ($delay->delay_amount == null && $delay->delay_remaining == null)
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span class="fw-bold">-</span>
-                                                                        </td>
-                                                                    @else
-                                                                        <td>{{$delay->delay_amount}}</td>
-                                                                        <td>{{$delay->delay_remaining}}</td>
-                                                                    @endif
-                                                                    <td>
-                                                                        <button class="btn btn-secondary" title="دفع المتأخرات" data-bs-toggle="modal" data-bs-target="#pay_delay_{{$delay->id}}">
-                                                                            <i class="fa-solid fa-money-bill"></i>
-                                                                        </button>
-                                                                        <div class="modal fade" id="pay_delay_{{$delay->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">تسديد متأخرات الإشتراك</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action="{{route('oldDelays.pay')}}" method="post" data-paymentForm-id="{{$delay->id}}">
-                                                                                            @csrf
-                                                                                            <div class="row">
-                                                                                                <input type="hidden" name="id" value="{{$delay->id}}"/>
-                                                                                                <div class="col-12">
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="member_id" class="text-muted">رقم العضوية</label>
-                                                                                                        <input type="number" class="text-muted form-control" id="member_id" name="member_id" value="{{$delay->member_id}}" readonly>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="invoice" class="text-muted">رقم الإيصال</label>
-                                                                                                        <input type="text" class="text-muted form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="invoice" minlength="2" maxlength="5" placeholder="رقم الإيصال" data-inv-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentInvReq" data-inv-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentInvMsg" data-inv-id="{{$delay->id}}">يجب ان يكون رقم الايصال مكون من 5 ارقام</p>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="olddelay" class="text-muted">المبلغ المدفوع</label>
-                                                                                                        <input type="text" class="text-muted form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" minlength="2" maxlength="5" name="olddelay" id="olddelay" placeholder="المبلغ المدفوع من العضو" data-pay-id="{{$delay->id}}" required>
-                                                                                                        <p class="required d-none text-danger paymentAmountReq" data-pay-id="{{$delay->id}}">هذا الحقل مطلوب</p>
-                                                                                                        <p class="required d-none text-danger paymentAmountMsg" data-pay-id="{{$delay->id}}">يجب ان لا يقل المبلغ عن 2 رقم ولا يكون اكثر من 5 رقم</p>
-                                                                                                    </div>
-                                                                                                    <div class="form-group mb-3">
-                                                                                                        <label for="payment_date" class="text-muted">تاريخ الدفع</label>
-                                                                                                        <input type="date" class="form-control text-muted" name="payment_date" id="payment_date">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="modal-footer">
-                                                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
-                                                                                                    <button type="submit" role="button" data-PaymentSubmit-id="{{$delay->id}}" class="btn btn-primary">تأكيد</button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         @endforeach
                                                     </tbody>
                                                 </table>

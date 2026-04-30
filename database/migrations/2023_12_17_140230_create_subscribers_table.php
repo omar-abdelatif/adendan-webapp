@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('member_id')->unique();
+            $table->unsignedBigInteger('member_id')->unique();
             $table->string('name');
             $table->string('nickname')->nullable();
             $table->bigInteger('ssn')->unique();

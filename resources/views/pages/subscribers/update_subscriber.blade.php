@@ -14,7 +14,8 @@
 @endsection
 @section('script')
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
+    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
+    <script src="{{ asset('assets/js/custom-script.js')}}"></script>
 @endsection
 @section('content')
     @if ($errors->any())
@@ -56,6 +57,12 @@
                                                     رقم المحمول
                                                 </label>
                                                 <input class="form-control text-white" id="validatemobilenumber" value="{{$subscriber->mobile_no}}" name="mobile_no" type="number" placeholder="رقم المحمول">
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <label class="form-label fw-bold text-white" for="validatemobilenumber">
+                                                    رقم المحمول اخر
+                                                </label>
+                                                <input class="form-control text-white" value="{{$subscriber->another_mobile_no}}" name="another_mobile_no" type="number" placeholder="رقم المحمول اخر">
                                             </div>
                                             <div class="form-group mt-3">
                                                 <div class="id-img mb-3 text-center">
@@ -192,10 +199,25 @@
                                     <h5 class="txt-light">البيانات الصحية</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-md-4">
-                                            <input type="checkbox" class="checkbox_animated" name="status" id="deathOrNot" {{ $subscriber->status === 2 ? 'checked' : '' }}>
-                                            <label for="deathOrNot" class="text-center text-muted ms-2 mb-0">هل الشخص متوفي ؟</label>
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="checkbox" class="checkbox_animated" name="status" id="deathOrNot" {{ $subscriber->status === 2 ? 'checked' : '' }}>
+                                                <label for="deathOrNot" class="text-center text-muted ms-2 mb-0">هل الشخص متوفي ؟</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group d-none" id="deathStateContainer">
+                                                <label for="death_state" class="form-label text-secondary">اسم المقبره</label>
+                                                <select name="tomb_name" class="form-select text-secondary" id="death_state">
+                                                    <option selected disabled>اسم المقبره</option>
+                                                    @foreach($tombs as $tomb)
+                                                        <option value="{{ $tomb->title }}" {{ $subscriber->tomb_name === $tomb->title ? 'selected' : '' }}>
+                                                            {{ $tomb->title }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

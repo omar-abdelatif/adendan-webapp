@@ -39,6 +39,8 @@
                                         <option value="القطامية" class="option-control">القطامية</option>
                                         <option value="الغفير" class="option-control">الغفير</option>
                                         <option value="زينهم" class="option-control">زينهم</option>
+                                        <option value="وادي الراحة" class="option-control">وادي الراحة</option>
+                                        <option value="القرية" class="option-control">القرية</option>
                                     </select>
                                     <p class="required d-none text-danger fw-bold mb-0" id="regionMsg">يرجى اختيار المنطقة من القائمة أدناه</p>
                                 </div>
