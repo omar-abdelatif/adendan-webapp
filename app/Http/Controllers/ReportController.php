@@ -138,7 +138,7 @@ class ReportController extends Controller {
     public function bankTransactions() {
         $transactions = PaymentTransaction::whereIn('transaction_type', ['بنك/ايداع', 'بنك/سحب'])->get();
         $totalBank = TotalBank::first();
-        $bankAmount = $totalBank ? $totalBank->amount : 0;
+        $bankAmount = $totalBank->amount;
         $amount = $transactions->sum('amount');
         return view('pages.reports.bank', compact('transactions', 'amount', 'bankAmount'));
     }

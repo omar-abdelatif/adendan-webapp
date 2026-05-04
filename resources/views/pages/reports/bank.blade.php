@@ -70,9 +70,7 @@
                                 </div>
                             </div>
                             <div class="font-Info">
-                                @foreach ($bankAmount as $safe)
-                                    <h5 class="mb-1 text-muted">{{number_format($safe)}} ج.م</h5>
-                                @endforeach
+                                <h5 class="mb-1 text-muted">{{number_format($bankAmount)}} ج.م</h5>
                             </div>
                         </div>
                     </div>
