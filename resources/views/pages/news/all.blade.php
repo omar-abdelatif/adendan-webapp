@@ -127,7 +127,11 @@
                                     @if ($new->category === 'عزاء')
                                         <img src={{ asset('assets/frontend/images/bg/news/death/0205f1b1728e6eacf3e5935c553516b8.jpg')}} class="img-fluid rounded" width="50" alt={{$new->img}}>
                                     @elseif($new->category === 'أفراح')
-                                        <img src={{ asset('assets/frontend/images/bg/news/wedding/default.jpg')}} class="img-fluid rounded" width="50" alt={{$new->img}}>
+                                        @if ($new->img && $new->category === 'أفراح')
+                                            <img src={{asset('assets/images/news-imgs/'.$new->img)}} class="img-fluid rounded" width="50" alt={{$new->img}}>
+                                        @else
+                                            <img src='https://adendan.com/assets/images/news-imgs/1776934971.jpg' class="img-fluid rounded" width="50" alt={{$new->img}}>
+                                        @endif
                                     @else
                                         <img src={{ $new->img ? asset('assets/images/news-imgs/'.$new->img) : asset('assets/frontend/images/icons/default/download.jpeg')}} class="img-fluid rounded" width="50" alt={{$new->img}}>
                                     @endif
