@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('outer_donations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('invoice_id');
+            $table->bigInteger('invoice_id')->unique();
             $table->bigInteger('amount');
             $table->string('donation_destination');
             $table->integer('donators_id')->index()->references('id')->on('donators')->onDelete('cascade');

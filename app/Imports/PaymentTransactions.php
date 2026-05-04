@@ -2,13 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\PaymentTransaction;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\WithBatchInserts;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
 class PaymentTransactions implements ToCollection, WithHeadingRow, WithBatchInserts, WithCalculatedFormulas {
     public function collection(Collection $collection) {
@@ -19,7 +18,8 @@ class PaymentTransactions implements ToCollection, WithHeadingRow, WithBatchInse
                     if (is_numeric($row['payment_date'])) {
                         $paymentDate = Date::excelToDateTimeObject($row['payment_date'])->format('Y-m-d');
                     } else {
-                        $paymentDate = date('Y-m-d', strtotime($row['payment_date']));
+                        $timestamp = strtotime($row['payment_date']);
+                        $paymentDate = $timestamp !== false ? date('Y-m-d', $timestamp) : null;
                     }
                 } catch (\Exception $e) {
                     $paymentDate = null;
@@ -31,22 +31,12 @@ class PaymentTransactions implements ToCollection, WithHeadingRow, WithBatchInse
                     $item = Date::excelToDateTimeObject($item)->format('Y-m-d');
                 } catch (\Exception $e) {}
             }
-            PaymentTransaction::create([
-                'member_id' => $row['member_id'],
-                'item' => $item,
-                'amount' => $row['amount'] ?? 0,
-                'inv_no' => $row['inv_no'],
-                'payment_date' => $paymentDate ?? '-',
-                'payment_method' => $row['payment_method'],
-                'payment_cat' => $row['payment_cat'],
-                'transaction_type' => $row['transaction_type'],
-            ]);
+            paymentTransaction($row['member_id'], (int) $row['amount'] ?? 0, $paymentDate ?? null, trim($row['payment_method']), trim($row['payment_cat']), trim($row['transaction_type']), trim($row['transaction_cat']), trim($item), $row['inv_no']);
         }
     }
     function headingRow(): int {
         return 1;
     }
-
     function batchSize(): int {
         return 100;
     }

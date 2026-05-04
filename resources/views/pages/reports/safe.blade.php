@@ -102,10 +102,24 @@
                             <div class="bg-round">
                                 <img width="70" height="70" src="https://img.icons8.com/plasticine/70/bank.png" alt="bank" />
                             </div>
-                            <h5 class="text-muted">إجمالـي الخـزنه الحـالي</h5>
+                            <h5 class="text-muted">إجمالـي المصروفات</h5>
                         </div>
                         <div class="font-Info">
-                            <h5 class="mb-1 text-muted">{{number_format($totalSafeAmount)}} ج.م</h5>
+                            <h5 class="mb-1 text-muted">{{number_format($withdrawalsAmount)}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="70" height="70" src="https://img.icons8.com/plasticine/70/bank.png" alt="bank" />
+                            </div>
+                            <h5 class="text-muted">صافي الخـزنه الحـالي</h5>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1 text-muted">{{number_format($netSafeAmount)}} ج.م</h5>
                         </div>
                     </div>
                 </div>
@@ -117,7 +131,7 @@
                     <div class="card-header p-3">
                         <h3 class="light-card balance-card widget-hover w-50 mx-auto justify-content-center rounded-pill bg-primary mb-0">
                             <i class="fas fa-exchange-alt" style="font-size:30px;"></i>
-                            تـفاصيـل الـخزنـه
+                            تـفاصيـل الـخزينـــه
                         </h3>
                     </div>
                     <div class="card-body">
@@ -154,32 +168,32 @@
                                 <tbody>
                                     @foreach ($transactions as $transaction)
                                         <tr>
-                                            <td class="text-center">{{$transaction->member_id}}</td>
-                                            <td class="text-center">{{$transaction->payment_date}}</td>
+                                            <td class="text-center">{{$transaction->member_id ?? '-'}}</td>
+                                            <td class="text-center">{{$transaction->payment_date ?? '-'}}</td>
                                             <td class="text-center">{{$transaction->transaction_type}}</td>
                                             <td class="text-center">
-                                                @if ($transaction->transaction_type === 'تبرعات' || $transaction->transaction_type === 'إشتراك' || $transaction->transaction_type === 'بنك/سحب' || $transaction->transaction_type === 'بنك/إيداع' || $transaction->transaction_type === 'خزنة/سحب' || $transaction->transaction_type === 'خزنة/إيداع' || $transaction->transaction_type === 'إشتراك جديد')
-                                                    <h3 class="badge rounded-pill badge-success" style="font-size: 13px;">إيداع</h3>
+                                                @if ($transaction->transaction_cat === 'ايداع')
+                                                    <h3 class="badge rounded-pill badge-success" style="font-size: 13px;">{{$transaction->transaction_cat}}</h3>
                                                 @else
-                                                    <h3 class="badge rounded-pill badge-danger" style="font-size: 13px;">سـحب</h3>
+                                                    <h3 class="badge rounded-pill badge-danger" style="font-size: 13px;">{{$transaction->transaction_cat}}</h3>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if ($transaction->proof_img !== null)
-                                                    <button type="button" class="btn btn-transparent" data-bs-target="#proof_{{$transaction->id}}" data-bs-toggle="modal">
-                                                        <img src="{{asset('assets/images/withdraws/'.$transaction->proof_img)}}" width="70" class="rounded" alt="{{$transaction->proof_img}}">
+                                                @if (is_numeric($transaction->inv_no))
+                                                    <span class="fw-bold">{{$transaction->inv_no}}</span>
+                                                @else
+                                                    <button type="button" class="btn btn-transparent" data-bs-target="#inv_{{$transaction->id}}" data-bs-toggle="modal">
+                                                        <img src="{{asset('assets/images/withdraws/'.$transaction->inv_no)}}" width="70" class="rounded" alt="{{$transaction->inv_no}}">
                                                     </button>
-                                                    <div class="modal fade" id="proof_{{$transaction->id}}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="inv_{{$transaction->id}}" tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-body p-0">
-                                                                    <img src="{{asset('assets/images/withdraws/'.$transaction->proof_img)}}" class="rounded w-100" alt="{{$transaction->proof_img}}">
+                                                                    <img src="{{asset('assets/images/withdraws/'.$transaction->inv_no)}}" class="rounded w-100" alt="{{$transaction->inv_no}}">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @else
-                                                    <span class="fw-bold">-</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">

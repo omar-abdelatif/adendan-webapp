@@ -219,8 +219,17 @@
                                                                                 <input type="number" name="amount" class="form-control" placeholder="المبلغ" id="amount">
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="donation_destination" class="text-muted">نوع التبرع</label>
-                                                                                <input type="text" name="donation_destination" class="form-control" placeholder="نوع التبرع" id="donation_destination">
+                                                                                <label for="donation_destination" class="text-muted">جهة التبرع</label>
+                                                                                <input type="text" name="donation_destination" class="form-control" placeholder="جهة التبرع" id="donation_destination">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="payment_method" class="form-label text-muted">طريقة الدفع</label>
+                                                                                <select name="payment_method" class="form-select" id="payment_method">
+                                                                                    <option selected>أختر طريقة الدفع</option>
+                                                                                    <option value="كاش">كاش</option>
+                                                                                    <option value="كارت">كارت</option>
+                                                                                    <option value="محفظة">محفظة</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>

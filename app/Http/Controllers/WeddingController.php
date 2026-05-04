@@ -95,13 +95,11 @@ class WeddingController extends Controller
         $request->validate([
             'import' => 'required|file|mimes:xlsx,xls',
         ]);
-        $import = Excel::import(new WeddingImport, $request['import'], null, \Maatwebsite\Excel\Excel::XLSX);
-        if ($import) {
-            $notificationSuccess = [
-                'message' => 'تم رفع البيانات بنجاح',
-                'alert-type' => 'success'
-            ];
-        }
+        Excel::import(new WeddingImport, $request['import'], null, \Maatwebsite\Excel\Excel::XLSX);
+        $notificationSuccess = [
+            'message' => 'تم رفع البيانات بنجاح',
+            'alert-type' => 'success'
+        ];
         return redirect()->back()->with($notificationSuccess);
     }
 }

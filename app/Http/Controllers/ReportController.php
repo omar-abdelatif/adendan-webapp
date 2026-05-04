@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bank;
 use App\Models\CostYears;
 use App\Models\Donations;
 use App\Models\Due;
 use App\Models\OcrData;
+use App\Models\TotalBank;
+use App\Models\Subscribers;
+use App\Models\SearchedData;
+use Illuminate\Http\Request;
 use App\Models\OuterDonations;
 use App\Models\PaymentTransaction;
-use App\Models\SearchedData;
-use App\Models\Subscribers;
-use App\Models\TotalBank;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller {
     function __construct(){
@@ -128,19 +127,18 @@ class ReportController extends Controller {
     //! Safe
     public function safe() {
         $transactions = PaymentTransaction::get();
-        $sumDonationsAmount = PaymentTransaction::whereIn('transaction_type', ['تبرعات', 'التبرعات'])->sum('amount');
-        $sumSubscriptionsAmount = PaymentTransaction::whereIn('transaction_type', ['اشتراك', 'إشتراك'])->sum('amount');
-        $totalSafeAmount = PaymentTransaction::sum('amount');
-        return view('pages.reports.safe', compact('totalSafeAmount', 'transactions', 'sumDonationsAmount', 'sumSubscriptionsAmount'));
+        $sumDonationsAmount = PaymentTransaction::whereIn('transaction_type', ['التبرعات', 'تبرعات', 'تبرع سنوي'])->sum('amount');
+        $sumSubscriptionsAmount = PaymentTransaction::whereIn('transaction_type', ['إشتراك جديد', 'إشتراك', 'اشتراك'])->sum('amount');
+        $withdrawalsAmount = PaymentTransaction::whereIn('transaction_cat', ['خزينة/سحب', 'سحب'])->sum('amount');
+        $totalSafeAmount = PaymentTransaction::whereIn('transaction_type', ['إشتراك جديد', 'إشتراك', 'اشتراك', 'تبرعات', 'إشتراك جديد + تبرع سنوي', 'التبرعات'])->sum('amount');
+        $netSafeAmount = $totalSafeAmount - $withdrawalsAmount;
+        return view('pages.reports.safe', compact('netSafeAmount', 'transactions', 'sumDonationsAmount', 'sumSubscriptionsAmount', 'withdrawalsAmount'));
     }
     //! Bank
     public function bankTransactions() {
-        $transactions = Bank::get();
-        $totalBank = TotalBank::get();
-        $bankAmount = [];
-        foreach ($totalBank as $bank) {
-            $bankAmount[] =  $bank->amount;
-        }
+        $transactions = PaymentTransaction::whereIn('transaction_type', ['بنك/ايداع', 'بنك/سحب'])->get();
+        $totalBank = TotalBank::first();
+        $bankAmount = $totalBank ? $totalBank->amount : 0;
         $amount = $transactions->sum('amount');
         return view('pages.reports.bank', compact('transactions', 'amount', 'bankAmount'));
     }

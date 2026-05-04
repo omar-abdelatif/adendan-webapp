@@ -178,13 +178,17 @@
                                                 <p class="required d-none mb-0 text-danger" id="addressReq">هذا الحقل مطلوب</p>
                                                 <p class="required d-none mb-0 text-danger" id="addressMsg">يجب ان يكون العنوان باللغة العربية</p>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
                                                 <label class="form-label text-muted" for="confirmpasswordwizard">
                                                     رقم المحمول
                                                 </label>
                                                 <input type="text" id="mobile_no" name="mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول" required>
                                                 <p id="mobileMsgRequired" class="d-none required mb-0">حقل الرقم المحمول مطلوب</p>
                                                 <p id="mobileMsg" class=" required d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                            </div>
+                                            <div class="form-group mb-lg-3 mb-md-2 mb-sm-1">
+                                                <label class="form-label text-muted" for="confirmpasswordwizard">رقم المحمول الاخر</label>
+                                                <input type="text" id="another_mobile_no" name="another_mobile_no" maxlength="11" class="form-control text-muted" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="أدخل رقم المحمول الاخر">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -308,7 +312,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label for="invoice_no" class="text-muted">رقم إيصال الدفع</label>
-                                            <input type="text" name="invoice_no" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
+                                            <input type="text" name="inv_no" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control text-muted" id="invoice_no" placeholder="رقم إيصال الدفع">
                                         </div>
                                     </div>
                                 </div>
@@ -367,7 +371,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-3">
                                     <label for="costYear" class="text-muted">السنة</label>
-                                    <select name="year" id="costYear" class="form-select text-muted" required data-base-url="https://adendan.com/admin/subscribers">
+                                    <select name="item" id="costYear" class="form-select text-muted" required data-base-url="http://127.0.0.1:8000/admin/subscribers">
                                         <option selected disabled>السنة</option>
                                         @foreach ($years as $year)
                                             <option value="{{$year->year}}">{{$year->year}}</option>
@@ -377,7 +381,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="yearly_cost" class="text-muted">المبلغ</label>
-                                    <input type="text" name="yearly_cost" maxlength="4" minlength="2" id="yearly_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control" placeholder="المبلغ" required readonly>
+                                    <input type="text" name="amount" maxlength="4" minlength="2" id="yearly_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control" placeholder="المبلغ" required readonly>
                                     <p class="required d-none text-danger mb-0 fw-bold" id="costReq">هذا الحقل مطلوب</p>
                                     <p class="required d-none text-danger mb-0 fw-bold" id="costMsg">يجب ان يكون اقصى رقم هو 4 ارقام</p>
                                 </div>

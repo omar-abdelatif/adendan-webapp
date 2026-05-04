@@ -6,7 +6,6 @@ use App\Models\News;
 use App\Models\NewsVideos;
 use Illuminate\Http\Request;
 use App\Models\NewsThumbnail;
-use App\Http\Requests\NewsRequest;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -192,13 +191,11 @@ class NewsController extends Controller
     {
         $video = NewsVideos::find($id);
         if ($video) {
-            $delete = $video->delete();
-            if ($delete) {
-                $notificationSuccess = [
-                    'message' => "تم الحذف بنجاح",
-                    'alert-type' => 'success'
-                ];
-            }
+            $video->delete();
+            $notificationSuccess = [
+                'message' => "تم الحذف بنجاح",
+                'alert-type' => 'success'
+            ];
             return redirect()->back()->with($notificationSuccess);
         }
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\TotalSafe;
-use App\Models\SafeReports;
 use Illuminate\Http\Request;
 use App\Models\Miscellaneous;
 use App\Http\Requests\MiscellaneousRequest;
@@ -38,11 +37,8 @@ class MiscellaneousController extends Controller {
             ]);
         }
         if ($store) {
-            SafeReports::create([
-                'member_id' => '-',
-                'transaction_type' => 'نثريات' . " " . ($validated['category']) . " " . ($request->other_category),
-                'amount' => $request['amount'],
-            ]);
+            $item = 'نثريات' . "-" . ($validated['category']) . "-" . ($request->other_category);
+            paymentTransaction(null, $request['amount'], now(), 'كاش', 'كلى', 'نثريات', 'سحب', $item, $imagename ?? '');
             $sumAmount = $totalSafe->amount - $request['amount'];
             $totalSafe->update([
                 'amount' => $sumAmount,

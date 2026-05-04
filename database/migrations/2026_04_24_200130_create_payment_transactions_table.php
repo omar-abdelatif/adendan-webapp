@@ -17,9 +17,10 @@ return new class extends Migration {
             $table->integer('amount')->default(0);
             $table->integer('inv_no')->default(0);
             $table->string('payment_cat');
-            $table->date('payment_date');
+            $table->date('payment_date')->nullable();
             $table->string('payment_method');
             $table->string('transaction_type');
+            $table->string('transaction_cat');
             $table->timestamps();
         });
     }

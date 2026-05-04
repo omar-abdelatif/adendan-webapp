@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Delay;
+use App\Models\Due;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
-use App\Models\Subscriptions;
+use App\Models\PaymentTransaction;
 use App\Http\Requests\SubscriptionRequest;
 
 class SubscriptionsController extends Controller {
@@ -18,29 +18,19 @@ class SubscriptionsController extends Controller {
         $subDue = $subscriber->dues()->where('transaction_type', 'إشتراك')->get();
         $totalSubscriptionAmount = $subDue->sum('amount_remaining');
         $donDue = $subscriber->dues()->where('transaction_type', 'تبرعات')->get();
-        $totalDonationAmount = $donDue->sum('total_amount');
+        $totalDonationAmount = $donDue->sum('amount_remaining');
         return view('pages.subscriptions.subscriptions_details', compact('subscriber', 'subscriptions', 'subDue', 'donDue', 'totalSubscriptionAmount', 'totalDonationAmount'));
     }
     public function storeSubscription(SubscriptionRequest $request) {
         $validated = $request->validated();
         if ($validated) {
             $subscriber = Subscribers::where('member_id', $validated['member_id'])->first();
-            $oldDelays = Delay::where('member_id', $validated['member_id'])->first();
+            $dues = Due::where('member_id', $validated['member_id'])->first();
             if ($subscriber) {
-                $store = Subscriptions::create([
-                    'member_id' => $request['member_id'],
-                    'subscription_cost' => $request['subscription_cost'],
-                    'invoice_no' => $request['invoice_no'],
-                    'period' => $oldDelays->year,
-                    'delays' => $request['delays'],
-                    'payment_type' => $request['payment_type'],
-                    'payment_date' => $request['payment_date'],
-                    'delays_period' => $request['delays_period'],
-                    'subscribers_id' => $subscriber->id,
-                ]);
+                $store = paymentTransaction($request['member_id'], $request['amount'], $request['payment_date'], $request['payment_type'], 'كلي', 'إشتراك جديد', 'ايداع', $dues->item, $request['invoice_no']);
                 if ($store) {
                     $subscriber->update(['status' => 1]);
-                    $oldDelays->delete();
+                    $dues->delete();
                     $notificationSuccess = [
                         "message" => "تم الإضافة بنجاح",
                         "alert-type" => "success"
@@ -52,7 +42,7 @@ class SubscriptionsController extends Controller {
         return redirect()->back()->withErrors($validated);
     }
     public function destroyingSubscription(int $id) {
-        $subscription = Subscriptions::find($id);
+        $subscription = PaymentTransaction::find($id);
         if ($subscription) {
             $delete = $subscription->delete();
             if ($delete) {
@@ -71,7 +61,7 @@ class SubscriptionsController extends Controller {
     }
     public function updatingSubscription(Request $request) {
         $id = $request->id;
-        $subscription = Subscriptions::find($id);
+        $subscription = PaymentTransaction::find($id);
         if ($subscription) {
             $update = $subscription->update($request->all());
             if ($update) {

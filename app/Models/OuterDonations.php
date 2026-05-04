@@ -19,6 +19,7 @@ class OuterDonations extends Model
         'invoice_id',
         'amount',
         'donation_destination',
+        'payment_method',
         'donators_id'
     ];
     public function donators()

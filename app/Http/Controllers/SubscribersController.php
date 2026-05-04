@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Delay;
+use App\Models\Due;
 use App\Models\Tombs;
 use App\Models\TotalSafe;
 use App\Models\CostYears;
-use App\Models\SafeReports;
 use App\Models\Subscribers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\Subscriptions;
 use App\Imports\SubscribersImport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,8 +21,7 @@ class SubscribersController extends Controller
     function __construct(){
         $this->middleware('permission:المشتركين');
     }
-    public function index()
-    {
+    public function index() {
         $years = CostYears::all();
         $halfDelay = $this->insertHalfDelay();
         $value = $this->getSubscriptionValue();
@@ -36,8 +33,7 @@ class SubscribersController extends Controller
         $newMemberId = count($subs) > 0 ? Subscribers::orderBy('member_id', 'desc')->first()->member_id + 1 : null;
         return view('pages.subscribers.subscribers', compact('members', 'years', 'halfDelay', 'cost', 'year', 'currentSubCost', 'newMemberId', 'subs'));
     }
-    public function storeSubs(Request $request)
-    {
+    public function storeSubs(Request $request) {
         $validatedData = $request->validate([
             'ssn' => 'required|digits:14',
             'mobile_no' => 'required|digits:11',
@@ -66,7 +62,7 @@ class SubscribersController extends Controller
             $destinationPath = public_path('assets/images/subscribers/avatar/');
             $filename->move($destinationPath, $pImg);
         }
-        $totalSafe = TotalSafe::where('id', 1)->first();
+        $totalSafe = TotalSafe::first();
         //! Insert The Subscriber
         $store = Subscribers::create([
             'member_id' => $request['member_id'],
@@ -77,6 +73,7 @@ class SubscribersController extends Controller
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
             'mobile_no' => $request['mobile_no'],
+            'another_mobile_no' => $request['another_mobile_no'],
             'job' => $request['job'],
             'job_tel' => $request['job_tel'],
             'home_tel' => $request['home_tel'],
@@ -91,21 +88,10 @@ class SubscribersController extends Controller
             'status' => 1
         ]);
         if ($store) {
-            $subscriberId = $store->id;
-            Subscriptions::create([
-                'member_id' => $request->member_id,
-                'subscription_cost' => $totalNewSubCost,
-                'invoice_no' => $request->invoice_no,
-                'period' => $year,
-                'payment_type' => 'إشتراك جديد',
-                'subscribers_id' => $subscriberId
-            ]);
-            SafeReports::create([
-                'member_id' => $request->member_id,
-                'transaction_type' => 'إشتراك جديد',
-                'amount' => $totalNewSubCost,
-                'invoice_no' => $request->invoice_no,
-            ]);
+            paymentTransaction($store->member_id, $totalNewSubCost, now(), 'كاش', 'كلي', 'إشتراك جديد', 'ايداع', $year, $request->inv_no);
+            paymentTransaction($store->member_id, 40, now(), 'كاش', 'كلي', 'تبرع سنوي', 'ايداع', $year, $request->inv_no);
+            $this->addDue($store->member_id, 100, 'تبرع سيارة التكريم', 'تبرعات');
+            $this->addDue($store->member_id, 200, 'تبرع صيانة المقرات ', 'تبرعات');
             $sumAmount = $totalSafe->amount + $totalNewSubCost;
             $totalSafe->update([
                 'amount' => $sumAmount,
@@ -119,8 +105,7 @@ class SubscribersController extends Controller
             return redirect()->back()->withErrors($validatedData);
         }
     }
-    public function destroy(int $id)
-    {
+    public function destroy(int $id) {
         $member = Subscribers::find($id);
         if ($member) {
             //! Single Image
@@ -131,9 +116,9 @@ class SubscribersController extends Controller
                 }
             }
             //! Delays
-            $delays = Delay::where('subscribers_id', $member->id)->first();
-            if ($delays != null) {
-                $delays->delete();
+            $due = Due::where('member_id', $member->id)->first();
+            if ($due != null) {
+                $due->delete();
             }
             $delete = $member->delete();
             if ($delete) {
@@ -145,16 +130,14 @@ class SubscribersController extends Controller
             }
         }
     }
-    public function subscriberDetails(int $id)
-    {
+    public function subscriberDetails(int $id) {
         $subscriber = Subscribers::find($id);
         $tombs = Tombs::get();
         if ($subscriber) {
             return view('pages.subscribers.update_subscriber', compact('subscriber', 'tombs'));
         }
     }
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $id = $request->id;
         $member = Subscribers::findOrFail($id);
         if ($member) {
@@ -223,8 +206,7 @@ class SubscribersController extends Controller
         }
         return redirect()->back()->withErrors('حدث خطأ برجاء ابلاغ المسؤول');
     }
-    public function bulkUpload(Request $request)
-    {
+    public function bulkUpload(Request $request) {
         $validated = $request->validate(['import' => 'required|mimes:xlsx,xls']);
         if ($validated) {
             $import = Excel::import(new SubscribersImport, $request['import'], null, \Maatwebsite\Excel\Excel::XLSX);
@@ -238,8 +220,7 @@ class SubscribersController extends Controller
         }
         return redirect()->back()->withErrors($validated);
     }
-    public function insertHalfDelay()
-    {
+    public function insertHalfDelay() {
         $currentDate = Carbon::now()->startOfMonth();
         $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
         if ($currentDate > $june30) {
@@ -251,8 +232,7 @@ class SubscribersController extends Controller
             return $differenceInMonths;
         }
     }
-    function getSubscriptionValue()
-    {
+    function getSubscriptionValue() {
         $currentDate = Carbon::now();
         $june30 = Carbon::create($currentDate->year, 6, 30, 0, 0, 0);
         if ($currentDate->gt($june30)) {
@@ -266,8 +246,7 @@ class SubscribersController extends Controller
             return [$costYearly, $currentDate->year];
         }
     }
-    function safeInsert(Request $request)
-    {
+    function safeInsert(Request $request) {
         $value = $this->getSubscriptionValue();
         $cost = $value[0];
         $totalSafe = TotalSafe::where('id', 1)->first();
@@ -275,13 +254,7 @@ class SubscribersController extends Controller
         $totalSafe->update([
             'amount' => $sumAmount,
         ]);
-        $return =  SafeReports::create([
-            'member_id' => $request->member_id,
-            'transaction_type' => 'إشتراكات',
-            'amount' => $cost,
-            'proof_img' => '-',
-        ]);
-        return $return;
+        return paymentTransaction($request->member_id, $cost, Carbon::now()->format('Y-m-d'), $request->payment_method, 'كلي', 'تبرع سنوي', 'ايداع', $value[1], $request->inv_no);;
     }
     public function getSubscribersData() {
         $subscribers = Subscribers::get();
@@ -353,18 +326,25 @@ class SubscribersController extends Controller
             return $actions . $donationModal;
         })->rawColumns(['Actions'])->make(true);
     }
-    public function getYearlyCostByAjax(string $year)
-    {
+    public function getYearlyCostByAjax(string $year) {
         $cost = CostYears::where('year', $year)->value('cost');
         return response()->json([
             'cost' => $cost
         ]);
     }
-    public function generatePasswords()
-    {
+    public function generatePasswords() {
         Artisan::call('users:generate-password');
         return response()->json([
             'message' => 'Passwords generated successfully'
+        ]);
+    }
+    private function addDue(int $memberId, int $amount, $item, string $tractionType) {
+        Due::create([
+            'member_id' => $memberId,
+            'total_amount' => $amount,
+            'amount_remaining' => $amount,
+            'item' => $item,
+            'transaction_type' => $tractionType,
         ]);
     }
 }

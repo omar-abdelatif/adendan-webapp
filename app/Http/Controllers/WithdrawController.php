@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bank;
-use App\Models\SafeReports;
 use App\Models\TotalBank;
 use App\Models\TotalSafe;
 use Illuminate\Http\Request;
 
-class WithdrawController extends Controller
-{
+class WithdrawController extends Controller {
     function __construct(){
         $this->middleware('permission:التقارير');
     }
-    public function withdraw(Request $request)
-    {
-        $totalSafe = TotalSafe::findOrFail(1);
-        $totalBank = TotalBank::findOrFail(1);
+    public function withdraw(Request $request) {
+        $totalSafe = TotalSafe::first();
+        $totalBank = TotalBank::first();
         $validated = $request->validate([
             'amount' => 'required|integer|min:1',
             'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
@@ -39,24 +35,14 @@ class WithdrawController extends Controller
                 $imagename = time() . '.' . $imagefile->getClientOriginalExtension();
                 $destinationPath = public_path('assets/images/withdraws');
                 $imagefile->move($destinationPath, $imagename);
-                $store = SafeReports::create([
-                    'member_id' => '-',
-                    'proof_img' => $imagename,
-                    'amount' => $validated['amount'],
-                    'payment_date' => $request->transaction_date,
-                    'transaction_type' => 'خزنة/سحب',
-                ]);
+                $store = paymentTransaction(0, $validated['amount'], new \DateTime($request->transaction_date), 'كاش', 'خزنة/سحب', 'تحويلات', 'سحب', $imagename, '');
                 if ($store) {
                     $newAmount = $totalSafe->amount - $validated['amount'];
                     $totalSafe->update(['amount' => $newAmount]);
                     $newBank = $totalBank->amount + $validated['amount'];
                     $totalBank->update(['amount' => $newBank]);
-                    Bank::create([
-                        'amount' => $validated['amount'],
-                        'transaction_type' => 'بنك/ايداع',
-                        'transaction_date' => $request->transaction_date,
-                        'proof_img' => $imagename,
-                    ]);
+                    paymentTransaction(0, $validated['amount'], new \DateTime($request->transaction_date), 'كاش', 'خزنة/سحب', 'تحويلات', 'ايداع', $imagename, '');
+                    paymentTransaction(0, $validated['amount'], new \DateTime($request->transaction_date), 'كاش', 'تحويلات', 'خزنة/سحب', 'سحب', $imagename, '');
                     $notificationSuccess = [
                         'message' => 'تم السحب',
                         'alert-type' => 'success',
@@ -69,10 +55,9 @@ class WithdrawController extends Controller
         }
         return back()->withErrors($validated);
     }
-    public function bankWithdraw(Request $request)
-    {
-        $totalSafe = TotalSafe::findOrFail(1);
-        $totalBank = TotalBank::findOrFail(1);
+    public function bankWithdraw(Request $request) {
+        $totalSafe = TotalSafe::first();
+        $totalBank = TotalBank::first();
         $validated = $request->validate([
             'amount' => 'required|integer|min:1',
             'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
@@ -95,24 +80,13 @@ class WithdrawController extends Controller
                 $extention = time() . "." . $imagefile->extension();
                 $destinationPath = public_path('assets/images/withdraws');
                 $imagefile->move($destinationPath, $extention);
-                $store = Bank::create([
-                    'proof_img' => $extention,
-                    'amount' =>  $validated['amount'],
-                    'transaction_date' => $request->payment_date,
-                    'transaction_type' => 'بنك/سحب',
-                ]);
+                $store = paymentTransaction(0, $validated['amount'], new \DateTime($request->payment_date), 'كاش', 'بنك/سحب', 'تحويلات', 'سحب', $extention, '');
                 if ($store) {
                     $newAmount = $totalSafe->amount + $validated['amount'];
                     $totalSafe->update(['amount' => $newAmount]);
                     $newBank =  $totalBank->amount - $validated['amount'];
                     $totalBank->update(['amount' => $newBank]);
-                    SafeReports::create([
-                        'member_id' => '-',
-                        'amount' => $validated['amount'],
-                        'proof_img' => $extention,
-                        'payment_date' => $request->payment_date,
-                        'transaction_type' => 'خزنة/إيداع'
-                    ]);
+                    paymentTransaction(0, $validated['amount'], new \DateTime($request->payment_date), 'كاش', 'خزنة/إيداع', 'تحويلات', 'ايداع', $extention, '');
                     $notificationSuccess = [
                         'message' => 'تم السحب',
                         "alert-type" => "success",

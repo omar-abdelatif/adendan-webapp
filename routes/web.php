@@ -111,10 +111,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('generate-passwords', 'generatePasswords')->name('generate-passwords');
     });
     Route::prefix('subscription')->controller(SubscriptionsController::class)->name('subscription.')->group(function () {
-        Route::get('subscription/history/{id}', 'index')->name('history');
-        Route::post('subscription/store', 'storeSubscription')->name('store');
-        Route::post('subscription/updating', 'updatingSubscription')->name('update');
-        Route::get('subscription/delete/{id}', 'destroyingSubscription')->name('destroy');
+        Route::get('history/{id}', 'index')->name('history');
+        Route::post('store', 'storeSubscription')->name('store');
+        Route::post('updating', 'updatingSubscription')->name('update');
+        Route::get('delete/{id}', 'destroyingSubscription')->name('destroy');
     });
     Route::prefix('subscription/dues')->controller(DelayController::class)->group(function () {
         Route::post('pay', 'paySubscription')->name('subscription.pay');
@@ -133,7 +133,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('donations/store', 'storeDonations')->name('donations.store');
         Route::post('donations/update', 'updateDonation')->name('donations.update');
         Route::get('donations/remove/{id}', 'removeDonation')->name('donation.remove');
-        Route::post('donation/pay_old_donation', 'payOldDonation')->name('pay.oldDonation');
         Route::post('donations/pay_delay_donation', 'payDelayDonation')->name('pay.delayDonation');
         Route::post('donations/delays/upload_bulk', 'donationsOnSubscribers')->name('delays.uploadDonations');
     });

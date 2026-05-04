@@ -133,6 +133,7 @@ $(function () {
                 url: BaseUrl + "/get-year-cost/" + selectedYear,
                 method: "GET",
                 success: function (data) {
+                    console.log(data);
                     if (data.cost !== null) {
                         $("#yearly_cost").val(data.cost);
                     } else {

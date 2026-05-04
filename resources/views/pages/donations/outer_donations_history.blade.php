@@ -36,6 +36,7 @@
                                         <th class="text-center">رقم الإيصال</th>
                                         <th class="text-center">المبلغ</th>
                                         <th class="text-center">نوع التبرع</th>
+                                        <th class="text-center">طريقة الدفع</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,6 +46,7 @@
                                             <td class="text-center">{{$donations->invoice_id}}</td>
                                             <td class="text-center">{{$donations->amount}}</td>
                                             <td class="text-center">{{$donations->donation_destination}}</td>
+                                            <td class="text-center">{{$donations->payment_method}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
