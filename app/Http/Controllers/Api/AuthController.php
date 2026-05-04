@@ -18,6 +18,7 @@ class AuthController extends Controller {
         if (!$subscriber || !Hash::check($request->password, $subscriber->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
+        $subscriber->tokens()->delete();
         $token = $subscriber->createToken('subscriber_token')->plainTextToken;
         return response()->json([
             'access_token' => $token,
