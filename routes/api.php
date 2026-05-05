@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\NewsCommentsController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\OcrController;
 use App\Http\Controllers\Api\SubscriberFinanceController;
@@ -12,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::post('/ocr-data', [OcrController::class, 'store']);
     Route::post('/member/login', [AuthController::class, 'login']);
-    Route::controller(NewsController::class)->group(function () {
-        Route::get('/all_news', 'allNews');
-        Route::get('/news/{id}', 'show');
+    Route::prefix('/news')->controller(NewsController::class)->group(function () {
+        Route::get('/all', 'allNews');
+        Route::get('/{id}', 'show');
+        Route::controller(NewsCommentsController::class)->group(function () {
+            Route::get('/{newsId}/comments', 'getComments');
+            Route::post('/{newsId}/comments', 'store');
+        });
     });
     Route::controller(TombController::class)->group(function () {
         Route::get('/all_tombs', 'index');

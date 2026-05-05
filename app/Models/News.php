@@ -26,4 +26,7 @@ class News extends Model
     public function videos(){
         return $this->hasMany(NewsVideos::class);
     }
+    public function comments() {
+        return $this->hasMany(NewsComments::class, 'news_id');
+    }
 }
