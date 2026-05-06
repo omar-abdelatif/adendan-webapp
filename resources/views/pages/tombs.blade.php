@@ -183,19 +183,19 @@
                                                                             </div>
                                                                             <div class="form-group mb-3">
                                                                                 <label for="title" class="text-muted">نوع المقبره</label>
-                                                                                <select name="tomb_type" class="form-select text-muted" required>
+                                                                                <select name="tomb_specialization" class="form-select text-muted" required>
                                                                                     <option selected>نوع المقبره</option>
-                                                                                    <option value="رجال" class="option-control" {{$tomb->tomb_type === 'رجال' ? 'selected' : ''}}>رجال</option>
-                                                                                    <option value="سيدات" class="option-control" {{$tomb->tomb_type === 'سيدات' ? 'selected' : ''}}>سيدات</option>
-                                                                                    <option value="مختلط" class="option-control" {{$tomb->tomb_type === 'مختلط' ? 'selected' : ''}}>مختلط</option>
+                                                                                    <option value="عيون" class="option-control" {{$tomb->tomb_specialization === 'عيون' ? 'selected' : ''}}>عيون</option>
+                                                                                    <option value="لحد" class="option-control" {{$tomb->tomb_specialization === 'لحد' ? 'selected' : ''}}>لحد</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mb-3">
-                                                                                <label for="title" class="text-muted">تصنيفف المقبره</label>
-                                                                                <select name="tomb_specialization" class="form-select text-muted" required>
-                                                                                    <option selected>تصنيفف المقبره</option>
-                                                                                    <option value="عيون" class="option-control" {{$tomb->tomb_specialization === 'عيون' ? 'selected' : ''}}>عيون</option>
-                                                                                    <option value="لحد" class="option-control" {{$tomb->tomb_specialization === 'لحد' ? 'selected' : ''}}>لحد</option>
+                                                                                <label for="title" class="text-muted">تصنيف المقبره</label>
+                                                                                <select name="tomb_type" class="form-select text-muted" required>
+                                                                                    <option selected>تصنيف المقبره</option>
+                                                                                    <option value="رجال" class="option-control" {{$tomb->tomb_type === 'رجال' ? 'selected' : ''}}>رجال</option>
+                                                                                    <option value="سيدات" class="option-control" {{$tomb->tomb_type === 'سيدات' ? 'selected' : ''}}>سيدات</option>
+                                                                                    <option value="مختلط" class="option-control" {{$tomb->tomb_type === 'مختلط' ? 'selected' : ''}}>مختلط</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group">
