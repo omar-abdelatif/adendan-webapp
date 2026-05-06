@@ -50,23 +50,19 @@ class TombsController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function updateTomb(Request $request)
-    {
-        $validated = $request->validated();
-        if ($validated) {
-            $id = $request->id;
-            $tomb = Tombs::findOrFail($id);
-            if ($tomb) {
-                $update = $tomb->update($request->all());
-                if ($update) {
-                    $notificationSuccess = [
-                        'message' => 'تم التعديل بنجاح',
-                        'alert-type' => 'success',
-                    ];
-                    return redirect()->back()->with($notificationSuccess);
-                }
+    public function updateTomb(Request $request) {
+        $id = $request->id;
+        $tomb = Tombs::findOrFail($id);
+        if ($tomb) {
+            $update = $tomb->update($request->all());
+            if ($update) {
+                $notificationSuccess = [
+                    'message' => 'تم التعديل بنجاح',
+                    'alert-type' => 'success',
+                ];
+                return redirect()->back()->with($notificationSuccess);
             }
         }
-        return redirect()->back()->withErrors($validated);
+        return redirect()->back()->withErrors('لم يتم التعديل');
     }
 }
