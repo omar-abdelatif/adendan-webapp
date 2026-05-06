@@ -4,13 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TombRequest extends FormRequest
-{
+class TombRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -19,10 +17,11 @@ class TombRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
             'title' => 'required',
+            'tomb_type' => 'required',
+            'tomb_specialization' => 'required',
             'region' => 'required',
             'tomb_guard_name' => 'nullable',
             'tomb_guard_number' => 'nullable',

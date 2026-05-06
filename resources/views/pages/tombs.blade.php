@@ -45,6 +45,23 @@
                                     <p class="required d-none text-danger fw-bold mb-0" id="regionMsg">يرجى اختيار المنطقة من القائمة أدناه</p>
                                 </div>
                                 <div class="form-group mb-3">
+                                    <label for="title" class="text-muted">نوع المقبره</label>
+                                    <select name="tomb_type" class="form-select text-muted" required>
+                                        <option selected>نوع المقبره</option>
+                                        <option value="رجال" class="option-control">رجال</option>
+                                        <option value="سيدات" class="option-control">سيدات</option>
+                                        <option value="مختلط" class="option-control">مختلط</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="title" class="text-muted">تصنيفف المقبره</label>
+                                    <select name="tomb_specialization" class="form-select text-muted" required>
+                                        <option selected>تصنيفف المقبره</option>
+                                        <option value="عيون" class="option-control">عيون</option>
+                                        <option value="لحد" class="option-control">لحد</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="tomb_guard_name" class="text-muted">إسم التربي</label>
                                     <input type="text" id="tomb_guard_name" class="form-control text-muted" pattern="[\u0600-\u06FF\s]{10,}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="tomb_guard_name" placeholder="إسم التربي">
                                 </div>
@@ -90,6 +107,8 @@
                                     <tr>
                                         <td class="text-center text-muted">#</td>
                                         <td class="text-center text-muted">إسم المقبره</td>
+                                        <td class="text-center text-muted">تصنيفف المقبره</td>
+                                        <td class="text-center text-muted">التخصص</td>
                                         <td class="text-center text-muted">المنطقة</td>
                                         <td class="text-center text-muted">إسم التربي</td>
                                         <td class="text-center text-muted">رقم المحمول</td>
@@ -102,6 +121,8 @@
                                         <tr>
                                             <td class="text-muted">{{$i++}}</td>
                                             <td class="text-muted">{{$tomb->title}}</td>
+                                            <td class="text-muted">{{$tomb->tomb_type}}</td>
+                                            <td class="text-muted">{{$tomb->tomb_specialization}}</td>
                                             <td class="text-muted">{{$tomb->region}}</td>
                                             <td class="text-muted">
                                                 @if ($tomb->tomb_guard_name)
@@ -158,6 +179,23 @@
                                                                                     <option value="القطامية" class="option-control" {{$tomb->region === 'القطامية' ? 'selected' : ''}}>القطامية</option>
                                                                                     <option value="الغفير" class="option-control" {{$tomb->region === 'الغفير' ? 'selected' : ''}}>الغفير</option>
                                                                                     <option value="زينهم" class="option-control" {{$tomb->region === 'زينهم' ? 'selected' : ''}}>زينهم</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-muted">نوع المقبره</label>
+                                                                                <select name="tomb_type" class="form-select text-muted" required>
+                                                                                    <option selected>نوع المقبره</option>
+                                                                                    <option value="رجال" class="option-control" {{$tomb->tomb_type === 'رجال' ? 'selected' : ''}}>رجال</option>
+                                                                                    <option value="سيدات" class="option-control" {{$tomb->tomb_type === 'سيدات' ? 'selected' : ''}}>سيدات</option>
+                                                                                    <option value="مختلط" class="option-control" {{$tomb->tomb_type === 'مختلط' ? 'selected' : ''}}>مختلط</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group mb-3">
+                                                                                <label for="title" class="text-muted">تصنيفف المقبره</label>
+                                                                                <select name="tomb_specialization" class="form-select text-muted" required>
+                                                                                    <option selected>تصنيفف المقبره</option>
+                                                                                    <option value="عيون" class="option-control" {{$tomb->tomb_specialization === 'عيون' ? 'selected' : ''}}>عيون</option>
+                                                                                    <option value="لحد" class="option-control" {{$tomb->tomb_specialization === 'لحد' ? 'selected' : ''}}>لحد</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group">

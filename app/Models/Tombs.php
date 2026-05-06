@@ -10,6 +10,8 @@ class Tombs extends Model {
     protected $table = 'tombs';
     protected $fillable = [
         'title',
+        'tomb_type',
+        'tomb_specialization',
         'region',
         'tomb_guard_name',
         'tomb_guard_number',
