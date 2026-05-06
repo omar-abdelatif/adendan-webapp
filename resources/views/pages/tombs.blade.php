@@ -39,7 +39,7 @@
                                         <option value="القطامية" class="option-control">القطامية</option>
                                         <option value="الغفير" class="option-control">الغفير</option>
                                         <option value="زينهم" class="option-control">زينهم</option>
-                                        <option value="وادي الراحة" class="option-control">وادي الراحة</option>
+                                        <option value="العين السخنة" class="option-control">العين السخنة</option>
                                         <option value="القرية" class="option-control">القرية</option>
                                     </select>
                                     <p class="required d-none text-danger fw-bold mb-0" id="regionMsg">يرجى اختيار المنطقة من القائمة أدناه</p>
@@ -179,6 +179,7 @@
                                                                                     <option value="القطامية" class="option-control" {{$tomb->region === 'القطامية' ? 'selected' : ''}}>القطامية</option>
                                                                                     <option value="الغفير" class="option-control" {{$tomb->region === 'الغفير' ? 'selected' : ''}}>الغفير</option>
                                                                                     <option value="زينهم" class="option-control" {{$tomb->region === 'زينهم' ? 'selected' : ''}}>زينهم</option>
+                                                                                    <option value="العين السخنة" class="option-control" {{$tomb->region === 'العين السخنة' ? 'selected' : ''}}>العين السخنة</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mb-3">
