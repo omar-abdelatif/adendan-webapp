@@ -46,19 +46,19 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="title" class="text-muted">نوع المقبره</label>
-                                    <select name="tomb_type" class="form-select text-muted" required>
+                                    <select name="tomb_specialization" class="form-select text-muted" required>
                                         <option selected>نوع المقبره</option>
-                                        <option value="رجال" class="option-control">رجال</option>
-                                        <option value="سيدات" class="option-control">سيدات</option>
-                                        <option value="مختلط" class="option-control">مختلط</option>
+                                        <option value="عيون" class="option-control">عيون</option>
+                                        <option value="لحد" class="option-control">لحد</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="title" class="text-muted">تصنيفف المقبره</label>
-                                    <select name="tomb_specialization" class="form-select text-muted" required>
-                                        <option selected>تصنيفف المقبره</option>
-                                        <option value="عيون" class="option-control">عيون</option>
-                                        <option value="لحد" class="option-control">لحد</option>
+                                    <label for="title" class="text-muted">تصنيف المقبره</label>
+                                    <select name="tomb_type" class="form-select text-muted" required>
+                                        <option selected>تصنيف المقبره</option>
+                                        <option value="رجال" class="option-control">رجال</option>
+                                        <option value="سيدات" class="option-control">سيدات</option>
+                                        <option value="مختلط" class="option-control">مختلط</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
