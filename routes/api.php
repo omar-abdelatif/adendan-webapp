@@ -19,6 +19,7 @@ Route::middleware('guest')->group(function () {
         Route::controller(NewsCommentsController::class)->group(function () {
             Route::get('/{newsId}/comments', 'getComments');
             Route::post('/{newsId}/comments', 'store');
+            Route::get('limited_news', 'latestNews');
         });
     });
     Route::controller(TombController::class)->group(function () {

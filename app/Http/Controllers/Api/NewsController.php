@@ -12,4 +12,7 @@ class NewsController extends Controller {
     public function show(int $id){
         return response()->json(News::find($id));
     }
+    public function latestNews(){
+        return response()->json(News::latest()->limit(6)->get());
+    }
 }
