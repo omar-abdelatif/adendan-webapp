@@ -15,11 +15,11 @@ Route::middleware('guest')->group(function () {
     Route::post('/member/login', [AuthController::class, 'login']);
     Route::prefix('/news')->controller(NewsController::class)->group(function () {
         Route::get('/all', 'allNews');
+        Route::get('/limited_news', 'latestNews');
         Route::get('/{id}', 'show');
         Route::controller(NewsCommentsController::class)->group(function () {
             Route::get('/{newsId}/comments', 'getComments');
             Route::post('/{newsId}/comments', 'store');
-            Route::get('limited_news', 'latestNews');
         });
     });
     Route::controller(TombController::class)->group(function () {
