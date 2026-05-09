@@ -34,7 +34,7 @@ class AssociationCommittesController extends Controller
         ];
         return redirect()->back()->with($notificationError);
     }
-    public function remove($id)
+    public function remove(int $id)
     {
         $remove = AssociationCommittes::findOrFail($id);
         if ($remove) {

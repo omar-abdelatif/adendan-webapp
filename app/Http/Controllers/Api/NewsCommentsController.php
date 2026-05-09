@@ -26,4 +26,23 @@ class NewsCommentsController extends Controller {
             'comment' => $comment,
         ], 201);
     }
+    public function update(Request $request, int $newsId, int $commentId) {
+        $comment = NewsComments::where('id', $commentId)->where('news_id', $newsId)->firstOrFail();
+        $comment->update([
+            'content' => $request->content
+        ]);
+        return response()->json([
+            'message' => 'تم التعديل بنجاح',
+            'data' => $comment->fresh()
+        ]);
+    }
+    public function destroy(int $newsId, int $commentId) {
+        $comment = NewsComments::where('id', $commentId)->where('news_id', $newsId)->firstOrFail();
+        $deletedComment = $comment->replicate();
+        $comment->delete();
+        return response()->json([
+            'message' => 'تم الحذف بنجاح',
+            'data' => $deletedComment
+        ]);
+    }
 }

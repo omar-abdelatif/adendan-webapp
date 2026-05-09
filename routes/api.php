@@ -20,6 +20,8 @@ Route::middleware('guest')->group(function () {
         Route::controller(NewsCommentsController::class)->group(function () {
             Route::get('/{newsId}/comments', 'getComments');
             Route::post('/{newsId}/comments', 'store');
+            Route::put('/{newsId}/comments/{commentId}', 'update');
+            Route::delete('/{newsId}/comments/{commentId}', 'destroy');
         });
     });
     Route::controller(TombController::class)->group(function () {
