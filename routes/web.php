@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DueController;
+use App\Http\Controllers\SMSController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
@@ -23,9 +25,8 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\OuterDonationsController;
 use App\Http\Controllers\SubscriberDataController;
-use App\Http\Controllers\AssociationCommittesController;
-use App\Http\Controllers\DueController;
 use App\Http\Controllers\PaymentTransactionController;
+use App\Http\Controllers\AssociationCommittesController;
 
 Auth::routes();
 
@@ -178,6 +179,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('delete/{id}', 'delete')->name('delete');
         Route::post('create_new', 'insert')->name('insert');
         Route::get('delete_ocr/{id}', 'deleteOcr')->name('ocr.delete');
+    });
+    Route::prefix('sms')->controller(SMSController::class)->name('sms.')->group(function () {
+        Route::get('sms', 'index')->name('index');
+        Route::get('create_new', 'createNewSub')->name('createNew');
+        Route::post('send_msg', 'sendMsg')->name('storeMsg');
+        Route::put('renew_sub/{id}', 'ReNew')->name('renew');
+        Route::post('bulk_store', 'bulkstore')->name('bulkstore');
+        Route::post('store_subscriber', 'storeSubscriber')->name('storeSubscriber');
     });
     Route::controller(PaymentTransactionController::class)->group(function () {
         Route::post('import-payment-transactions', 'import')->name('payment_transactions.import');

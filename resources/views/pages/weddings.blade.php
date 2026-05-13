@@ -137,7 +137,7 @@
                                             <td class="text-white text-center">{{$wedding->date}}</td>
                                             <td class="text-white text-center">{{$wedding->groom_name}}</td>
                                             <td class="text-white text-center">{{$wedding->pride_father_name ? 'كريمة/'.$wedding->pride_father_name : '-'}}</td>
-                                            <td class="text-white text-center">{{$wedding->address}}</td>
+                                            <td class="text-white text-center">{{$wedding->address ?? '-'}}</td>
                                             @if ($wedding->from_time === $wedding->to_time)
                                                 <td class="text-white text-center" dir="ltr">لم يحدد الميعاد بعد</td>
                                                 <td class="text-white text-center" dir="ltr">لم يحدد الميعاد بعد</td>

@@ -4,22 +4,19 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class PaymobService
-{
+class PaymobService {
 
-    protected $apiKey;
-    protected $integrationId;
-    protected $iframeId;
-    protected $intentionUrl;
+    protected string $apiKey;
+    protected string $integrationId;
+    protected string $iframeId;
+    protected string $intentionUrl;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->integrationId = config('paymob.integration_id');
         $this->intentionUrl = config('paymob.intention_url');
     }
 
-    public function createIntention($amount, $currency = 'EGP', $mobile_number = null, $first_name = null, $last_name = null,)
-    {
+    public function createIntention(int $amount, $currency = 'EGP', $mobile_number = null, $first_name = null, $last_name = null,) {
         $response = Http::post($this->intentionUrl, [
             'api_key' => $this->apiKey,
             'amount_cents' => $amount * 100,

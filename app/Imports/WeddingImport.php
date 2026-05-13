@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
 use App\Models\Wedding;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -20,7 +21,7 @@ class WeddingImport implements ToCollection, WithHeadingRow, WithBatchInserts
             $weddingDate = $this->parseExcelDate($row['date']);
             Wedding::create([
                 'day' => $row['day'],
-                'date' => $weddingDate,
+                'date' => $weddingDate ?? null,
                 'groom_name' => $row['groom_name'] ?? null,
                 'pride_father_name' => $row['pride_father_name'] ?? null,
                 'address' => $row['address'],
@@ -30,43 +31,53 @@ class WeddingImport implements ToCollection, WithHeadingRow, WithBatchInserts
         }
     }
 
-    private function parseExcelTime($value)
-    {
-        if (!$value) return null;
-
-        // لو الوقت جاي كرقم (Excel time)
-        if (is_numeric($value)) {
-            $carbonTime = \Carbon\Carbon::instance(Date::excelToDateTimeObject($value));
-            return $carbonTime->format('g:i A');
+    private function parseExcelDate($value) {
+        if ($value === null || $value === '') {
+            return null;
         }
-
-        // لو string بصيغة وقت
         try {
-            return \Carbon\Carbon::parse($value)->format('g:i A');
+            if (is_numeric($value)) {
+                return Carbon::instance(
+                    Date::excelToDateTimeObject($value)
+                )->format('Y-m-d');
+            }
+            if ($value instanceof \DateTime) {
+                return Carbon::instance($value)->format('Y-m-d');
+            }
+            if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $value)) {
+                return Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+            }
+            return Carbon::parse($value)->format('Y-m-d');
         } catch (\Exception $e) {
-            return null; // فشل التحويل
+            logger()->error('Date Parse Error', [
+                'value' => $value,
+                'message' => $e->getMessage(),
+            ]);
+            return null;
         }
     }
 
-    private function parseExcelDate($value) {
-        if (!$value) return null;
+    private function parseExcelTime($value) {
+        if ($value === null || $value === '') {
+            return null;
+        }
         try {
             if (is_numeric($value)) {
-                return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value))->format('Y-m-d');
+                return Carbon::instance(
+                    Date::excelToDateTimeObject($value)
+                )->format('g:i A');
             }
-            return \Carbon\Carbon::parse($value)->format('Y-m-d');
+            return Carbon::parse($value)->format('g:i A');
         } catch (\Exception $e) {
             return null;
         }
     }
 
-    function headingRow(): int
-    {
+    function headingRow(): int {
         return 1;
     }
 
-    function batchSize(): int
-    {
+    function batchSize(): int {
         return 100;
     }
 }

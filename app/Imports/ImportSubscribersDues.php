@@ -5,9 +5,9 @@ namespace App\Imports;
 use App\Models\Due;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class ImportSubscribersDues implements ToCollection, WithHeadingRow, WithBatchInserts, WithCalculatedFormulas {
     public function collection(Collection $collection) {

@@ -18,8 +18,7 @@ class WeddingController extends Controller
         $weddings = Wedding::all();
         return view('pages.weddings', compact('weddings'));
     }
-    public function weddingStore(WeddingRequest $request)
-    {
+    public function weddingStore(WeddingRequest $request) {
         $validated = $request->validated();
         $fromTime = $request['from_time'];
         $toTime = $request['to_time'];
@@ -43,8 +42,7 @@ class WeddingController extends Controller
         }
         return redirect()->back()->withErrors($validated);
     }
-    public function weddingRemove($id)
-    {
+    public function weddingRemove(int $id) {
         $removeWedding = Wedding::findOrFail($id);
         if ($removeWedding) {
             $delete = $removeWedding->delete();
@@ -90,8 +88,7 @@ class WeddingController extends Controller
             }
         }
     }
-    public function uploadBulkWedding(Request $request)
-    {
+    public function uploadBulkWedding(Request $request) {
         $request->validate([
             'import' => 'required|file|mimes:xlsx,xls',
         ]);

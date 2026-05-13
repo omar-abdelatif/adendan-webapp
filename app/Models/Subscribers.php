@@ -5,11 +5,10 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Subscribers extends Authenticatable {
-    use HasFactory, LogsActivity, HasApiTokens;
+    use LogsActivity, HasApiTokens;
     protected $table = 'subscribers';
     protected $hidden = ['password'];
     protected $fillable = [
@@ -47,6 +46,9 @@ class Subscribers extends Authenticatable {
     }
     public function tomb(){
         return $this->belongsTo(Tombs::class, 'tomb_name', 'title');
+    }
+    public function smssubscribers(){
+        return $this->hasOne(SMSSubscribers::class, 'member_id', 'member_id');
     }
     protected function getDynamicLogName(): string{
         return 'Subscribers';

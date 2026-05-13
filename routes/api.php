@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NewsCommentsController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\OcrController;
+use App\Http\Controllers\Api\SMSController;
 use App\Http\Controllers\Api\SubscriberFinanceController;
 use App\Http\Controllers\Api\TombController;
 use App\Http\Controllers\Api\WeddingsController;
@@ -44,5 +45,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/donations-payments-history', 'getUserDonationPaymentHistory');
         Route::get('/subscription-dues', 'getsubscriptionDues');
         Route::get('/donation-dues', 'getUserDonationDues');
+    });
+    Route::prefix('sms')->controller(SMSController::class)->group(function () {
+        Route::get('payment_history', 'getUserSmsPaymentHistory');
+        Route::post('pay_subscription', 'paySmsSubscription');
     });
 });

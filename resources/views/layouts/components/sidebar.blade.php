@@ -121,6 +121,14 @@
                             </a>
                         </li>
                     @endcan
+                    @can('الرسائل')
+                        <li class="sidebar-list">
+                            <a href="{{route('sms.index')}}" class="sidebar-link sidebar-title">
+                                <i class="fa-duotone fa-solid fa-envelope text-muted fs-5"></i>
+                                <span>خدمة الرسائل</span>
+                            </a>
+                        </li>
+                    @endcan
                     @can('التقارير')
                         <li class="sidebar-list">
                             <a href="#" class="sidebar-link sidebar-title">

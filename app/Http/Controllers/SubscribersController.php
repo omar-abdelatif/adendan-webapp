@@ -36,12 +36,10 @@ class SubscribersController extends Controller
     public function storeSubs(Request $request) {
         $validatedData = $request->validate([
             'ssn' => 'required|digits:14',
-            'mobile_no' => 'required|digits:11',
-        ], [
-            'ssn.required' => 'حقل الرقم القومي مطلوب.',
-            'ssn.digits' => 'يجب ألا يزيد الرقم القومي عن :digits رقم.',
-            'mobile_no.required' => 'حقل رقم الهاتف مطلوب.',
-            'mobile_no.digits' => 'يجب ألا يزيد رقم الهاتف عن :digits رقم.',
+            'mobile_no' => 'required|regex:/^01[0-9]{9}$/',
+        ], [], [
+            'ssn' => 'الرقم القومي',
+            'mobile_no' => 'رقم الهاتف',
         ]);
         $slug = Str::slug($request->name, '-');
         $value = $this->getSubscriptionValue();
@@ -191,11 +189,14 @@ class SubscribersController extends Controller
                 'educational_qualification' => $request['educational_qualification'],
                 'qualification_date' => $request['qualification_date'],
                 'tomb_name' => $request['tomb_name'],
+                'status' => $request['status'] ?? 0
             ]);
-            DB::transaction(function () use ($member) {
-                $member->update(['status' => 2]);
-                $member->dues()->delete();
-            });
+            if ($request->status) {
+                DB::transaction(function () use ($member) {
+                    $member->update(['status' => 2]);
+                    $member->dues()->delete();
+                });
+            }
             if ($update) {
                 $notificationSuccess = [
                     'message' => "تم التعديل بنجاح",
