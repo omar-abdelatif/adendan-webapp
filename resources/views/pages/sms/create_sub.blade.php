@@ -108,7 +108,9 @@
                                                             <tr>
                                                                 <td class="text-center">{{$subscriber->member_id}}</td>
                                                                 <td class="text-center">{{$subscriber->name}}</td>
-                                                                <td class="text-center">{{$subscriber->mobile_no}}</td>
+                                                                <td class="text-center">
+                                                                    {{ \Illuminate\Support\Str::startsWith($subscriber->mobile_no, '0')? $subscriber->mobile_no: '0' . $subscriber->mobile_no }}
+                                                                </td>
                                                                 <td class="text-center">
                                                                     <a type="button" class="btn btn-success ms-2" data-bs-toggle="modal" title="اضافة عضو" href="#renew_{{$subscriber->member_id}}">
                                                                         <i class="fa-solid fa-plus"></i>
@@ -173,6 +175,7 @@
                                                             <th class="text-muted text-center">رقم العضوية</th>
                                                             <th class="text-muted text-center">رقم المحمول</th>
                                                             <th class="text-muted text-center">حالة الاشتراك</th>
+                                                            <th class="text-muted text-center">نهاية الاشتراك</th>
                                                             <th class="text-muted text-center">Actions</th>
                                                         </tr>
                                                     </thead>
@@ -188,6 +191,7 @@
                                                                         <span class="badge badge-light-danger">غير نشط</span>
                                                                     @endif
                                                                 </td>
+                                                                <td class="text-center">{{$subscriber->subscription_expiry_date}}</td>
                                                                 <td class="text-center">
                                                                     @if ($subscriber->active_sms === 0)
                                                                         <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" title="تجديد الاشتراك" data-bs-target="#renew_{{$subscriber->id}}">

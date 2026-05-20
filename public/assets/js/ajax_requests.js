@@ -162,6 +162,14 @@ $(function () {
             cancelButtonText: "إلغاء",
         }).then((result) => {
             if (result.isConfirmed) {
+                Swal.fire({
+                    title: "جارٍ توليد كلمات السر...",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
                 $.ajax({
                     url: generateUrl,
                     method: "POST",
@@ -171,11 +179,9 @@ $(function () {
                     success: function (response) {
                         Swal.fire({
                             icon: "success",
-                            title: "تم إنشاء كلمات المرور بنجاح",
+                            text: `تم توليد ${response.count} كلمة سر جديدة`,
                             showConfirmButton: false,
-                            timer: 1500,
-                        }).then(() => {
-                            location.reload();
+                            timer: 2000,
                         });
                     },
                     error: function (xhr, status, error) {

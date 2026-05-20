@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportSmsSubscribers;
+use App\Models\PaymentTransaction;
 use App\Models\SMSMSGS;
+use App\Models\SMSSubscribers;
 use App\Models\Subscribers;
+use App\Services\EgyptLinxSmsService;
 use App\Services\SMSService;
 use Illuminate\Http\Request;
-use App\Models\SMSSubscribers;
-use App\Models\PaymentTransaction;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\ImportSmsSubscribers;
 
 class SMSController extends Controller {
-    public function __construct(protected SMSService $sms) {}
+    public function __construct(protected SMSService $sms, protected EgyptLinxSmsService $egylinx) {}
     public function index(){
         $sms = SMSMSGS::all();
         $totalAmount = PaymentTransaction::where('item','رسائل')->sum('amount');
@@ -69,7 +70,9 @@ class SMSController extends Controller {
     public function ReNew(Request $request, int $id){
         $smsSubscription = SMSSubscribers::findOrFail($id);
         $smsSubscription->update([
-            'active_sms' => 1
+            'subscription_start_date' => now(),
+            'subscription_expiry_date' => now()->copy()->addYear(),
+            'active_sms' => true,
         ]);
         paymentTransaction($request->member_id ?? null, $request->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'تجديد', 'ايداع', 'رسائل', $request->inv_no);
         $notificationSuccess = [
@@ -91,5 +94,29 @@ class SMSController extends Controller {
             'message' => 'Sent successfully',
             'data'    => $result['data']
         ]);
+    }
+    public function testSms(Request $request)
+    {
+        $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
+        $message      = $request->content;
+        $smsPerPerson = $this->egylinx->calculateSmsCount($message);
+        $totalNeeded  = count($recipients) * $smsPerPerson;
+        $balance      = $this->egylinx->getBalance();
+        if ($balance < $totalNeeded) {
+            return $this->egylinx->checkBalance($balance, $totalNeeded);
+        }
+        $results  = $this->egylinx->sendArabic($recipients, $request->content);
+        $success = collect($results)->where('success', true)->count();
+        $failed  = collect($results)->where('success', false)->values();
+        return response()->json([
+            'success_count' => $success,
+            'failed_count'  => $failed->count(),
+            'failed_numbers' => $failed->pluck('number')->toArray(),
+        ]);
+    }
+    public function getBalance()
+    {
+        $balance = $this->egylinx->getBalance();
+        return response()->json(['balance' => $balance]);
     }
 }

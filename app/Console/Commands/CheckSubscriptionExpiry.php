@@ -21,7 +21,8 @@ class CheckSubscriptionExpiry extends Command {
      *
      * @var string
      */
-    public function handle(): void {
-        SMSSubscribers::where('status', 'active')->where('expiry_date', '<', Carbon::today())->update(['status' => 'inactive']);
+    public function handle() {
+        SMSSubscribers::where('active_sms', 1)->whereDate('subscription_expiry_date', Carbon::today())->update(['active_sms' => 0]);
+        return Command::SUCCESS;
     }
 }

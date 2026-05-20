@@ -80,7 +80,7 @@ $(function () {
             "<div class='d-flex align-items-center justify-content-evenly py-4 border-top border-bottom-2 border-white'>" +
                 "<input type='text' name='url[]' class='form-control text-center text-white' placeholder='رابط الفيديو'>" +
                 "<a href='javascript:void(0)' class='btn btn-danger px-2 py-2 removeRow ms-2'>-</a>" +
-                "</div>"
+                "</div>",
         );
         $("#inputs").append(newRow);
     });
@@ -111,19 +111,17 @@ document.addEventListener("DOMContentLoaded", function () {
             let newsId = this.dataset.newsId;
             let baseUrl = window.location.origin;
             let publicUrl = `${baseUrl}/all_news/single_news/${newsId}`;
-
             let tempInput = document.createElement("input");
             tempInput.value = publicUrl;
             document.body.appendChild(tempInput);
             tempInput.select();
             document.execCommand("copy");
             document.body.removeChild(tempInput);
-
             alert("تم نسخ رابط الخبر");
         });
     });
     //! Form For Get The Incomplete Data From The Subscssriber
-    let searchedForms = document.querySelectorAll(".searchedForm[data-form-id]",);
+    let searchedForms = document.querySelectorAll(".searchedForm[data-form-id]");
     if (searchedForms) {
         searchedForms.forEach((form) => {
             let url = form.getAttribute("action");

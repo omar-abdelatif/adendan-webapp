@@ -116,6 +116,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('store', 'storeSubscription')->name('store');
         Route::post('updating', 'updatingSubscription')->name('update');
         Route::get('delete/{id}', 'destroyingSubscription')->name('destroy');
+        Route::post('subscriptions/notify-expiry', 'runNotifyExpiry')->name('notify-expiry');
     });
     Route::prefix('subscription/dues')->controller(DelayController::class)->group(function () {
         Route::post('pay', 'paySubscription')->name('subscription.pay');
@@ -183,10 +184,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('sms')->controller(SMSController::class)->name('sms.')->group(function () {
         Route::get('sms', 'index')->name('index');
         Route::get('create_new', 'createNewSub')->name('createNew');
-        Route::post('send_msg', 'sendMsg')->name('storeMsg');
+        Route::post('send_msg', 'testSms')->name('storeMsg');
         Route::put('renew_sub/{id}', 'ReNew')->name('renew');
         Route::post('bulk_store', 'bulkstore')->name('bulkstore');
         Route::post('store_subscriber', 'storeSubscriber')->name('storeSubscriber');
+        Route::get('balance', 'getBalance')->name('balance');
     });
     Route::controller(PaymentTransactionController::class)->group(function () {
         Route::post('import-payment-transactions', 'import')->name('payment_transactions.import');

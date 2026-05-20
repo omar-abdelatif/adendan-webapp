@@ -31,7 +31,6 @@ class SMSService {
                 'body' => $message,
                 'from' => 'adendan',
                 'encoding'     => 'UNICODE',
-                'routingGroup' => 'ECONOMY',
             ];
         }
         try {

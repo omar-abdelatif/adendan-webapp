@@ -37,4 +37,10 @@ return [
         'token_id' => env('BULKSMS_TOKEN_ID'),
     ],
 
+    'egyptlinx' => [
+        'provider' => env('EGYPTLINX_SMS_PROVIDER'),
+        'password' => env('EGYPTLINX_SMS_PASSWORD'),
+        'sender'   => env('EGYPTLINX_SMS_SENDER'),
+    ],
+
 ];

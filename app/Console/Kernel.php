@@ -5,8 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel
-{
+class Kernel extends ConsoleKernel {
     /**
      * Define the application's command schedule.
      *
@@ -14,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-        $schedule->command('subscriptions:check-expiry')->daily();
+        $schedule->command('subscriptions:check-expiry')->dailyAt('00:00')->withoutOverlapping();
+        $schedule->command('subscriptions:notify-expiry')->dailyAt('00:00')->withoutOverlapping();
     }
 
     /**
@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
-
+        $this->load(__DIR__ . '/Commands');
         require base_path('routes/console.php');
     }
 }

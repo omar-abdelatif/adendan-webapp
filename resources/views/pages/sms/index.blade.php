@@ -7,6 +7,87 @@
     <li class="breadcrumb-item active">الرئيسية</li>
     <li class="breadcrumb-item active">الرسائل</li>
 @endsection
+@section('custom-js')
+    <script>
+        window.smsRoutes = {
+            storeMsg: "{{ route('sms.storeMsg') }}",
+            balance:  "{{ route('sms.balance') }}"
+        };
+        window.csrfToken = "{{ csrf_token() }}";
+        window.arabicOnly = function (input) {
+            input.value = input.value.replace(/[^\u0600-\u06FF\s]/g, '');
+        };
+        function toggleCondolence() {
+            const show = document.getElementById('has_condolence').checked;
+            document.getElementById('condolence_options').style.display = show ? 'block' : 'none';
+            buildMsg();
+        }
+        function getSelectedDays() {
+            const checked = document.querySelectorAll('.day-check:checked');
+            return Array.from(checked).map(el => el.value);
+        }
+        window.buildMsg = function () {
+            const gender    = document.getElementById('gender').value;
+            const name      = document.getElementById('name').value.trim();
+            const dPlace    = document.getElementById('death_place').value;
+            const dAddr     = document.getElementById('death_address').value.trim();
+            const prayer    = document.getElementById('prayer_time').value;
+            const burial    = document.getElementById('burial_place').value.trim();
+            const hasCond   = document.getElementById('has_condolence').checked;
+            const men       = document.getElementById('men').checked;
+            const women     = document.getElementById('women').checked;
+            const days      = window.getSelectedDays();
+            const womenText = document.getElementById('women_condolence_text').value.trim();
+            const mosque    = document.getElementById('mosque_name').value;
+            document.getElementById('men_days').style.display   = men   ? 'block' : 'none';
+            document.getElementById('women_text').style.display = women ? 'block' : 'none';
+            if (!name) {
+                document.getElementById('sms_preview').textContent = '—';
+                window.updateCounter('');
+                return;
+            }
+            let msg = `${gender} ${name} ${dPlace}`;
+            if (dAddr) msg += ` ${dAddr}`;
+            msg += ` و صلاة الجنازة ${prayer}`;
+            if (mosque) msg += ` بـ${mosque}`;
+            if (burial) msg += `والدفن ب${burial}`;
+            if (!hasCond) {
+                msg += ' ولا يوجد عزاء للرجال ولا للسيدات';
+            } else {
+                if (men && women) {
+                    let menText = ' وعزاء الرجال';
+                    if (days.length > 0) menText += ` ${days.join(' و')} بالمقر`;
+                    else menText += ' بالمقر';
+                    msg += menText;
+                    if (womenText) msg += ` وعزاء السيدات ${womenText}`;
+                } else if (men && !women) {
+                    let menText = ' وعزاء الرجال';
+                    if (days.length > 0) menText += ` ${days.join(' و')} بالمقر`;
+                    else menText += ' بالمقر';
+                    msg += `${menText} ولا عزاء للسيدات`;
+                } else if (women && !men) {
+                    if (womenText) msg += ` وعزاء السيدات ${womenText} ولا عزاء للرجال`;
+                } else {
+                    msg += ' وعزاء';
+                }
+            }
+            document.getElementById('sms_preview').textContent = msg;
+            document.getElementById('msg_content').value = msg;
+            window.updateCounter(msg);
+        }
+        function updateCounter(msg) {
+            const len = msg.length;
+            const sms = len <= 70 ? 1 : len <= 134 ? 2 : 3;
+
+            document.getElementById('char_count').textContent = len;
+            document.getElementById('sms_count').textContent  = sms;
+
+            const counter = document.getElementById('sms_counter');
+            counter.className = len > 134 ? 'text-danger' : 'text-muted';
+        }
+    </script>
+    <script src="{{asset('assets/js/sms.js')}}"></script>
+@endsection
 @section('modals')
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_new">إضافة مشتركين بالجملة</button>
     <div class="modal fade" id="add_new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,9 +120,120 @@
                 <div class="modal-body">
                     <form action="{{route('sms.storeMsg')}}" id="smsForm" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="msg_content" class="text-muted">محتوى الرسالة</label>
-                            <textarea name="content" class="form-control text-light" dir="rtl" id="msg_content" rows="5" placeholder="محتوى الرسالة" required></textarea>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="name" class="form-label text-muted">اسم المتوفي (ثلاثي)</label>
+                                    <input type="text" id="name" class="form-control" placeholder="محمد احمد محمود" pattern="[\u0600-\u06FF\s]+" oninput="arabicOnly(this); buildMsg()">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="gender" class="form-label text-muted">جنس المتوفي</label>
+                                    <select id="gender" class="form-control" onchange="buildMsg()">
+                                        <option disabled>— اختر —</option>
+                                        <option value="توفي">ذكر</option>
+                                        <option value="توفيت">أنثى</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="death_place" class="form-label text-muted">مكان الوفاة</label>
+                                    <select id="death_place" class="form-control" onchange="buildMsg()">
+                                        <option disabled>— اختر —</option>
+                                        <option value="بالمنزل">المنزل</option>
+                                        <option value="بمستشفى">المستشفى</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="death_address" class="form-label text-muted">عنوان مكان الوفاة</label>
+                                    <input type="text" id="death_address" class="form-control" placeholder="عنوان مكان الوفاة" oninput="buildMsg()">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="prayer_time" class="form-label text-muted">وقت صلاة الجنازة</label>
+                                    <select id="prayer_time" class="form-control" onchange="buildMsg()">
+                                        <option disabled>— اختر —</option>
+                                        <option value="عقب صلاة الظهر">الظهر</option>
+                                        <option value="عقب صلاة العصر">العصر</option>
+                                        <option value="عقب صلاة المغرب">المغرب</option>
+                                        <option value="عقب صلاة العشاء">العشاء</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="burial_place" class="form-label text-muted">مكان الدفن</label>
+                                    <select id="burial_place" class="form-control" onchange="buildMsg()">
+                                        <option disabled>— اختر —</option>
+                                        <option value="اكتوبر">اكتوبر</option>
+                                        <option value="الفيوم">الفيوم</option>
+                                        <option value="مايو">مايو</option>
+                                        <option value="القطامية">القطامية</option>
+                                        <option value="الغفير">الغفير</option>
+                                        <option value="زينهم">زينهم</option>
+                                        <option value="العين السخنة">العين السخنة</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="has_condolence" onchange="toggleCondolence()">
+                                    <label class="form-check-label text-muted" for="has_condolence">يوجد عزاء</label>
+                                </div>
+                                <div id="condolence_options" style="display:none; padding-right: 1.5rem; margin-top: 10px;">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="men" onchange="buildMsg()">
+                                        <label class="form-check-label text-muted" for="men">الرجال</label>
+                                    </div>
+                                    <div id="men_days" style="display:none; padding-right: 1.5rem; margin-top: 8px;">
+                                        <label class="text-muted" style="font-size: 13px;">أيام العزاء</label>
+                                        <div class="d-flex gap-3 flex-wrap mt-1">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input day-check" name="men_day" value="اليوم" id="day_today" onchange="buildMsg()">
+                                                <label class="form-check-label text-muted" for="day_today">اليوم</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input day-check" name="men_day" value="السبت" id="day_sat" onchange="buildMsg()">
+                                                <label class="form-check-label text-muted" for="day_sat">السبت</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input day-check" name="men_day" value="الاثنين" id="day_mon" onchange="buildMsg()">
+                                                <label class="form-check-label text-muted" for="day_mon">الاثنين</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input day-check" name="men_day" value="الأربعاء" id="day_wed" onchange="buildMsg()">
+                                                <label class="form-check-label text-muted" for="day_wed">الأربعاء</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input type="checkbox" class="form-check-input" id="women" onchange="buildMsg()">
+                                        <label class="form-check-label text-muted" for="women">السيدات</label>
+                                    </div>
+                                    <div id="women_text" style="display:none; padding-right: 1.5rem; margin-top: 8px;">
+                                        <input type="text" id="women_condolence_text" class="form-control" placeholder="مثال: يوم السبت فقط" pattern="[\u0600-\u06FF\s]+" oninput="arabicOnly(this); buildMsg()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="mosque_name" class="form-label text-muted">مكان صلاة الجنازة</label>
+                                    <input type="text" id="mosque_name" name="mosque_name" class="form-control" placeholder="مسجد النور" pattern="[\u0600-\u06FF\s]+" oninput="arabicOnly(this); buildMsg()">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="text-muted">معاينة الرسالة</label>
+                                <div id="sms_preview" class="form-control text-muted" style="min-height: 80px; background: #f8f9fa; white-space: pre-wrap; direction: rtl;">—</div>
+                                <small id="sms_counter" class="text-muted">
+                                    <span id="char_count">0</span> / 134 حرف &nbsp;|&nbsp; <span id="sms_count">1</span> رسالة
+                                </small>
+                            </div>
+                            <textarea name="content" id="msg_content" class="d-none"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -104,6 +296,23 @@
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1 text-muted"> {{$totalAmount}} ج.م</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-4">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="100" height="100" src="https://img.icons8.com/color/80/money-transfer.png" alt="user-2"/>
+                            </div>
+                            <div>
+                                <h5 class="text-muted fs-4">الرصيد المتبقي:</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1 text-muted" id="balance-remining"></h5>
                         </div>
                     </div>
                 </div>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubscriptionRequest;
 use App\Models\Due;
+use App\Models\PaymentTransaction;
 use App\Models\Subscribers;
 use Illuminate\Http\Request;
-use App\Models\PaymentTransaction;
-use App\Http\Requests\SubscriptionRequest;
+use Illuminate\Support\Facades\Artisan;
 
 class SubscriptionsController extends Controller {
     function __construct() {
@@ -77,5 +78,13 @@ class SubscriptionsController extends Controller {
             'alert-type' => 'error'
         ];
         return redirect()->back()->with($notificationError);
+    }
+    public function runNotifyExpiry() {
+        Artisan::call('subscriptions:notify-expiry');
+        $output = Artisan::output();
+        return response()->json([
+            'success' => true,
+            'message' => trim($output),
+        ]);
     }
 }

@@ -335,8 +335,13 @@ class SubscribersController extends Controller
     }
     public function generatePasswords() {
         Artisan::call('users:generate-password');
+        $output = Artisan::output();
+        $lines = array_filter(explode("\n", trim($output)));
+        $count = (int) end($lines);
         return response()->json([
-            'message' => 'Passwords generated successfully'
+            'success' => true,
+            'message' => 'تم انشاء كلمات السر بنجاح',
+            'count'   => $count,
         ]);
     }
     private function addDue(int $memberId, int $amount, $item, string $tractionType) {

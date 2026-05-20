@@ -10,6 +10,7 @@ class SMSSubscribers extends Model {
         'member_id',
         'mobile_no',
         'amount',
+        'subscription_start_date',
         'subscription_expiry_date',
         'active_sms',
     ];

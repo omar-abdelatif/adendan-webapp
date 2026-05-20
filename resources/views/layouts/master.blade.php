@@ -19,6 +19,8 @@
         {{-- ! Vite ! --}}
         @vite(['resources/js/app.js', 'resources/sass/app.scss'])
         @include('layouts.assets.css')
+        @yield('custom-css')
+        @yield('custom-js')
     </head>
 
     <body class="dark-only rtl">
