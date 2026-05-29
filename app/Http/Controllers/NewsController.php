@@ -15,7 +15,7 @@ class NewsController extends Controller
     }
     public function index()
     {
-        $news = News::all();
+        $news = News::select('id', 'title', 'category', 'img', 'created_at')->get();
         return view('pages.news.all', compact('news'));
     }
     public function storeNews(Request $request)

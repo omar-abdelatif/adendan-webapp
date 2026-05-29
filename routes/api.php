@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\NewsCommentsController;
-use App\Http\Controllers\Api\NewsController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\OcrController;
 use App\Http\Controllers\Api\SMSController;
-use App\Http\Controllers\Api\SubscriberFinanceController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\TombController;
-use App\Http\Controllers\Api\WeddingsController;
 use App\Http\Controllers\Api\WorkersController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\WeddingsController;
+use App\Http\Controllers\Api\NewsCommentsController;
+use App\Http\Controllers\Api\SubscriberFinanceController;
 
 Route::middleware('guest')->group(function () {
     Route::post('/ocr-data', [OcrController::class, 'store']);
@@ -34,11 +35,14 @@ Route::middleware('guest')->group(function () {
     Route::controller(WeddingsController::class)->group(function () {
         Route::get('/all_weddings', 'index');
     });
+    Route::prefix('paymob')->controller(PaymentController::class)->group(function () {
+        Route::match(['get', 'post'], 'callback', 'callback');
+    });
 });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::controller(AuthController::class)->group(function () {
-        Route::post('/user/logout', 'logout');
-        Route::get('/user/me', 'user');
+    Route::prefix('user')->controller(AuthController::class)->group(function () {
+        Route::post('logout', 'logout');
+        Route::get('me', 'user');
     });
     Route::prefix('/subscriber')->controller(SubscriberFinanceController::class)->group(function () {
         Route::get('/subscription-payments-history', 'getUserSubscriptionPaymentHistory');
@@ -49,5 +53,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('sms')->controller(SMSController::class)->group(function () {
         Route::get('payment_history', 'getUserSmsPaymentHistory');
         Route::post('pay_subscription', 'paySmsSubscription');
+        Route::get('sms_status', 'getSmsStatus');
+        Route::post('renew_subscription', 'renewSms');
     });
+    Route::prefix('pay')->controller(PaymentController::class)->group(function () {
+        Route::post('deduct_due/{transactionId}', 'deductDue');
+    });
+    // Route::prefix('paymob')->controller(CheckoutController::class)->group(function () {
+    //     Route::post('/checkout', 'checkingOut');
+    // });
 });

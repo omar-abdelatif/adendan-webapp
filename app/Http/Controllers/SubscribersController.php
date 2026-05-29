@@ -86,8 +86,8 @@ class SubscribersController extends Controller
             'status' => 1
         ]);
         if ($store) {
-            paymentTransaction($store->member_id, $totalNewSubCost, now(), 'كاش', 'كلي', 'إشتراك جديد', 'ايداع', $year, $request->inv_no);
-            paymentTransaction($store->member_id, 40, now(), 'كاش', 'كلي', 'تبرع سنوي', 'ايداع', $year, $request->inv_no);
+            paymentTransaction($store->member_id, $totalNewSubCost, now(), 'كاش', 'كلي', 'إشتراك جديد', 'ايداع', $year, $request->inv_no, null, null);
+            paymentTransaction($store->member_id, 40, now(), 'كاش', 'كلي', 'تبرع سنوي', 'ايداع', $year, $request->inv_no, null, null);
             $this->addDue($store->member_id, 100, 'تبرع سيارة التكريم', 'تبرعات');
             $this->addDue($store->member_id, 200, 'تبرع صيانة المقرات ', 'تبرعات');
             $sumAmount = $totalSafe->amount + $totalNewSubCost;
@@ -189,7 +189,6 @@ class SubscribersController extends Controller
                 'educational_qualification' => $request['educational_qualification'],
                 'qualification_date' => $request['qualification_date'],
                 'tomb_name' => $request['tomb_name'],
-                'status' => $request['status'] ?? 0
             ]);
             if ($request->status) {
                 DB::transaction(function () use ($member) {

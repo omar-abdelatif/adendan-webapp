@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\ImportSmsSubscribers;
 use App\Models\PaymentTransaction;
+use App\Models\SMSFEES;
 use App\Models\SMSMSGS;
 use App\Models\SMSSubscribers;
 use App\Models\Subscribers;
@@ -19,7 +20,18 @@ class SMSController extends Controller {
         $totalAmount = PaymentTransaction::where('item','رسائل')->sum('amount');
         $nonMembers = SMSSubscribers::where('member_id', null)->count();
         $members    = SMSSubscribers::where('member_id', '!=', null)->count();
-        return view('pages.sms.index', compact('sms', 'totalAmount', 'nonMembers', 'members'));
+        $fees = SMSFEES::latest()->first();
+        return view('pages.sms.index', compact('sms', 'totalAmount', 'nonMembers', 'members', 'fees'));
+    }
+    public function updateSmsFees(Request $request){
+        $fees = SMSFEES::first();
+        $amount = (int) $request->amount;
+        $this->sms->updateSmsFees($fees, $amount);
+        $notificationSuccess = [
+            'message' => "تم تحديث الرسوم بنجاح",
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notificationSuccess);
     }
     public function createNewSub(){
         $subscribers = Subscribers::select('id','member_id', 'name', 'mobile_no')->where('status', '!=', 2)->get();
@@ -50,14 +62,7 @@ class SMSController extends Controller {
             'inv_no' => 'رقم الايصال',
         ]);
         if($validated) {
-            SMSSubscribers::create([
-                'member_id' => $request->member_id ?? null,
-                'mobile_no' => $request->mobile_no,
-                'amount' => $request->amount,
-                'subscription_start_date' => now(),
-                'subscription_expiry_date' => now()->copy()->addYear(),
-                'active_sms' => 1,
-            ]);
+            $this->egylinx->storeOrUpdateSmsSubscriber($request->member_id, $request->mobile_no, $request->amount, now());
             paymentTransaction($request->member_id ?? null, $request->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'اشتراك', 'ايداع', 'رسائل' ,$request->inv_no);
             $notificationSuccess = [
                 'message' => "تم التسجيل بنجاح",
@@ -69,34 +74,33 @@ class SMSController extends Controller {
     }
     public function ReNew(Request $request, int $id){
         $smsSubscription = SMSSubscribers::findOrFail($id);
-        $smsSubscription->update([
-            'subscription_start_date' => now(),
-            'subscription_expiry_date' => now()->copy()->addYear(),
-            'active_sms' => true,
-        ]);
-        paymentTransaction($request->member_id ?? null, $request->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'تجديد', 'ايداع', 'رسائل', $request->inv_no);
-        $notificationSuccess = [
-            'message' => "تم الاستيراد بنجاح",
-            'alert-type' => 'success'
-        ];
-        return redirect()->back()->with($notificationSuccess);
-    }
-    public function sendMsg(Request $request) {
-        $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
-        $result = $this->sms->sendMessage($recipients, $request->content);
-        if (!$result['success']) {
-            return response()->json([
-                'message' => 'SMS failed',
-                'errors'  => $result['error']
-            ], 500);
+        if ($smsSubscription) {
+            $renewalAmount = $this->egylinx->smsFees();
+            $smsSubscription->update([
+                'subscription_start_date' => now(),
+                'subscription_expiry_date' => $this->egylinx->getSmsExpiryDate(now()),
+                'amount' => $renewalAmount,
+                'active_sms' => true,
+            ]);
+            paymentTransaction($request->member_id ?? null, $renewalAmount, now()->format('Y-m-d'), 'كاش', 'كلي', 'تجديد', 'ايداع', 'رسائل', $request->inv_no);
+            return response()->json(['message' => 'تم التجديد بنجاح']);
         }
-        return response()->json([
-            'message' => 'Sent successfully',
-            'data'    => $result['data']
-        ]);
     }
-    public function testSms(Request $request)
-    {
+    // public function sendMsg(Request $request) {
+    //     $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
+    //     $result = $this->sms->sendMessage($recipients, $request->content);
+    //     if (!$result['success']) {
+    //         return response()->json([
+    //             'message' => 'SMS failed',
+    //             'errors'  => $result['error']
+    //         ], 500);
+    //     }
+    //     return response()->json([
+    //         'message' => 'Sent successfully',
+    //         'data'    => $result['data']
+    //     ]);
+    // }
+    public function testSms(Request $request) {
         $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
         $message      = $request->content;
         $smsPerPerson = $this->egylinx->calculateSmsCount($message);
@@ -114,8 +118,7 @@ class SMSController extends Controller {
             'failed_numbers' => $failed->pluck('number')->toArray(),
         ]);
     }
-    public function getBalance()
-    {
+    public function getBalance() {
         $balance = $this->egylinx->getBalance();
         return response()->json(['balance' => $balance]);
     }

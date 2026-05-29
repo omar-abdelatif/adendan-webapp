@@ -10,6 +10,9 @@
     </li>
     <li class="breadcrumb-item active">مشترك جديد</li>
 @endsection
+@section('script')
+    <script src="{{asset('assets/js/sms.js')}}"></script>
+@endsection
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
@@ -68,14 +71,6 @@
                                                     <label for="mobile_no" class="form-label text-muted">رقم المحمول</label>
                                                     <input type="number" name="mobile_no" id="mobile_no" class="form-control" required>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="amount" class="form-label text-muted">المبلغ</label>
-                                                    <input type="number" name="amount" id="amount" value="40" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inv_no" class="form-label text-muted">رقم الايصال</label>
-                                                    <input type="number" name="inv_no" id="inv_no" class="form-control">
-                                                </div>
                                                 <div class="modal-footer mt-4">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
                                                     <button type="submit" role="button" id="associateSubmit" class="btn btn-primary">تأكيد</button>
@@ -108,9 +103,7 @@
                                                             <tr>
                                                                 <td class="text-center">{{$subscriber->member_id}}</td>
                                                                 <td class="text-center">{{$subscriber->name}}</td>
-                                                                <td class="text-center">
-                                                                    {{ \Illuminate\Support\Str::startsWith($subscriber->mobile_no, '0')? $subscriber->mobile_no: '0' . $subscriber->mobile_no }}
-                                                                </td>
+                                                                <td class="text-center">{{$subscriber->mobile_no}}</td>
                                                                 <td class="text-center">
                                                                     <a type="button" class="btn btn-success ms-2" data-bs-toggle="modal" title="اضافة عضو" href="#renew_{{$subscriber->member_id}}">
                                                                         <i class="fa-solid fa-plus"></i>
@@ -132,14 +125,6 @@
                                                                                         <div class="form-group">
                                                                                             <label for="amount_{{$subscriber->id}}" class="form-label text-muted">رقم المحمول</label>
                                                                                             <input type="number" id="amount_{{$subscriber->id}}" class="form-control" name="mobile_no" value="{{$subscriber->mobile_no}}" readonly>
-                                                                                        </div>
-                                                                                        <div class="form-group">
-                                                                                            <label for="amount_{{$subscriber->id}}" class="form-label text-muted">المبلغ</label>
-                                                                                            <input type="number" id="amount_{{$subscriber->id}}" class="form-control" name="amount" value="40" required>
-                                                                                        </div>
-                                                                                        <div class="form-group">
-                                                                                            <label for="inv_no_{{$subscriber->id}}" class="form-label text-muted">رقم الايصال</label>
-                                                                                            <input type="number" id="inv_no_{{$subscriber->id}}" class="form-control" name="inv_no" required>
                                                                                         </div>
                                                                                         <div class="modal-footer">
                                                                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
@@ -194,37 +179,9 @@
                                                                 <td class="text-center">{{$subscriber->subscription_expiry_date}}</td>
                                                                 <td class="text-center">
                                                                     @if ($subscriber->active_sms === 0)
-                                                                        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" title="تجديد الاشتراك" data-bs-target="#renew_{{$subscriber->id}}">
+                                                                        <button type="button" class="btn btn-success ms-2 renew" data-renew-url="{{ route('sms.renew', ['id' => $subscriber->id]) }}" data-member-id="{{$subscriber->member_id}}" data-subscriber-id="{{$subscriber->id}}" title="تجديد الاشتراك">
                                                                             <i class="fa-solid fa-arrow-rotate-right"></i>
                                                                         </button>
-                                                                        <div class="modal fade" id="renew_{{$subscriber->id}}" tabindex="-1" aria-labelledby="renewLabel{{$subscriber->id}}" aria-hidden="true">
-                                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h1 class="modal-title fs-5 text-muted" id="renew_{{$subscriber->id}}">تجديد اشتراك</h1>
-                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                    </div>
-                                                                                    <div class="modal-body">
-                                                                                        <form action="{{route('sms.renew', $subscriber->id)}}" method="post">
-                                                                                            @csrf
-                                                                                            @method('PUT')
-                                                                                            <div class="form-group">
-                                                                                                <label for="amount_{{$subscriber->id}}" class="form-label text-muted">المبلغ</label>
-                                                                                                <input type="number" id="amount_{{$subscriber->id}}" class="form-control" name="amount" value="40" required>
-                                                                                            </div>
-                                                                                            <div class="form-group">
-                                                                                                <label for="inv_no_{{$subscriber->id}}" class="form-label text-muted">رقم الايصال</label>
-                                                                                                <input type="number" id="inv_no_{{$subscriber->id}}" class="form-control" name="inv_no" required>
-                                                                                            </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
-                                                                                                <button type="submit" role="button" id="associateSubmit" class="btn btn-primary">تأكيد</button>
-                                                                                            </div>
-                                                                                        </form>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
                                                                     @else
                                                                         <span class="text-center font-bold">-</span>
                                                                     @endif

@@ -183,6 +183,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
     Route::prefix('sms')->controller(SMSController::class)->name('sms.')->group(function () {
         Route::get('sms', 'index')->name('index');
+        Route::post('store_sms_fees', 'updateSmsFees')->name('updateFees');
         Route::get('create_new', 'createNewSub')->name('createNew');
         Route::post('send_msg', 'testSms')->name('storeMsg');
         Route::put('renew_sub/{id}', 'ReNew')->name('renew');

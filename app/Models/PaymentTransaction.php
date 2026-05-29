@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class PaymentTransaction extends Model {
@@ -16,6 +15,10 @@ class PaymentTransaction extends Model {
         'payment_method',
         'transaction_cat',
         'transaction_type',
+        'paymob_intention_id',
+        'paymob_transaction_id',
+        'paymob_status',
+
     ];
     public function subscriber() {
         return $this->belongsTo(Subscribers::class, 'member_id', 'member_id');

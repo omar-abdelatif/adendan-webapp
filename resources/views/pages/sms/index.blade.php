@@ -7,7 +7,7 @@
     <li class="breadcrumb-item active">الرئيسية</li>
     <li class="breadcrumb-item active">الرسائل</li>
 @endsection
-@section('custom-js')
+@section('script')
     <script>
         window.smsRoutes = {
             storeMsg: "{{ route('sms.storeMsg') }}",
@@ -89,7 +89,7 @@
     <script src="{{asset('assets/js/sms.js')}}"></script>
 @endsection
 @section('modals')
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_new">إضافة مشتركين بالجملة</button>
+    <button type="button" class="btn btn-success" title="إضافة مشتركين بالجملة" data-bs-toggle="modal" data-bs-target="#add_new">مشتركين بالجملة</button>
     <div class="modal fade" id="add_new" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -159,6 +159,7 @@
                                     <select id="prayer_time" class="form-control" onchange="buildMsg()">
                                         <option disabled>— اختر —</option>
                                         <option value="عقب صلاة الظهر">الظهر</option>
+                                        <option value="عقب صلاة الجمعة">الجمعة</option>
                                         <option value="عقب صلاة العصر">العصر</option>
                                         <option value="عقب صلاة المغرب">المغرب</option>
                                         <option value="عقب صلاة العشاء">العشاء</option>
@@ -244,7 +245,28 @@
             </div>
         </div>
     </div>
-    <a href="{{route('sms.createNew')}}" class="btn btn-success ms-2">اضافة مشترك</a>
+    <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" title="تعديل رسوم الرسالة" data-bs-target="#sms_fees">رسوم الرسالة</button>
+    <div class="modal fade" id="sms_fees" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-muted" id="exampleModalLabel">تعديل رسوم الرسالة</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('sms.updateFees')}}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="fees_amount" class="form-label text-muted">المبلغ (ج.م)</label>
+                            <input type="number" name="amount" id="fees_amount" class="form-control" value="{{ $fees->amount }}" min="0" required>
+                        </div>
+                        <button class="btn btn-success fw-bold text-white mt-3 w-100" type="submit">تحديث الرسوم</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{route('sms.createNew')}}" class="btn btn-success ms-2" title="إضافة مشترك">اضافة مشترك</a>
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -313,6 +335,23 @@
                         </div>
                         <div class="font-Info">
                             <h5 class="mb-1 text-muted" id="balance-remining"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 box-col-4">
+                <div class="card widget-1">
+                    <div class="card-body align-items-center">
+                        <div class="widget-content">
+                            <div class="bg-round">
+                                <img width="100" height="100" src="https://img.icons8.com/color/80/money-transfer.png" alt="user-2"/>
+                            </div>
+                            <div>
+                                <h5 class="text-muted fs-4">الرسوم:</h5>
+                            </div>
+                        </div>
+                        <div class="font-Info">
+                            <h5 class="mb-1 text-muted" id="fees">{{ $fees->amount }} ج.م</h5>
                         </div>
                     </div>
                 </div>

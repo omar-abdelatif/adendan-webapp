@@ -7,17 +7,32 @@ use App\Models\PaymentTransaction;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('paymentTransaction')) {
-    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, $item, $inv) {
+    // function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, $item, $inv) {
+    //     return PaymentTransaction::create([
+    //         'item' => $item,
+    //         'inv_no' => $inv,
+    //         'amount' => $amount,
+    //         'member_id' => $memberId ?? null,
+    //         'payment_date' => $paymentDate,
+    //         'payment_method' => $paymentMethod,
+    //         'payment_cat' => $paymentCategory,
+    //         'transaction_type' => $transactionType,
+    //         'transaction_cat' => $transactionCategory,
+    //     ]);
+    // }
+    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, string $item, ?int $inv = null, string $paymobIntentionId = null, ?string $paymobStatus = null) {
         return PaymentTransaction::create([
-            'item' => $item,
-            'inv_no' => $inv,
-            'amount' => $amount,
-            'member_id' => $memberId ?? null,
-            'payment_date' => $paymentDate,
-            'payment_method' => $paymentMethod,
-            'payment_cat' => $paymentCategory,
-            'transaction_type' => $transactionType,
-            'transaction_cat' => $transactionCategory,
+            'item'                => $item,
+            'inv_no'              => $inv,
+            'amount'              => $amount,
+            'member_id'           => $memberId ?? null,
+            'payment_date'        => $paymentDate,
+            'payment_method'      => $paymentMethod,
+            'payment_cat'         => $paymentCategory,
+            'transaction_type'    => $transactionType,
+            'transaction_cat'     => $transactionCategory,
+            'paymob_intention_id' => $paymobIntentionId,
+            'paymob_status'       => $paymobStatus ?? null,
         ]);
     }
 }
@@ -27,12 +42,8 @@ if(!function_exists('validateTransfer')){
             'amount'    => 'required|integer|min:1',
             'proof_img' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
         ], [
-            'amount.min'        => 'المبلغ غير متاح',
-            'amount.required'   => 'يجب إدخال المبلغ',
-            'proof_img.required' => 'يجب ارفاق صورة الإثبات',
-            'proof_img.image'   => 'يجب أن يكون الملف صورة',
-            'proof_img.mimes'   => 'يجب أن يكون الملف من نوع :values',
-            'proof_img.max'     => 'يجب ألا يتجاوز حجم الصورة :max',
+            'amount'        => 'المبلغ',
+            'proof_img' => 'صورة الاثبات',
         ]);
     }
 }
@@ -48,8 +59,8 @@ if (!function_exists('handleTransfer')) {
     function handleTransfer(array $validated, string $imagename, string $date, string $fromCat, string $toCat, object $fromTotal, object $toTotal): bool {
         try {
             DB::transaction(function () use ($validated, $imagename, $date, $fromCat, $toCat, $fromTotal, $toTotal) {
-                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $fromCat, 'تحويلات', 'سحب', $imagename, '');
-                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $toCat, 'تحويلات', 'ايداع', $imagename, '');
+                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $fromCat, 'تحويلات', 'سحب', 'تحويلات', $imagename, null, 'paid');
+                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $toCat, 'تحويلات', 'ايداع', 'تحويلات', $imagename, null, 'paid');
                 $fromTotal->decrement('amount', $validated['amount']);
                 $toTotal->increment('amount', $validated['amount']);
             });

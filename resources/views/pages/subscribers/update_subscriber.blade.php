@@ -216,6 +216,13 @@
                                                             {{ $tomb->title }}
                                                         </option>
                                                     @endforeach
+                                                    {{-- <option value="اكتوبر" {{$subscriber->tomb_name === 'اكتوبر' ? 'selected' : ''}}>اكتوبر</option>
+                                                    <option value="الفيوم" {{$subscriber->tomb_name === 'الفيوم' ? 'selected' : ''}}>الفيوم</option>
+                                                    <option value="القطامية" {{$subscriber->tomb_name === 'القطامية' ? 'selected' : ''}}>القطامية</option>
+                                                    <option value="الغفير" {{$subscriber->tomb_name === 'الغفير' ? 'selected' : ''}}>الغفير</option>
+                                                    <option value="مايو" {{$subscriber->tomb_name === 'مايو' ? 'selected' : ''}}>مايو</option>
+                                                    <option value="زينهم" {{$subscriber->tomb_name === 'زينهم' ? 'selected' : ''}}>زينهم</option>
+                                                    <option value="العين السخنة" {{$subscriber->tomb_name === 'العين السخنة' ? 'selected' : ''}}>العين السخنة</option> --}}
                                                 </select>
                                             </div>
                                         </div>

@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\SMSFEES;
+use App\Models\SMSSubscribers;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class EgyptLinxSmsService {
@@ -13,6 +16,28 @@ class EgyptLinxSmsService {
         $this->provider = config('services.egyptlinx.provider');
         $this->password  = config('services.egyptlinx.password');
         $this->sender    = config('services.egyptlinx.sender');
+    }
+    public function storeOrUpdateSmsSubscriber(?int $memberId, string $mobileNo, int $amount, $subscriptionDate): void {
+        $exists = SMSSubscribers::where('member_id', $memberId)->where('active_sms', 0)->exists();
+        $fees = $this->smsFees();
+        if ($exists) {
+            SMSSubscribers::where('member_id', $memberId)->update([
+                'subscription_start_date' => $subscriptionDate,
+                'subscription_expiry_date' => $this->getSmsExpiryDate(now()),
+                'amount' => $fees,
+                'active_sms' => 1,
+            ]);
+            return;
+        } else {
+            SMSSubscribers::create([
+                'member_id' => $memberId,
+                'mobile_no' => $mobileNo,
+                'amount' => $fees,
+                'subscription_start_date' => $subscriptionDate,
+                'subscription_expiry_date' => $this->getSmsExpiryDate(now()),
+                'active_sms' => 1,
+            ]);
+        }
     }
     public function calculateSmsCount(string $message): int {
         $length = mb_strlen($message);
@@ -59,5 +84,25 @@ class EgyptLinxSmsService {
                 'total_needed' => $totalNeeded,
             ], 422);
         }
+    }
+    public function getSmsExpiryDate($date): Carbon {
+        $month = $date->month;
+        $year  = $date->year;
+        if ($month >= 1 && $month <= 6) {
+            return Carbon::create($year, 6, 30)->endOfDay();
+        }
+        return Carbon::create($year + 1, 6, 30)->endOfDay();
+    }
+    public function smsFees(): int {
+        return SMSFEES::first()->amount;
+    }
+    public function renewSmsSubscription(?int $memberId, int $amount, $subscriptionDate): void {
+        $user = SMSSubscribers::where('member_id', $memberId)->first();
+        $user->update([
+            'subscription_start_date' => $subscriptionDate,
+            'subscription_expiry_date' => $this->getSmsExpiryDate(now()),
+            'amount' => $amount,
+            'active_sms' => 1,
+        ]);
     }
 }
