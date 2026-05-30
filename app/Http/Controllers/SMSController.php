@@ -117,8 +117,7 @@ class SMSController extends Controller {
         $balance = $this->egylinx->getBalance();
         return response()->json(['balance' => $balance]);
     }
-    public function deleteSubscriber(int $id)
-    {
+    public function deleteSubscriber(int $id) {
         $this->sms->deleteSubscriber($id);
         $notificationSuccess = [
             'message' => "تم حذف المشترك بنجاح",

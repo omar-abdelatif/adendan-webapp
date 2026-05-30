@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('pay_subscription', 'paySmsSubscription');
         Route::get('sms_status', 'getSmsStatus');
         Route::post('renew_subscription', 'renewSms');
+        Route::get('fees', 'getSmsFees');
     });
     Route::prefix('pay')->controller(PaymentController::class)->group(function () {
         Route::post('deduct_due/{transactionId}', 'deductDue');

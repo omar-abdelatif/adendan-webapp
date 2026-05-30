@@ -19,16 +19,16 @@ class SMSController extends Controller {
     }
     public function paySmsSubscription(Request $request) {
         $user = $request->user();
+        dd($user);
         $userMemberId = $user->member_id;
         $mobileNumber = $user->mobile_no;
-        $amount = $request->amount;
         $paymentMethod = $request->payment_method;
-        $item = $request->item;
+        $amount = $this->egyptLinkService->smsFees();
         $subscriptionDate = now();
         $this->egyptLinkService->storeOrUpdateSmsSubscriber($userMemberId, $mobileNumber, $amount, $subscriptionDate);
         $transaction = $user->paymentTransactions()->create([
             'amount' => $amount,
-            'item' => $item,
+            'item' => 'رسائل',
             'payment_cat' => 'دفع اولاين',
             'payment_date' => now(),
             'inv_no' => 0,
@@ -80,6 +80,13 @@ class SMSController extends Controller {
             'success' => true,
             'message' => 'تم تجديد اشتراك الرسائل بنجاح',
             'transaction' => $transaction,
+        ]);
+    }
+    public function getSmsFees() {
+        $fees = $this->egyptLinkService->smsFees();
+        return response()->json([
+            'success' => true,
+            'fees' => $fees,
         ]);
     }
 }

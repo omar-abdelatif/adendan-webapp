@@ -11,12 +11,6 @@ class SMSService {
             'amount' => $amount,
         ]);
     }
-    // private function storeSms (string $content, string $status) :void {
-    //     SMSMSGS::create([
-    //         'sent_status' => $status,
-    //         'message' => $content,
-    //     ]);
-    // }
     public function getSmsStatus(int $memberId) {
         $subscriber = SMSSubscribers::where('member_id', $memberId)->first();
         if (!$subscriber) {
