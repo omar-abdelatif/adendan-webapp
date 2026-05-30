@@ -51,19 +51,14 @@ class SMSController extends Controller {
     }
     public function storeSubscriber(Request $request){
         $validated = $request->validate([
-            'member_id'=>'nullable',
-            'mobile_no'=>'required',
-            'amount' => 'required',
-            'inv_no'=>'required',
-        ],[],[
-            'member_id' => 'رقم العضوية',
+            'mobile_no' => 'required',
+        ], [], [
             'mobile_no' => 'رقم المحمول',
-            'amount' => 'المبلغ',
-            'inv_no' => 'رقم الايصال',
         ]);
         if($validated) {
-            $this->egylinx->storeOrUpdateSmsSubscriber($request->member_id, $request->mobile_no, $request->amount, now());
-            paymentTransaction($request->member_id ?? null, $request->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'اشتراك', 'ايداع', 'رسائل' ,$request->inv_no);
+            $fees = SMSFEES::latest()->first();
+            $this->egylinx->storeOrUpdateSmsSubscriber($request->member_id, $request->mobile_no, $fees->amount, now());
+            paymentTransaction($request->member_id ?? null, $fees->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'اشتراك', 'ايداع', 'رسائل', $request->inv_no);
             $notificationSuccess = [
                 'message' => "تم التسجيل بنجاح",
                 'alert-type' => 'success'
@@ -121,5 +116,14 @@ class SMSController extends Controller {
     public function getBalance() {
         $balance = $this->egylinx->getBalance();
         return response()->json(['balance' => $balance]);
+    }
+    public function deleteSubscriber(int $id)
+    {
+        $this->sms->deleteSubscriber($id);
+        $notificationSuccess = [
+            'message' => "تم حذف المشترك بنجاح",
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notificationSuccess);
     }
 }

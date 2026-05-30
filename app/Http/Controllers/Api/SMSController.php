@@ -17,8 +17,7 @@ class SMSController extends Controller {
             'data' => $history,
         ]);
     }
-    public function paySmsSubscription(Request $request)
-    {
+    public function paySmsSubscription(Request $request) {
         $user = $request->user();
         $userMemberId = $user->member_id;
         $mobileNumber = $user->mobile_no;
@@ -36,7 +35,7 @@ class SMSController extends Controller {
             'transaction_type' => 'اشتراك',
             'payment_method' => $paymentMethod,
             'transaction_cat' => 'ايداع',
-            'paymob_status' => 'paid',
+            'paymob_status' => 'pending',
         ]);
         return response()->json([
             'success' => true,
@@ -44,11 +43,16 @@ class SMSController extends Controller {
             'transaction' => $transaction,
         ]);
     }
-    public function getSmsStatus(Request $request)
-    {
+    public function getSmsStatus(Request $request) {
         $user = $request->user();
         $memberId = $user->member_id;
         $smsStatus = $this->smsService->getSmsStatus($memberId);
+        if ($smsStatus === false) {
+            return response()->json([
+                'success' => false,
+                'message' => 'لا يوجد اشتراك لهذا العضو',
+            ], 404);
+        }
         return response()->json([
             'success' => true,
             'sms_status' => $smsStatus,

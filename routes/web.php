@@ -190,6 +190,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('bulk_store', 'bulkstore')->name('bulkstore');
         Route::post('store_subscriber', 'storeSubscriber')->name('storeSubscriber');
         Route::get('balance', 'getBalance')->name('balance');
+        Route::delete('delete_subscriber/{id}', 'deleteSubscriber')->name('deleteSubscriber');
     });
     Route::controller(PaymentTransactionController::class)->group(function () {
         Route::post('import-payment-transactions', 'import')->name('payment_transactions.import');

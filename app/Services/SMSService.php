@@ -19,10 +19,16 @@ class SMSService {
     // }
     public function getSmsStatus(int $memberId) {
         $subscriber = SMSSubscribers::where('member_id', $memberId)->first();
+        if (!$subscriber) {
+            return false;
+        }
         return [
             'status' => $subscriber->active_sms,
             'subscription_date' => $subscriber->subscription_start_date,
             'expiry_date' => $subscriber->subscription_expiry_date,
         ];
+    }
+    public function deleteSubscriber(int $id) {
+        return SMSSubscribers::findOrFail($id)->delete();
     }
 }

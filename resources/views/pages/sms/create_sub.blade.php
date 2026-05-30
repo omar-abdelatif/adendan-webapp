@@ -182,9 +182,33 @@
                                                                         <button type="button" class="btn btn-success ms-2 renew" data-renew-url="{{ route('sms.renew', ['id' => $subscriber->id]) }}" data-member-id="{{$subscriber->member_id}}" data-subscriber-id="{{$subscriber->id}}" title="تجديد الاشتراك">
                                                                             <i class="fa-solid fa-arrow-rotate-right"></i>
                                                                         </button>
-                                                                    @else
-                                                                        <span class="text-center font-bold">-</span>
                                                                     @endif
+                                                                    @can('sms-delete-subscriber')
+                                                                        <button type="button" class="btn btn-danger" title="إضافة مشتركين بالجملة" data-bs-toggle="modal" data-bs-target="#deleteSubscriberModal_{{$subscriber->id}}">
+                                                                            <i class="fa-solid fa-trash"></i>
+                                                                        </button>
+                                                                        <div class="modal fade" id="deleteSubscriberModal_{{$subscriber->id}}" tabindex="-1" aria-labelledby="deleteSubscriberLabel_{{$subscriber->id}}" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h1 class="modal-title fs-5 text-muted" id="deleteSubscriberLabel_{{$subscriber->id}}">حذف مشترك</h1>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p class="text-muted">هل أنت متأكد أنك تريد حذف هذا المشترك؟</p>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                                                                                        <form action="{{ route('sms.deleteSubscriber', ['id' => $subscriber->id]) }}" method="POST" class="d-inline">
+                                                                                            @csrf
+                                                                                            @method('DELETE')
+                                                                                            <button type="submit" class="btn btn-danger">حذف</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endcan
                                                                 </td>
                                                             </tr>
                                                         @endforeach
