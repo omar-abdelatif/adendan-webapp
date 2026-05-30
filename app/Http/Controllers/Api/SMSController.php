@@ -19,7 +19,6 @@ class SMSController extends Controller {
     }
     public function paySmsSubscription(Request $request) {
         $user = $request->user();
-        dd($user);
         $userMemberId = $user->member_id;
         $mobileNumber = $user->mobile_no;
         $paymentMethod = $request->payment_method;
