@@ -47,7 +47,8 @@ class PaymobService {
             Log::error('Paymob intention failed', ['body' => $response->body()]);
             throw new \Exception('Paymob Error: ' . $response->body());
         }
-        return $response->json();
+        $responseData = $response->json();
+        return $responseData['client_secret'];
     }
     public function getCheckoutUrl(string $clientSecret): string {
         return 'https://accept.paymob.com/unifiedcheckout/?publicKey=' . $this->publicKey . '&clientSecret=' . $clientSecret;
@@ -80,13 +81,13 @@ class PaymobService {
         $hash = hash_hmac('sha512', $str, $secret);
         return $hash === $receivedHmac;
     }
-    public function deductDue(int $transactionId): void {
-        $transaction = PaymentTransaction::find($transactionId);
-        if (!$transaction) return;
+    public function deductDue(PaymentTransaction $transaction): void {
         $due = Due::where('member_id', $transaction->member_id)->where('item', $transaction->item)->first();
-        if (!$due) return;
+        if (!$due) {
+            throw new \Exception("لا يوجد مستحق لهذا العضو");
+        }
         DB::transaction(function () use ($due, $transaction) {
-            $currentRemaining = $due->amount_remaining > 0 ? $due->amount_remaining : $due->total_amount;
+            $currentRemaining = $due->amount_remaining ?? $due->total_amount;
             $newAmountRemaining = max(0, $currentRemaining - $transaction->amount);
             if ($newAmountRemaining === 0) {
                 $due->delete();
@@ -97,5 +98,14 @@ class PaymobService {
                 ]);
             }
         });
+    }
+    public function calculatePaymentCat(int $amount ,int $memberId, string $item): string {
+        $due = Due::where('member_id', $memberId)->where('item', $item)->first();
+        if (!$due) {
+            throw new \Exception("لا يوجد مستحق لهذا العضو");
+        }
+        $remaining = $due->amount_remaining ?? $due->total_amount;
+        $paymentCat = $amount >= $remaining ? 'كلي' : 'جزئي';
+        return $paymentCat;
     }
 }
