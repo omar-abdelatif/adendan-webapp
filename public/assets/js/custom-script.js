@@ -1,8 +1,8 @@
-function postByAjax(url, method, formData, message, rowId = null) {
+function postByAjax(url, method, formData, message) {
     $.ajax({
-        url: url,
         method: method,
         data: formData,
+        url: url,
         processData: false,
         contentType: false,
         success: function (data) {
@@ -21,7 +21,12 @@ function postByAjax(url, method, formData, message, rowId = null) {
             }
         },
         error: function (xhr, status, error) {
-            console.log("Error:", error);
+            Swal.fire({
+                icon: "error",
+                title: "حدث خطأ",
+                text: xhr.responseJSON?.message || "حدث خطأ غير متوقع",
+                showConfirmButton: true,
+            });
         },
     });
 }
@@ -95,7 +100,29 @@ $(function () {
     $(".datepicker-here").datepicker({
         dateFormat: "yyyy-mm-dd",
     });
+    //! Approve or Reject Update Request
+    let approveBtns = document.querySelectorAll(".approve-update-request");
+    approveBtns.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            let form = this.closest("form");
+            let url = form.getAttribute("action");
+            let formData = new FormData(form);
+            postByAjax(url, "POST", formData, "تم الموافقة على التعديلات");
+        });
+    });
+    let declineBtns = document.querySelectorAll(".declined-update-request");
+    declineBtns.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            let form = this.closest("form");
+            let url = form.getAttribute("action");
+            let formData = new FormData();
+            postByAjax(url, "DELETE", formData, "تم رفض التعديلات");
+        });
+    });
 });
+
 //! JavaScript
 document.addEventListener("DOMContentLoaded", function () {
     //! Remove Alert After 5 Seconds
@@ -121,7 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     //! Form For Get The Incomplete Data From The Subscssriber
-    let searchedForms = document.querySelectorAll(".searchedForm[data-form-id]");
+    let searchedForms = document.querySelectorAll(
+        ".searchedForm[data-form-id]",
+    );
     if (searchedForms) {
         searchedForms.forEach((form) => {
             let url = form.getAttribute("action");

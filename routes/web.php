@@ -42,6 +42,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('update_profile', 'update')->name('user.update');
         Route::get('user/delete/{id}', 'destroy')->name('user.delete');
         Route::post('user/update', 'updateUser')->name('newuser.update');
+        Route::get('update_requests', 'updateRequests')->name('reports.updateRequests');
+        Route::post('update_request', 'updateRequest')->name('user.updateRequest');
+        Route::delete('decline_update_request/{id}', 'declineUpdateRequest')->name('user.declineUpdateRequest');
     });
     Route::prefix('news')->controller(NewsController::class)->group(function () {
         Route::get('all', 'index')->name('news.all');

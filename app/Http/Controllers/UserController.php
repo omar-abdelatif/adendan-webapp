@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscribers;
 use App\Models\User;
+use App\Models\UserUpdateStaging;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 
-class UserController extends Controller
-{
-    function __construct()
-    {
+class UserController extends Controller {
+    function __construct() {
         $this->middleware('permission:المستخدمين');
     }
     public function index()
@@ -22,7 +22,6 @@ class UserController extends Controller
         $permissions = Permission::all();
         return view('pages.users.profile', compact('users', 'roles', 'permissions'));
     }
-
     public function update(Request $request)
     {
         $id = $request->id;
@@ -113,7 +112,7 @@ class UserController extends Controller
 
         return view('pages.users.index', compact('users', 'roles', 'permissions', 'usersPermissions'));
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $user = User::find($id);
         if ($user) {
@@ -155,5 +154,28 @@ class UserController extends Controller
                 return redirect()->back()->with($notificationSuccess);
             }
         }
+    }
+    public function updateRequests() {
+        $requests = UserUpdateStaging::select('id', 'member_id', 'name', 'address', 'mobile_no', 'ssn', 'job_title', 'birth_date', 'created_at')->get();
+        return view('pages.api.users.users_update_request', compact('requests'));
+    }
+    public function updateRequest(Request $request) {
+        $userMemberId = $request->member_id;
+        $user = Subscribers::where('member_id', $userMemberId)->first();
+        $user->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'mobile_no' => $request->mobile_no,
+            'ssn' => $request->ssn,
+            'job' => $request->job_title,
+            'birthdate' => $request->birthdate,
+        ]);
+        UserUpdateStaging::where('member_id', $userMemberId)->delete();
+        return response()->json(['success' => true, 'message' => 'تم قبول طلب تحديث']);
+    }
+    public function declineUpdateRequest(int $id) {
+        $stagingRequest = UserUpdateStaging::find($id);
+        $stagingRequest->delete();
+        return response()->json(['success' => true, 'title' => 'تم رفض طلب تحديث', 'message' => 'تم رفض طلب تحديث']);
     }
 }

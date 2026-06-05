@@ -189,6 +189,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="{{route('reports.updateRequests')}}">
+                                        <span>طلبات التحديث</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{route('reports.safe')}}">
                                         <span>الخزنة</span>
                                     </a>

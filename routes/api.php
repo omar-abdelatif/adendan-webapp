@@ -1,16 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\OcrController;
-use App\Http\Controllers\Api\SMSController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\NewsController;
-use App\Http\Controllers\Api\TombController;
-use App\Http\Controllers\Api\WorkersController;
-use App\Http\Controllers\Api\PaymentController;
-use App\Http\Controllers\Api\WeddingsController;
 use App\Http\Controllers\Api\NewsCommentsController;
+use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\OcrController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\SMSController;
 use App\Http\Controllers\Api\SubscriberFinanceController;
+use App\Http\Controllers\Api\TombController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WeddingsController;
+use App\Http\Controllers\Api\WorkersController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::post('/ocr-data', [OcrController::class, 'store']);
@@ -40,9 +41,14 @@ Route::middleware('guest')->group(function () {
     });
 });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::prefix('user')->controller(AuthController::class)->group(function () {
-        Route::post('logout', 'logout');
-        Route::get('me', 'user');
+    Route::prefix('user')->group(function () {
+        Route::controller(UserController::class)->group(function () {
+            Route::put('/update', 'updateUser');
+        });
+        Route::controller(AuthController::class)->group(function () {
+            Route::post('logout', 'logout');
+            Route::get('me', 'user');
+        });
     });
     Route::prefix('/subscriber')->controller(SubscriberFinanceController::class)->group(function () {
         Route::get('/subscription-payments-history', 'getUserSubscriptionPaymentHistory');

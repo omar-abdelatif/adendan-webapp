@@ -13,9 +13,8 @@ class NewsController extends Controller
     function __construct(){
         $this->middleware('permission:الاخبار');
     }
-    public function index()
-    {
-        $news = News::select('id', 'title', 'category', 'img', 'created_at')->get();
+    public function index() {
+        $news = News::select('id', 'title', 'slug', 'category', 'img', 'created_at')->get();
         return view('pages.news.all', compact('news'));
     }
     public function storeNews(Request $request)
