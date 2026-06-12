@@ -22,7 +22,7 @@ class PaymobService {
             'wallet' => (int) config('services.paymob.wallet_integration_id'),
         ];
     }
-    public function createIntention(int $amount, string $category, string $firstName, string $lastName, string $phone,): array {
+    public function createIntention(int $amount, string $category, string $firstName, string $lastName, string $phone,): string {
         $response = Http::withHeaders([
             'Authorization' => 'Token ' . $this->secretKey,
             'Content-Type'  => 'application/json',

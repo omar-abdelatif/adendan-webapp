@@ -7,20 +7,7 @@ use App\Models\PaymentTransaction;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('paymentTransaction')) {
-    // function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, $item, $inv) {
-    //     return PaymentTransaction::create([
-    //         'item' => $item,
-    //         'inv_no' => $inv,
-    //         'amount' => $amount,
-    //         'member_id' => $memberId ?? null,
-    //         'payment_date' => $paymentDate,
-    //         'payment_method' => $paymentMethod,
-    //         'payment_cat' => $paymentCategory,
-    //         'transaction_type' => $transactionType,
-    //         'transaction_cat' => $transactionCategory,
-    //     ]);
-    // }
-    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, string $item, ?int $inv = null, string $paymobIntentionId = null, ?string $paymobStatus = null) {
+    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, string $item, ?int $inv = null, ?int $paymobIntentionId = null, ?string $paymobStatus = null) {
         return PaymentTransaction::create([
             'item'                => $item,
             'inv_no'              => $inv,
@@ -31,7 +18,7 @@ if (!function_exists('paymentTransaction')) {
             'payment_cat'         => $paymentCategory,
             'transaction_type'    => $transactionType,
             'transaction_cat'     => $transactionCategory,
-            'paymob_intention_id' => $paymobIntentionId,
+            'paymob_intention_id' => $paymobIntentionId ?? null,
             'paymob_status'       => $paymobStatus ?? null,
         ]);
     }

@@ -8,30 +8,32 @@ use App\Services\PaymobService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller {
     public function __construct(private PaymobService $paymobService) {}
-    public function sendPayment(int $memberId, int $amount, string $memberName, int $phone, string $category, string $paymentMethod, string $item): JsonResponse {
-        $nameParts  = explode(' ', trim($memberName));
-        $firstName  = $nameParts[0] ?? 'NA';
-        $lastName   = $nameParts[1] ?? 'NA';
-        try {
-            $intention = $this->paymobService->createIntention( amount: $amount, category: $category, firstName: $firstName, lastName: $lastName, phone: $phone );
-            paymentTransaction($memberId, $amount, now(), $paymentMethod, $category, 'دفع اونلاين', 'ايداع', $item, null, $intention['intention_order_id'], 'pending',);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-                'alert-type' => 'error',
-            ], 500);
-        }
-        return response()->json([
-            'client_secret' => $intention['client_secret'],
-            'message'    => 'تم الدفع بنجاح',
-            'alert-type' => 'success',
-            'checkout_url' => $this->paymobService->getCheckoutUrl($intention['client_secret']),
-        ]);
-    }
+    // public function sendPayment(int $memberId, int $amount, string $memberName, int $phone, string $category, string $paymentMethod, string $item): JsonResponse {
+    //     $nameParts  = explode(' ', trim($memberName));
+    //     $firstName  = $nameParts[0] ?? 'NA';
+    //     $lastName   = $nameParts[1] ?? 'NA';
+    //     try {
+    //         $intention = $this->paymobService->createIntention( amount: $amount, category: $category, firstName: $firstName, lastName: $lastName, phone: $phone );
+    //         paymentTransaction($memberId, $amount, now(), $paymentMethod, $category, 'دفع اونلاين', 'ايداع', $item, null, $intention['intention_order_id'], 'pending');
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => $e->getMessage(),
+    //             'alert-type' => 'error',
+    //         ], 500);
+    //     }
+    //     return response()->json([
+    //         'client_secret' => $intention['client_secret'],
+    //         'message'    => 'تم الدفع بنجاح',
+    //         'alert-type' => 'success',
+    //         'checkout_url' => $this->paymobService->getCheckoutUrl($intention['client_secret']),
+    //     ]);
+    // }
     public function callback(Request $request): JsonResponse {
+        Log::info('Paymob Callback', $request->all());
         $hmac = $request->query('hmac');
         $data = $request->query();
         if (!$hmac || !$this->paymobService->verifyHmac($data, $hmac)) {
@@ -54,6 +56,7 @@ class PaymentController extends Controller {
         $request->validate([
             'amount' => 'required|integer|min:1',
             'item'   => 'required|string',
+            'payment_method' => 'required|string'
         ]);
         $user = $request->user();
         $userName = $user->name;
