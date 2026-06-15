@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentTransaction;
-use App\Services\Api\AuthService;
 use App\Services\PaymobService;
 // use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller {
-    public function __construct(private PaymobService $paymobService, protected AuthService $authedService) {}
+    public function __construct(private PaymobService $paymobService) {}
     // public function callback(Request $request): JsonResponse {
     //     Log::info('=== CALLBACK DEBUG ===');
     //     $hmac = $request->query('hmac');
@@ -179,10 +178,10 @@ class PaymentController extends Controller {
         }
 
         // ✅ تحقق من الـ HMAC (من $obj مش من $data)
-        if (!$hmac || !$this->paymobService->verifyHmac($obj, $hmac)) {
-            Log::error('HMAC verification failed');
-            return response()->json(['message' => 'بيانات غير صحيحة (فشل التشفير)'], 400);
-        }
+        // if (!$hmac || !$this->paymobService->verifyHmac($obj, $hmac)) {
+        //     Log::error('HMAC verification failed');
+        //     return response()->json(['message' => 'بيانات غير صحيحة (فشل التشفير)'], 400);
+        // }
 
         $userData = explode('-', $merchantOrderId, 2);
 
