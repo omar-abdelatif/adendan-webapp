@@ -179,10 +179,10 @@ class PaymentController extends Controller {
         }
 
         // ✅ تحقق من الـ HMAC (من $obj مش من $data)
-        // if (!$hmac || !$this->paymobService->verifyHmac($obj, $hmac)) {
-        //     Log::error('HMAC verification failed');
-        //     return response()->json(['message' => 'بيانات غير صحيحة (فشل التشفير)'], 400);
-        // }
+        if (!$hmac || !$this->paymobService->verifyHmac($obj, $hmac)) {
+            Log::error('HMAC verification failed');
+            return response()->json(['message' => 'بيانات غير صحيحة (فشل التشفير)'], 400);
+        }
 
         $userData = explode('-', $merchantOrderId, 2);
 
