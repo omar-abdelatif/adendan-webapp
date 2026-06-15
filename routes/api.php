@@ -63,11 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('renew_subscription', 'renewSms');
         Route::get('fees', 'getSmsFees');
     });
-    Route::prefix('pay')->controller(PaymentController::class)->group(function () {
-        Route::post('callback', 'callback');
-        Route::post('initiate', 'initiatePayment');
-    });
-    // Route::prefix('paymob')->controller(CheckoutController::class)->group(function () {
-    //     Route::post('/checkout', 'checkingOut');
-    // });
+});
+Route::prefix('pay')->controller(PaymentController::class)->group(function () {
+    Route::match(['get', 'post'], 'callback', 'callback');
 });

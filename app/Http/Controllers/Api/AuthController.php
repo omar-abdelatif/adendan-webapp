@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subscribers;
+use App\Services\Api\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller {
+    public function __construct(protected AuthService $authService) {}
     public function login(Request $request) {
         $request->validate([
             'ssn'      => ['required'],
             'password' => ['required'],
         ]);
-        $subscriber = Subscribers::where('ssn', $request->ssn)->first();
+        $subscriber = $this->authService->getAuthedUser($request->ssn);
         if (!$subscriber || !Hash::check($request->password, $subscriber->password)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
@@ -31,7 +32,7 @@ class AuthController extends Controller {
         return response()->json(['message' => 'Logged out successfully']);
     }
     public function user(Request $request) {
-        $subscriber = PersonalAccessToken::findToken($request->bearerToken())?->tokenable;
+        $subscriber = $this->authService->getToken($request);
         if (!$subscriber) {
             return response()->json(['message' => 'User not found'], 404);
         }
