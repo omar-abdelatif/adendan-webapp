@@ -34,6 +34,7 @@ class Subscribers extends Authenticatable {
         'status',
         'img',
         'tomb_name',
+        'fcm_token'
     ];
     public function dues(){
         return $this->hasMany(Due::class, 'member_id', 'member_id');

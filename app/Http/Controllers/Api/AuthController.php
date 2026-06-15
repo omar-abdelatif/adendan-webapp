@@ -11,6 +11,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 class AuthController extends Controller {
     public function __construct(protected AuthService $authService) {}
     public function login(Request $request) {
+        dd($request);
         $request->validate([
             'ssn'      => ['required'],
             'password' => ['required'],

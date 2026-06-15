@@ -27,6 +27,7 @@ class SubscriberRequest extends FormRequest
             'name' => 'required|string',
             'id_img' => 'nullable|image|max:2048|mimes:png,webp,jpg,jpeg',
             'job_tel' => 'nullable',
+            'fcm_token' => 'nullable',
             'address' => 'nullable|string',
             'home_tel' => 'nullable',
             'nickname' => 'nullable|string',
