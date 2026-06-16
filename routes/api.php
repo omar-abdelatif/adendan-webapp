@@ -64,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('renew_subscription', 'renewSms');
         Route::get('fees', 'getSmsFees');
     });
-    Route::prefix('notify')->controller(NotificationsController::class)->group(function () {
+    Route::prefix('fcm/notify')->controller(NotificationsController::class)->group(function () {
         Route::get('send_notifications', 'sendNotify');
     });
 });

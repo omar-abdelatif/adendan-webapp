@@ -53,6 +53,7 @@ class PaymentController extends Controller {
         $memberId = (int) $userData[0];
         $item = trim($userData[1]);
         $amount = $amountCents / 100;
+        $transactionMethod = $userData[2];
         $paymentMethod = $obj['source_data']['sub_type'] ?? 'wallet';
         Log::info('Processing transaction:', [
             'member_id' => $memberId,
@@ -60,9 +61,9 @@ class PaymentController extends Controller {
             'amount' => $amount,
             'method' => $paymentMethod,
         ]);
-        DB::transaction(function () use ($memberId, $amount, $item, $paymentMethod, $transactionId, $orderId) {
+        DB::transaction(function () use ($memberId, $amount, $item, $paymentMethod, $transactionId, $orderId, $transactionMethod) {
             $paymentCat = $this->paymobService->calculatePaymentCat($amount, $memberId, $item);
-            $transaction = $this->createTransaction( $memberId, $amount, now(), $paymentMethod, $paymentCat, $item, $orderId );
+            $transaction = $this->createTransaction($memberId, $amount, now(), $paymentMethod, $paymentCat, $item, $orderId, $transactionMethod);
             $transaction->update([
                 'paymob_transaction_id' => $transactionId,
                 'paymob_status' => 'paid',
@@ -75,7 +76,8 @@ class PaymentController extends Controller {
     private function deductDue(PaymentTransaction $transaction): void {
         $this->paymobService->deductDue($transaction);
     }
-    private function createTransaction(int $memberId, int $amount, $paymentDate, string $paymentMethod, string $paymentCat, string $item, ?string $paymobIntentionId = null): PaymentTransaction {
-        return paymentTransaction($memberId, $amount, $paymentDate, $paymentMethod, $paymentCat, 'دفع اونلاين', 'ايداع', $item, 0, $paymobIntentionId, 'pending');
+    private function createTransaction(int $memberId, int $amount, $paymentDate, string $paymentMethod, string $paymentCat, string $item, ?string $paymobIntentionId = null, string $transactionType): PaymentTransaction
+    {
+        return paymentTransaction(memberId: $memberId, amount: $amount, paymentDate: $paymentDate, paymentMethod: $paymentMethod, paymentCategory: $paymentCat, transactionType: $transactionType, transactionCategory: 'ايداع', item: $item, inv: null, paymobIntentionId: $paymobIntentionId, paymobStatus: 'pending', transactionMethod: 'دفع اونلاين',);
     }
 }

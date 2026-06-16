@@ -7,7 +7,7 @@ use App\Models\PaymentTransaction;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('paymentTransaction')) {
-    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, string $item, ?int $inv = null, ?int $paymobIntentionId = null, ?string $paymobStatus = null) {
+    function paymentTransaction(int $memberId = null, int $amount, $paymentDate, string $paymentMethod, string $paymentCategory, string $transactionType, string $transactionCategory, string $item, ?int $inv = null, ?int $paymobIntentionId = null, ?string $paymobStatus = null, string $transactionMethod) {
         return PaymentTransaction::create([
             'item'                => $item,
             'inv_no'              => $inv,
@@ -17,6 +17,7 @@ if (!function_exists('paymentTransaction')) {
             'payment_method'      => $paymentMethod,
             'payment_cat'         => $paymentCategory,
             'transaction_type'    => $transactionType,
+            'transaction_method'  => $transactionMethod,
             'transaction_cat'     => $transactionCategory,
             'paymob_intention_id' => $paymobIntentionId ?? null,
             'paymob_status'       => $paymobStatus ?? null,
@@ -46,8 +47,8 @@ if (!function_exists('handleTransfer')) {
     function handleTransfer(array $validated, string $imagename, string $date, string $fromCat, string $toCat, object $fromTotal, object $toTotal): bool {
         try {
             DB::transaction(function () use ($validated, $imagename, $date, $fromCat, $toCat, $fromTotal, $toTotal) {
-                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $fromCat, 'تحويلات', 'سحب', 'تحويلات', $imagename, null, 'paid');
-                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $toCat, 'تحويلات', 'ايداع', 'تحويلات', $imagename, null, 'paid');
+                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $fromCat, 'تحويلات', 'سحب', 'تحويلات', $imagename, null, 'paid', 'تحويلات');
+                paymentTransaction(0, $validated['amount'], new \DateTime($date), 'كاش', $toCat, 'تحويلات', 'ايداع', 'تحويلات', $imagename, null, 'paid', 'تحويلات');
                 $fromTotal->decrement('amount', $validated['amount']);
                 $toTotal->increment('amount', $validated['amount']);
             });

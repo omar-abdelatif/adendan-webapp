@@ -15,6 +15,7 @@ class PaymentTransaction extends Model {
         'payment_method',
         'transaction_cat',
         'transaction_type',
+        'transaction_method',
         'paymob_intention_id',
         'paymob_transaction_id',
         'paymob_status',
