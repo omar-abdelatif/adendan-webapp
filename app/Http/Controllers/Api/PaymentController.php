@@ -76,8 +76,7 @@ class PaymentController extends Controller {
     private function deductDue(PaymentTransaction $transaction): void {
         $this->paymobService->deductDue($transaction);
     }
-    private function createTransaction(int $memberId, int $amount, $paymentDate, string $paymentMethod, string $paymentCat, string $item, ?string $paymobIntentionId = null, string $transactionType): PaymentTransaction
-    {
-        return paymentTransaction(memberId: $memberId, amount: $amount, paymentDate: $paymentDate, paymentMethod: $paymentMethod, paymentCategory: $paymentCat, transactionType: $transactionType, transactionCategory: 'ايداع', item: $item, inv: null, paymobIntentionId: $paymobIntentionId, paymobStatus: 'pending', transactionMethod: 'دفع اونلاين',);
+    private function createTransaction(int $memberId, int $amount, $paymentDate, string $paymentMethod, string $paymentCat, string $item, ?string $paymobIntentionId = null, string $transactionType): PaymentTransaction {
+        return paymentTransaction(memberId: $memberId, amount: $amount, paymentDate: $paymentDate, paymentMethod: $paymentMethod, paymentCategory: $paymentCat, transactionType: $transactionType, transactionCategory: 'ايداع', item: $item, inv: 0, paymobIntentionId: $paymobIntentionId, paymobStatus: 'pending', transactionMethod: 'دفع اونلاين',);
     }
 }
