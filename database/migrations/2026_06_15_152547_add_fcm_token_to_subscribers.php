@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void {
         Schema::table('subscribers', function (Blueprint $table) {
-            $table->string('fcm_token')->nullable();
+            $table->string('fcm_token')->nullable()->after('password');
         });
     }
 
