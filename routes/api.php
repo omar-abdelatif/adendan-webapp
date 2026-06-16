@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\TombController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WeddingsController;
 use App\Http\Controllers\Api\WorkersController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -62,6 +63,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('sms_status', 'getSmsStatus');
         Route::post('renew_subscription', 'renewSms');
         Route::get('fees', 'getSmsFees');
+    });
+    Route::prefix('notify')->controller(NotificationsController::class)->group(function () {
+        Route::get('send_notifications', 'sendNotify');
     });
 });
 Route::prefix('pay')->controller(PaymentController::class)->group(function () {

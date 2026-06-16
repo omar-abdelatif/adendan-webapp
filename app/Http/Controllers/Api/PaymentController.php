@@ -45,7 +45,7 @@ class PaymentController extends Controller {
         //     Log::error('HMAC verification failed');
         //     return response()->json(['message' => 'بيانات غير صحيحة (فشل التشفير)'], 400);
         // }
-        $userData = explode('-', $merchantOrderId, 2);
+        $userData = explode('-', $merchantOrderId);
         if (count($userData) < 2) {
             Log::error('Invalid merchant_order_id format', ['value' => $merchantOrderId]);
             return response()->json(['message' => 'بيانات غير صحيحة'], 400);

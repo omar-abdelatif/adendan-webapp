@@ -8,19 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PaymobService {
-    // private string $secretKey;
-    // private string $publicKey;
-    // private string $intentionUrl;
-    // private array  $integrations;
-    public function __construct() {
-        // $this->secretKey    = config('services.paymob.secret');
-        // $this->publicKey    = config('services.paymob.public');
-        // $this->intentionUrl = config('services.paymob.intention_url');
-        // $this->integrations = [
-        //     'card'   => (int) config('services.paymob.card_integration_id'),
-        //     'wallet' => (int) config('services.paymob.wallet_integration_id'),
-        // ];
-    }
     public function verifyHmac(array $data, string $receivedHmac): bool {
         $secret = config('services.paymob.hmac_secret');
         $fields = [
