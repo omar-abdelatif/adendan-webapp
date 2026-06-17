@@ -41,6 +41,8 @@ class NewsController extends Controller
             "slug" => uniqid(),
             "posted_by" => Auth::user()->name
         ]);
+        //! Send Notifications
+        app(NotificationsController::class)->sendNewsNotification($news);
         //! Get image Id
         $newsId = $news->id;
         //! Insert Single or Multi Urls

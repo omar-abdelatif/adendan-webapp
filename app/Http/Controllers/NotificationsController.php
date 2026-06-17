@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Subscribers;
-use App\Services\NotificationSerivce;
+use Google\Client as GoogleClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Google\Client as GoogleClient;
 
 class NotificationsController extends Controller {
-    public function __construct(protected NotificationSerivce $notificationSerivce) {}
     private function getAccessToken(): string {
         return cache()->remember('firebase_access_token', now()->addMinutes(50), function () {
             $credentials = json_decode( file_get_contents(env('FIREBASE_CREDENTIALS')), true );
@@ -20,7 +19,7 @@ class NotificationsController extends Controller {
             return $client->getAccessToken()['access_token'];
         });
     }
-    private function sendToOne(string $fcmToken, string $title, string $body): bool {
+    private function sendToOne(string $fcmToken, string $title, string $body, array $data = []): bool {
         $projectId   = env('FIREBASE_PROJECT_ID');
         $accessToken = $this->getAccessToken();
         $url         = "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send";
@@ -34,30 +33,24 @@ class NotificationsController extends Controller {
                 'android' => [
                     'priority' => 'high',
                 ],
+                'data' => $data,
             ]
         ]);
         return isset($response->json()['name']);
     }
-    public function sendToSubscribers(Request $request) {
-        $request->validate([
-            'title' => 'required|string',
-            'body'  => 'required|string',
-        ]);
-        $tokens = Subscribers::whereNotNull('fcm_token')->pluck('fcm_token', 'id');
-        if ($tokens->isEmpty()) {
-            return response()->json(['message' => 'لا يوجد مشتركون'], 200);
+    public function sendNewsNotification(News $news) {
+        $tokens = Subscribers::whereNotNull('fcm_token')->pluck('fcm_token');
+        foreach ($tokens as $token) {
+            $this->sendToOne(
+                fcmToken: $token,
+                title: 'خبر جديد',
+                body: $news->title,
+                data: [
+                    'type'    => 'news',
+                    'news_id' => (string) $news->id,
+                ]
+            );
         }
-        $success = 0;
-        $failed  = 0;
-        foreach ($tokens as $userId => $token) {
-            $sent = $this->sendToOne($token, $request->title, $request->body);
-            $sent ? $success++ : $failed++;
-        }
-        return response()->json([
-            'message' => 'تم الإرسال',
-            'success' => $success,
-            'failed'  => $failed,
-        ]);
     }
     public function updateFcmToken(Request $request) {
         $request->validate(['fcm_token' => 'required|string']);
