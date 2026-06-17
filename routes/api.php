@@ -40,6 +40,12 @@ Route::middleware('guest')->group(function () {
     Route::prefix('paymob')->controller(PaymentController::class)->group(function () {
         Route::match(['get', 'post'], 'callback', 'callback');
     });
+    Route::prefix('notify')->controller(NotificationsController::class)->group(function(){
+        Route::post('send-notification', 'sendToSubscribers');
+    });
+    Route::prefix('pay')->controller(PaymentController::class)->group(function () {
+        Route::match(['get', 'post'], 'callback', 'callback');
+    });
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
@@ -65,9 +71,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('fees', 'getSmsFees');
     });
     Route::prefix('fcm/notify')->controller(NotificationsController::class)->group(function () {
-        Route::get('send_notifications', 'sendNotify');
+        Route::get('fcm-token', 'updateFcmToken');
     });
-});
-Route::prefix('pay')->controller(PaymentController::class)->group(function () {
-    Route::match(['get', 'post'], 'callback', 'callback');
 });
