@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\NewsThumbnail;
 use App\Models\NewsVideos;
 use Illuminate\Http\Request;
-use App\Models\NewsThumbnail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -42,7 +43,11 @@ class NewsController extends Controller
             "posted_by" => Auth::user()->name
         ]);
         //! Send Notifications
-        app(NotificationsController::class)->sendNewsNotification($news);
+        try {
+            app(NotificationsController::class)->sendNewsNotification($news);
+        } catch (\Exception $e) {
+            Log::error('FCM Error: ' . $e->getMessage());
+        }
         //! Get image Id
         $newsId = $news->id;
         //! Insert Single or Multi Urls
