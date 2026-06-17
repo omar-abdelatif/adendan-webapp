@@ -71,6 +71,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('fees', 'getSmsFees');
     });
     Route::prefix('fcm/notify')->controller(NotificationsController::class)->group(function () {
-        Route::get('fcm-token', 'updateFcmToken');
+        Route::post('fcm-token', 'updateFcmToken');
     });
 });
