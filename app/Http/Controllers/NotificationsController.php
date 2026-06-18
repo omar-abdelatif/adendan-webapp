@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Http;
 class NotificationsController extends Controller {
     private function getAccessToken(): string {
         return cache()->remember('firebase_access_token', now()->addMinutes(50), function () {
-            $credentials = json_decode( file_get_contents(env('FIREBASE_CREDENTIALS')), true );
+            $credentials = json_decode(file_get_contents(config('services.firebase.credentials')), true);
             $client = new GoogleClient();
             $client->setAuthConfig($credentials);
             $client->addScope('https://www.googleapis.com/auth/firebase.messaging');
