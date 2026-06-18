@@ -32,6 +32,11 @@ class NotificationsController extends Controller {
                 ],
                 'android' => [
                     'priority' => 'high',
+                    'notification' => [
+                        'notification_priority' => 'PRIORITY_HIGH',
+                        'default_sound'         => true,
+                        'default_vibrate_timings' => true,
+                    ],
                 ],
                 'data' => $data,
             ]
