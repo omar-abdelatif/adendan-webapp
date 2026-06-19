@@ -27,6 +27,10 @@ class AuthController extends Controller {
     }
     public function logout(Request $request) {
         $token = PersonalAccessToken::findToken($request->bearerToken());
+        $subscriber = Subscribers::where('id', $request->user()->id)->first();
+        if ($subscriber) {
+            $subscriber->update(['fcm_token' => null]);
+        }
         $token?->delete();
         return response()->json(['message' => 'Logged out successfully']);
     }
