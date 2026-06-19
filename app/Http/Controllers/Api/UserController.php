@@ -45,7 +45,7 @@ class UserController extends Controller {
             'data' => $validatedData,
         ], 500);
     }
-    public function isPending(Request $request){
+    public function updateIsPending(Request $request) {
         $subscriber = UserUpdateStaging::where('member_id', $request->member_id)->exist();
         if($subscriber){
             return response()->json([
