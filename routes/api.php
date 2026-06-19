@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::put('/update', 'updateUser');
+            Route::get('is_pending', 'isPending');
         });
         Route::controller(AuthController::class)->group(function () {
             Route::post('logout', 'logout');
