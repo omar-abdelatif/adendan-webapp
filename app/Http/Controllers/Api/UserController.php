@@ -38,9 +38,13 @@ class UserController extends Controller {
         if($store){
             return response()->json([
                 'message' => 'تم ارسال طلب التحديث، الطلب قيد المعالجة.',
+                'success' => true,
                 'data' => $store
             ], 200);
         }
-        return response()->json($validatedData, 500);
+        return response()->json([
+            'data' => $validatedData,
+            'success' => false
+        ], 500);
     }
 }
