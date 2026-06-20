@@ -24,23 +24,29 @@ class SMSController extends Controller {
         $paymentMethod = $request->payment_method;
         $amount = $this->egyptLinkService->smsFees();
         $subscriptionDate = now();
-        $this->egyptLinkService->storeOrUpdateSmsSubscriber($userMemberId, $mobileNumber, $amount, $subscriptionDate);
-        $transaction = $user->paymentTransactions()->create([
-            'amount' => $amount,
-            'item' => 'رسائل',
-            'payment_cat' => 'دفع اولاين',
-            'payment_date' => now(),
-            'inv_no' => 0,
-            'transaction_type' => 'اشتراك',
-            'payment_method' => $paymentMethod,
-            'transaction_cat' => 'ايداع',
-            'paymob_status' => 'pending',
-        ]);
-        return response()->json([
-            'success' => true,
-            'message' => 'تم دفع اشتراك الرسائل بنجاح',
-            'transaction' => $transaction,
-        ]);
+        try {
+            $this->egyptLinkService->storeOrUpdateSmsSubscriber($userMemberId, $mobileNumber, $subscriptionDate);
+            $transaction = $user->paymentTransactions()->create([
+                'amount' => $amount,
+                'item' => 'رسائل',
+                'payment_cat' => 'دفع اولاين',
+                'payment_date' => now(),
+                'inv_no' => 0,
+                'transaction_type' => 'اشتراك',
+                'payment_method' => $paymentMethod,
+                'transaction_cat' => 'ايداع',
+                'paymob_status' => 'pending',
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'تم دفع اشتراك الرسائل بنجاح',
+                'transaction' => $transaction,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
     public function getSmsStatus(Request $request) {
         $user = $request->user();

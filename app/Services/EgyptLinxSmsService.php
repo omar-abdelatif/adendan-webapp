@@ -17,7 +17,7 @@ class EgyptLinxSmsService {
         $this->password  = config('services.egyptlinx.password');
         $this->sender    = config('services.egyptlinx.sender');
     }
-    public function storeOrUpdateSmsSubscriber(?int $memberId, string $mobileNo, int $amount, $subscriptionDate): void {
+    public function storeOrUpdateSmsSubscriber(?int $memberId, string $mobileNo, $subscriptionDate): void {
         $exists = SMSSubscribers::where('member_id', $memberId)->where('active_sms', 0)->exists();
         $fees = $this->smsFees();
         if ($exists) {

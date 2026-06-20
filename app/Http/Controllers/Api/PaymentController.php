@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentTransaction;
+use App\Services\EgyptLinxSmsService;
 use App\Services\PaymobService;
-// use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller {
-    public function __construct(private PaymobService $paymobService) {}
+    public function __construct(private PaymobService $paymobService, protected EgyptLinxSmsService $egyptLinkService) {}
     public function callback(Request $request) {
         Log::info('=== CALLBACK DEBUG ===');
         $allData = $request->all();
@@ -53,7 +53,9 @@ class PaymentController extends Controller {
         $memberId = (int) $userData[0];
         $item = trim($userData[1]);
         $amount = $amountCents / 100;
+        $subscriptionDate = now();
         $transactionMethod = $userData[2];
+        $mobileNumber = (int) $userData[4];
         $paymentMethod = $obj['source_data']['sub_type'] ?? 'wallet';
         Log::info('Processing transaction:', [
             'member_id' => $memberId,
@@ -61,14 +63,23 @@ class PaymentController extends Controller {
             'amount' => $amount,
             'method' => $paymentMethod,
         ]);
-        DB::transaction(function () use ($memberId, $amount, $item, $paymentMethod, $transactionId, $orderId, $transactionMethod) {
-            $paymentCat = $this->paymobService->calculatePaymentCat($amount, $memberId, $item);
-            $transaction = $this->createTransaction($memberId, $amount, now(), $paymentMethod, $paymentCat, $item, $orderId, $transactionMethod);
-            $transaction->update([
-                'paymob_transaction_id' => $transactionId,
-                'paymob_status' => 'paid',
-            ]);
-            $this->deductDue($transaction);
+        DB::transaction(function () use ($memberId, $amount, $item, $paymentMethod, $transactionId, $orderId, $transactionMethod, $subscriptionDate, $mobileNumber) {
+            $paymentCat = $item === 'رسائل' ? 'كلي' : $this->paymobService->calculatePaymentCat($amount, $memberId, $item);
+            if ($item === 'رسائل') {
+                $transaction = $this->createTransaction($memberId, $amount, $subscriptionDate, $paymentMethod, $paymentCat, $item, $orderId, $transactionMethod);
+                $transaction->update([
+                    'paymob_transaction_id' => $transactionId,
+                    'paymob_status' => 'paid',
+                ]);
+                $this->egyptLinkService->storeOrUpdateSmsSubscriber($memberId, $mobileNumber, $subscriptionDate);
+            } else {
+                $transaction = $this->createTransaction($memberId, $amount, $subscriptionDate, $paymentMethod, $paymentCat, $item, $orderId, $transactionMethod);
+                $transaction->update([
+                    'paymob_transaction_id' => $transactionId,
+                    'paymob_status' => 'paid',
+                ]);
+                $this->deductDue($transaction);
+            }
             Log::info('Transaction completed:', ['id' => $transaction->id]);
         });
         return response()->json(['message' => 'تم الدفع بنجاح']);
