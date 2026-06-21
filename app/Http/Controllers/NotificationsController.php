@@ -7,6 +7,7 @@ use App\Models\Subscribers;
 use Google\Client as GoogleClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class NotificationsController extends Controller {
     private function getAccessToken(): string {
@@ -41,6 +42,7 @@ class NotificationsController extends Controller {
                 'data' => $data,
             ]
         ]);
+        Log::info('FCM Response', $response->json());
         return isset($response->json()['name']);
     }
     public function sendNewsNotification(News $news) {

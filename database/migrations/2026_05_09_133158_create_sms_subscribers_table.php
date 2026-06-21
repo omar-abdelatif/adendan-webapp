@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->engine("InnoDB");
             $table->id();
             $table->foreignId('member_id')->constrained('subscribers', 'member_id')->cascadeOnDelete()->nullable();
-            $table->integer('mobile_no');
+            $table->bigInteger('mobile_no');
             $table->integer('amount');
             $table->date('subscription_start_date')->nullable();
             $table->date('subscription_expiry_date')->nullable();
