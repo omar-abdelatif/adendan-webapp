@@ -42,7 +42,12 @@ class NotificationsController extends Controller {
                 'data' => $data,
             ]
         ]);
-        // dd($projectId, $accessToken, $url, $response->status(), $response->json(), $response->body());
+        if ($response->status() === 404) {
+            $errorCode = $response->json()['error']['details'][0]['errorCode'] ?? '';
+            if ($errorCode === 'UNREGISTERED') {
+                Subscribers::where('fcm_token', $fcmToken)->update(['fcm_token' => null]);
+            }
+        }
         Log::info('FCM Response', [
             'project_id' => $projectId,
             'token'      => substr($fcmToken, 0, 20) . '...',
