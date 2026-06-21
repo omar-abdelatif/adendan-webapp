@@ -33,18 +33,21 @@ class NewsController extends Controller
             $destinationPath = public_path('assets/images/news-imgs/');
             $imageFile->move($destinationPath, $imagename);
         }
-        //! Store News
-        $news = News::create([
-            "title" => $request['title'],
-            "description" => $request['description'],
-            "category" => $request['category'],
-            "img" => $imagename ?? null,
-            "slug" => uniqid(),
-            "posted_by" => Auth::user()->name
-        ]);
-        //! Send Notifications
         try {
+            Log::info('Creating News');
+            //! Store News
+            $news = News::create([
+                "title" => $request['title'],
+                "description" => $request['description'],
+                "category" => $request['category'],
+                "img" => $imagename ?? null,
+                "slug" => uniqid(),
+                "posted_by" => Auth::user()->name
+            ]);
+            Log::info('Sending Notifications');
+            //! Send Notifications
             app(NotificationsController::class)->sendNewsNotification($news);
+            Log::info('Notifications Sent Successfully');
         } catch (\Exception $e) {
             Log::error('FCM Error: ' . $e->getMessage());
         }

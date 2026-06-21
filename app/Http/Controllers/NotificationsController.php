@@ -42,7 +42,13 @@ class NotificationsController extends Controller {
                 'data' => $data,
             ]
         ]);
-        Log::info('FCM Response', $response->json());
+        // dd($projectId, $accessToken, $url, $response->status(), $response->json(), $response->body());
+        Log::info('FCM Response', [
+            'project_id' => $projectId,
+            'token'      => substr($fcmToken, 0, 20) . '...',
+            'status'     => $response->status(),
+            'body'       => $response->json(),
+        ]);
         return isset($response->json()['name']);
     }
     public function sendNewsNotification(News $news) {
