@@ -21,7 +21,7 @@ class NotificationsController extends Controller {
         });
     }
     private function sendToOne(string $fcmToken, string $title, string $body, array $data = []): bool {
-        $projectId   = env('FIREBASE_PROJECT_ID');
+        $projectId   = config('services.firebase.project_id');
         $accessToken = $this->getAccessToken();
         $url         = "https://fcm.googleapis.com/v1/projects/{$projectId}/messages:send";
         $response = Http::withToken($accessToken)->post($url, [
