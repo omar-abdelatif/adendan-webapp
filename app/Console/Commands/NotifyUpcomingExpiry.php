@@ -16,7 +16,7 @@ class NotifyUpcomingExpiry extends Command {
         $subscribers = SMSSubscribers::where('active_sms', 1)->whereDate('subscription_expiry_date', $targetDate)->get();
         $phones = $subscribers->pluck('mobile_no')->toArray();
         if (empty($subscribers)) {
-            $this->info('لا يوجد اشتراكات تنتهي بعد شهر.');
+            $this->info('لا يوجد اشتراكات تنتهي قريباً.');
             return Command::SUCCESS;
         }
         $egyptLinxSmsService->sendArabic($phones,"اشتراكك في خدمة الرسائل سينتهي قريباً. يرجى التجديد.");
