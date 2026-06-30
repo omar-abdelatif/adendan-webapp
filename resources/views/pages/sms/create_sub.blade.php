@@ -167,7 +167,7 @@
                                                     <tbody>
                                                         @foreach ($subscribed as $subscriber)
                                                             <tr>
-                                                                <td class="text-center">{{$subscriber->member_id}}</td>
+                                                                <td class="text-center">{{$subscriber->member_id ?? 'غير عضو'}}</td>
                                                                 <td class="text-center">{{$subscriber->mobile_no}}</td>
                                                                 <td class="text-center">
                                                                     @if ($subscriber->active_sms === 1)

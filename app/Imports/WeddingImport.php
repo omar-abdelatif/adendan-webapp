@@ -37,9 +37,7 @@ class WeddingImport implements ToCollection, WithHeadingRow, WithBatchInserts
         }
         try {
             if (is_numeric($value)) {
-                return Carbon::instance(
-                    Date::excelToDateTimeObject($value)
-                )->format('Y-m-d');
+                return Carbon::instance(Date::excelToDateTimeObject($value))->format('Y-m-d');
             }
             if ($value instanceof \DateTime) {
                 return Carbon::instance($value)->format('Y-m-d');

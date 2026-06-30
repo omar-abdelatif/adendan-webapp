@@ -8,10 +8,11 @@ use App\Models\SMSFEES;
 use App\Models\SMSMSGS;
 use App\Models\SMSSubscribers;
 use App\Models\Subscribers;
+use Maatwebsite\Excel\Excel;
 use App\Services\EgyptLinxSmsService;
 use App\Services\SMSService;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel as ImportExcel;
 
 class SMSController extends Controller {
     public function __construct(protected SMSService $sms, protected EgyptLinxSmsService $egylinx) {}
@@ -34,20 +35,29 @@ class SMSController extends Controller {
         return redirect()->back()->with($notificationSuccess);
     }
     public function createNewSub(){
-        $subscribers = Subscribers::select('id', 'member_id', 'name', 'mobile_no')->where('status', '!=', 2)->where('mobile_no', '!=', 0)->get();
+        $subscribedMemberIds = SMSSubscribers::whereNotNull('member_id')->pluck('member_id');
+        $subscribers = Subscribers::select('id', 'member_id', 'name', 'mobile_no')->where('status', '!=', 2)->where('mobile_no', '!=', 0)->whereNotIn('member_id', $subscribedMemberIds)->get();
         $subscribed = SMSSubscribers::get();
         return view('pages.sms.create_sub', compact('subscribed', 'subscribers'));
     }
     public function bulkStore(Request $request){
-        $request->validate([
-            'import-subscriber' => 'required|mimes:xlsx,xls'
-        ]);
-        Excel::import(new ImportSmsSubscribers, $request['import-subscriber'], null, \Maatwebsite\Excel\Excel::XLSX);
-        $notificationSuccess = [
-            'message' => "تم الاستيراد بنجاح",
-            'alert-type' => 'success'
-        ];
-        return redirect()->back()->with($notificationSuccess);
+        $notificationResponse = null;
+        try {
+            $request->validate([
+                'import-subscriber' => 'required|mimes:xlsx,xls'
+            ]);
+            ImportExcel::import(new ImportSmsSubscribers, $request['import-subscriber'], null, Excel::XLSX);
+            $notificationResponse = [
+                'message' => "تم الاستيراد بنجاح",
+                'alert-type' => 'success'
+            ];
+        } catch (\Throwable $th) {
+            $notificationResponse = [
+                'message' => $th->getMessage(),
+                'alert-type' => 'error'
+            ];
+        }
+        return redirect()->back()->with($notificationResponse);
     }
     public function storeSubscriber(Request $request){
         $validated = $request->validate([
@@ -81,20 +91,6 @@ class SMSController extends Controller {
             return response()->json(['message' => 'تم التجديد بنجاح']);
         }
     }
-    // public function sendMsg(Request $request) {
-    //     $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
-    //     $result = $this->sms->sendMessage($recipients, $request->content);
-    //     if (!$result['success']) {
-    //         return response()->json([
-    //             'message' => 'SMS failed',
-    //             'errors'  => $result['error']
-    //         ], 500);
-    //     }
-    //     return response()->json([
-    //         'message' => 'Sent successfully',
-    //         'data'    => $result['data']
-    //     ]);
-    // }
     public function testSms(Request $request) {
         $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
         $message      = $request->content;
