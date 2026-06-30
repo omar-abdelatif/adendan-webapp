@@ -31,7 +31,7 @@ class PaymentTransactions implements ToCollection, WithHeadingRow, WithBatchInse
                     $item = Date::excelToDateTimeObject($item)->format('Y-m-d');
                 } catch (\Exception $e) {}
             }
-            paymentTransaction($row['member_id'], (int) $row['amount'] ?? 0, $paymentDate ?? null, trim($row['payment_method']), trim($row['payment_cat']), trim($row['transaction_type']), trim($row['transaction_cat']), trim($item), $row['inv_no']);
+            paymentTransaction($row['member_id'], (int) $row['amount'] ?? 0, $paymentDate ?? null, trim($row['payment_method']), trim($row['payment_cat']), trim($row['transaction_type']), trim($row['transaction_cat']), trim($item), $row['inv_no'], null, null, 'المقر');
         }
     }
     function headingRow(): int {
