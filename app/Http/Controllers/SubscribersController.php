@@ -86,8 +86,8 @@ class SubscribersController extends Controller
             'status' => 1
         ]);
         if ($store) {
-            paymentTransaction($store->member_id, $totalNewSubCost, now(), 'كاش', 'كلي', 'إشتراك جديد', 'ايداع', $year, $request->inv_no, null, null);
-            paymentTransaction($store->member_id, 40, now(), 'كاش', 'كلي', 'تبرع سنوي', 'ايداع', $year, $request->inv_no, null, null);
+            paymentTransaction($store->member_id, $totalNewSubCost, now(), 'كاش', 'كلي', 'إشتراك جديد', 'ايداع', $year, $request->inv_no, null, null, 'مقر');
+            paymentTransaction($store->member_id, 40, now(), 'كاش', 'كلي', 'تبرع سنوي', 'ايداع', $year, $request->inv_no, null, null, 'مقر');
             $this->addDue($store->member_id, 100, 'تبرع سيارة التكريم', 'تبرعات');
             $this->addDue($store->member_id, 200, 'تبرع صيانة المقرات ', 'تبرعات');
             $sumAmount = $totalSafe->amount + $totalNewSubCost;
@@ -254,7 +254,7 @@ class SubscribersController extends Controller
         $totalSafe->update([
             'amount' => $sumAmount,
         ]);
-        return paymentTransaction($request->member_id, $cost, Carbon::now()->format('Y-m-d'), $request->payment_method, 'كلي', 'تبرع سنوي', 'ايداع', $value[1], $request->inv_no);;
+        return paymentTransaction($request->member_id, $cost, Carbon::now()->format('Y-m-d'), $request->payment_method, 'كلي', 'تبرع سنوي', 'ايداع', $value[1], $request->inv_no, null, null, 'مقر');
     }
     public function getSubscribersData() {
         $subscribers = Subscribers::get();

@@ -30,10 +30,9 @@
                             <p class="required d-none text-danger fw-bold mb-0" id="newsReq">حقل العنوان مطلوب</p>
                             <p class="required d-none text-danger fw-bold mb-0" id="newsMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 7 أحرف</p>
                         </div>
-                        <div class="form-group mb-lg-3 mb-md-2">
-                            <label for="details" class="text-muted">تفاصيل الخبر</label>
-                            <textarea name="description" id="details" dir="rtl" class="form-control text-light" rows="10" placeholder="تفاصيل الخبر" required></textarea>
-                            <p class="required d-none text-danger fw-bold mb-0" id="detailsReq">حقل التفاصيل مطلوب</p>
+                        <div class="form-group mb-3">
+                            <label for="newscontent" class="form-label text-secondary">محتوى الخبر</label>
+                            <textarea id="newscontent" name="description" dir="rtl" placeholder="محتوى الخبر" class="form-control text-secondary" rows="5"></textarea>
                         </div>
                         <div class="form-group mb-lg-3 mb-md-2">
                             <label for="categorySelect" class="text-muted">إختر التصنيف</label>
@@ -203,9 +202,9 @@
                                                                     <label for="title" class="text-white">العنوان</label>
                                                                     <input type="text" class="form-control text-white" name="title" value="{{$new->title}}" placeholder="عنوان الخبر">
                                                                 </div>
-                                                                <div class="form-group mt-3">
-                                                                    <label for="description" class="text-white">تفاصيل الخبر</label>
-                                                                    <textarea name="description" id="desc_{{$new->id}}" data-news-id="{{$new->id}}" class="form-control text-light text-center pt-2">{{$new->description}}</textarea>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="newscontent" class="form-label text-secondary">محتوى الخبر</label>
+                                                                    <textarea id="desc_{{$new->id}}" name="description" dir="rtl" placeholder="محتوى الخبر" data-news-id="{{$new->id}}" class="form-control text-secondary" rows="5">{{$new->description}}</textarea>
                                                                 </div>
                                                                 <div class="form-group mt-3">
                                                                     <label for="" class="text-white">إختر التصنيف</label>

@@ -15,7 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.ar.js')}}"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> --}}
+<script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('assets/js/ckeditor/build-config.js')}}"></script>
+<script src="{{asset('assets/js/ckeditor/styles.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('script')
 <script>

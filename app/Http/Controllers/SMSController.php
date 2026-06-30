@@ -34,7 +34,7 @@ class SMSController extends Controller {
         return redirect()->back()->with($notificationSuccess);
     }
     public function createNewSub(){
-        $subscribers = Subscribers::select('id','member_id', 'name', 'mobile_no')->where('status', '!=', 2)->get();
+        $subscribers = Subscribers::select('id', 'member_id', 'name', 'mobile_no')->where('status', '!=', 2)->where('mobile_no', '!=', 0)->get();
         $subscribed = SMSSubscribers::get();
         return view('pages.sms.create_sub', compact('subscribed', 'subscribers'));
     }
@@ -57,8 +57,8 @@ class SMSController extends Controller {
         ]);
         if($validated) {
             $fees = SMSFEES::latest()->first();
-            $this->egylinx->storeOrUpdateSmsSubscriber($request->member_id, $request->mobile_no, $fees->amount, now());
-            paymentTransaction($request->member_id ?? null, $fees->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'اشتراك', 'ايداع', 'رسائل', 0);
+            $this->egylinx->storeOrUpdateSmsSubscriber($request->member_id, $request->mobile_no, now());
+            paymentTransaction($request->member_id ?? null, $fees->amount, now()->format('Y-m-d'), 'كاش', 'كلي', 'اشتراك', 'ايداع', 'رسائل', 0, null, null, 'المقر');
             $notificationSuccess = [
                 'message' => "تم التسجيل بنجاح",
                 'alert-type' => 'success'
@@ -77,7 +77,7 @@ class SMSController extends Controller {
                 'amount' => $renewalAmount,
                 'active_sms' => true,
             ]);
-            paymentTransaction($request->member_id ?? null, $renewalAmount, now()->format('Y-m-d'), 'كاش', 'كلي', 'تجديد', 'ايداع', 'رسائل', 0);
+            paymentTransaction($request->member_id ?? null, $renewalAmount, now()->format('Y-m-d'), 'كاش', 'كلي', 'تجديد', 'ايداع', 'رسائل', 0, null, null, 'المقر');
             return response()->json(['message' => 'تم التجديد بنجاح']);
         }
     }

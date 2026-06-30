@@ -1,44 +1,122 @@
 import './bootstrap';
 
 document.addEventListener("DOMContentLoaded", function () {
-    //! Use CK EDITOR
-    let textAreas = document.querySelectorAll("textarea[data-news-id]");
-    if (textAreas) {
-        textAreas.forEach(function (item) {
-            ClassicEditor.create(item).then((editor) => {
-                ckEditorInstance = editor;
-                editor.model.document.on("change:data", () => {
-                    const rawText = editor
-                        .getData()
-                        .replace(/<[^>]*>/g, "")
-                        .trim();
-                    if (rawText.length > 0) {
-                        const firstChar = rawText.charAt(0);
-                        const isArabic = /[\u0600-\u06FF]/.test(firstChar);
-                        editor.editing.view.change((writer) => {
-                            writer.setAttribute(
-                                "direction",
-                                isArabic ? "rtl" : "ltr",
-                                editor.editing.view.document.getRoot()
-                            );
-                        });
+    //! CKEditor Initialization
+    const details = document.getElementById("newscontent");
+    if (details) {
+        CKEDITOR.replace("newscontent", {
+            language: "ar",
+            contentsLangDirection: "rtl",
+            contentsCss: [
+                CKEDITOR.basePath + "contents.css",
+                `p[data-placeholder]:empty::before {
+                    content: attr(data-placeholder);
+                    color: #aaa;
+                    font-style: italic;
+                    pointer-events: none;
+                    display: block;
+                }`,
+            ],
+            removePlugins: "elementspath",
+            resize_enabled: false,
+            toolbar: [
+                {
+                    name: "alignment",
+                    items: ["JustifyRight", "JustifyCenter", "JustifyLeft"],
+                },
+                { name: "direction", items: ["BidiRtl", "BidiLtr"] },
+                { name: "basicstyles", items: ["Bold", "Underline"] },
+                { name: "paragraph", items: ["NumberedList", "BulletedList"] },
+                { name: "links", items: ["Link", "Unlink"] },
+                { name: "styles", items: ["Format", "Font", "FontSize"] },
+                { name: "clipboard", items: ["Undo", "Redo"] },
+            ],
+            on: {
+                instanceReady: function (evt) {
+                    const editor = evt.editor;
+                    if (!editor.getData().trim()) {
+                        editor.setData(
+                            '<p data-placeholder="اكتب تفاصيل الخبر هنا"></p>',
+                        );
                     }
-                });
-                editor.model.document.registerPostFixer((writer) => {
-                    const root = editor.model.document.getRoot();
-                    for (const range of root.getChildren()) {
-                        for (const item of range.getChildren()) {
-                            if (item.is("textProxy")) {
-                                const urlMatch = item.data.match(/https?:\/\/[^\s<]+/);
-                                if (urlMatch) {
-                                    writer.setAttribute( "linkHref", urlMatch[0], item );
-                                }
-                            }
+                    editor.on("change", function () {
+                        const content = editor.getData();
+                        const updated = content.replace(
+                            /<p([^>]*)data-placeholder="[^"]*"([^>]*)>(.*?)<\/p>/gi,
+                            function (match, before, after, inner) {
+                                return inner.trim().length > 0
+                                    ? `<p${before}${after}>${inner}</p>`
+                                    : match;
+                            },
+                        );
+                        if (updated !== content) {
+                            editor.setData(updated);
                         }
-                    }
-                    return false;
+                    });
+                },
+            },
+        });
+        CKEDITOR.plugins.add("ConvertLinks", {
+            init: function (editor) {
+                editor.ui.addButton("ConvertLinks", {
+                    label: "تحويل الروابط",
+                    command: "convertLinks",
+                    toolbar: "custom",
                 });
-            }).catch((err) => console.error(err));
+                editor.addCommand("convertLinks", {
+                    exec: function (editor) {
+                        const rawText = editor
+                            .getData()
+                            .replace(/<[^>]*>/g, "")
+                            .trim();
+                        const urlRegex = /https?:\/\/[^\s<]+/g;
+                        const updatedText = rawText.replace(
+                            urlRegex,
+                            function (url) {
+                                return `<a href="${url}" target="_blank">${url}</a>`;
+                            },
+                        );
+                        editor.setData(updatedText);
+                    },
+                });
+            },
         });
     }
+    //! Use CK EDITOR In Update Modal
+    document.addEventListener("show.bs.modal", function (event) {
+        const modal = event.target;
+        if (!modal.id.startsWith("editing_")) return;
+        const textarea = modal.querySelector("textarea[data-news-id]");
+        if (!textarea || textarea.dataset.ckInitialized) return;
+        textarea.dataset.ckInitialized = "true";
+        const originalContent = textarea.value;
+        CKEDITOR.replace(textarea.id, {
+            language: "ar",
+            contentsLangDirection: "rtl",
+            extraPlugins: "ConvertLinks",
+            toolbar: [
+                {
+                    name: "alignment",
+                    items: ["JustifyRight", "JustifyCenter", "JustifyLeft"],
+                },
+                { name: "direction", items: ["BidiRtl", "BidiLtr"] },
+                { name: "basicstyles", items: ["Bold", "Underline"] },
+                { name: "paragraph", items: ["NumberedList", "BulletedList"] },
+                { name: "links", items: ["Link", "Unlink"] },
+                { name: "styles", items: ["Format", "Font", "FontSize"] },
+                { name: "clipboard", items: ["Undo", "Redo"] },
+            ],
+            on: {
+                instanceReady: function (evt) {
+                    evt.editor.setData(originalContent);
+                },
+            },
+        });
+        const form = textarea.closest("form");
+        if (form) {
+            form.addEventListener("submit", () => {
+                textarea.value = CKEDITOR.instances[textarea.id].getData();
+            });
+        }
+    });
 });
