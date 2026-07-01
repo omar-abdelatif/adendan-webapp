@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel {
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-        $schedule->command('sms:notify-expiry-month')->dailyAt('09:00')->withoutOverlapping();
-        $schedule->command('sms:notify-expiry-upcoming')->dailyAt('09:00')->withoutOverlapping();
-        $schedule->command('sms:notify-expiry-today')->dailyAt('09:00')->withoutOverlapping();
+        $schedule->command('sms:notify-expiry-month')->dailyAt('00:00')->withoutOverlapping();
+        $schedule->command('sms:notify-expiry-upcoming')->dailyAt('00:00')->withoutOverlapping();
+        $schedule->command('sms:notify-expiry-today')->dailyAt('00:00')->withoutOverlapping();
         $schedule->command('subscriptions:check-expiry')->dailyAt('00:00')->withoutOverlapping();
     }
 
