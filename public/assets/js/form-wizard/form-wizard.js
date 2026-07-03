@@ -34,11 +34,7 @@ function nextStep() {
         if (currentStep == stepLength - 1) {
             document.getElementById("nextbtn").classList.add("d-none");
             document.getElementById("submitButton").classList.remove("d-none");
-            if (
-                !document
-                    .getElementById("submitButton")
-                    .querySelector("button[type=submit]")
-            ) {
+            if (!document.getElementById("submitButton").querySelector("button[type=submit]")) {
                 //! Create and append the submit button
                 let button = document.createElement("button");
                 button.classList.add("btn", "btn-primary", "w-100", "text-center");

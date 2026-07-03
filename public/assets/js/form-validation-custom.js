@@ -21,13 +21,7 @@ function validateForm(form) {
     const categorySelects = form.querySelectorAll("select[required]");
     categorySelects.forEach(function (select) {
         let categoryErrorMsg = select.nextElementSibling;
-        if (
-            select.value === "التصنيف" ||
-            select.value === "المنطقة" ||
-            select.value === "الحرفة" ||
-            select.value === "السنة" ||
-            select.value === "نوع التبرع"
-        ) {
+        if ( select.value === "التصنيف" || select.value === "المنطقة" || select.value === "الحرفة" || select.value === "السنة" || select.value === "نوع التبرع" ) {
             select.classList.add("error");
             select.classList.remove("good");
             categoryErrorMsg.classList.remove("d-none");
