@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class NotifyUpcomingExpiry extends Command {
-    protected $signature   = 'subscriptions:notify-expiry';
+    protected $signature   = 'sms:notify-expiry-upcoming';
     protected $description = 'إرسال تذكير SMS للأعضاء قبل انتهاء اشتراكهم بشهر';
 
     public function handle(EgyptLinxSmsService $egyptLinxSmsService){
