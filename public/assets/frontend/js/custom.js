@@ -710,8 +710,8 @@ $(function () {
                     if (backdrop) backdrop.remove();
                 }, { once: true },);
                 Swal.fire({
-                    icon: "error",
-                    title: "Error",
+                    icon: "warning",
+                    title: "تحذير",
                     text: "تم تسجيل البيانات بالفعل، برجاء انتظار المسؤول لتحديث البيانات",
                 }).then((result) => {
                     if (result.isConfirmed) {

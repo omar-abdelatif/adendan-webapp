@@ -12,6 +12,7 @@ class EgyptLinxSmsService {
     private string $password;
     private string $sender;
     private string $baseUrl = 'https://bulk.egypt-linx.com/api';
+    private string $balanceUrl = 'https://bulk.egypt-linx.com';
     public function __construct() {
         $this->provider = config('services.egyptlinx.provider');
         $this->password  = config('services.egyptlinx.password');
@@ -69,7 +70,7 @@ class EgyptLinxSmsService {
         return $results;
     }
     public function getBalance(): int|float {
-        $response = Http::get($this->baseUrl . '/Balance', [
+        $response = Http::get($this->balanceUrl . '/Balance', [
             'Provider' => $this->provider,
             'Password' => $this->password,
         ]);

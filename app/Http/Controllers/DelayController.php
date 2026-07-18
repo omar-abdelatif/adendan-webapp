@@ -83,7 +83,7 @@ class DelayController extends Controller
     }
     private function recordTransaction(object $request, int $amount, string $category, string $transactionCat): void {
         $transactionType = str_contains($request->item, 'تبرع') ? 'تبرعات' : 'إشتراك';
-        paymentTransaction($request->member_id, $amount, $request->payment_date, $request->payment_method, $category, $transactionType, $transactionCat, $request->item, $request->inv_no);
+        paymentTransaction($request->member_id, $amount, $request->payment_date, $request->payment_method, $category, $transactionType, $transactionCat, $request->item, $request->inv_no, null, null, 'المقر');
     }
     private function updateTotalSafe(object $totalSafe, int $amount): void {
         $totalSafe->increment('amount', $amount);

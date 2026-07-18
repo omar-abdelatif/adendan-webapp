@@ -92,7 +92,7 @@ class SMSController extends Controller {
         }
     }
     public function testSms(Request $request) {
-        $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
+        $recipients = SMSSubscribers::where('active_sms', 1)->pluck('mobile_no')->toArray();
         $message      = $request->content;
         $smsPerPerson = $this->egylinx->calculateSmsCount($message);
         $totalNeeded  = count($recipients) * $smsPerPerson;
@@ -100,7 +100,7 @@ class SMSController extends Controller {
         if ($balance < $totalNeeded) {
             return $this->egylinx->checkBalance($balance, $totalNeeded);
         }
-        $results  = $this->egylinx->sendArabic($recipients, $request->content);
+        $results  = $this->egylinx->sendArabic($recipients, $message);
         $success = collect($results)->where('success', true)->count();
         $failed  = collect($results)->where('success', false)->values();
         return response()->json([

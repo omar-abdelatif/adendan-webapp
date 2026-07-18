@@ -84,24 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     return res.json();
                 })
                 .then((data) => {
-                    // Swal.close();
-                    // const hasFailures = data.failed_count > 0;
-                    // Swal.fire({
-                    //     icon: hasFailures ? "warning" : "success",
-                    //     title: "نتيجة الإرسال",
-                    //     html: `
-                    //         <p>✅ نجاح: <strong>${data.success_count}</strong></p>
-                    //         <p>❌ فشل: <strong>${data.failed_count}</strong></p>
-                    //     `,
-                    //     confirmButtonText: hasFailures ? "إعادة إرسال للفاشلين" : "حسناً",
-                    //     confirmButtonColor: hasFailures ? "#f0ad4e" : "#3085d6",
-                    //     showCancelButton: hasFailures,
-                    //     cancelButtonText: "إغلاق",
-                    // }).then((result) => {
-                    //     if (result.isConfirmed && hasFailures) {
-                    //         sendSms(content, data.failed_numbers);
-                    //     }
-                    // });
                     setTimeout(() => {
                         Swal.close();
                         const hasFailures = data.failed_count > 0;
@@ -112,9 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>✅ نجاح: <strong>${data.success_count}</strong></p>
                             <p>❌ فشل: <strong>${data.failed_count}</strong></p>
                         `,
-                            confirmButtonText: hasFailures
-                                ? "إعادة إرسال للفاشلين"
-                                : "حسناً",
+                            confirmButtonText: hasFailures ? "إعادة إرسال للفاشلين" : "حسناً",
                             confirmButtonColor: hasFailures ? "#f0ad4e" : "#3085d6",
                             showCancelButton: hasFailures,
                             cancelButtonText: "إغلاق",

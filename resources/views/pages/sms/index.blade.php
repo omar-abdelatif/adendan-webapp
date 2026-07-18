@@ -42,7 +42,8 @@
             document.getElementById('men_days').style.display   = men   ? 'block' : 'none';
             document.getElementById('women_text').style.display = women ? 'block' : 'none';
             if (!name) {
-                document.getElementById('sms_preview').textContent = '—';
+                // document.getElementById('sms_preview').textContent = '—';
+                document.querySelector('.sms_preview').textContent = '—';
                 window.updateCounter('');
                 return;
             }
@@ -71,7 +72,8 @@
                     msg += ' وعزاء';
                 }
             }
-            document.getElementById('sms_preview').textContent = msg;
+            // document.getElementById('sms_preview').textContent = msg;
+            document.querySelector('.sms_preview').textContent = msg;
             document.getElementById('msg_content').value = msg;
             window.updateCounter(msg);
         }
@@ -229,12 +231,16 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="text-muted">معاينة الرسالة</label>
-                                <div id="sms_preview" class="form-control text-muted" style="min-height: 80px; background: #f8f9fa; white-space: pre-wrap; direction: rtl;">—</div>
+                                {{-- <div id="sms_preview" class="form-control text-muted" style="min-height: 80px; background: #f8f9fa; white-space: pre-wrap; direction: rtl;">—</div> --}}
+                                {{-- <textarea name="" id="sms_preview" class="form-control" cols="30" rows="10">—</textarea> --}}
+                                {{-- <small id="sms_counter" class="text-muted">
+                                    <span id="char_count">0</span> / 134 حرف &nbsp;|&nbsp; <span id="sms_count">1</span> رسالة
+                                </small> --}}
+                                <textarea name="content" id="msg_content" class="form-control sms_preview" placeholder="—"></textarea>
                                 <small id="sms_counter" class="text-muted">
                                     <span id="char_count">0</span> / 134 حرف &nbsp;|&nbsp; <span id="sms_count">1</span> رسالة
                                 </small>
                             </div>
-                            <textarea name="content" id="msg_content" class="d-none"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إغلاق</button>
