@@ -92,7 +92,7 @@ class SMSController extends Controller {
         }
     }
     public function testSms(Request $request) {
-        $recipients = SMSSubscribers::pluck('mobile_no')->toArray();
+        $recipients = SMSSubscribers::where('active_sms', 1)->pluck('mobile_no')->toArray();
         $message      = $request->content;
         $smsPerPerson = $this->egylinx->calculateSmsCount($message);
         $totalNeeded  = count($recipients) * $smsPerPerson;
