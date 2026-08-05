@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-// use App\Models\SMSMSGS;
 use App\Models\SMSSubscribers;
 
 class SMSService {

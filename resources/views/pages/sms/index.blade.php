@@ -120,7 +120,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('sms.storeMsg')}}" id="smsForm" method="post">
+                    <form id="smsForm" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -231,11 +231,6 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="text-muted">معاينة الرسالة</label>
-                                {{-- <div id="sms_preview" class="form-control text-muted" style="min-height: 80px; background: #f8f9fa; white-space: pre-wrap; direction: rtl;">—</div> --}}
-                                {{-- <textarea name="" id="sms_preview" class="form-control" cols="30" rows="10">—</textarea> --}}
-                                {{-- <small id="sms_counter" class="text-muted">
-                                    <span id="char_count">0</span> / 134 حرف &nbsp;|&nbsp; <span id="sms_count">1</span> رسالة
-                                </small> --}}
                                 <textarea name="content" id="msg_content" class="form-control sms_preview" placeholder="—"></textarea>
                                 <small id="sms_counter" class="text-muted">
                                     <span id="char_count">0</span> / 134 حرف &nbsp;|&nbsp; <span id="sms_count">1</span> رسالة
