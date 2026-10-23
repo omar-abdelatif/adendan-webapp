@@ -14,9 +14,7 @@
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.assossiation')}}">لجان الجمعية</a>
             </li>
             <li class="nav-item {{ request()->routeIs('site.search') ? 'active' : '' }}">
-                <a class="nav-link rounded-pill bg-primary" href="{{route('site.search')}}">
-                    الإستعلامات
-                </a>
+                <a class="nav-link rounded-pill bg-primary" href="{{route('site.search')}}"> الإستعلامات</a>
             </li>
             <li class="nav-item {{ request()->routeIs('site.workers') ? 'active' : ''}}">
                 <a class="nav-link rounded-pill bg-primary" href="{{route('site.workers')}}">حرف و خدمات</a>
@@ -29,14 +27,10 @@
                 <ul class="dropdown-menu">
                     <div class="container d-flex justify-content-center py-4">
                         <li>
-                            <a class="dropdown-item rounded-pill text-white bg-primary rounded text-center p-2" href="{{route('site.about')}}">
-                                من نحن
-                            </a>
+                            <a class="dropdown-item rounded-pill text-white bg-primary rounded text-center p-2" href="{{route('site.about')}}"> من نحن</a>
                         </li>
                         <li>
-                            <a class="dropdown-item rounded-pill text-white bg-primary rounded text-center p-2" href="{{route('site.contact')}}">
-                                تواصل معنا
-                            </a>
+                            <a class="dropdown-item rounded-pill text-white bg-primary rounded text-center p-2" href="{{route('site.contact')}}"> تواصل معنا</a>
                         </li>
                     </div>
                 </ul>
