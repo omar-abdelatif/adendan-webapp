@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     //! CKEditor Initialization
     const details = document.getElementById("newscontent");
     if (details) {
+        const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
         CKEDITOR.replace("newscontent", {
             language: "ar",
             contentsLangDirection: "rtl",
-            removePlugins: "elementspath",
+            removePlugins: "elementspath" + (isTouch ? ",contextmenu,liststyle,tabletools,tableresize,tableselection" : ""),
+            forcePasteAsPlainText: true,
             resize_enabled: false,
             toolbar: [
                 {
@@ -43,33 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     editor.on("focus", togglePlaceholder);
                     editor.on("blur", togglePlaceholder);
                     togglePlaceholder();
-                    // if (!editor.getData().trim()) {
-                    //     editor.setData('<p data-placeholder="اكتب تفاصيل الخبر هنا"></p>',);
-                    // }
-                    // editor.on("change", function () {
-                    //     const content = editor.getData();
-                    //     const updated = content.replace(
-                    //         /<p([^>]*)data-placeholder="[^"]*"([^>]*)>(.*?)<\/p>/gi,
-                    //         function (match, before, after, inner) {
-                    //             return inner.trim().length > 0 ? `<p${before}${after}>${inner}</p>` : match;
-                    //         },
-                    //     );
-                    //     if (updated !== content) {
-                    //         editor.setData(updated);
-                    //     }
-                    // });
                 },
             },
-            // contentsCss: [
-            //     CKEDITOR.basePath + "contents.css",
-            //     `p[data-placeholder]:empty::before {
-            //         content: attr(data-placeholder);
-            //         color: #aaa;
-            //         font-style: italic;
-            //         pointer-events: none;
-            //         display: block;
-            //     }`,
-            // ],
         });
         CKEDITOR.plugins.add("ConvertLinks", {
             init: function (editor) {
