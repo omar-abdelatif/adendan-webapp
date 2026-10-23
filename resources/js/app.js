@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         CKEDITOR.replace("newscontent", {
             language: "ar",
             contentsLangDirection: "rtl",
-            removePlugins: "elementspath" + (isTouch ? ",contextmenu,liststyle,tabletools,tableresize,tableselection" : ""),
+            removePlugins: "elementspath",
             forcePasteAsPlainText: true,
             resize_enabled: false,
             toolbar: [
@@ -24,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 { name: "clipboard", items: ["Undo", "Redo"] },
             ],
             on: {
+                contentDom: function (evt) {
+                    if (!isTouch) return;
+                    evt.editor.document.$.addEventListener( "contextmenu", function (e) { e.stopImmediatePropagation(); }, true );
+                },
                 instanceReady: function (evt) {
                     const editor = evt.editor;
                     const editable = editor.editable();
